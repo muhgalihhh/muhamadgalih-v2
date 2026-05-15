@@ -70,6 +70,30 @@ export interface GalleryItem {
   created_at: string;
 }
 
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  read: boolean;
+  created_at: string;
+}
+
+export interface Testimonial {
+  id: string;
+  user_id: string;
+  author_name: string;
+  author_email: string | null;
+  author_avatar: string | null;
+  author_role: string | null;
+  author_company: string | null;
+  content: string;
+  rating: number;
+  approved: boolean;
+  created_at: string;
+}
+
 export interface Profile {
   id: string;
   name: string;

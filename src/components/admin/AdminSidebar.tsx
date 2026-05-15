@@ -14,16 +14,20 @@ import {
   LogOut,
   ExternalLink,
   Images,
+  MessageSquareQuote,
+  Inbox,
 } from "lucide-react";
 
 const nav = [
-  { label: "Overview",     href: "/admin",              icon: LayoutDashboard },
-  { label: "Skills",       href: "/admin/skills",       icon: Wrench },
-  { label: "Experience",   href: "/admin/experience",   icon: Briefcase },
-  { label: "Works",        href: "/admin/works",        icon: FolderOpen },
-  { label: "Gallery",      href: "/admin/gallery",      icon: Images },
-  { label: "Certificates", href: "/admin/certificates", icon: Award },
-  { label: "Contact",      href: "/admin/contact",      icon: Mail },
+  { label: "Overview",      href: "/admin",               icon: LayoutDashboard },
+  { label: "Skills",        href: "/admin/skills",        icon: Wrench },
+  { label: "Experience",    href: "/admin/experience",    icon: Briefcase },
+  { label: "Works",         href: "/admin/works",         icon: FolderOpen },
+  { label: "Gallery",       href: "/admin/gallery",       icon: Images },
+  { label: "Certificates",  href: "/admin/certificates",  icon: Award },
+  { label: "Testimonials",  href: "/admin/testimonials",  icon: MessageSquareQuote },
+  { label: "Messages",      href: "/admin/messages",      icon: Inbox },
+  { label: "Contact",       href: "/admin/contact",       icon: Mail },
 ];
 
 export default function AdminSidebar() {

@@ -238,13 +238,13 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
 
         {/* ── Left: Text ── */}
         <motion.div
-          className="flex flex-col gap-3 lg:gap-4"
+          className="flex flex-col gap-3 lg:gap-4 items-center lg:items-start"
           variants={containerAnim}
           initial="hidden"
           animate="show"
         >
           {/* Top row: Available + Hi there! stickers (rotated, varied) */}
-          <motion.div variants={itemAnim} className="flex flex-wrap items-center gap-3">
+          <motion.div variants={itemAnim} className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
             {isAvailable && (
               <div
                 className="inline-flex items-center gap-2 cartoon-border-sm bg-mint px-4 py-2 rounded-full w-fit"
@@ -269,7 +269,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           </motion.div>
 
           {/* Name section — stacked sticker treatment */}
-          <motion.div variants={itemAnim} className="flex flex-col gap-2 items-start">
+          <motion.div variants={itemAnim} className="flex flex-col gap-2 items-center lg:items-start">
             {/* First name(s) — big yellow stroke text */}
             <h1
               className="hero-stroke-text font-display font-extrabold leading-none text-[clamp(1.75rem,5.5vw,5rem)] pb-1 pr-2"
@@ -279,7 +279,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
 
             {/* Last name (violet sticker) + face circle — only if there's a last name */}
             {lastName ? (
-              <div className="flex items-center gap-3 flex-wrap -mt-1">
+              <div className="flex items-center gap-3 flex-wrap -mt-1 justify-center lg:justify-start">
                 <motion.div
                   whileHover={{ rotate: 2, scale: 1.04, y: -2 }}
                   className="bg-violet cartoon-border rounded-2xl px-4 py-1 inline-block"
@@ -368,7 +368,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           </motion.div>
 
           {/* Cycling role text — inline sentence, no pill */}
-          <motion.div variants={itemAnim} className="flex items-center gap-2.5 flex-wrap">
+          <motion.div variants={itemAnim} className="flex items-center gap-2.5 flex-wrap justify-center lg:justify-start">
             <span className="font-body text-muted text-sm md:text-lg italic">
               I build
             </span>
@@ -386,7 +386,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           </motion.div>
 
           {/* Role sticker tags — more breathing room */}
-          <motion.div variants={itemAnim} className="flex flex-wrap gap-1.5 lg:gap-2.5 mt-0">
+          <motion.div variants={itemAnim} className="flex flex-wrap gap-1.5 lg:gap-2.5 mt-0 justify-center lg:justify-start">
             {rolePills.map((role) => (
               <span
                 key={role.label}
@@ -399,7 +399,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemAnim} className="flex flex-wrap gap-2 lg:gap-3 mt-1 lg:mt-3">
+          <motion.div variants={itemAnim} className="flex flex-wrap gap-2 lg:gap-3 mt-1 lg:mt-3 justify-center lg:justify-start">
             <a
               href="#works"
               className="cartoon-border bg-navy text-cream font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
@@ -576,12 +576,6 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             />
           </motion.div>
 
-          {/* Mobile-only tap hint below card */}
-          {illustrationUrl && (
-            <p className="lg:hidden font-body text-[11px] text-muted text-center select-none">
-              tap to flip ✦
-            </p>
-          )}
         </ScrollReveal>
       </div>
 

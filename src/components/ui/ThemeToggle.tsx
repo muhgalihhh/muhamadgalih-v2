@@ -10,7 +10,8 @@ export default function ThemeToggle() {
   return (
     <motion.button
       onClick={toggle}
-      className="w-9 h-9 rounded-full cartoon-border-sm bg-cream flex items-center justify-center hover:-translate-y-0.5 active:translate-y-0 transition-transform relative overflow-hidden"
+      className="w-9 h-9 rounded-full cartoon-border-sm flex items-center justify-center hover:-translate-y-0.5 active:translate-y-0 transition-transform relative overflow-hidden"
+      style={{ backgroundColor: "#FFFEF0" }}
       aria-label="Toggle dark mode"
       whileTap={{ scale: 0.85 }}
       transition={{ type: "spring", stiffness: 400, damping: 15 }}

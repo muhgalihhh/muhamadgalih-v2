@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { sendContactMessage } from "@/app/actions/contact";
 import { motion, AnimatePresence } from "framer-motion";
 import { Code2, Palette, Network, Camera, MapPin, Clock, Briefcase, Loader2, Send, CheckCircle } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
@@ -26,17 +27,27 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
   const socials = getSocials(profile ?? null);
 
   const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [fields, setFields] = useState({ name: "", email: "", subject: "", message: "" });
+  const [isPending, startTransition] = useTransition();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState("loading");
-    // Simulate send; replace with actual email/Supabase action
-    await new Promise((r) => setTimeout(r, 1400));
-    setFormState("success");
+    setErrorMsg("");
+    const fd = new FormData(e.currentTarget);
+    startTransition(async () => {
+      const res = await sendContactMessage(fd);
+      if (res.ok) {
+        setFormState("success");
+      } else {
+        setErrorMsg(res.error ?? "Something went wrong.");
+        setFormState("error");
+      }
+    });
   };
 
   return (
@@ -134,7 +145,7 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
                   <h3 className="font-display font-extrabold text-2xl mb-2">Message sent!</h3>
                   <p className="font-body text-ink/70">I&apos;ll get back to you as soon as possible. Thanks for reaching out!</p>
                   <button
-                    onClick={() => { setFormState("idle"); setFields({ name: "", email: "", subject: "", message: "" }); }}
+                    onClick={() => { setFormState("idle"); setErrorMsg(""); setFields({ name: "", email: "", subject: "", message: "" }); }}
                     className="mt-6 cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
                   >
                     Send another ✦
@@ -199,13 +210,19 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
                     />
                   </div>
 
+                  {formState === "error" && (
+                    <p className="text-sm font-body text-red-600 bg-red-50 cartoon-border-sm rounded-xl px-4 py-2">
+                      {errorMsg}
+                    </p>
+                  )}
+
                   <motion.button
                     type="submit"
-                    disabled={formState === "loading"}
+                    disabled={isPending}
                     className="cartoon-border bg-navy text-cream font-body font-semibold px-6 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform self-start flex items-center gap-2 disabled:opacity-60"
                     whileTap={{ scale: 0.96 }}
                   >
-                    {formState === "loading" ? (
+                    {isPending ? (
                       <>
                         <Loader2 size={15} className="animate-spin" />
                         Sending...

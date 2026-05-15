@@ -2,7 +2,8 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
-import type { Profile, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
+import { createServiceClient } from "@/lib/supabase/service";
+import type { Profile, GalleryItem, ProjectCategoryRow, ContactMessage } from "@/types/portfolio";
 
 // ── Storage cleanup helpers ──────────────────────────────────
 const STORAGE_MARKER = "/storage/v1/object/public/portfolio/";
@@ -445,4 +446,26 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
   if (error) return { error: error.message };
   const { data: { publicUrl } } = supabase.storage.from("portfolio").getPublicUrl(path);
   return { url: publicUrl };
+}
+
+// ── Contact messages (inbox) ──────────────────────────────────
+export async function getContactMessages(): Promise<ContactMessage[]> {
+  const supabase = createServiceClient();
+  const { data } = await supabase
+    .from("contact_messages")
+    .select("*")
+    .order("created_at", { ascending: false });
+  return data ?? [];
+}
+
+export async function markMessageRead(id: string) {
+  const supabase = createServiceClient();
+  await supabase.from("contact_messages").update({ read: true }).eq("id", id);
+  revalidatePath("/admin/messages");
+}
+
+export async function deleteMessage(id: string) {
+  const supabase = createServiceClient();
+  await supabase.from("contact_messages").delete().eq("id", id);
+  revalidatePath("/admin/messages");
 }

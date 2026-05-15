@@ -1,9 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, User, FolderOpen, Mail } from "lucide-react";
+import { Home, User, FolderOpen, Mail, Loader2 } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navItems = [
@@ -15,6 +16,12 @@ const navItems = [
 
 export default function MobileNav() {
   const pathname = usePathname();
+  const [loadingHref, setLoadingHref] = useState<string | null>(null);
+
+  // Clear loading when navigation completes
+  useEffect(() => {
+    setLoadingHref(null);
+  }, [pathname]);
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-[200]">
@@ -22,7 +29,7 @@ export default function MobileNav() {
         {/* SVG curved background */}
         <svg
           viewBox="0 0 375 72"
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full pointer-events-none"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -35,7 +42,7 @@ export default function MobileNav() {
         {/* Border curve on top */}
         <svg
           viewBox="0 0 375 4"
-          className="absolute top-0 left-0 w-full"
+          className="absolute top-0 left-0 w-full pointer-events-none"
           preserveAspectRatio="none"
         >
           <path
@@ -47,18 +54,24 @@ export default function MobileNav() {
         </svg>
 
         {/* Center button — theme toggle above the notch */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-[38px]">
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-[38px] z-10">
           <div className="scale-110">
             <ThemeToggle />
           </div>
         </div>
 
         {/* Nav icons */}
-        <div className="relative h-full flex items-end pb-3 px-4">
+        <div className="relative h-full flex items-end pb-3 px-4 z-10">
           {/* Left pair */}
           <div className="flex flex-1 justify-around">
             {navItems.slice(0, 2).map((item) => (
-              <NavIcon key={item.href} item={item} active={pathname === item.href} />
+              <NavIcon
+                key={item.href}
+                item={item}
+                active={pathname === item.href}
+                loading={loadingHref === item.href}
+                onClick={() => { if (pathname !== item.href) setLoadingHref(item.href); }}
+              />
             ))}
           </div>
           {/* Center spacer */}
@@ -66,7 +79,13 @@ export default function MobileNav() {
           {/* Right pair */}
           <div className="flex flex-1 justify-around">
             {navItems.slice(2).map((item) => (
-              <NavIcon key={item.href} item={item} active={pathname === item.href} />
+              <NavIcon
+                key={item.href}
+                item={item}
+                active={pathname === item.href}
+                loading={loadingHref === item.href}
+                onClick={() => { if (pathname !== item.href) setLoadingHref(item.href); }}
+              />
             ))}
           </div>
         </div>
@@ -81,20 +100,31 @@ export default function MobileNav() {
 function NavIcon({
   item,
   active,
+  loading,
+  onClick,
 }: {
   item: (typeof navItems)[number];
   active: boolean;
+  loading: boolean;
+  onClick: () => void;
 }) {
   return (
     <motion.div whileTap={{ scale: 0.78 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
       <Link
         href={item.href}
+        onClick={onClick}
         className={`flex flex-col items-center gap-0.5 transition-colors ${
-          active ? "text-coral" : "text-cream/50"
+          active ? "text-coral" : loading ? "text-yellow" : "text-cream/50"
         }`}
       >
-        <item.Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
-        <span className="text-[9px] font-body font-medium">{item.label}</span>
+        {loading ? (
+          <Loader2 size={20} className="animate-spin" />
+        ) : (
+          <item.Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
+        )}
+        <span className="text-[9px] font-body font-medium">
+          {loading ? "..." : item.label}
+        </span>
       </Link>
     </motion.div>
   );

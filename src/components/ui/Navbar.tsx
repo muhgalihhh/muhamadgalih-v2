@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Loader2 } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
@@ -13,12 +15,18 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [loadingHref, setLoadingHref] = useState<string | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  useEffect(() => {
+    setLoadingHref(null);
+  }, [pathname]);
 
   return (
     <motion.nav
@@ -43,16 +51,24 @@ export default function Navbar() {
 
       {/* Links */}
       <div className="flex items-center gap-8">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="font-body font-medium text-ink hover:text-coral transition-colors relative group"
-          >
-            {link.label}
-            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-coral rounded-full transition-all duration-300 group-hover:w-full" />
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          const isLoading = loadingHref === link.href;
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => { if (!isActive) setLoadingHref(link.href); }}
+              className={`font-body font-medium transition-colors relative group flex items-center gap-1.5 ${
+                isLoading ? "text-coral/60" : "text-ink hover:text-coral"
+              }`}
+            >
+              {isLoading && <Loader2 size={13} className="animate-spin shrink-0" />}
+              {link.label}
+              <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-coral rounded-full transition-all duration-300 group-hover:w-full" />
+            </Link>
+          );
+        })}
       </div>
 
       {/* Right side: theme toggle + CTA */}
@@ -60,8 +76,10 @@ export default function Navbar() {
         <ThemeToggle />
         <Link
           href="/contact"
-          className="cartoon-border bg-coral text-cream font-body font-semibold px-5 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+          onClick={() => { if (pathname !== "/contact") setLoadingHref("/contact"); }}
+          className="cartoon-border bg-coral text-cream font-body font-semibold px-5 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center gap-1.5"
         >
+          {loadingHref === "/contact" ? <Loader2 size={14} className="animate-spin" /> : null}
           Hire Me ✦
         </Link>
       </div>
