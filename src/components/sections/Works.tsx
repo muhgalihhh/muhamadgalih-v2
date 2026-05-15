@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import type { Project } from "@/types/portfolio";
 
 type Category = "all" | "software" | "uiux" | "illustration";
@@ -39,6 +40,7 @@ const categoryLabel: Record<string, string> = {
 
 export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects = dbProjects?.length ? dbProjects : staticProjects;
 
@@ -94,6 +96,7 @@ export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
                   exit={{ opacity: 0, scale: 0.88 }}
                   transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   className={`col-span-1 ${sizeClasses[size] ?? ""} ${project.color_class} cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform min-h-[160px]`}
+                  onClick={() => setSelectedProject(project)}
                 >
                   <div className={`p-4 md:p-6 h-full flex flex-col justify-between ${project.text_color_class}`}>
                     <div className="flex items-start justify-between">
@@ -138,6 +141,12 @@ export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
           </div>
         </ScrollReveal>
       </div>
+
+      <ProjectDetailModal
+        project={selectedProject}
+        categoryLabel={categoryLabel}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }

@@ -6,6 +6,7 @@ import AnimatedText from "@/components/animations/AnimatedText";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectCarousel from "@/components/works/ProjectCarousel";
+import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import SpotifyCard from "@/components/ui/SpotifyCard";
 import type { Project, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
 
@@ -123,6 +124,7 @@ function toRow(p: Project): ProjectRow {
 export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp }: { dbProjects?: Project[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[] }) {
   const [active, setActive] = useState<Category>("all");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [modalProject, setModalProject] = useState<ProjectRow | null>(null);
 
   const categories = categoriesProp?.length ? categoriesProp : FALLBACK_CATEGORIES;
   const filters = [
@@ -270,16 +272,24 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                               ))}
                             </div>
 
-                            {project.link && project.link !== "#" && (
-                              <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <div className="flex flex-wrap gap-2">
+                              <button
+                                onClick={() => setModalProject(project)}
                                 className="inline-flex items-center gap-2 cartoon-border-sm bg-black/20 font-body font-semibold text-sm px-4 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
                               >
-                                View Project ↗
-                              </a>
-                            )}
+                                View Details ✦
+                              </button>
+                              {project.link && project.link !== "#" && (
+                                <a
+                                  href={project.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 cartoon-border-sm bg-black/20 font-body font-semibold text-sm px-4 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+                                >
+                                  Live ↗
+                                </a>
+                              )}
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -397,6 +407,11 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
           )}
         </div>
       </section>
+      <ProjectDetailModal
+        project={modalProject}
+        categoryLabel={categoryLabel}
+        onClose={() => setModalProject(null)}
+      />
     </main>
   );
 }

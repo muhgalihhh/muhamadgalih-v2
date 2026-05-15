@@ -81,7 +81,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
     <section
       ref={sectionRef}
       id="hero"
-      className="min-h-screen bg-cream relative overflow-hidden flex items-center md:pt-20 pb-40 md:pb-20"
+      className="min-h-screen bg-cream relative overflow-x-hidden flex items-start md:items-center pt-8 md:pt-20 pb-40 md:pb-20"
     >
       {/* Faint dot grid background */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none">

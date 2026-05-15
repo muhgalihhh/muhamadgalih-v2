@@ -54,7 +54,7 @@ export default function MobileNav() {
         </svg>
 
         {/* Center button — theme toggle above the notch */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-[38px] z-10">
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-[38px] z-20">
           <div className="scale-110">
             <ThemeToggle />
           </div>
@@ -75,7 +75,7 @@ export default function MobileNav() {
             ))}
           </div>
           {/* Center spacer */}
-          <div className="w-16 shrink-0" />
+          <div className="w-16 shrink-0 pointer-events-none" />
           {/* Right pair */}
           <div className="flex flex-1 justify-around">
             {navItems.slice(2).map((item) => (
