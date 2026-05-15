@@ -1,26 +1,215 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Colors ── */
+  --color-cream:  #FFFEF0;
+  --color-navy:   #120E2D;
+  --color-coral:  #FF5757;
+  --color-yellow: #FFD166;
+  --color-mint:   #06D6A0;
+  --color-violet: #845EF7;
+  --color-sky:    #4CC9F0;
+  --color-pink:   #FF6B9D;
+  --color-ink:    #0D0B1E;
+  --color-muted:  #6B6B8A;
+
+  /* ── Typography ── */
+  --font-display: var(--font-syne);
+  --font-body:    var(--font-jakarta);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Dark mode overrides ── */
+/* Only override ink/muted — cream must stay light so text-cream stays readable on dark sections */
+.dark {
+  --color-ink:   #F0EFFF;
+  --color-muted: #9997B3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Darken bg-cream surfaces directly (not via variable, to preserve text-cream) */
+.dark body {
+  background-color: #0F0E17;
+}
+.dark .bg-cream {
+  background-color: #0F0E17;
+}
+
+/* Bright cards: restore dark ink so text-ink stays readable on light backgrounds */
+.dark .bg-yellow,
+.dark .bg-mint,
+.dark .bg-sky,
+.dark .bg-pink {
+  --color-ink: #0D0B1E;
+  --color-muted: #3D3B52;
+}
+
+/* ── Hero name cartoon stroke — mobile-first, scaled up at lg ── */
+.hero-stroke-text {
+  color: #FFD166;
+  -webkit-text-stroke: 2px #FFFEF0;
+  paint-order: stroke fill;
+  text-shadow:
+    -3px -3px 0 #0D0B1E, -2px -3px 0 #0D0B1E, 0px -3px 0 #0D0B1E,
+     2px -3px 0 #0D0B1E,  3px -3px 0 #0D0B1E,  3px -2px 0 #0D0B1E,
+     3px  0px 0 #0D0B1E,  3px  2px 0 #0D0B1E,  3px  3px 0 #0D0B1E,
+     2px  3px 0 #0D0B1E,  0px  3px 0 #0D0B1E, -2px  3px 0 #0D0B1E,
+    -3px  3px 0 #0D0B1E, -3px  2px 0 #0D0B1E, -3px  0px 0 #0D0B1E,
+    -3px -2px 0 #0D0B1E,  5px  5px 0 rgba(13, 11, 30, 0.18);
+}
+@media (min-width: 1024px) {
+  .hero-stroke-text {
+    -webkit-text-stroke: 5px #FFFEF0;
+    text-shadow:
+      -8px -8px 0 #0D0B1E, -5px -8px 0 #0D0B1E,  0px -8px 0 #0D0B1E,
+       5px -8px 0 #0D0B1E,  8px -8px 0 #0D0B1E,   8px -5px 0 #0D0B1E,
+       8px  0px 0 #0D0B1E,  8px  5px 0 #0D0B1E,   8px  8px 0 #0D0B1E,
+       5px  8px 0 #0D0B1E,  0px  8px 0 #0D0B1E,  -5px  8px 0 #0D0B1E,
+      -8px  8px 0 #0D0B1E, -8px  5px 0 #0D0B1E,  -8px  0px 0 #0D0B1E,
+      -8px -5px 0 #0D0B1E, 12px 12px 0 rgba(13, 11, 30, 0.18);
+  }
+}
+.dark .hero-stroke-text {
+  text-shadow:
+    -3px -3px 0 rgba(240,239,255,0.4), -2px -3px 0 rgba(240,239,255,0.4),  0px -3px 0 rgba(240,239,255,0.4),
+     2px -3px 0 rgba(240,239,255,0.4),  3px -3px 0 rgba(240,239,255,0.4),  3px -2px 0 rgba(240,239,255,0.4),
+     3px  0px 0 rgba(240,239,255,0.4),  3px  2px 0 rgba(240,239,255,0.4),  3px  3px 0 rgba(240,239,255,0.4),
+     2px  3px 0 rgba(240,239,255,0.4),  0px  3px 0 rgba(240,239,255,0.4), -2px  3px 0 rgba(240,239,255,0.4),
+    -3px  3px 0 rgba(240,239,255,0.4), -3px  2px 0 rgba(240,239,255,0.4), -3px  0px 0 rgba(240,239,255,0.4),
+    -3px -2px 0 rgba(240,239,255,0.4),  5px  5px 0 rgba(0, 0, 0, 0.3);
+}
+@media (min-width: 1024px) {
+  .dark .hero-stroke-text {
+    text-shadow:
+      -8px -8px 0 rgba(240,239,255,0.35), -5px -8px 0 rgba(240,239,255,0.35),  0px -8px 0 rgba(240,239,255,0.35),
+       5px -8px 0 rgba(240,239,255,0.35),  8px -8px 0 rgba(240,239,255,0.35),  8px -5px 0 rgba(240,239,255,0.35),
+       8px  0px 0 rgba(240,239,255,0.35),  8px  5px 0 rgba(240,239,255,0.35),  8px  8px 0 rgba(240,239,255,0.35),
+       5px  8px 0 rgba(240,239,255,0.35),  0px  8px 0 rgba(240,239,255,0.35), -5px  8px 0 rgba(240,239,255,0.35),
+      -8px  8px 0 rgba(240,239,255,0.35), -8px  5px 0 rgba(240,239,255,0.35), -8px  0px 0 rgba(240,239,255,0.35),
+      -8px -5px 0 rgba(240,239,255,0.35), 12px 12px 0 rgba(0, 0, 0, 0.35);
   }
 }
 
+/* ── Base reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide default cursor when custom cursor is active */
+.cursor-custom,
+.cursor-custom * {
+  cursor: none !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0F0E17;
+}
+::-webkit-scrollbar-thumb {
+  background: #845EF7;
+  border-radius: 9999px;
+}
+
+/* ── Cartoon border utilities ── */
+.cartoon-border {
+  border: 2px solid var(--color-ink);
+  box-shadow: 4px 4px 0px 0px var(--color-ink);
+}
+
+.cartoon-border-sm {
+  border: 2px solid var(--color-ink);
+  box-shadow: 2px 2px 0px 0px var(--color-ink);
+}
+
+.cartoon-border-lg {
+  border: 2px solid var(--color-ink);
+  box-shadow: 6px 6px 0px 0px var(--color-ink);
+}
+
+/* Light variant for dark backgrounds */
+.cartoon-border-light {
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.1);
+}
+
+/* In dark mode, cartoon borders use softer shadow */
+.dark .cartoon-border {
+  box-shadow: 4px 4px 0px 0px rgba(240, 239, 255, 0.4);
+}
+.dark .cartoon-border-sm {
+  box-shadow: 2px 2px 0px 0px rgba(240, 239, 255, 0.4);
+}
+.dark .cartoon-border-lg {
+  box-shadow: 6px 6px 0px 0px rgba(240, 239, 255, 0.4);
+}
+
+/* ── Grid line pattern (graph paper / architectural) ── */
+.grid-pattern-lines {
+  background-image:
+    linear-gradient(to right, var(--color-ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+/* Light variant for dark backgrounds */
+.grid-pattern-lines-light {
+  background-image:
+    linear-gradient(to right, rgba(255, 254, 240, 0.85) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 254, 240, 0.85) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Hide scrollbar but keep scrollable */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Marquee animations ── */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 28s linear infinite;
+}
+.animate-marquee-right {
+  animation: marquee-right 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation-play-state: paused;
+  }
 }
