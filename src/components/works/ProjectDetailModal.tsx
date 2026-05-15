@@ -53,7 +53,6 @@ export default function ProjectDetailModal({
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
             className="w-full md:max-w-2xl bg-cream rounded-t-3xl md:rounded-2xl cartoon-border overflow-hidden max-h-[90vh] flex flex-col"
-            style={{ colorScheme: "light" }}
           >
             {/* Drag handle — mobile only */}
             <div className="flex justify-center pt-3 pb-1 md:hidden shrink-0">

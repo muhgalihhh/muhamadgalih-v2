@@ -5,7 +5,8 @@ import { Rocket, Palette, Code2, Award } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
-import type { Experience, Skill, Certificate } from "@/types/portfolio";
+import TestimonialsSection from "@/components/sections/Testimonials";
+import type { Experience, Skill, Certificate, Testimonial } from "@/types/portfolio";
 
 const staticExperience = [
   {
@@ -84,9 +85,11 @@ interface Props {
   dbExperiences?: Experience[];
   dbSkills?: Skill[];
   dbCertificates?: Certificate[];
+  testimonials?: Testimonial[];
+  ownTestimonial?: Testimonial | null;
 }
 
-export default function AboutContent({ dbExperiences, dbSkills, dbCertificates }: Props) {
+export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, testimonials = [], ownTestimonial = null }: Props) {
   const experience: Experience[] = dbExperiences?.length ? dbExperiences : staticExperience;
   const skills: Skill[] = dbSkills?.length ? dbSkills : staticSkills;
   const certificates: Certificate[] = dbCertificates ?? [];
@@ -166,7 +169,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates }
                         <div className="flex items-center gap-3">
                           {/* Company logo / icon inside the card */}
                           {(exp.company_logo_url || exp.company_logo_emoji) && (
-                            <div className="w-11 h-11 rounded-xl bg-white/20 cartoon-border-sm flex items-center justify-center shrink-0 overflow-hidden">
+                            <div className="w-11 h-11 rounded-xl bg-cream/20 cartoon-border-sm flex items-center justify-center shrink-0 overflow-hidden">
                               {exp.company_logo_url
                                 ? <img src={exp.company_logo_url} alt={exp.company} className="w-full h-full object-cover rounded-xl" />
                                 : <SkillIcon icon={exp.company_logo_emoji} className="w-6 h-6" />
@@ -253,7 +256,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates }
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {certificates.map((cert, i) => (
                 <ScrollReveal key={cert.id} variant="scale-in" delay={i * 0.07}>
-                  <div className="cartoon-border rounded-2xl overflow-hidden bg-white group hover:-translate-y-1 transition-transform">
+                  <div className="cartoon-border rounded-2xl overflow-hidden bg-cream group hover:-translate-y-1 transition-transform">
                     {cert.image_url ? (
                       <div className="w-full h-36 overflow-hidden">
                         <img
@@ -303,7 +306,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates }
                     <div className="w-full h-36 bg-yellow flex items-center justify-center">
                       <Award size={48} strokeWidth={1.2} className="text-ink/40" />
                     </div>
-                    <div className="p-4 bg-white">
+                    <div className="p-4 bg-cream">
                       <div className="h-3 w-3/4 bg-ink/10 rounded-full mb-2" />
                       <div className="h-2.5 w-1/2 bg-ink/10 rounded-full" />
                     </div>
@@ -317,6 +320,8 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates }
           )}
         </div>
       </section>
+
+      <TestimonialsSection testimonials={testimonials} ownTestimonial={ownTestimonial} />
     </main>
   );
 }

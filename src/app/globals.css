@@ -190,6 +190,25 @@ body {
   display: none;
 }
 
+/* ── Dark mode — form elements ── */
+/* Input & textarea backgrounds adapt to dark surface */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark textarea,
+.dark select {
+  background-color: #1a1828;
+  color: var(--color-ink);
+}
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 0.5;
+}
+
+/* Navbar backdrop in dark mode */
+.dark .bg-cream\/90 {
+  background-color: rgba(15, 14, 23, 0.92) !important;
+}
+
 /* ── Marquee animations ── */
 @keyframes marquee-left {
   from { transform: translateX(0); }

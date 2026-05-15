@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
 export default function ThemeToggle() {
@@ -16,16 +17,21 @@ export default function ThemeToggle() {
       whileTap={{ scale: 0.85 }}
       transition={{ type: "spring", stiffness: 400, damping: 15 }}
     >
-      <motion.span
-        key={isDark ? "sun" : "moon"}
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 20, opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="text-base leading-none select-none"
-      >
-        {isDark ? "☀️" : "🌙"}
-      </motion.span>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDark ? "sun" : "moon"}
+          initial={{ y: -16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
+          transition={{ duration: 0.18 }}
+          className="flex items-center justify-center"
+        >
+          {isDark
+            ? <Sun size={16} className="text-yellow-500" strokeWidth={2} />
+            : <Moon size={16} className="text-indigo-500" strokeWidth={2} />
+          }
+        </motion.span>
+      </AnimatePresence>
     </motion.button>
   );
 }

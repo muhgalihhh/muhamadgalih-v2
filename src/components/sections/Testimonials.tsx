@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X } from "lucide-react";
+import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut } from "lucide-react";
 import Image from "next/image";
+import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { submitTestimonial } from "@/app/actions/testimonials";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -89,16 +90,44 @@ export default function TestimonialsSection({
   const [signingIn, setSigningIn] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [errorMsg, setErrorMsg] = useState("");
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  // Check auth state on mount + auto-open form if returning from OAuth
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setCurrentUser(user);
+      if (user && !ownTestimonial) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("testimonial") === "open") {
+          setModalState("form");
+          document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" });
+          // Clean up the URL param
+          const url = new URL(window.location.href);
+          url.searchParams.delete("testimonial");
+          window.history.replaceState({}, "", url.toString());
+        }
+      }
+    });
+  }, [ownTestimonial]);
 
   const handleGoogleSignIn = async () => {
     setSigningIn(true);
     const supabase = createClient();
+    const base = process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin;
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback?next=/#testimonials`,
+        redirectTo: `${base}/auth/callback?next=/?testimonial=open`,
       },
     });
+  };
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setCurrentUser(null);
+    setModalState("closed");
   };
 
   const handleAddClick = () => {
@@ -145,13 +174,39 @@ export default function TestimonialsSection({
           </div>
 
           <ScrollReveal variant="fade-left" delay={0.25}>
-            <button
-              onClick={handleAddClick}
-              className="cartoon-border bg-violet text-cream font-body font-semibold px-5 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center gap-2 shrink-0"
-            >
-              <MessageSquareQuote size={16} />
-              {ownTestimonial ? "Your testimonial" : "Leave a testimonial"}
-            </button>
+            <div className="flex flex-col items-end gap-2">
+              <button
+                onClick={handleAddClick}
+                className="cartoon-border bg-violet text-cream font-body font-semibold px-5 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center gap-2 shrink-0"
+              >
+                {currentUser?.user_metadata?.avatar_url && (
+                  <Image
+                    src={currentUser.user_metadata.avatar_url}
+                    alt={currentUser.user_metadata.full_name ?? ""}
+                    width={20}
+                    height={20}
+                    className="rounded-full"
+                  />
+                )}
+                {!currentUser && <MessageSquareQuote size={16} />}
+                {ownTestimonial ? "Your testimonial" : "Leave a testimonial"}
+              </button>
+              {/* Signed-in indicator */}
+              {currentUser && (
+                <div className="flex items-center gap-2">
+                  <span className="font-body text-xs text-muted">
+                    Signed in as <span className="font-semibold text-ink">{currentUser.user_metadata?.full_name ?? currentUser.email}</span>
+                  </span>
+                  <button
+                    onClick={handleSignOut}
+                    className="font-body text-xs text-muted hover:text-coral transition-colors flex items-center gap-1"
+                  >
+                    <LogOut size={11} />
+                    Sign out
+                  </button>
+                </div>
+              )}
+            </div>
           </ScrollReveal>
         </div>
 
@@ -188,7 +243,6 @@ export default function TestimonialsSection({
               exit={{ y: "100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
               className="cartoon-border bg-cream w-full md:max-w-md rounded-t-3xl md:rounded-2xl relative overflow-y-auto max-h-[85vh]"
-              style={{ colorScheme: "light" }}
             >
               {/* Drag handle — mobile only */}
               <div className="flex justify-center pt-3 pb-1 md:hidden">
@@ -257,23 +311,46 @@ export default function TestimonialsSection({
                     Sign in with Google to submit. Your name & photo will come from your Google account.
                   </p>
 
-                  {/* Google sign-in prompt at top */}
-                  <div className="cartoon-border-sm bg-ink/5 rounded-xl p-4 flex items-center justify-between mb-5">
-                    <span className="font-body text-sm text-ink/70">Sign in to verify identity</span>
-                    <button
-                      type="button"
-                      onClick={handleGoogleSignIn}
-                      disabled={signingIn}
-                      className="cartoon-border bg-navy text-cream font-body font-semibold text-xs px-4 py-2 rounded-full hover:-translate-y-0.5 transition-transform flex items-center gap-1.5 disabled:opacity-60"
-                    >
-                      {signingIn ? (
-                        <Loader2 size={12} className="animate-spin" />
-                      ) : (
-                        <LogIn size={12} />
+                  {/* Google sign-in / signed-in indicator */}
+                  {currentUser ? (
+                    <div className="cartoon-border-sm bg-mint/30 rounded-xl p-4 flex items-center gap-3 mb-5">
+                      {currentUser.user_metadata?.avatar_url && (
+                        <Image
+                          src={currentUser.user_metadata.avatar_url}
+                          alt={currentUser.user_metadata.full_name ?? ""}
+                          width={36}
+                          height={36}
+                          className="rounded-full cartoon-border-sm shrink-0"
+                        />
                       )}
-                      {signingIn ? "Redirecting..." : "Continue with Google"}
-                    </button>
-                  </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-body font-semibold text-ink text-sm truncate">
+                          {currentUser.user_metadata?.full_name ?? currentUser.email}
+                        </p>
+                        <p className="font-body text-xs text-mint-dark flex items-center gap-1">
+                          <CheckCircle size={11} className="text-green-600" />
+                          <span className="text-green-700">Signed in with Google</span>
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="cartoon-border-sm bg-ink/5 rounded-xl p-4 flex items-center justify-between mb-5">
+                      <span className="font-body text-sm text-ink/70">Sign in to verify identity</span>
+                      <button
+                        type="button"
+                        onClick={handleGoogleSignIn}
+                        disabled={signingIn}
+                        className="cartoon-border bg-navy text-cream font-body font-semibold text-xs px-4 py-2 rounded-full hover:-translate-y-0.5 transition-transform flex items-center gap-1.5 disabled:opacity-60"
+                      >
+                        {signingIn ? (
+                          <Loader2 size={12} className="animate-spin" />
+                        ) : (
+                          <LogIn size={12} />
+                        )}
+                        {signingIn ? "Redirecting..." : "Continue with Google"}
+                      </button>
+                    </div>
+                  )}
 
                   <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     {/* Rating */}
