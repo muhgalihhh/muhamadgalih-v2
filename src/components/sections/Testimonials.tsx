@@ -179,17 +179,23 @@ export default function TestimonialsSection({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[500] bg-ink/50 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[500] bg-ink/50 backdrop-blur-sm flex items-end md:items-center justify-center md:p-4"
             onClick={(e) => { if (e.target === e.currentTarget) setModalState("closed"); }}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="cartoon-border bg-cream rounded-2xl p-6 md:p-8 w-full max-w-md relative"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              className="cartoon-border bg-cream w-full md:max-w-md rounded-t-3xl md:rounded-2xl relative overflow-y-auto max-h-[85vh]"
               style={{ colorScheme: "light" }}
             >
+              {/* Drag handle — mobile only */}
+              <div className="flex justify-center pt-3 pb-1 md:hidden">
+                <div className="w-10 h-1 rounded-full bg-ink/20" />
+              </div>
+
+              <div className="p-6 md:p-8">
               <button
                 onClick={() => setModalState("closed")}
                 className="absolute top-4 right-4 text-muted hover:text-ink transition-colors"
@@ -333,6 +339,7 @@ export default function TestimonialsSection({
                   </form>
                 </>
               )}
+              </div>{/* end inner padding div */}
             </motion.div>
           </motion.div>
         )}
