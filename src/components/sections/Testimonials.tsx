@@ -82,7 +82,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
     <motion.div
       initial={{ opacity: 0, y: 48, scale: 0.85 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.2, margin: "-50px" }}
       transition={{
         type: "spring",
         stiffness: 240,
