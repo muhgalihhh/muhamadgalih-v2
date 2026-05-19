@@ -2,8 +2,10 @@
 
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { ArrowDown, Mail, MessageSquareQuote } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import CyclingText from "@/components/animations/CyclingText";
+import { handleAnchorClick } from "@/lib/smoothScroll";
 import type { Profile } from "@/types/portfolio";
 
 const DEFAULT_ROLES = ["Full-Stack Engineering", "UI/UX Design", "Illustration & Art"];
@@ -399,18 +401,30 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemAnim} className="flex flex-wrap gap-2 lg:gap-3 mt-1 lg:mt-3 justify-center lg:justify-start">
+          <motion.div variants={itemAnim} className="flex flex-wrap gap-2 lg:gap-3 mt-6 lg:mt-10 justify-center lg:justify-start">
             <a
               href="#works"
-              className="cartoon-border bg-navy text-cream font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+              onClick={(e) => handleAnchorClick(e, "works")}
+              className="cartoon-border bg-navy text-cream font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2"
             >
-              See My Work ↓
+              See My Work
+              <ArrowDown size={20} strokeWidth={2.5} className="lg:w-[22px] lg:h-[22px]" />
+            </a>
+            <a
+              href="#testimonials"
+              onClick={(e) => handleAnchorClick(e, "testimonials")}
+              className="cartoon-border bg-violet text-cream font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2"
+            >
+              Testimonials
+              <MessageSquareQuote size={20} strokeWidth={2.5} className="lg:w-[22px] lg:h-[22px]" />
             </a>
             <a
               href="#contact"
-              className="cartoon-border bg-coral text-cream font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+              onClick={(e) => handleAnchorClick(e, "contact")}
+              className="cartoon-border bg-coral text-cream font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2"
             >
-              Let&apos;s Talk ✉
+              Let&apos;s Talk
+              <Mail size={20} strokeWidth={2.5} className="lg:w-[22px] lg:h-[22px]" />
             </a>
           </motion.div>
         </motion.div>
