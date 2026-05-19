@@ -3,7 +3,7 @@
 import { useState, useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut, User as UserIcon, Pencil, AlertTriangle } from "lucide-react";
+import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut, User as UserIcon, Pencil, AlertTriangle, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
@@ -77,13 +77,20 @@ function StarRating({ value, onChange }: { value: number; onChange?: (v: number)
   );
 }
 
-function TestimonialCard({ t }: { t: Testimonial }) {
+function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: 48, scale: 0.85 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        type: "spring",
+        stiffness: 240,
+        damping: 13,
+        mass: 0.9,
+        delay: index * 0.08,
+      }}
+      whileHover={{ y: -4, transition: { type: "spring", stiffness: 350, damping: 14 } }}
       className="cartoon-border bg-cream rounded-2xl p-6 flex flex-col gap-4 h-full"
     >
       <StarRating value={t.rating} />
@@ -117,6 +124,15 @@ export default function TestimonialsSection({
   const router = useRouter();
   const [modalState, setModalState] = useState<ModalState>(ownTestimonial ? "pending" : "closed");
   const [rating, setRating] = useState(ownTestimonial?.rating ?? 5);
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 6;
+  const totalPages = Math.max(1, Math.ceil(testimonials.length / PAGE_SIZE));
+  const pagedTestimonials = testimonials.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const goToPage = (p: number) => {
+    setPage(p);
+    document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const [signingIn, setSigningIn] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [errorMsg, setErrorMsg] = useState("");
@@ -255,11 +271,62 @@ export default function TestimonialsSection({
             </div>
           </ScrollReveal>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <TestimonialCard key={t.id} t={t} />
-            ))}
-          </div>
+          <>
+            <div key={page} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pagedTestimonials.map((t, i) => (
+                <TestimonialCard key={t.id} t={t} index={i} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-12 flex-wrap">
+                <motion.button
+                  onClick={() => goToPage(Math.max(1, page - 1))}
+                  disabled={page === 1}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={page > 1 ? { y: -2 } : undefined}
+                  className="cartoon-border-sm bg-cream w-10 h-10 rounded-full flex items-center justify-center text-ink transition-transform disabled:opacity-40 disabled:cursor-not-allowed"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft size={18} />
+                </motion.button>
+
+                {Array.from({ length: totalPages }).map((_, i) => {
+                  const n = i + 1;
+                  const active = page === n;
+                  return (
+                    <motion.button
+                      key={n}
+                      onClick={() => goToPage(n)}
+                      whileTap={{ scale: 0.85 }}
+                      whileHover={!active ? { y: -2, scale: 1.05 } : undefined}
+                      animate={active ? { scale: [1, 1.15, 1] } : { scale: 1 }}
+                      transition={active ? { type: "spring", stiffness: 320, damping: 12 } : undefined}
+                      className={`cartoon-border-sm w-10 h-10 rounded-full font-body font-bold text-sm transition-colors ${
+                        active ? "bg-violet text-cream" : "bg-cream text-ink hover:bg-violet/10"
+                      }`}
+                      aria-label={`Go to page ${n}`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {n}
+                    </motion.button>
+                  );
+                })}
+
+                <motion.button
+                  onClick={() => goToPage(Math.min(totalPages, page + 1))}
+                  disabled={page === totalPages}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={page < totalPages ? { y: -2 } : undefined}
+                  className="cartoon-border-sm bg-cream w-10 h-10 rounded-full flex items-center justify-center text-ink transition-transform disabled:opacity-40 disabled:cursor-not-allowed"
+                  aria-label="Next page"
+                >
+                  <ChevronRight size={18} />
+                </motion.button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
