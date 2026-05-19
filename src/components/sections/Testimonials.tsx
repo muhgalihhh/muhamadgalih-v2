@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useTransition, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut, User as UserIcon } from "lucide-react";
+import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut, User as UserIcon, Pencil, AlertTriangle } from "lucide-react";
 import Image from "next/image";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
@@ -113,12 +114,14 @@ export default function TestimonialsSection({
   testimonials: Testimonial[];
   ownTestimonial: Testimonial | null;
 }) {
+  const router = useRouter();
   const [modalState, setModalState] = useState<ModalState>(ownTestimonial ? "pending" : "closed");
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(ownTestimonial?.rating ?? 5);
   const [signingIn, setSigningIn] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [errorMsg, setErrorMsg] = useState("");
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const isEditing = Boolean(ownTestimonial);
 
   // Check auth state on mount + auto-open form if returning from OAuth
   useEffect(() => {
@@ -163,6 +166,11 @@ export default function TestimonialsSection({
     setModalState("form");
   };
 
+  const handleEditClick = () => {
+    if (ownTestimonial) setRating(ownTestimonial.rating);
+    setModalState("form");
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMsg("");
@@ -172,6 +180,7 @@ export default function TestimonialsSection({
       const res = await submitTestimonial(fd);
       if (res.ok) {
         setModalState("success");
+        router.refresh();
       } else {
         setErrorMsg(res.error ?? "Something went wrong.");
       }
@@ -289,9 +298,13 @@ export default function TestimonialsSection({
               {modalState === "success" && (
                 <div className="text-center py-4">
                   <CheckCircle size={52} className="mx-auto mb-4 text-mint" strokeWidth={1.5} />
-                  <h3 className="font-display font-extrabold text-ink text-2xl mb-2">Thank you!</h3>
+                  <h3 className="font-display font-extrabold text-ink text-2xl mb-2">
+                    {isEditing ? "Saved!" : "Thank you!"}
+                  </h3>
                   <p className="font-body text-muted text-sm">
-                    Your testimonial has been submitted and is pending review. I appreciate it!
+                    {isEditing
+                      ? "Your changes have been saved and will be reviewed before going live again."
+                      : "Your testimonial has been submitted and is pending review. I appreciate it!"}
                   </p>
                   <button
                     onClick={() => setModalState("closed")}
@@ -320,12 +333,20 @@ export default function TestimonialsSection({
                       &ldquo;{ownTestimonial.content}&rdquo;
                     </p>
                   </div>
-                  <button
-                    onClick={() => setModalState("closed")}
-                    className="cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
-                  >
-                    Close
-                  </button>
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <button
+                      onClick={handleEditClick}
+                      className="cartoon-border bg-violet text-cream font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform inline-flex items-center gap-2"
+                    >
+                      <Pencil size={14} /> Edit
+                    </button>
+                    <button
+                      onClick={() => setModalState("closed")}
+                      className="cartoon-border bg-ink text-cream font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
+                    >
+                      Close
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -333,11 +354,22 @@ export default function TestimonialsSection({
               {modalState === "form" && (
                 <>
                   <h3 className="font-display font-extrabold text-ink text-xl mb-1">
-                    Leave a testimonial ✦
+                    {isEditing ? "Edit your testimonial ✦" : "Leave a testimonial ✦"}
                   </h3>
                   <p className="font-body text-muted text-xs mb-5">
-                    Sign in with Google to submit. Your name & photo will come from your Google account.
+                    {isEditing
+                      ? "Update your testimonial below. Submitting will re-send it for review."
+                      : "Sign in with Google to submit. Your name & photo will come from your Google account."}
                   </p>
+
+                  {isEditing && ownTestimonial?.approved && (
+                    <div className="cartoon-border-sm bg-yellow/30 rounded-xl p-3 mb-5 flex items-start gap-2">
+                      <AlertTriangle size={14} className="text-ink mt-0.5 shrink-0" />
+                      <p className="font-body text-xs text-ink leading-relaxed">
+                        Your testimonial is currently live. Editing it will hide it until I review the changes.
+                      </p>
+                    </div>
+                  )}
 
                   {/* Google sign-in / signed-in indicator */}
                   {currentUser ? (
@@ -389,6 +421,7 @@ export default function TestimonialsSection({
                         <label className="font-body font-semibold text-ink text-sm">Your role</label>
                         <input
                           name="author_role"
+                          defaultValue={ownTestimonial?.author_role ?? ""}
                           placeholder="e.g. CTO"
                           className="cartoon-border-sm rounded-xl px-3 py-2.5 font-body text-sm text-ink bg-cream outline-none focus:ring-2 focus:ring-violet/40 placeholder:text-muted/50"
                         />
@@ -397,6 +430,7 @@ export default function TestimonialsSection({
                         <label className="font-body font-semibold text-ink text-sm">Company</label>
                         <input
                           name="author_company"
+                          defaultValue={ownTestimonial?.author_company ?? ""}
                           placeholder="e.g. Acme Inc."
                           className="cartoon-border-sm rounded-xl px-3 py-2.5 font-body text-sm text-ink bg-cream outline-none focus:ring-2 focus:ring-violet/40 placeholder:text-muted/50"
                         />
@@ -410,6 +444,7 @@ export default function TestimonialsSection({
                         name="content"
                         required
                         rows={4}
+                        defaultValue={ownTestimonial?.content ?? ""}
                         placeholder="Share your experience working with Galih..."
                         className="cartoon-border-sm rounded-xl px-3 py-2.5 font-body text-sm text-ink bg-cream outline-none focus:ring-2 focus:ring-violet/40 placeholder:text-muted/50 resize-none"
                       />
@@ -422,21 +457,36 @@ export default function TestimonialsSection({
                     )}
 
                     <p className="font-body text-[11px] text-muted leading-relaxed">
-                      After submitting, your testimonial will be reviewed before going live.
+                      {isEditing
+                        ? "After saving, your testimonial will be re-reviewed before going live."
+                        : "After submitting, your testimonial will be reviewed before going live."}
                     </p>
 
-                    <motion.button
-                      type="submit"
-                      disabled={isPending}
-                      className="cartoon-border bg-violet text-cream font-body font-semibold px-6 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center justify-center gap-2 disabled:opacity-60"
-                      whileTap={{ scale: 0.96 }}
-                    >
-                      {isPending ? (
-                        <><Loader2 size={14} className="animate-spin" /> Submitting...</>
-                      ) : (
-                        <><MessageSquareQuote size={14} /> Submit testimonial</>
+                    <div className="flex gap-2 flex-wrap">
+                      {isEditing && (
+                        <button
+                          type="button"
+                          onClick={() => setModalState("pending")}
+                          className="cartoon-border bg-cream text-ink font-body font-semibold px-5 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+                        >
+                          Cancel
+                        </button>
                       )}
-                    </motion.button>
+                      <motion.button
+                        type="submit"
+                        disabled={isPending}
+                        className="flex-1 cartoon-border bg-violet text-cream font-body font-semibold px-6 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center justify-center gap-2 disabled:opacity-60"
+                        whileTap={{ scale: 0.96 }}
+                      >
+                        {isPending ? (
+                          <><Loader2 size={14} className="animate-spin" /> {isEditing ? "Saving..." : "Submitting..."}</>
+                        ) : isEditing ? (
+                          <><Pencil size={14} /> Save changes</>
+                        ) : (
+                          <><MessageSquareQuote size={14} /> Submit testimonial</>
+                        )}
+                      </motion.button>
+                    </div>
                   </form>
                 </>
               )}
