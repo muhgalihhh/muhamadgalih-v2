@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowDown, Mail, MessageSquareQuote } from "lucide-react";
+import { ArrowDown, Mail, MessageSquareQuote, Download } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import CyclingText from "@/components/animations/CyclingText";
 import { handleAnchorClick } from "@/lib/smoothScroll";
@@ -47,6 +47,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
   const isAvailable      = profile?.availability     ?? true;
   const avatarUrl        = profile?.avatar_url       ?? null;
   const illustrationUrl  = profile?.illustration_url ?? null;
+  const cvUrl            = profile?.cv_url           ?? null;
 
   // Split name: first part(s) → stroke text, last word → sticker box
   const nameParts  = name.trim().split(/\s+/);
@@ -426,6 +427,18 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               Let&apos;s Talk
               <Mail size={20} strokeWidth={2.5} className="lg:w-[22px] lg:h-[22px]" />
             </a>
+            {cvUrl && (
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="cartoon-border bg-mint text-ink font-body font-semibold px-4 py-2 lg:px-6 lg:py-3 text-sm lg:text-base rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2"
+              >
+                Download CV
+                <Download size={20} strokeWidth={2.5} className="lg:w-[22px] lg:h-[22px]" />
+              </a>
+            )}
           </motion.div>
         </motion.div>
 

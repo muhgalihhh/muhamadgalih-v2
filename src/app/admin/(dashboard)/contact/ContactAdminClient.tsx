@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { updateProfile, uploadFile } from "@/app/actions/admin";
-import { Upload, Loader2, CheckCircle, Music, ExternalLink, Image, X } from "lucide-react";
+import { Upload, Loader2, CheckCircle, Music, ExternalLink, Image, X, FileText } from "lucide-react";
 import type { Profile } from "@/types/portfolio";
 
 const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
@@ -36,6 +36,9 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
   const [avatarUploading, setAvatarUploading]             = useState(false);
   const [illustrationUrl, setIllustrationUrl]             = useState(profile?.illustration_url ?? "");
   const [illustrationUploading, setIllustrationUploading] = useState(false);
+  const [cvUrl, setCvUrl]                                 = useState(profile?.cv_url ?? "");
+  const [cvUploading, setCvUploading]                     = useState(false);
+  const [cvUploadMsg, setCvUploadMsg]                     = useState("");
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -58,6 +61,24 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
     const res = await uploadFile(fd);
     if (res.url) setIllustrationUrl(res.url);
     setIllustrationUploading(false);
+    e.target.value = "";
+  };
+
+  const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setCvUploading(true);
+    setCvUploadMsg("");
+    const fd = new FormData();
+    fd.set("file", file); fd.set("folder", "cv");
+    const res = await uploadFile(fd);
+    if (res.url) {
+      setCvUrl(res.url);
+      setCvUploadMsg("Uploaded! Save profile to apply.");
+    } else {
+      setCvUploadMsg(res.error ?? "Upload failed");
+    }
+    setCvUploading(false);
     e.target.value = "";
   };
 
@@ -87,6 +108,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
     fd.set("spotify_embed_url", extractSpotifyUrl(spotifyInput));
     fd.set("avatar_url", avatarUrl);
     fd.set("illustration_url", illustrationUrl);
+    fd.set("cv_url", cvUrl);
     setMsg(""); setSuccess(false);
     startTransition(async () => {
       const res = await updateProfile(profile.id, fd);
@@ -290,6 +312,53 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
                   type="url"
                   value={illustrationUrl}
                   onChange={(e) => setIllustrationUrl(e.target.value)}
+                  placeholder="https://..."
+                  className={inputCls}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CV / Resume */}
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <span className="text-sm font-semibold text-slate-700">CV / Resume</span>
+            <p className="text-slate-400 text-xs mt-0.5">Upload PDF — akan muncul sebagai tombol Download CV di hero & contact section.</p>
+          </div>
+          <div className="p-6 flex items-start gap-5">
+            <div className="w-20 h-20 rounded-xl border border-slate-200 overflow-hidden bg-slate-50 shrink-0 flex items-center justify-center">
+              <FileText size={28} className={cvUrl ? "text-indigo-500" : "text-slate-300"} />
+            </div>
+            <div className="flex-1 space-y-3">
+              <div className="flex items-center gap-3 flex-wrap">
+                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
+                  {cvUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+                  {cvUploading ? "Uploading..." : "Upload CV (PDF)"}
+                  <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={handleCvUpload} disabled={cvUploading} />
+                </label>
+                {cvUrl && (
+                  <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-indigo-600 hover:underline">
+                    <ExternalLink size={11} /> View current
+                  </a>
+                )}
+                {cvUrl && (
+                  <button type="button" onClick={() => setCvUrl("")} className="flex items-center gap-1 text-xs text-slate-400 hover:text-red-500 transition-colors">
+                    <X size={11} /> Remove
+                  </button>
+                )}
+              </div>
+              {cvUploadMsg && (
+                <p className={`text-xs ${cvUploadMsg.startsWith("Uploaded") ? "text-green-600" : "text-red-500"}`}>
+                  {cvUploadMsg}
+                </p>
+              )}
+              <div className="flex flex-col gap-1.5">
+                <label className={labelCls}>Or paste a direct PDF URL</label>
+                <input
+                  type="url"
+                  value={cvUrl}
+                  onChange={(e) => setCvUrl(e.target.value)}
                   placeholder="https://..."
                   className={inputCls}
                 />

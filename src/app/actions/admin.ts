@@ -300,13 +300,14 @@ export async function updateProfile(id: string, formData: FormData) {
   const newAvatar       = (formData.get("avatar_url") as string) || null;
   const newIllustration = (formData.get("illustration_url") as string) || null;
   const newMusic        = (formData.get("music_url") as string) || null;
+  const newCv           = (formData.get("cv_url") as string) || null;
 
   const heroRolesRaw = (formData.get("hero_roles") as string) || "";
   const hero_roles = heroRolesRaw.split("\n").map((r) => r.trim()).filter(Boolean);
 
   const { data: old } = await supabase
     .from("profile")
-    .select("avatar_url, illustration_url, music_url")
+    .select("avatar_url, illustration_url, music_url, cv_url")
     .eq("id", id)
     .single();
 
@@ -326,6 +327,7 @@ export async function updateProfile(id: string, formData: FormData) {
     tagline:            (formData.get("tagline") as string) || null,
     avatar_url:         newAvatar,
     illustration_url:   newIllustration,
+    cv_url:             newCv,
     hero_roles:         hero_roles.length > 0 ? hero_roles : ["Full-Stack Engineering", "UI/UX Design", "Illustration & Art"],
     years_experience:   parseInt((formData.get("years_experience") as string) || "0", 10),
     clients_count:      parseInt((formData.get("clients_count") as string) || "0", 10),
@@ -337,6 +339,7 @@ export async function updateProfile(id: string, formData: FormData) {
     if (old.avatar_url       && old.avatar_url       !== newAvatar)       removed.push(old.avatar_url);
     if (old.illustration_url && old.illustration_url !== newIllustration) removed.push(old.illustration_url);
     if (old.music_url        && old.music_url        !== newMusic)        removed.push(old.music_url);
+    if (old.cv_url           && old.cv_url           !== newCv)           removed.push(old.cv_url);
     await deleteStorageFiles(removed);
   }
   revalidatePath("/admin/(dashboard)/contact");

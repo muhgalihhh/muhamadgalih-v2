@@ -1,5 +1,6 @@
 "use client";
 
+import { Download } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import type { Profile } from "@/types/portfolio";
@@ -24,6 +25,7 @@ function getSocials(profile: Profile | null) {
 export default function Contact({ profile }: { profile?: Profile | null }) {
   const email = profile?.email || "galihslank79@gmail.com";
   const socials = getSocials(profile ?? null);
+  const cvUrl = profile?.cv_url ?? null;
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-yellow relative overflow-hidden">
@@ -67,6 +69,18 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
                 {social.label} ↗
               </a>
             ))}
+            {cvUrl && (
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="bg-mint text-ink cartoon-border font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform text-sm inline-flex items-center gap-2"
+              >
+                Download CV
+                <Download size={16} strokeWidth={2.5} />
+              </a>
+            )}
           </div>
         </ScrollReveal>
 

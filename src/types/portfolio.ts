@@ -111,6 +111,7 @@ export interface Profile {
   tagline: string | null;
   avatar_url: string | null;
   illustration_url: string | null;
+  cv_url: string | null;
   hero_roles: string[];
   years_experience: number;
   clients_count: number;

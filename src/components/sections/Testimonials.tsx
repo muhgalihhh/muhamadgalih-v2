@@ -2,7 +2,7 @@
 
 import { useState, useTransition, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut } from "lucide-react";
+import { Star, LogIn, Loader2, CheckCircle, MessageSquareQuote, X, LogOut, User as UserIcon } from "lucide-react";
 import Image from "next/image";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
@@ -10,6 +10,46 @@ import { submitTestimonial } from "@/app/actions/testimonials";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import AnimatedText from "@/components/animations/AnimatedText";
 import type { Testimonial } from "@/types/portfolio";
+
+function Avatar({
+  src,
+  name,
+  size = 36,
+  bordered = true,
+}: {
+  src?: string | null;
+  name: string;
+  size?: number;
+  bordered?: boolean;
+}) {
+  const [errored, setErrored] = useState(false);
+  const showPlaceholder = !src || errored;
+  const borderClass = bordered ? "cartoon-border-sm" : "";
+
+  if (showPlaceholder) {
+    return (
+      <div
+        className={`rounded-full bg-violet/20 ${borderClass} flex items-center justify-center text-violet shrink-0`}
+        style={{ width: size, height: size }}
+        aria-label={name}
+      >
+        <UserIcon size={Math.round(size * 0.55)} strokeWidth={2.2} />
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={name}
+      width={size}
+      height={size}
+      className={`rounded-full object-cover ${borderClass} shrink-0`}
+      onError={() => setErrored(true)}
+      unoptimized
+    />
+  );
+}
 
 function StarRating({ value, onChange }: { value: number; onChange?: (v: number) => void }) {
   const [hovered, setHovered] = useState(0);
@@ -50,19 +90,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         &ldquo;{t.content}&rdquo;
       </p>
       <div className="flex items-center gap-3 pt-2 border-t-2 border-ink/10">
-        {t.author_avatar ? (
-          <Image
-            src={t.author_avatar}
-            alt={t.author_name}
-            width={36}
-            height={36}
-            className="rounded-full object-cover cartoon-border-sm"
-          />
-        ) : (
-          <div className="w-9 h-9 rounded-full bg-violet/20 cartoon-border-sm flex items-center justify-center font-display font-bold text-violet text-sm">
-            {t.author_name.charAt(0).toUpperCase()}
-          </div>
-        )}
+        <Avatar src={t.author_avatar} name={t.author_name} size={36} />
         <div>
           <p className="font-body font-semibold text-ink text-sm">{t.author_name}</p>
           {(t.author_role || t.author_company) && (
@@ -179,16 +207,16 @@ export default function TestimonialsSection({
                 onClick={handleAddClick}
                 className="cartoon-border bg-violet text-cream font-body font-semibold px-5 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center gap-2 shrink-0"
               >
-                {currentUser?.user_metadata?.avatar_url && (
-                  <Image
-                    src={currentUser.user_metadata.avatar_url}
-                    alt={currentUser.user_metadata.full_name ?? ""}
-                    width={20}
-                    height={20}
-                    className="rounded-full"
+                {currentUser ? (
+                  <Avatar
+                    src={currentUser.user_metadata?.avatar_url}
+                    name={currentUser.user_metadata?.full_name ?? ""}
+                    size={20}
+                    bordered={false}
                   />
+                ) : (
+                  <MessageSquareQuote size={16} />
                 )}
-                {!currentUser && <MessageSquareQuote size={16} />}
                 {ownTestimonial ? "Your testimonial" : "Leave a testimonial"}
               </button>
               {/* Signed-in indicator */}
@@ -314,15 +342,11 @@ export default function TestimonialsSection({
                   {/* Google sign-in / signed-in indicator */}
                   {currentUser ? (
                     <div className="cartoon-border-sm bg-mint/30 rounded-xl p-4 flex items-center gap-3 mb-5">
-                      {currentUser.user_metadata?.avatar_url && (
-                        <Image
-                          src={currentUser.user_metadata.avatar_url}
-                          alt={currentUser.user_metadata.full_name ?? ""}
-                          width={36}
-                          height={36}
-                          className="rounded-full cartoon-border-sm shrink-0"
-                        />
-                      )}
+                      <Avatar
+                        src={currentUser.user_metadata?.avatar_url}
+                        name={currentUser.user_metadata?.full_name ?? ""}
+                        size={36}
+                      />
                       <div className="flex-1 min-w-0">
                         <p className="font-body font-semibold text-ink text-sm truncate">
                           {currentUser.user_metadata?.full_name ?? currentUser.email}
