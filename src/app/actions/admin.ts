@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import sharp from "sharp";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/service";
 import type { Profile, GalleryItem, ProjectCategoryRow, ContactMessage } from "@/types/portfolio";
@@ -440,11 +441,28 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
   const file = formData.get("file") as File;
   const folder = (formData.get("folder") as string) || "misc";
   if (!file || file.size === 0) return { error: "No file provided" };
-  const ext = file.name.split(".").pop();
+
+  // Convert raster images to WebP for smaller, smoother delivery.
+  // Skip SVG (vector) and GIF (may be animated) — keep them as-is.
+  const convertible =
+    file.type.startsWith("image/") &&
+    !["image/svg+xml", "image/gif"].includes(file.type);
+
+  let body: Buffer | File = file;
+  let ext = file.name.split(".").pop();
+  let contentType = file.type || undefined;
+
+  if (convertible) {
+    const buf = Buffer.from(await file.arrayBuffer());
+    body = await sharp(buf).rotate().webp({ quality: 80 }).toBuffer();
+    ext = "webp";
+    contentType = "image/webp";
+  }
+
   const path = `${folder}/${Date.now()}.${ext}`;
-  const { error } = await supabase.storage.from("portfolio").upload(path, file, {
+  const { error } = await supabase.storage.from("portfolio").upload(path, body, {
     upsert: false,
-    contentType: file.type || undefined,
+    contentType,
   });
   if (error) return { error: error.message };
   const { data: { publicUrl } } = supabase.storage.from("portfolio").getPublicUrl(path);
