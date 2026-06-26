@@ -15,7 +15,7 @@ export default function ProjectCarousel({
 
   if (!images.length) {
     return (
-      <div className="w-full h-40 md:h-52 rounded-xl bg-black/10 flex items-center justify-center cartoon-border-sm mb-4">
+      <div className="w-full aspect-video rounded-xl bg-black/10 flex items-center justify-center cartoon-border-sm mb-4">
         <span className="font-body text-sm opacity-40">No screenshots yet</span>
       </div>
     );
@@ -34,7 +34,7 @@ export default function ProjectCarousel({
 
   return (
     <div className="mb-4">
-      <div className="relative w-full h-40 md:h-52 rounded-xl overflow-hidden cartoon-border-sm bg-black/10">
+      <div className="relative w-full aspect-video rounded-xl overflow-hidden cartoon-border-sm bg-black/10">
         <AnimatePresence custom={direction} mode="popLayout">
           <motion.img
             key={current}

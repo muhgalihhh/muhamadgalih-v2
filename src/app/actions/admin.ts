@@ -448,13 +448,16 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
     file.type.startsWith("image/") &&
     !["image/svg+xml", "image/gif"].includes(file.type);
 
-  let body: Buffer | File = file;
+  let body: Blob | File = file;
   let ext = file.name.split(".").pop();
   let contentType = file.type || undefined;
 
   if (convertible) {
     const buf = Buffer.from(await file.arrayBuffer());
-    body = await sharp(buf).rotate().webp({ quality: 80 }).toBuffer();
+    const webp = await sharp(buf).rotate().webp({ quality: 80 }).toBuffer();
+    // Wrap in a Blob — passing a raw Node Buffer corrupts the binary
+    // (bytes get UTF-8 mangled) when uploaded via the Server Action.
+    body = new Blob([new Uint8Array(webp)], { type: "image/webp" });
     ext = "webp";
     contentType = "image/webp";
   }

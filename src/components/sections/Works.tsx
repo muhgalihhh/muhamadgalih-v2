@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import type { Project } from "@/types/portfolio";
 
@@ -100,7 +101,9 @@ export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
                 >
                   <div className={`p-4 md:p-6 h-full flex flex-col justify-between ${project.text_color_class}`}>
                     <div className="flex items-start justify-between">
-                      <span className="text-3xl md:text-4xl">{project.emoji}</span>
+                      <span className="text-3xl md:text-4xl flex items-center">
+                        {project.emoji ? <SkillIcon icon={project.emoji} className="w-8 h-8 md:w-10 md:h-10" /> : "✦"}
+                      </span>
                       <span className={`cartoon-border-sm bg-black/10 font-body text-xs px-2 md:px-3 py-1 rounded-full ${project.text_color_class}`}>
                         {categoryLabel[project.category] ?? project.category}
                       </span>
