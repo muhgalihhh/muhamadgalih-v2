@@ -146,7 +146,7 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
                   <p className="font-body text-ink/70">I&apos;ll get back to you as soon as possible. Thanks for reaching out!</p>
                   <button
                     onClick={() => { setFormState("idle"); setErrorMsg(""); setFields({ name: "", email: "", subject: "", message: "" }); }}
-                    className="mt-6 cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
+                    className="card-surface mt-6 cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
                   >
                     Send another ✦
                   </button>

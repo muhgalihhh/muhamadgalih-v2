@@ -393,7 +393,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             {rolePills.map((role) => (
               <span
                 key={role.label}
-                className={`cartoon-border ${role.color} font-body font-semibold px-2 py-1 lg:px-3 lg:py-1.5 rounded-full inline-block text-xs lg:text-sm`}
+                className={`card-surface cartoon-border ${role.color} font-body font-semibold px-2 py-1 lg:px-3 lg:py-1.5 rounded-full inline-block text-xs lg:text-sm`}
                 style={{ transform: `rotate(${role.rotation})` }}
               >
                 {role.label}

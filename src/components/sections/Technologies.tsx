@@ -28,7 +28,7 @@ const staticDev = [
 function ToolPill({ skill, delay }: { skill: Skill; delay: number }) {
   return (
     <ScrollReveal variant="scale-in" delay={delay}>
-      <div className={`${skill.color_class} cartoon-border-sm rounded-xl px-3 md:px-4 py-2 md:py-2.5 flex items-center gap-2 hover:-translate-y-0.5 transition-transform cursor-default`}>
+      <div className={`card-surface ${skill.color_class} cartoon-border-sm rounded-xl px-3 md:px-4 py-2 md:py-2.5 flex items-center gap-2 hover:-translate-y-0.5 transition-transform cursor-default`}>
         {skill.icon && <SkillIcon icon={skill.icon} className="w-5 h-5" />}
         <span className="font-body font-semibold text-xs md:text-sm whitespace-nowrap">{skill.name}</span>
       </div>

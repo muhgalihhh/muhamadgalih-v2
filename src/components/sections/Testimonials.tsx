@@ -375,7 +375,7 @@ export default function TestimonialsSection({
                   </p>
                   <button
                     onClick={() => setModalState("closed")}
-                    className="mt-6 cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
+                    className="card-surface mt-6 cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
                   >
                     Close
                   </button>
@@ -409,7 +409,7 @@ export default function TestimonialsSection({
                     </button>
                     <button
                       onClick={() => setModalState("closed")}
-                      className="cartoon-border bg-ink text-cream font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
+                      className="card-surface cartoon-border bg-ink text-cream font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
                     >
                       Close
                     </button>

@@ -60,7 +60,7 @@ export default function ProjectDetailModal({
             </div>
 
             {/* Colored header */}
-            <div className={`${project.color_class} ${project.text_color_class} px-5 md:px-7 py-5 shrink-0 relative`}>
+            <div className={`card-surface ${project.color_class} ${project.text_color_class} px-5 md:px-7 py-5 shrink-0 relative`}>
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/20 flex items-center justify-center hover:bg-black/30 transition-colors"
@@ -128,7 +128,7 @@ export default function ProjectDetailModal({
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 cartoon-border ${project.color_class} ${project.text_color_class} font-body font-semibold text-sm px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform`}
+                      className={`card-surface inline-flex items-center gap-2 cartoon-border ${project.color_class} ${project.text_color_class} font-body font-semibold text-sm px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform`}
                     >
                       <ExternalLink size={14} />
                       View Live Project

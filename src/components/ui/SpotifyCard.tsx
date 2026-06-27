@@ -15,7 +15,7 @@ export default function SpotifyCard({ embedUrl, className = "", height = 152 }: 
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
-      className={`cartoon-border rounded-2xl overflow-hidden bg-ink ${className}`}
+      className={`card-surface cartoon-border rounded-2xl overflow-hidden bg-ink ${className}`}
     >
       <div className="flex items-center gap-2 px-4 py-2.5 bg-ink border-b-2 border-cream/10">
         <Music size={13} className="text-cream/50" />

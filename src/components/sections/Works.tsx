@@ -20,12 +20,13 @@ const staticProjects = [
   { id: "s6", title: "REST API Service",      category: "software" as const,      description: "Scalable REST API with auth, rate limiting, and auto-generated OpenAPI docs.",                                           color_class: "bg-pink",   text_color_class: "text-ink",   tech_stack: ["Node.js", "Express", "PostgreSQL", "Redis"],    image_urls: [], emoji: "🔧", link: "/works", order_index: 5, published: true, created_at: "" },
 ];
 
-const sizeMap = ["featured", "small", "small", "wide", "medium", "medium"];
+// Asymmetric bento — every card is tall (row-span-2) so the preview image stays
+// clearly visible; only the column width varies for an editorial, "cool" rhythm.
+const sizeMap = ["hero", "side", "half", "half", "side", "hero"];
 const sizeClasses: Record<string, string> = {
-  featured: "md:col-span-2 md:row-span-2",
-  wide:     "md:col-span-4",
-  medium:   "md:col-span-2",
-  small:    "md:col-span-1",
+  hero: "md:col-span-4 md:row-span-2", // wide feature
+  half: "md:col-span-3 md:row-span-2", // balanced pair
+  side: "md:col-span-2 md:row-span-2", // narrow but still tall
 };
 
 const filters: { label: string; value: Category }[] = [
@@ -84,7 +85,7 @@ export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
         </ScrollReveal>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 [grid-auto-rows:180px] md:[grid-auto-rows:220px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:gap-4 [grid-auto-rows:170px] md:[grid-auto-rows:175px]">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => {
               const size = sizeMap[i % sizeMap.length];
@@ -97,7 +98,7 @@ export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.88 }}
                   transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className={`col-span-1 ${sizeClasses[size] ?? ""} ${project.color_class} cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform min-h-[160px]`}
+                  className={`card-surface col-span-1 row-span-2 ${sizeClasses[size] ?? ""} ${project.color_class} cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform min-h-[320px]`}
                   onClick={() => setSelectedProject(project)}
                 >
                   <div className={`relative z-10 p-4 md:p-6 h-full flex flex-col gap-3 ${project.text_color_class}`}>

@@ -76,16 +76,30 @@ const staticProjects = [
 ];
 
 const staticGalleryItems = [
-  { id: 1, color: "bg-violet",  height: "h-56 md:h-64",  label: "Character Design", emoji: "🎭" },
-  { id: 2, color: "bg-coral",   height: "h-40 md:h-48",  label: "Brand Identity",   emoji: "🌟" },
-  { id: 3, color: "bg-sky",     height: "h-64 md:h-80",  label: "UI Screens",       emoji: "📱" },
-  { id: 4, color: "bg-yellow",  height: "h-48 md:h-56",  label: "Poster Art",       emoji: "🎨" },
-  { id: 5, color: "bg-mint",    height: "h-72 md:h-72",  label: "Illustration",     emoji: "✏️" },
-  { id: 6, color: "bg-pink",    height: "h-40 md:h-52",  label: "Motion Design",    emoji: "🎬" },
-  { id: 7, color: "bg-navy",    height: "h-56 md:h-60",  label: "Typography",       emoji: "🔤" },
-  { id: 8, color: "bg-coral",   height: "h-48 md:h-72",  label: "Iconography",      emoji: "⚡" },
-  { id: 9, color: "bg-violet",  height: "h-40 md:h-48",  label: "Sticker Pack",     emoji: "🤌" },
+  { id: 1, color: "bg-violet",  label: "Character Design", emoji: "🎭" },
+  { id: 2, color: "bg-coral",   label: "Brand Identity",   emoji: "🌟" },
+  { id: 3, color: "bg-sky",     label: "UI Screens",       emoji: "📱" },
+  { id: 4, color: "bg-yellow",  label: "Poster Art",       emoji: "🎨" },
+  { id: 5, color: "bg-mint",    label: "Illustration",     emoji: "✏️" },
+  { id: 6, color: "bg-pink",    label: "Motion Design",    emoji: "🎬" },
+  { id: 7, color: "bg-navy",    label: "Typography",       emoji: "🔤" },
+  { id: 8, color: "bg-coral",   label: "Iconography",      emoji: "⚡" },
+  { id: 9, color: "bg-violet",  label: "Sticker Pack",     emoji: "🤌" },
 ];
+
+/* Pola bento asimetris — besar/kecil/tinggi/lebar berulang per index.
+   col-span max 2 → aman di mobile (2 kolom) maupun desktop (4 kolom). */
+const bentoSpans = [
+  "col-span-2 row-span-2", // big square
+  "col-span-2 row-span-1", // wide
+  "col-span-1 row-span-1", // small
+  "col-span-1 row-span-2", // tall
+  "col-span-1 row-span-1", // small
+  "col-span-1 row-span-1", // small
+  "col-span-2 row-span-1", // wide
+  "col-span-1 row-span-2", // tall
+];
+const bentoSpan = (i: number) => bentoSpans[i % bentoSpans.length];
 
 const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
   { id: "1", slug: "software",     label: "Software",     order_index: 0, created_at: "" },
@@ -208,7 +222,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                     {/* Card header */}
                     <button
                       onClick={() => setOpenId(isOpen ? null : project.id)}
-                      className={`w-full flex items-center gap-4 p-4 md:p-5 text-left ${project.color_class} ${project.text_color_class} transition-opacity hover:opacity-90`}
+                      className={`card-surface w-full flex items-center gap-4 p-4 md:p-5 text-left ${project.color_class} ${project.text_color_class} transition-opacity hover:opacity-90`}
                     >
                       <span className="text-2xl md:text-3xl shrink-0 select-none flex items-center justify-center w-8 h-8">
                         {project.emoji ? <SkillIcon icon={project.emoji} className="w-7 h-7" /> : "✦"}
@@ -251,7 +265,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                          className={`overflow-hidden ${project.color_class}`}
+                          className={`card-surface overflow-hidden ${project.color_class}`}
                         >
                           <div className={`px-5 pb-5 pt-3 border-t-2 border-black/10 ${project.text_color_class}`}>
                             {/* Screenshots carousel */}
@@ -357,15 +371,20 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
             </p>
           </ScrollReveal>
 
-          <div className="columns-2 md:columns-3 gap-4 space-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[130px] md:auto-rows-[175px] gap-3 md:gap-4 grid-flow-row-dense">
             {galleryItems.length > 0 ? (
               galleryItems.map((item, i) => (
-                <ScrollReveal key={item.id} variant="scale-in" delay={i * 0.06}>
-                  <div className="cartoon-border-light rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform w-full break-inside-avoid mb-4">
+                <ScrollReveal
+                  key={item.id}
+                  variant="scale-in"
+                  delay={(i % 8) * 0.05}
+                  className={`${bentoSpan(i)} min-h-0`}
+                >
+                  <div className="h-full w-full cartoon-border-light rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform">
                     <img
                       src={item.image_url}
                       alt={item.title || "Gallery item"}
-                      className="w-full h-auto block"
+                      className="w-full h-full object-cover block"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-end justify-end p-3 gap-0.5">
                       {item.title && (
@@ -381,9 +400,14 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
             ) : (
               /* Placeholder saat gallery masih kosong */
               staticGalleryItems.map((item, i) => (
-                <ScrollReveal key={item.id} variant="scale-in" delay={i * 0.06}>
+                <ScrollReveal
+                  key={item.id}
+                  variant="scale-in"
+                  delay={(i % 8) * 0.05}
+                  className={`${bentoSpan(i)} min-h-0`}
+                >
                   <div
-                    className={`${item.color} ${item.height} cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform w-full break-inside-avoid mb-4`}
+                    className={`${item.color} h-full w-full cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform`}
                   >
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                       <span className="text-4xl md:text-5xl">{item.emoji}</span>

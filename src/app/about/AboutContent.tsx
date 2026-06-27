@@ -130,7 +130,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.55 + i * 0.04, duration: 0.4, ease: [0.22,1,0.36,1] }}
-                  className={`${s.color_class} font-body font-semibold px-3 py-1.5 rounded-full cartoon-border-sm text-xs md:text-sm hover:-translate-y-0.5 transition-transform inline-flex items-center gap-1.5`}
+                  className={`card-surface ${s.color_class} font-body font-semibold px-3 py-1.5 rounded-full cartoon-border-sm text-xs md:text-sm hover:-translate-y-0.5 transition-transform inline-flex items-center gap-1.5`}
                 >
                   {s.icon && <SkillIcon icon={s.icon} className="w-4 h-4 shrink-0" />}{s.name}
                 </motion.span>
@@ -162,9 +162,9 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
                 <ScrollReveal key={exp.id} variant="fade-up" delay={i * 0.12}>
                   <div className="md:pl-24 relative">
                     {/* Timeline dot — plain color circle */}
-                    <div className={`hidden md:flex absolute left-4 top-6 w-8 h-8 rounded-full ${exp.color_class} cartoon-border-sm shrink-0`} />
+                    <div className={`card-surface hidden md:flex absolute left-4 top-6 w-8 h-8 rounded-full ${exp.color_class} cartoon-border-sm shrink-0`} />
 
-                    <div className={`${exp.color_class} cartoon-border rounded-2xl p-6 md:p-8 ${exp.text_color_class}`}>
+                    <div className={`card-surface ${exp.color_class} cartoon-border rounded-2xl p-6 md:p-8 ${exp.text_color_class}`}>
                       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
                         <div className="flex items-center gap-3">
                           {/* Company logo / icon inside the card */}
@@ -224,7 +224,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {organizations.map((org, i) => (
               <ScrollReveal key={org.name} variant="scale-in" delay={i * 0.1}>
-                <div className={`${org.color} cartoon-border rounded-2xl p-6 text-ink h-full`}>
+                <div className={`card-surface ${org.color} cartoon-border rounded-2xl p-6 text-ink h-full`}>
                   <org.Icon size={36} className="mb-4" strokeWidth={1.5} />
                   <h3 className="font-display font-extrabold text-lg leading-tight mb-1">
                     {org.name}
