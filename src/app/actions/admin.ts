@@ -159,6 +159,66 @@ export async function deleteExperience(id: string) {
   revalidatePath("/about");
 }
 
+// ── Organizations ────────────────────────────────────────────
+export async function getAdminOrganizations() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("organizations").select("*").order("order_index");
+  return data ?? [];
+}
+
+export async function createOrganization(formData: FormData) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("organizations").insert({
+    name:             formData.get("name") as string,
+    role:             formData.get("role") as string,
+    period:           formData.get("period") as string,
+    icon:             (formData.get("icon") as string) || "",
+    logo_url:         (formData.get("logo_url") as string) || null,
+    color_class:      formData.get("color_class") as string,
+    text_color_class: formData.get("text_color_class") as string,
+    order_index:      Number(formData.get("order_index") ?? 0) || 0,
+  });
+  revalidatePath("/admin/(dashboard)/organizations");
+  revalidatePath("/about");
+  if (error) return { error: error.message };
+  return { ok: true };
+}
+
+export async function updateOrganization(id: string, formData: FormData) {
+  const supabase = await createClient();
+  const newLogo = (formData.get("logo_url") as string) || null;
+
+  const { data: old } = await supabase.from("organizations").select("logo_url").eq("id", id).single();
+
+  const { error } = await supabase.from("organizations").update({
+    name:             formData.get("name") as string,
+    role:             formData.get("role") as string,
+    period:           formData.get("period") as string,
+    icon:             (formData.get("icon") as string) || "",
+    logo_url:         newLogo,
+    color_class:      formData.get("color_class") as string,
+    text_color_class: formData.get("text_color_class") as string,
+    order_index:      Number(formData.get("order_index") ?? 0) || 0,
+  }).eq("id", id);
+
+  if (!error && old?.logo_url && old.logo_url !== newLogo) {
+    await deleteStorageFiles([old.logo_url]);
+  }
+  revalidatePath("/admin/(dashboard)/organizations");
+  revalidatePath("/about");
+  if (error) return { error: error.message };
+  return { ok: true };
+}
+
+export async function deleteOrganization(id: string) {
+  const supabase = await createClient();
+  const { data: old } = await supabase.from("organizations").select("logo_url").eq("id", id).single();
+  await supabase.from("organizations").delete().eq("id", id);
+  if (old) await deleteStorageFiles([old.logo_url]);
+  revalidatePath("/admin/(dashboard)/organizations");
+  revalidatePath("/about");
+}
+
 // ── Projects ─────────────────────────────────────────────────
 export async function getAdminProjects() {
   const supabase = await createClient();

@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Skill, Experience, Project, Certificate, Profile, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
+import type { Skill, Experience, Organization, Project, Certificate, Profile, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
 
 export async function getPublicProjects(): Promise<Project[]> {
   try {
@@ -25,6 +25,20 @@ export async function getPublicExperiences(): Promise<Experience[]> {
       .order("order_index");
     if (error || !data?.length) return [];
     return data as Experience[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getPublicOrganizations(): Promise<Organization[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("organizations")
+      .select("*")
+      .order("order_index");
+    if (error || !data?.length) return [];
+    return data as Organization[];
   } catch {
     return [];
   }

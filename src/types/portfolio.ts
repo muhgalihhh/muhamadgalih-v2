@@ -33,6 +33,19 @@ export interface Experience {
   created_at: string;
 }
 
+export interface Organization {
+  id: string;
+  name: string;
+  role: string;
+  period: string;
+  icon: string;
+  logo_url: string | null;
+  color_class: string;
+  text_color_class: string;
+  order_index: number;
+  created_at: string;
+}
+
 export interface Project {
   id: string;
   title: string;

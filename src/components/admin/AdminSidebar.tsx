@@ -16,12 +16,14 @@ import {
   Images,
   MessageSquareQuote,
   Inbox,
+  Users,
 } from "lucide-react";
 
 const nav = [
   { label: "Overview",      href: "/admin",               icon: LayoutDashboard },
   { label: "Skills",        href: "/admin/skills",        icon: Wrench },
   { label: "Experience",    href: "/admin/experience",    icon: Briefcase },
+  { label: "Organizations", href: "/admin/organizations", icon: Users },
   { label: "Works",         href: "/admin/works",         icon: FolderOpen },
   { label: "Gallery",       href: "/admin/gallery",       icon: Images },
   { label: "Certificates",  href: "/admin/certificates",  icon: Award },

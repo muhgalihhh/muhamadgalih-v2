@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Rocket, Palette, Code2, Award } from "lucide-react";
+import { Award, Users } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import TestimonialsSection from "@/components/sections/Testimonials";
-import type { Experience, Skill, Certificate, Testimonial } from "@/types/portfolio";
+import type { Experience, Skill, Certificate, Organization, Testimonial } from "@/types/portfolio";
 
 const staticExperience = [
   {
@@ -75,24 +75,26 @@ const staticSkills = [
   { id: "k10",name: "Procreate",       color_class: "bg-violet text-cream", category: "design" as const,      icon: "", order_index: 9, created_at: "" },
 ];
 
-const organizations = [
-  { name: "Google Developer Student Club", role: "UI/UX Lead",       period: "2022 · 2023",    color: "bg-sky",  Icon: Rocket },
-  { name: "University Design Club",        role: "Creative Director", period: "2021 · 2023",    color: "bg-mint", Icon: Palette },
-  { name: "Open Source Community",         role: "Contributor",       period: "2022 · Present", color: "bg-pink", Icon: Code2 },
+const staticOrganizations: Organization[] = [
+  { id: "o1", name: "Google Developer Student Club", role: "UI/UX Lead",       period: "2022 · 2023",    icon: "LuRocket",  logo_url: null, color_class: "bg-sky",  text_color_class: "text-ink", order_index: 0, created_at: "" },
+  { id: "o2", name: "University Design Club",        role: "Creative Director", period: "2021 · 2023",    icon: "LuPalette", logo_url: null, color_class: "bg-mint", text_color_class: "text-ink", order_index: 1, created_at: "" },
+  { id: "o3", name: "Open Source Community",         role: "Contributor",       period: "2022 · Present", icon: "LuCode",    logo_url: null, color_class: "bg-pink", text_color_class: "text-ink", order_index: 2, created_at: "" },
 ];
 
 interface Props {
   dbExperiences?: Experience[];
   dbSkills?: Skill[];
   dbCertificates?: Certificate[];
+  dbOrganizations?: Organization[];
   testimonials?: Testimonial[];
   ownTestimonial?: Testimonial | null;
 }
 
-export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, testimonials = [], ownTestimonial = null }: Props) {
+export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, dbOrganizations, testimonials = [], ownTestimonial = null }: Props) {
   const experience: Experience[] = dbExperiences?.length ? dbExperiences : staticExperience;
   const skills: Skill[] = dbSkills?.length ? dbSkills : staticSkills;
   const certificates: Certificate[] = dbCertificates ?? [];
+  const organizations: Organization[] = dbOrganizations?.length ? dbOrganizations : staticOrganizations;
 
   return (
     <main className="md:pt-20">
@@ -223,9 +225,15 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {organizations.map((org, i) => (
-              <ScrollReveal key={org.name} variant="scale-in" delay={i * 0.1}>
-                <div className={`card-surface ${org.color} cartoon-border rounded-2xl p-6 text-ink h-full`}>
-                  <org.Icon size={36} className="mb-4" strokeWidth={1.5} />
+              <ScrollReveal key={org.id} variant="scale-in" delay={i * 0.1}>
+                <div className={`card-surface ${org.color_class} ${org.text_color_class} cartoon-border rounded-2xl p-6 h-full`}>
+                  <div className="mb-4 flex items-center justify-center w-9 h-9">
+                    {org.logo_url
+                      ? <img src={org.logo_url} alt={org.name} className="w-9 h-9 object-contain rounded-md" />
+                      : org.icon
+                        ? <SkillIcon icon={org.icon} className="w-9 h-9" />
+                        : <Users size={36} strokeWidth={1.5} />}
+                  </div>
                   <h3 className="font-display font-extrabold text-lg leading-tight mb-1">
                     {org.name}
                   </h3>
