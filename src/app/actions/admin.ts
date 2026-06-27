@@ -168,10 +168,14 @@ export async function getAdminOrganizations() {
 
 export async function createOrganization(formData: FormData) {
   const supabase = await createClient();
+  const imagesRaw = (formData.get("images") as string) ?? "";
+  const images = imagesRaw.split("\n").map((u) => u.trim()).filter(Boolean);
   const { error } = await supabase.from("organizations").insert({
     name:             formData.get("name") as string,
     role:             formData.get("role") as string,
     period:           formData.get("period") as string,
+    description:      (formData.get("description") as string) || "",
+    images,
     icon:             (formData.get("icon") as string) || "",
     logo_url:         (formData.get("logo_url") as string) || null,
     color_class:      formData.get("color_class") as string,
@@ -187,13 +191,17 @@ export async function createOrganization(formData: FormData) {
 export async function updateOrganization(id: string, formData: FormData) {
   const supabase = await createClient();
   const newLogo = (formData.get("logo_url") as string) || null;
+  const imagesRaw = (formData.get("images") as string) ?? "";
+  const images = imagesRaw.split("\n").map((u) => u.trim()).filter(Boolean);
 
-  const { data: old } = await supabase.from("organizations").select("logo_url").eq("id", id).single();
+  const { data: old } = await supabase.from("organizations").select("logo_url, images").eq("id", id).single();
 
   const { error } = await supabase.from("organizations").update({
     name:             formData.get("name") as string,
     role:             formData.get("role") as string,
     period:           formData.get("period") as string,
+    description:      (formData.get("description") as string) || "",
+    images,
     icon:             (formData.get("icon") as string) || "",
     logo_url:         newLogo,
     color_class:      formData.get("color_class") as string,
@@ -201,8 +209,11 @@ export async function updateOrganization(id: string, formData: FormData) {
     order_index:      Number(formData.get("order_index") ?? 0) || 0,
   }).eq("id", id);
 
-  if (!error && old?.logo_url && old.logo_url !== newLogo) {
-    await deleteStorageFiles([old.logo_url]);
+  if (!error && old) {
+    const removed: (string | null)[] = [];
+    if (old.logo_url && old.logo_url !== newLogo) removed.push(old.logo_url);
+    removed.push(...((old.images ?? []) as string[]).filter((u) => !images.includes(u)));
+    await deleteStorageFiles(removed);
   }
   revalidatePath("/admin/(dashboard)/organizations");
   revalidatePath("/about");
@@ -212,9 +223,9 @@ export async function updateOrganization(id: string, formData: FormData) {
 
 export async function deleteOrganization(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("organizations").select("logo_url").eq("id", id).single();
+  const { data: old } = await supabase.from("organizations").select("logo_url, images").eq("id", id).single();
   await supabase.from("organizations").delete().eq("id", id);
-  if (old) await deleteStorageFiles([old.logo_url]);
+  if (old) await deleteStorageFiles([old.logo_url, ...((old.images ?? []) as string[])]);
   revalidatePath("/admin/(dashboard)/organizations");
   revalidatePath("/about");
 }

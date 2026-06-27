@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Award, Users } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Award, Users, X } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
@@ -76,9 +77,9 @@ const staticSkills = [
 ];
 
 const staticOrganizations: Organization[] = [
-  { id: "o1", name: "Google Developer Student Club", role: "UI/UX Lead",       period: "2022 · 2023",    icon: "LuRocket",  logo_url: null, color_class: "bg-sky",  text_color_class: "text-ink", order_index: 0, created_at: "" },
-  { id: "o2", name: "University Design Club",        role: "Creative Director", period: "2021 · 2023",    icon: "LuPalette", logo_url: null, color_class: "bg-mint", text_color_class: "text-ink", order_index: 1, created_at: "" },
-  { id: "o3", name: "Open Source Community",         role: "Contributor",       period: "2022 · Present", icon: "LuCode",    logo_url: null, color_class: "bg-pink", text_color_class: "text-ink", order_index: 2, created_at: "" },
+  { id: "o1", name: "Google Developer Student Club", role: "UI/UX Lead",       period: "2022 · 2023",    description: "Led UI/UX initiatives and workshops, mentoring members on design fundamentals.", images: [], icon: "LuRocket",  logo_url: null, color_class: "bg-sky",  text_color_class: "text-ink", order_index: 0, created_at: "" },
+  { id: "o2", name: "University Design Club",        role: "Creative Director", period: "2021 · 2023",    description: "Directed the creative team and set the visual direction for campus events.", images: [], icon: "LuPalette", logo_url: null, color_class: "bg-mint", text_color_class: "text-ink", order_index: 1, created_at: "" },
+  { id: "o3", name: "Open Source Community",         role: "Contributor",       period: "2022 · Present", description: "Contributed code, docs, and design feedback to open-source projects.", images: [], icon: "LuCode",    logo_url: null, color_class: "bg-pink", text_color_class: "text-ink", order_index: 2, created_at: "" },
 ];
 
 interface Props {
@@ -95,6 +96,8 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
   const skills: Skill[] = dbSkills?.length ? dbSkills : staticSkills;
   const certificates: Certificate[] = dbCertificates ?? [];
   const organizations: Organization[] = dbOrganizations?.length ? dbOrganizations : staticOrganizations;
+  const [activeOrg, setActiveOrg] = useState<Organization | null>(null);
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
     <main className="md:pt-20">
@@ -226,7 +229,11 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {organizations.map((org, i) => (
               <ScrollReveal key={org.id} variant="scale-in" delay={i * 0.1}>
-                <div className={`card-surface ${org.color_class} ${org.text_color_class} cartoon-border rounded-2xl p-6 h-full`}>
+                <button
+                  type="button"
+                  onClick={() => setActiveOrg(org)}
+                  className={`card-surface ${org.color_class} ${org.text_color_class} cartoon-border rounded-2xl p-6 h-full w-full text-left cursor-pointer hover:-translate-y-1 transition-transform`}
+                >
                   <div className="mb-4 flex items-center justify-center w-9 h-9">
                     {org.logo_url
                       ? <img src={org.logo_url} alt={org.name} className="w-9 h-9 object-contain rounded-md" />
@@ -239,7 +246,14 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
                   </h3>
                   <p className="font-body font-semibold text-sm opacity-70">{org.role}</p>
                   <p className="font-body text-xs opacity-50 mt-2">{org.period}</p>
-                </div>
+                  {(org.description || org.images.length > 0) && (
+                    <p className="font-body text-xs font-semibold opacity-60 mt-4 inline-flex items-center gap-1.5">
+                      View details
+                      {org.images.length > 0 && <span className="opacity-80">· {org.images.length} 📷</span>}
+                      <span>→</span>
+                    </p>
+                  )}
+                </button>
               </ScrollReveal>
             ))}
           </div>
@@ -330,6 +344,115 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
       </section>
 
       <TestimonialsSection testimonials={testimonials} ownTestimonial={ownTestimonial} />
+
+      {/* ── Organization detail modal ── */}
+      <AnimatePresence>
+        {activeOrg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveOrg(null)}
+            className="fixed inset-0 z-[500] bg-ink/50 backdrop-blur-sm flex items-end md:items-center justify-center md:p-6"
+          >
+            <motion.div
+              initial={{ y: 40, opacity: 0, scale: 0.96 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 40, opacity: 0, scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 280, damping: 26 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full md:max-w-lg bg-cream cartoon-border rounded-t-3xl md:rounded-3xl overflow-hidden max-h-[85vh] overflow-y-auto"
+            >
+              {/* Header — uses the org's brand color */}
+              <div className={`card-surface ${activeOrg.color_class} ${activeOrg.text_color_class} p-6 md:p-7 relative`}>
+                <button
+                  onClick={() => setActiveOrg(null)}
+                  className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/15 hover:bg-black/25 flex items-center justify-center transition-colors"
+                  aria-label="Close"
+                >
+                  <X size={16} />
+                </button>
+                <div className="mb-4 flex items-center justify-center w-12 h-12">
+                  {activeOrg.logo_url
+                    ? <img src={activeOrg.logo_url} alt={activeOrg.name} className="w-12 h-12 object-contain rounded-lg" />
+                    : activeOrg.icon
+                      ? <SkillIcon icon={activeOrg.icon} className="w-12 h-12" />
+                      : <Users size={48} strokeWidth={1.5} />}
+                </div>
+                <h3 className="font-display font-extrabold text-2xl leading-tight pr-8">{activeOrg.name}</h3>
+                <p className="font-body font-semibold text-sm opacity-80 mt-1">{activeOrg.role}</p>
+                <p className="font-body text-xs opacity-60 mt-1">{activeOrg.period}</p>
+              </div>
+              {/* Body — description + gallery */}
+              <div className="p-6 md:p-7">
+                {activeOrg.description ? (
+                  <p className="font-body text-ink/80 text-sm md:text-base leading-relaxed whitespace-pre-line">
+                    {activeOrg.description}
+                  </p>
+                ) : (
+                  <p className="font-body text-muted text-sm italic">No description yet.</p>
+                )}
+
+                {activeOrg.images.length > 0 && (
+                  <div className="mt-6">
+                    <p className="font-body text-[11px] tracking-[0.2em] uppercase font-semibold text-muted mb-3">
+                      Gallery
+                    </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                      {activeOrg.images.map((url) => (
+                        <button
+                          key={url}
+                          type="button"
+                          onClick={() => setLightbox(url)}
+                          className="aspect-square rounded-xl overflow-hidden cartoon-border-sm group/img"
+                        >
+                          <img
+                            src={url}
+                            alt={activeOrg.name}
+                            loading="lazy"
+                            className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Lightbox (full photo) ── */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightbox(null)}
+            className="fixed inset-0 z-[600] bg-ink/85 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+          >
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-cream flex items-center justify-center transition-colors"
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
+            <motion.img
+              key={lightbox}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              src={lightbox}
+              alt=""
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-full max-h-full rounded-2xl object-contain cartoon-border-light"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

@@ -30,7 +30,26 @@ function OrganizationForm({
 }) {
   const [logoUrl, setLogoUrl]     = useState(defaultValues?.logo_url ?? "");
   const [iconKey, setIconKey]     = useState(defaultValues?.icon ?? "");
+  const [images, setImages]       = useState<string[]>(defaultValues?.images ?? []);
   const [uploading, setUploading] = useState(false);
+  const [galleryUploading, setGalleryUploading] = useState(false);
+
+  const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
+    setGalleryUploading(true);
+    const newUrls: string[] = [];
+    for (const file of files) {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("folder", "organizations");
+      const res = await uploadFile(fd);
+      if (res.url) newUrls.push(res.url);
+    }
+    setImages((p) => [...p, ...newUrls]);
+    setGalleryUploading(false);
+    e.target.value = "";
+  };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -48,7 +67,12 @@ function OrganizationForm({
   return (
     <form
       key={defaultValues?.id ?? "new"}
-      onSubmit={(e) => { e.preventDefault(); onSubmit(new FormData(e.currentTarget)); }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        fd.set("images", images.join("\n"));
+        onSubmit(fd);
+      }}
       className="grid grid-cols-2 gap-5"
     >
       <Field label="Organization Name *">
@@ -62,6 +86,16 @@ function OrganizationForm({
       </Field>
       <Field label="Order">
         <input name="order_index" type="number" defaultValue={defaultValues?.order_index ?? 0} className={inputCls} />
+      </Field>
+
+      <Field label="Description — what you did there" wide>
+        <textarea
+          name="description"
+          rows={3}
+          defaultValue={defaultValues?.description ?? ""}
+          placeholder="e.g. Led UI/UX workshops, mentored members, ran design sprints…"
+          className={`${inputCls} resize-none`}
+        />
       </Field>
 
       <Field label="Icon">
@@ -107,8 +141,32 @@ function OrganizationForm({
         <ColorPicker label="Card Color" nameBg="color_class" nameText="text_color_class" defaultBg={defaultValues?.color_class ?? "bg-sky"} />
       </div>
 
+      <Field label="Gallery Photos — shown in the detail view" wide>
+        <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
+          {galleryUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+          {galleryUploading ? "Uploading..." : "Upload photos"}
+          <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} className="hidden" disabled={galleryUploading} />
+        </label>
+        {images.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {images.map((url) => (
+              <div key={url} className="relative group w-20 h-20">
+                <img src={url} alt="" className="w-20 h-20 object-cover rounded-xl border border-slate-200" />
+                <button
+                  type="button"
+                  onClick={() => setImages((p) => p.filter((u) => u !== url))}
+                  className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] hidden group-hover:flex items-center justify-center"
+                >
+                  <X size={9} />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </Field>
+
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
-        <button type="submit" disabled={isPending} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
+        <button type="submit" disabled={isPending || galleryUploading} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add Organization"}
         </button>
       </div>

@@ -38,6 +38,8 @@ export interface Organization {
   name: string;
   role: string;
   period: string;
+  description: string;
+  images: string[];
   icon: string;
   logo_url: string | null;
   color_class: string;
