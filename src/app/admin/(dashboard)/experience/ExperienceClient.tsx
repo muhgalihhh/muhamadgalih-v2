@@ -69,8 +69,18 @@ function ExperienceForm({
       <Field label="Company Logo (optional)">
         <div className="flex items-center gap-3">
           {logoUrl && (
-            <div className="w-12 h-12 rounded-xl border border-slate-200 overflow-hidden shrink-0 bg-slate-50">
-              <img src={logoUrl} alt="logo" className="w-full h-full object-cover" />
+            <div className="relative w-12 h-12 shrink-0 group">
+              <div className="w-12 h-12 rounded-xl border border-slate-200 overflow-hidden bg-slate-50">
+                <img src={logoUrl} alt="logo" className="w-full h-full object-cover" />
+              </div>
+              <button
+                type="button"
+                onClick={() => setLogoUrl("")}
+                title="Remove logo"
+                className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow"
+              >
+                <X size={11} />
+              </button>
             </div>
           )}
           <div className="flex flex-col gap-2 flex-1">

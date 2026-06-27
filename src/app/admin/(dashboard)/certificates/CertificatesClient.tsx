@@ -61,7 +61,19 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
             {uploading ? "Uploading..." : "Upload image"}
             <input type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
           </label>
-          {imageUrl && <img src={imageUrl} alt="preview" className="w-16 h-10 object-cover rounded-lg border border-slate-200" />}
+          {imageUrl && (
+            <div className="relative shrink-0">
+              <img src={imageUrl} alt="preview" className="w-16 h-10 object-cover rounded-lg border border-slate-200" />
+              <button
+                type="button"
+                onClick={() => setImageUrl("")}
+                title="Remove image"
+                className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow"
+              >
+                <X size={11} />
+              </button>
+            </div>
+          )}
         </div>
         <input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Or paste image URL" className={`${inputCls} mt-1`} />
       </Field>
