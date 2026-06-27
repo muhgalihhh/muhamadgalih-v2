@@ -95,13 +95,14 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
     const files = Array.from(e.target.files ?? []);
     if (!files.length) return;
     setUploading(true);
-    const newUrls: string[] = [];
-    for (const file of files) {
-      const fd = new FormData();
-      fd.append("file", file); fd.append("folder", "projects");
-      const res = await uploadFile(fd);
-      if (res.url) newUrls.push(res.url);
-    }
+    const results = await Promise.all(
+      files.map((file) => {
+        const fd = new FormData();
+        fd.append("file", file); fd.append("folder", "projects");
+        return uploadFile(fd);
+      })
+    );
+    const newUrls = results.map((r) => r.url).filter((u): u is string => !!u);
     setImageUrls((p) => [...p, ...newUrls]);
     setUploading(false);
   };

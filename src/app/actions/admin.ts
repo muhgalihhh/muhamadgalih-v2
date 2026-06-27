@@ -525,7 +525,13 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
 
   if (convertible) {
     const buf = Buffer.from(await file.arrayBuffer());
-    const webp = await sharp(buf).rotate().webp({ quality: 80 }).toBuffer();
+    const webp = await sharp(buf)
+      .rotate()
+      // Cap huge photos — most screens never need more than ~2000px.
+      // Shrinks output a lot and makes WebP encoding much faster.
+      .resize(2000, 2000, { fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 80, effort: 3 })
+      .toBuffer();
     // Wrap in a Blob — passing a raw Node Buffer corrupts the binary
     // (bytes get UTF-8 mangled) when uploaded via the Server Action.
     body = new Blob([new Uint8Array(webp)], { type: "image/webp" });

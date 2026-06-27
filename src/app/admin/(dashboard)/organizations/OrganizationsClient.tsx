@@ -11,6 +11,11 @@ import { Plus, Pencil, Trash2, X, Upload, Loader2, Users } from "lucide-react";
 
 type FormMode = "add" | "edit" | null;
 
+// Keep in sync with serverActions.bodySizeLimit in next.config.ts (15mb),
+// leaving headroom for FormData overhead.
+const MAX_UPLOAD_MB = 12;
+const MAX_UPLOAD_BYTES = MAX_UPLOAD_MB * 1024 * 1024;
+
 const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
 const Field = ({ label, children, wide }: { label: string; children: React.ReactNode; wide?: boolean }) => (
   <div className={`flex flex-col gap-1.5 ${wide ? "col-span-2" : ""}`}>
@@ -33,35 +38,65 @@ function OrganizationForm({
   const [images, setImages]       = useState<string[]>(defaultValues?.images ?? []);
   const [uploading, setUploading] = useState(false);
   const [galleryUploading, setGalleryUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
 
   const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
-    if (!files.length) return;
-    setGalleryUploading(true);
-    const newUrls: string[] = [];
-    for (const file of files) {
-      const fd = new FormData();
-      fd.append("file", file);
-      fd.append("folder", "organizations");
-      const res = await uploadFile(fd);
-      if (res.url) newUrls.push(res.url);
-    }
-    setImages((p) => [...p, ...newUrls]);
-    setGalleryUploading(false);
     e.target.value = "";
+    if (!files.length) return;
+    setUploadError("");
+
+    // Pre-check size before sending to the server.
+    const tooBig = files.filter((f) => f.size > MAX_UPLOAD_BYTES);
+    const ok = files.filter((f) => f.size <= MAX_UPLOAD_BYTES);
+    if (tooBig.length) {
+      setUploadError(`Skipped ${tooBig.length} file(s) over ${MAX_UPLOAD_MB}MB: ${tooBig.map((f) => f.name).join(", ")}`);
+    }
+    if (!ok.length) return;
+
+    setGalleryUploading(true);
+    try {
+      const results = await Promise.all(
+        ok.map((file) => {
+          const fd = new FormData();
+          fd.append("file", file);
+          fd.append("folder", "organizations");
+          return uploadFile(fd);
+        })
+      );
+      const newUrls = results.map((r) => r.url).filter((u): u is string => !!u);
+      const failed = results.filter((r) => r.error).length;
+      if (newUrls.length) setImages((p) => [...p, ...newUrls]);
+      if (failed) setUploadError((prev) => [prev, `${failed} file(s) failed to upload.`].filter(Boolean).join(" "));
+    } catch {
+      setUploadError("Upload failed. The file may be too large or the connection dropped. Try again with a smaller image.");
+    } finally {
+      setGalleryUploading(false);
+    }
   };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("folder", "logos");
-    const res = await uploadFile(fd);
-    if (res.url) setLogoUrl(res.url);
-    setUploading(false);
     e.target.value = "";
+    if (!file) return;
+    setUploadError("");
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setUploadError(`"${file.name}" is over ${MAX_UPLOAD_MB}MB and was not uploaded.`);
+      return;
+    }
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("folder", "logos");
+      const res = await uploadFile(fd);
+      if (res.url) setLogoUrl(res.url);
+      else if (res.error) setUploadError(res.error);
+    } catch {
+      setUploadError("Upload failed. The file may be too large or the connection dropped.");
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -147,6 +182,10 @@ function OrganizationForm({
           {galleryUploading ? "Uploading..." : "Upload photos"}
           <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} className="hidden" disabled={galleryUploading} />
         </label>
+        <span className="text-[11px] text-slate-400 mt-1">Max {MAX_UPLOAD_MB}MB per photo · JPG, PNG, WebP</span>
+        {uploadError && (
+          <p className="text-[12px] text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2 mt-1">{uploadError}</p>
+        )}
         {images.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
             {images.map((url) => (
