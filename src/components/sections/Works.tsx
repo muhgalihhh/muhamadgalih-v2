@@ -7,9 +7,9 @@ import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
-import type { Project } from "@/types/portfolio";
+import type { Project, ProjectCategoryRow } from "@/types/portfolio";
 
-type Category = "all" | "software" | "uiux" | "illustration";
+type Category = string;
 
 const staticProjects = [
   { id: "s1", title: "Full-Stack Web App",    category: "software" as const,      description: "End-to-end web application with real-time features, authentication, and a dashboard built with Next.js and Supabase.", color_class: "bg-violet", text_color_class: "text-cream", tech_stack: ["Next.js", "TypeScript", "Supabase", "Tailwind"], image_urls: [], emoji: "⚡", link: "/works", order_index: 0, project_date: null, published: true, created_at: "" },
@@ -29,20 +29,22 @@ const sizeClasses: Record<string, string> = {
   side: "md:col-span-2 md:row-span-2", // narrow but still tall
 };
 
-const filters: { label: string; value: Category }[] = [
-  { label: "All",          value: "all" },
-  { label: "Software",     value: "software" },
-  { label: "UI/UX",        value: "uiux" },
-  { label: "Illustration", value: "illustration" },
+const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
+  { id: "1", slug: "software",     label: "Software",     order_index: 0, created_at: "" },
+  { id: "2", slug: "uiux",         label: "UI/UX",        order_index: 1, created_at: "" },
+  { id: "3", slug: "illustration", label: "Illustration", order_index: 2, created_at: "" },
 ];
 
-const categoryLabel: Record<string, string> = {
-  software: "Software", uiux: "UI/UX", illustration: "Illustration",
-};
-
-export default function Works({ dbProjects }: { dbProjects?: Project[] }) {
+export default function Works({ dbProjects, categories: categoriesProp }: { dbProjects?: Project[]; categories?: ProjectCategoryRow[] }) {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const categories = categoriesProp?.length ? categoriesProp : FALLBACK_CATEGORIES;
+  const filters = [
+    { label: "All", value: "all" },
+    ...categories.map((c) => ({ label: c.label, value: c.slug })),
+  ];
+  const categoryLabel = Object.fromEntries(filters.map((f) => [f.value, f.label]));
 
   const projects = dbProjects?.length ? dbProjects : staticProjects;
 
