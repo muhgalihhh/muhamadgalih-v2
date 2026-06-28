@@ -17,6 +17,8 @@ const staticExperience = [
     company_logo_url: null,
     company_logo_emoji: "⚡",
     period: "2023 · Present",
+    start_date: "2023-01-01",
+    end_date: null,
     color_class: "bg-violet",
     text_color_class: "text-cream",
     points: [
@@ -34,6 +36,8 @@ const staticExperience = [
     company_logo_url: null,
     company_logo_emoji: "🎨",
     period: "2022 · 2023",
+    start_date: "2022-01-01",
+    end_date: "2023-12-31",
     color_class: "bg-coral",
     text_color_class: "text-cream",
     points: [
@@ -51,6 +55,8 @@ const staticExperience = [
     company_logo_url: null,
     company_logo_emoji: "✏️",
     period: "2021 · Present",
+    start_date: "2021-01-01",
+    end_date: null,
     color_class: "bg-yellow",
     text_color_class: "text-ink",
     points: [
@@ -77,9 +83,9 @@ const staticSkills = [
 ];
 
 const staticOrganizations: Organization[] = [
-  { id: "o1", name: "Google Developer Student Club", role: "UI/UX Lead",       period: "2022 · 2023",    description: "Led UI/UX initiatives and workshops, mentoring members on design fundamentals.", images: [], icon: "LuRocket",  logo_url: null, color_class: "bg-sky",  text_color_class: "text-ink", order_index: 0, created_at: "" },
-  { id: "o2", name: "University Design Club",        role: "Creative Director", period: "2021 · 2023",    description: "Directed the creative team and set the visual direction for campus events.", images: [], icon: "LuPalette", logo_url: null, color_class: "bg-mint", text_color_class: "text-ink", order_index: 1, created_at: "" },
-  { id: "o3", name: "Open Source Community",         role: "Contributor",       period: "2022 · Present", description: "Contributed code, docs, and design feedback to open-source projects.", images: [], icon: "LuCode",    logo_url: null, color_class: "bg-pink", text_color_class: "text-ink", order_index: 2, created_at: "" },
+  { id: "o1", name: "Google Developer Student Club", role: "UI/UX Lead",       period: "2022 · 2023",    start_date: "2022-01-01", end_date: "2023-12-31", description: "Led UI/UX initiatives and workshops, mentoring members on design fundamentals.", images: [], icon: "LuRocket",  logo_url: null, color_class: "bg-sky",  text_color_class: "text-ink", order_index: 0, created_at: "" },
+  { id: "o2", name: "University Design Club",        role: "Creative Director", period: "2021 · 2023",    start_date: "2021-01-01", end_date: "2023-12-31", description: "Directed the creative team and set the visual direction for campus events.", images: [], icon: "LuPalette", logo_url: null, color_class: "bg-mint", text_color_class: "text-ink", order_index: 1, created_at: "" },
+  { id: "o3", name: "Open Source Community",         role: "Contributor",       period: "2022 · Present", start_date: "2022-01-01", end_date: null,         description: "Contributed code, docs, and design feedback to open-source projects.", images: [], icon: "LuCode",    logo_url: null, color_class: "bg-pink", text_color_class: "text-ink", order_index: 2, created_at: "" },
 ];
 
 interface Props {

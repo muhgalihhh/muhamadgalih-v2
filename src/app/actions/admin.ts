@@ -98,7 +98,12 @@ export async function deleteSkill(id: string) {
 // ── Experiences ──────────────────────────────────────────────
 export async function getAdminExperiences() {
   const supabase = await createClient();
-  const { data } = await supabase.from("experiences").select("*").order("order_index");
+  const { data } = await supabase
+    .from("experiences")
+    .select("*")
+    .order("end_date", { ascending: false, nullsFirst: true })
+    .order("start_date", { ascending: false, nullsFirst: false })
+    .order("order_index");
   return data ?? [];
 }
 
@@ -112,6 +117,8 @@ export async function createExperience(formData: FormData) {
     company_logo_emoji:  (formData.get("company_logo_emoji") as string) || "",
     company_logo_url:    (formData.get("company_logo_url") as string) || null,
     period:              formData.get("period") as string,
+    start_date:          (formData.get("start_date") as string) || null,
+    end_date:            (formData.get("end_date") as string) || null,
     color_class:         formData.get("color_class") as string,
     text_color_class:    formData.get("text_color_class") as string,
     points,
@@ -136,6 +143,8 @@ export async function updateExperience(id: string, formData: FormData) {
     company_logo_emoji:  (formData.get("company_logo_emoji") as string) || "",
     company_logo_url:    newLogo,
     period:              formData.get("period") as string,
+    start_date:          (formData.get("start_date") as string) || null,
+    end_date:            (formData.get("end_date") as string) || null,
     color_class:         formData.get("color_class") as string,
     text_color_class:    formData.get("text_color_class") as string,
     points,
@@ -162,7 +171,12 @@ export async function deleteExperience(id: string) {
 // ── Organizations ────────────────────────────────────────────
 export async function getAdminOrganizations() {
   const supabase = await createClient();
-  const { data } = await supabase.from("organizations").select("*").order("order_index");
+  const { data } = await supabase
+    .from("organizations")
+    .select("*")
+    .order("end_date", { ascending: false, nullsFirst: true })
+    .order("start_date", { ascending: false, nullsFirst: false })
+    .order("order_index");
   return data ?? [];
 }
 
@@ -174,6 +188,8 @@ export async function createOrganization(formData: FormData) {
     name:             formData.get("name") as string,
     role:             formData.get("role") as string,
     period:           formData.get("period") as string,
+    start_date:       (formData.get("start_date") as string) || null,
+    end_date:         (formData.get("end_date") as string) || null,
     description:      (formData.get("description") as string) || "",
     images,
     icon:             (formData.get("icon") as string) || "",
@@ -200,6 +216,8 @@ export async function updateOrganization(id: string, formData: FormData) {
     name:             formData.get("name") as string,
     role:             formData.get("role") as string,
     period:           formData.get("period") as string,
+    start_date:       (formData.get("start_date") as string) || null,
+    end_date:         (formData.get("end_date") as string) || null,
     description:      (formData.get("description") as string) || "",
     images,
     icon:             (formData.get("icon") as string) || "",
@@ -233,7 +251,11 @@ export async function deleteOrganization(id: string) {
 // ── Projects ─────────────────────────────────────────────────
 export async function getAdminProjects() {
   const supabase = await createClient();
-  const { data } = await supabase.from("projects").select("*").order("order_index");
+  const { data } = await supabase
+    .from("projects")
+    .select("*")
+    .order("project_date", { ascending: false, nullsFirst: false })
+    .order("order_index");
   return data ?? [];
 }
 
@@ -251,6 +273,7 @@ export async function createProject(formData: FormData) {
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
     link:             formData.get("link") as string,
+    project_date:     (formData.get("project_date") as string) || null,
     published:        formData.get("published") === "true",
     tech_stack,
     image_urls,
@@ -279,6 +302,7 @@ export async function updateProject(id: string, formData: FormData) {
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
     link:             formData.get("link") as string,
+    project_date:     (formData.get("project_date") as string) || null,
     published:        formData.get("published") === "true",
     tech_stack,
     image_urls,
@@ -309,7 +333,11 @@ export async function deleteProject(id: string) {
 // ── Certificates ─────────────────────────────────────────────
 export async function getAdminCertificates() {
   const supabase = await createClient();
-  const { data } = await supabase.from("certificates").select("*").order("created_at", { ascending: false });
+  const { data } = await supabase
+    .from("certificates")
+    .select("*")
+    .order("issue_date", { ascending: false, nullsFirst: false })
+    .order("created_at", { ascending: false });
   return data ?? [];
 }
 

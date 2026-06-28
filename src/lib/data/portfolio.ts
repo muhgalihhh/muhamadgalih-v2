@@ -8,6 +8,7 @@ export async function getPublicProjects(): Promise<Project[]> {
       .from("projects")
       .select("*")
       .eq("published", true)
+      .order("project_date", { ascending: false, nullsFirst: false })
       .order("order_index");
     if (error || !data?.length) return [];
     return data as Project[];
@@ -22,6 +23,8 @@ export async function getPublicExperiences(): Promise<Experience[]> {
     const { data, error } = await supabase
       .from("experiences")
       .select("*")
+      .order("end_date", { ascending: false, nullsFirst: true })
+      .order("start_date", { ascending: false, nullsFirst: false })
       .order("order_index");
     if (error || !data?.length) return [];
     return data as Experience[];
@@ -36,6 +39,8 @@ export async function getPublicOrganizations(): Promise<Organization[]> {
     const { data, error } = await supabase
       .from("organizations")
       .select("*")
+      .order("end_date", { ascending: false, nullsFirst: true })
+      .order("start_date", { ascending: false, nullsFirst: false })
       .order("order_index");
     if (error || !data?.length) return [];
     return data as Organization[];
@@ -64,6 +69,7 @@ export async function getPublicCertificates(): Promise<Certificate[]> {
     const { data, error } = await supabase
       .from("certificates")
       .select("*")
+      .order("issue_date", { ascending: false, nullsFirst: false })
       .order("created_at", { ascending: false });
     if (error || !data?.length) return [];
     return data as Certificate[];

@@ -116,11 +116,17 @@ function OrganizationForm({
       <Field label="Role *">
         <input name="role" required defaultValue={defaultValues?.role ?? ""} placeholder="e.g. UI/UX Lead" className={inputCls} />
       </Field>
-      <Field label="Period *">
+      <Field label="Period * — teks tampilan">
         <input name="period" required defaultValue={defaultValues?.period ?? ""} placeholder="2022 · 2023" className={inputCls} />
       </Field>
       <Field label="Order">
         <input name="order_index" type="number" defaultValue={defaultValues?.order_index ?? 0} className={inputCls} />
+      </Field>
+      <Field label="Start Date — untuk urutan">
+        <input name="start_date" type="date" defaultValue={defaultValues?.start_date ?? ""} className={inputCls} />
+      </Field>
+      <Field label="End Date — kosong = sekarang">
+        <input name="end_date" type="date" defaultValue={defaultValues?.end_date ?? ""} className={inputCls} />
       </Field>
 
       <Field label="Description — what you did there" wide>

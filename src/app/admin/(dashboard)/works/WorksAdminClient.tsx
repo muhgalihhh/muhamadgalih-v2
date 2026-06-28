@@ -164,6 +164,10 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
         <input name="link" defaultValue={defaultValues?.link ?? "#"} className={inputCls} />
       </Field>
 
+      <Field label="Project Date — untuk urutan">
+        <input name="project_date" type="date" defaultValue={defaultValues?.project_date ?? ""} className={inputCls} />
+      </Field>
+
       <Field label="Visibility">
         <div className="relative">
           <select name="published" defaultValue={String(defaultValues?.published ?? true)} className={`${inputCls} appearance-none pr-8 w-full`}>

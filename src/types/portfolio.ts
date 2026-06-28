@@ -26,6 +26,8 @@ export interface Experience {
   company_logo_url: string | null;
   company_logo_emoji: string;
   period: string;
+  start_date: string | null;
+  end_date: string | null;
   color_class: string;
   text_color_class: string;
   points: string[];
@@ -38,6 +40,8 @@ export interface Organization {
   name: string;
   role: string;
   period: string;
+  start_date: string | null;
+  end_date: string | null;
   description: string;
   images: string[];
   icon: string;
@@ -59,6 +63,7 @@ export interface Project {
   text_color_class: string;
   image_urls: string[];
   link: string;
+  project_date: string | null;
   order_index: number;
   published: boolean;
   created_at: string;

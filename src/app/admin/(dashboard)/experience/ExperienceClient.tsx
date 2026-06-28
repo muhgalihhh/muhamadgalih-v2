@@ -57,8 +57,15 @@ function ExperienceForm({
       <Field label="Company *">
         <input name="company" required defaultValue={defaultValues?.company ?? ""} placeholder="e.g. Acme Corp" className={inputCls} />
       </Field>
-      <Field label="Period *">
+      <Field label="Period * — teks tampilan">
         <input name="period" required defaultValue={defaultValues?.period ?? ""} placeholder="2023 · Present" className={inputCls} />
+      </Field>
+
+      <Field label="Start Date — untuk urutan">
+        <input name="start_date" type="date" defaultValue={defaultValues?.start_date ?? ""} className={inputCls} />
+      </Field>
+      <Field label="End Date — kosong = sekarang">
+        <input name="end_date" type="date" defaultValue={defaultValues?.end_date ?? ""} className={inputCls} />
       </Field>
 
       <Field label="Company Icon">
