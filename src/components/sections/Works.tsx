@@ -103,56 +103,50 @@ export default function Works({ dbProjects, categories: categoriesProp }: { dbPr
                   className={`card-surface col-span-1 row-span-2 ${sizeClasses[size] ?? ""} ${project.color_class} cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform min-h-[320px]`}
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className={`relative z-10 p-4 md:p-6 h-full flex flex-col gap-3 ${project.text_color_class}`}>
-                    <div className="flex items-start justify-between shrink-0">
-                      <span className="text-3xl md:text-4xl flex items-center">
-                        {project.emoji ? <SkillIcon icon={project.emoji} className="w-8 h-8 md:w-10 md:h-10" /> : "✦"}
-                      </span>
-                      <span className={`cartoon-border-sm bg-black/20 font-body text-xs px-2 md:px-3 py-1 rounded-full ${project.text_color_class}`}>
-                        {categoryLabel[project.category] ?? project.category}
-                      </span>
+                  {/* Full-bleed preview image */}
+                  {preview ? (
+                    <img
+                      src={preview}
+                      alt={`${project.title} preview`}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    /* No screenshot — big centered emoji on the card color */
+                    <div className={`absolute inset-0 flex items-center justify-center ${project.text_color_class}`}>
+                      {project.emoji ? <SkillIcon icon={project.emoji} className="w-20 h-20 md:w-24 md:h-24 opacity-90" /> : <span className="text-6xl">✦</span>}
                     </div>
+                  )}
 
-                    {/* Preview image — boxed inside the card */}
-                    {preview && (
-                      <div className="flex-1 min-h-0 rounded-xl overflow-hidden cartoon-border-sm bg-black/10 relative">
-                        <img
-                          src={preview}
-                          alt={`${project.title} preview`}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        {/* Tech badges on hover — over the image */}
-                        <div className="absolute inset-0 p-3 md:p-4 bg-black/55 flex flex-wrap content-end gap-1.5 md:gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          {project.tech_stack.map((tech) => (
-                            <span key={tech} className="cartoon-border-sm bg-cream text-ink px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-body font-semibold rounded-full">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="shrink-0">
-                      <h3 className="font-display font-extrabold text-lg md:text-2xl leading-tight">
-                        {project.title}
-                      </h3>
-                      <p className="font-body text-xs md:text-sm opacity-70 mt-1 line-clamp-2 leading-relaxed">
-                        {project.description}
-                      </p>
-                    </div>
+                  {/* Top row: emoji chip (over image) + category badge */}
+                  <div className="absolute top-0 left-0 right-0 z-20 p-4 md:p-5 flex items-start justify-between">
+                    {preview ? (
+                      <span className="cartoon-border-sm bg-cream/90 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center">
+                        {project.emoji ? <SkillIcon icon={project.emoji} className="w-6 h-6" /> : <span className="text-lg">✦</span>}
+                      </span>
+                    ) : <span />}
+                    <span className="cartoon-border-sm bg-black/40 text-cream backdrop-blur-sm font-body text-xs px-3 py-1 rounded-full">
+                      {categoryLabel[project.category] ?? project.category}
+                    </span>
                   </div>
 
-                  {/* Tech badges on hover — for cards without a preview image */}
-                  {!preview && (
-                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/50 to-transparent flex flex-wrap gap-1.5 md:gap-2 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                  {/* Bottom gradient + text overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-14 bg-gradient-to-t from-black/90 via-black/55 to-transparent">
+                    <h3 className="font-display font-extrabold text-cream text-lg md:text-2xl leading-tight line-clamp-2">
+                      {project.title}
+                    </h3>
+                    <p className="font-body text-cream/75 text-xs md:text-sm mt-1.5 line-clamp-2 leading-relaxed">
+                      {project.description}
+                    </p>
+                    {/* Tech badges reveal on hover */}
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 mt-0 max-h-0 opacity-0 group-hover:mt-3 group-hover:max-h-24 group-hover:opacity-100 overflow-hidden transition-all duration-300">
                       {project.tech_stack.map((tech) => (
-                        <span key={tech} className="cartoon-border-sm bg-cream text-ink px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-body font-semibold rounded-full">
+                        <span key={tech} className="cartoon-border-sm bg-cream text-ink px-2.5 py-0.5 md:py-1 text-[10px] md:text-xs font-body font-semibold rounded-full">
                           {tech}
                         </span>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </motion.div>
               );
             })}
