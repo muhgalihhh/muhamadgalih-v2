@@ -3,7 +3,7 @@ import { getPublicProjects, getProfile, getPublicGalleryItems, getPublicCategori
 import WorksContent from "./WorksContent";
 
 export const metadata: Metadata = {
-  title: "Works — Muhamad Galih · MIZARIE",
+  title: "Works · Muhamad Galih · MIZARIE",
   description: "Portfolio of projects, UI/UX work, and illustration by Muhamad Galih (MIZARIE).",
 };
 

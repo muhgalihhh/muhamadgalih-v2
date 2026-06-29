@@ -267,7 +267,7 @@ export default function TestimonialsSection({
         {testimonials.length === 0 ? (
           <ScrollReveal variant="fade-up">
             <div className="text-center py-16 text-muted font-body">
-              No testimonials yet — be the first! ✦
+              No testimonials yet. Be the first! ✦
             </div>
           </ScrollReveal>
         ) : (
@@ -392,7 +392,7 @@ export default function TestimonialsSection({
                   <p className="font-body text-muted text-xs mb-4">
                     {ownTestimonial.approved
                       ? "Your testimonial is live ✦"
-                      : "Pending review — will appear once approved."}
+                      : "Pending review, will appear once approved."}
                   </p>
                   <div className="cartoon-border-sm bg-ink/5 rounded-xl p-4 text-left mb-4">
                     <StarRating value={ownTestimonial.rating} />

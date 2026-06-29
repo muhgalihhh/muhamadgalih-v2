@@ -5,7 +5,7 @@ import AboutContent from "./AboutContent";
 import type { Testimonial } from "@/types/portfolio";
 
 export const metadata: Metadata = {
-  title: "About — Muhamad Galih · MIZARIE",
+  title: "About · Muhamad Galih · MIZARIE",
   description: "Full-Stack Engineer, UI/UX Designer & Illustrator based in Indonesia.",
 };
 
