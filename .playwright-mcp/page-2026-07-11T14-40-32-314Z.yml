@@ -1,0 +1,556 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e4]:
+    - generic [ref=f1e5]: MG
+    - paragraph [ref=f1e6]: MIZARIE
+  - navigation [ref=f1e11]:
+    - link "MG / MIZARIE" [ref=f1e12]:
+      - /url: /
+      - generic [ref=f1e13]: MG
+      - generic [ref=f1e14]: / MIZARIE
+    - generic [ref=f1e15]:
+      - link "About" [ref=f1e16]:
+        - /url: /about
+      - link "Works" [ref=f1e17]:
+        - /url: /works
+      - link "Contact" [ref=f1e18]:
+        - /url: /contact
+    - generic [ref=f1e19]:
+      - button "Toggle dark mode" [ref=f1e20]
+      - link "Hire me" [ref=f1e24]:
+        - /url: /contact
+  - main [ref=f1e25]:
+    - generic [ref=f1e26]:
+      - generic [ref=f1e28]:
+        - generic [ref=f1e29]:
+          - generic [ref=f1e30]: a.k.a. MIZARIE
+          - generic [ref=f1e31]: Available for projects
+        - heading "MUHAMAD GALIH" [level=1] [ref=f1e34]:
+          - generic [ref=f1e35]: MUHAMAD
+          - generic [ref=f1e36]: GALIH
+        - generic [ref=f1e37]:
+          - generic [ref=f1e38]:
+            - generic [ref=f1e39]:
+              - generic [ref=f1e40]: I build
+              - generic [ref=f1e41]: Full-Stack Engineering
+            - paragraph [ref=f1e43]: Engineer by day, illustrator by night — I make the web a little less boring.
+            - generic [ref=f1e44]:
+              - link "See my work" [ref=f1e45]:
+                - /url: "#works"
+              - link "Let's talk" [ref=f1e48]:
+                - /url: "#contact"
+              - link "Download CV" [ref=f1e52]:
+                - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/cv/1779196548240.pdf
+          - generic [ref=f1e59]:
+            - img "Muhamad Galih" [ref=f1e60]
+            - generic: photo
+            - generic: hover to flip
+      - generic: Scroll
+    - generic [ref=f1e61]:
+      - generic [ref=f1e63]:
+        - generic [ref=f1e64]:
+          - generic [ref=f1e65]: ●
+          - text: React.js
+        - generic [ref=f1e66]:
+          - generic [ref=f1e67]: ●
+          - text: Figma
+        - generic [ref=f1e68]:
+          - generic [ref=f1e69]: ●
+          - text: PHP
+        - generic [ref=f1e70]:
+          - generic [ref=f1e71]: ●
+          - text: Adobe Photoshop
+        - generic [ref=f1e72]:
+          - generic [ref=f1e73]: ●
+          - text: Adobe Illustrator
+        - generic [ref=f1e74]:
+          - generic [ref=f1e75]: ●
+          - text: Canva
+        - generic [ref=f1e76]:
+          - generic [ref=f1e77]: ●
+          - text: Supabase
+        - generic [ref=f1e78]:
+          - generic [ref=f1e79]: ●
+          - text: Next.js
+        - generic [ref=f1e80]:
+          - generic [ref=f1e81]: ●
+          - text: HTML
+        - generic [ref=f1e82]:
+          - generic [ref=f1e83]: ●
+          - text: CSS
+        - generic [ref=f1e84]:
+          - generic [ref=f1e85]: ●
+          - text: React.js
+        - generic [ref=f1e86]:
+          - generic [ref=f1e87]: ●
+          - text: Figma
+        - generic [ref=f1e88]:
+          - generic [ref=f1e89]: ●
+          - text: PHP
+        - generic [ref=f1e90]:
+          - generic [ref=f1e91]: ●
+          - text: Adobe Photoshop
+        - generic [ref=f1e92]:
+          - generic [ref=f1e93]: ●
+          - text: Adobe Illustrator
+        - generic [ref=f1e94]:
+          - generic [ref=f1e95]: ●
+          - text: Canva
+        - generic [ref=f1e96]:
+          - generic [ref=f1e97]: ●
+          - text: Supabase
+        - generic [ref=f1e98]:
+          - generic [ref=f1e99]: ●
+          - text: Next.js
+        - generic [ref=f1e100]:
+          - generic [ref=f1e101]: ●
+          - text: HTML
+        - generic [ref=f1e102]:
+          - generic [ref=f1e103]: ●
+          - text: CSS
+        - generic [ref=f1e104]:
+          - generic [ref=f1e105]: ●
+          - text: React.js
+        - generic [ref=f1e106]:
+          - generic [ref=f1e107]: ●
+          - text: Figma
+        - generic [ref=f1e108]:
+          - generic [ref=f1e109]: ●
+          - text: PHP
+        - generic [ref=f1e110]:
+          - generic [ref=f1e111]: ●
+          - text: Adobe Photoshop
+        - generic [ref=f1e112]:
+          - generic [ref=f1e113]: ●
+          - text: Adobe Illustrator
+        - generic [ref=f1e114]:
+          - generic [ref=f1e115]: ●
+          - text: Canva
+        - generic [ref=f1e116]:
+          - generic [ref=f1e117]: ●
+          - text: Supabase
+        - generic [ref=f1e118]:
+          - generic [ref=f1e119]: ●
+          - text: Next.js
+        - generic [ref=f1e120]:
+          - generic [ref=f1e121]: ●
+          - text: HTML
+        - generic [ref=f1e122]:
+          - generic [ref=f1e123]: ●
+          - text: CSS
+        - generic [ref=f1e124]:
+          - generic [ref=f1e125]: ●
+          - text: React.js
+        - generic [ref=f1e126]:
+          - generic [ref=f1e127]: ●
+          - text: Figma
+        - generic [ref=f1e128]:
+          - generic [ref=f1e129]: ●
+          - text: PHP
+        - generic [ref=f1e130]:
+          - generic [ref=f1e131]: ●
+          - text: Adobe Photoshop
+        - generic [ref=f1e132]:
+          - generic [ref=f1e133]: ●
+          - text: Adobe Illustrator
+        - generic [ref=f1e134]:
+          - generic [ref=f1e135]: ●
+          - text: Canva
+        - generic [ref=f1e136]:
+          - generic [ref=f1e137]: ●
+          - text: Supabase
+        - generic [ref=f1e138]:
+          - generic [ref=f1e139]: ●
+          - text: Next.js
+        - generic [ref=f1e140]:
+          - generic [ref=f1e141]: ●
+          - text: HTML
+        - generic [ref=f1e142]:
+          - generic [ref=f1e143]: ●
+          - text: CSS
+      - generic [ref=f1e145]:
+        - generic [ref=f1e146]:
+          - generic [ref=f1e147]: ●
+          - text: Firebase
+        - generic [ref=f1e148]:
+          - generic [ref=f1e149]: ●
+          - text: Laravel
+        - generic [ref=f1e150]:
+          - generic [ref=f1e151]: ●
+          - text: Docker
+        - generic [ref=f1e152]:
+          - generic [ref=f1e153]: ●
+          - text: Python
+        - generic [ref=f1e154]:
+          - generic [ref=f1e155]: ●
+          - text: MySQL
+        - generic [ref=f1e156]:
+          - generic [ref=f1e157]: ●
+          - text: MongoDB
+        - generic [ref=f1e158]:
+          - generic [ref=f1e159]: ●
+          - text: JavaScript
+        - generic [ref=f1e160]:
+          - generic [ref=f1e161]: ●
+          - text: CapCut
+        - generic [ref=f1e162]:
+          - generic [ref=f1e163]: ●
+          - text: PostgreSQL
+        - generic [ref=f1e164]:
+          - generic [ref=f1e165]: ●
+          - text: Firebase
+        - generic [ref=f1e166]:
+          - generic [ref=f1e167]: ●
+          - text: Laravel
+        - generic [ref=f1e168]:
+          - generic [ref=f1e169]: ●
+          - text: Docker
+        - generic [ref=f1e170]:
+          - generic [ref=f1e171]: ●
+          - text: Python
+        - generic [ref=f1e172]:
+          - generic [ref=f1e173]: ●
+          - text: MySQL
+        - generic [ref=f1e174]:
+          - generic [ref=f1e175]: ●
+          - text: MongoDB
+        - generic [ref=f1e176]:
+          - generic [ref=f1e177]: ●
+          - text: JavaScript
+        - generic [ref=f1e178]:
+          - generic [ref=f1e179]: ●
+          - text: CapCut
+        - generic [ref=f1e180]:
+          - generic [ref=f1e181]: ●
+          - text: PostgreSQL
+        - generic [ref=f1e182]:
+          - generic [ref=f1e183]: ●
+          - text: Firebase
+        - generic [ref=f1e184]:
+          - generic [ref=f1e185]: ●
+          - text: Laravel
+        - generic [ref=f1e186]:
+          - generic [ref=f1e187]: ●
+          - text: Docker
+        - generic [ref=f1e188]:
+          - generic [ref=f1e189]: ●
+          - text: Python
+        - generic [ref=f1e190]:
+          - generic [ref=f1e191]: ●
+          - text: MySQL
+        - generic [ref=f1e192]:
+          - generic [ref=f1e193]: ●
+          - text: MongoDB
+        - generic [ref=f1e194]:
+          - generic [ref=f1e195]: ●
+          - text: JavaScript
+        - generic [ref=f1e196]:
+          - generic [ref=f1e197]: ●
+          - text: CapCut
+        - generic [ref=f1e198]:
+          - generic [ref=f1e199]: ●
+          - text: PostgreSQL
+        - generic [ref=f1e200]:
+          - generic [ref=f1e201]: ●
+          - text: Firebase
+        - generic [ref=f1e202]:
+          - generic [ref=f1e203]: ●
+          - text: Laravel
+        - generic [ref=f1e204]:
+          - generic [ref=f1e205]: ●
+          - text: Docker
+        - generic [ref=f1e206]:
+          - generic [ref=f1e207]: ●
+          - text: Python
+        - generic [ref=f1e208]:
+          - generic [ref=f1e209]: ●
+          - text: MySQL
+        - generic [ref=f1e210]:
+          - generic [ref=f1e211]: ●
+          - text: MongoDB
+        - generic [ref=f1e212]:
+          - generic [ref=f1e213]: ●
+          - text: JavaScript
+        - generic [ref=f1e214]:
+          - generic [ref=f1e215]: ●
+          - text: CapCut
+        - generic [ref=f1e216]:
+          - generic [ref=f1e217]: ●
+          - text: PostgreSQL
+        - generic [ref=f1e218]:
+          - generic [ref=f1e219]: ●
+          - text: Firebase
+        - generic [ref=f1e220]:
+          - generic [ref=f1e221]: ●
+          - text: Laravel
+        - generic [ref=f1e222]:
+          - generic [ref=f1e223]: ●
+          - text: Docker
+        - generic [ref=f1e224]:
+          - generic [ref=f1e225]: ●
+          - text: Python
+        - generic [ref=f1e226]:
+          - generic [ref=f1e227]: ●
+          - text: MySQL
+        - generic [ref=f1e228]:
+          - generic [ref=f1e229]: ●
+          - text: MongoDB
+        - generic [ref=f1e230]:
+          - generic [ref=f1e231]: ●
+          - text: JavaScript
+        - generic [ref=f1e232]:
+          - generic [ref=f1e233]: ●
+          - text: CapCut
+        - generic [ref=f1e234]:
+          - generic [ref=f1e235]: ●
+          - text: PostgreSQL
+        - generic [ref=f1e236]:
+          - generic [ref=f1e237]: ●
+          - text: Firebase
+        - generic [ref=f1e238]:
+          - generic [ref=f1e239]: ●
+          - text: Laravel
+        - generic [ref=f1e240]:
+          - generic [ref=f1e241]: ●
+          - text: Docker
+        - generic [ref=f1e242]:
+          - generic [ref=f1e243]: ●
+          - text: Python
+        - generic [ref=f1e244]:
+          - generic [ref=f1e245]: ●
+          - text: MySQL
+        - generic [ref=f1e246]:
+          - generic [ref=f1e247]: ●
+          - text: MongoDB
+        - generic [ref=f1e248]:
+          - generic [ref=f1e249]: ●
+          - text: JavaScript
+        - generic [ref=f1e250]:
+          - generic [ref=f1e251]: ●
+          - text: CapCut
+        - generic [ref=f1e252]:
+          - generic [ref=f1e253]: ●
+          - text: PostgreSQL
+    - generic [ref=f1e255]:
+      - generic [ref=f1e256]:
+        - generic [ref=f1e257]: ABOUT
+        - generic [ref=f1e259]: ME
+      - generic [ref=f1e263]:
+        - generic [ref=f1e264]:
+          - generic [ref=f1e266]:
+            - generic [ref=f1e267]: 0+
+            - paragraph [ref=f1e268]: Projects shipped
+          - generic [ref=f1e270]:
+            - generic [ref=f1e271]: 0+
+            - paragraph [ref=f1e272]: Years across code & canvas
+          - generic [ref=f1e274]:
+            - generic [ref=f1e275]: 0+
+            - paragraph [ref=f1e276]: Clients who came back
+          - generic [ref=f1e278]:
+            - generic [ref=f1e279]: ∞
+            - paragraph [ref=f1e280]: Cups of coffee, uncounted
+        - generic [ref=f1e281]:
+          - paragraph [ref=f1e283]: Full-Stack Engineer, UI/UX Designer, and Illustrator based in Indonesia.
+          - generic [ref=f1e284]:
+            - heading "Skills & Tools" [level=3] [ref=f1e286]
+            - generic [ref=f1e287]:
+              - generic [ref=f1e288]: React.js
+              - generic [ref=f1e290]: Figma
+              - generic [ref=f1e292]: PHP
+              - generic [ref=f1e294]: Adobe Photoshop
+              - generic [ref=f1e296]: Adobe Illustrator
+              - generic [ref=f1e298]: Canva
+              - generic [ref=f1e300]: Supabase
+              - generic [ref=f1e302]: Next.js
+              - generic [ref=f1e304]: HTML
+              - generic [ref=f1e306]: CSS
+              - generic [ref=f1e308]: Firebase
+              - generic [ref=f1e310]: Laravel
+              - generic [ref=f1e312]: Docker
+              - generic [ref=f1e314]: Python
+              - generic [ref=f1e316]: MySQL
+              - generic [ref=f1e318]: MongoDB
+              - generic [ref=f1e320]: JavaScript
+              - generic [ref=f1e322]: CapCut
+              - generic [ref=f1e324]: PostgreSQL
+    - generic [ref=f1e327]:
+      - generic [ref=f1e328]:
+        - generic [ref=f1e329]: TOOLS
+        - generic [ref=f1e331]: "&"
+        - generic [ref=f1e333]: TECH
+      - paragraph [ref=f1e337]: The tools and technologies I use to bring ideas to life, from wireframe to production.
+      - generic [ref=f1e338]:
+        - generic [ref=f1e340]:
+          - generic [ref=f1e341]:
+            - generic [ref=f1e342]: D
+            - heading "Design & Creative" [level=3] [ref=f1e343]
+          - generic [ref=f1e344]:
+            - generic [ref=f1e345]: Figma
+            - generic [ref=f1e350]: Adobe Photoshop
+            - generic [ref=f1e353]: Adobe Illustrator
+            - generic [ref=f1e356]: Canva
+            - generic [ref=f1e359]: CapCut
+        - generic [ref=f1e363]:
+          - generic [ref=f1e364]:
+            - generic [ref=f1e365]: </>
+            - heading "Development" [level=3] [ref=f1e366]
+          - generic [ref=f1e367]:
+            - generic [ref=f1e368]: React.js
+            - generic [ref=f1e373]: PHP
+            - generic [ref=f1e378]: Supabase
+            - generic [ref=f1e383]: Next.js
+            - generic [ref=f1e388]: HTML
+            - generic [ref=f1e393]: CSS
+            - generic [ref=f1e398]: Firebase
+            - generic [ref=f1e403]: Laravel
+            - generic [ref=f1e408]: Docker
+            - generic [ref=f1e413]: Python
+            - generic [ref=f1e418]: MySQL
+            - generic [ref=f1e423]: MongoDB
+            - generic [ref=f1e428]: JavaScript
+            - generic [ref=f1e433]: PostgreSQL
+    - generic [ref=f1e439]:
+      - generic [ref=f1e440]:
+        - generic [ref=f1e441]: SELECTED
+        - generic [ref=f1e443]: WORKS
+      - generic [ref=f1e448]:
+        - button "All" [ref=f1e449]
+        - button "Software" [ref=f1e450]
+        - button "UI/UX" [ref=f1e451]
+        - button "Illustration" [ref=f1e452]
+        - button "Machine Learning" [ref=f1e453]
+      - generic [ref=f1e454]:
+        - generic [ref=f1e455]:
+          - img "FoldIn.space - UI/UX Redesign & Design System preview" [ref=f1e456]
+          - generic [ref=f1e457]: UI/UX
+          - generic [ref=f1e460]:
+            - heading "FoldIn.space - UI/UX Redesign & Design System" [level=3] [ref=f1e461]
+            - paragraph [ref=f1e462]: Led the end-to-end redesign of FoldIn, a social network for local events, building a token-driven Figma design system (~92 tokens, 6 collections, 5 breakpoints) that unified a fragmented UI from 8 fonts into one cohesive identity. Designed a 25+ component library, a custom flat icon system, and 50+ responsive screens spanning onboarding, events, checkout, wallet, and settings/KYC. Conceived and designed the flagship Ghost Match feature, turning verified event attendance into a connection-discovery experience.
+            - generic:
+              - generic [ref=f1e463]: Figma
+              - generic [ref=f1e464]: Canva
+        - generic [ref=f1e465]:
+          - img "Bakery Shop - Bakery ERP System preview" [ref=f1e466]
+          - generic [ref=f1e467]: Software
+          - generic [ref=f1e470]:
+            - heading "Bakery Shop - Bakery ERP System" [level=3] [ref=f1e471]
+            - paragraph [ref=f1e472]: Bakery ERP System is a full-featured Enterprise Resource Planning application built to manage the end-to-end operations of a bakery business. Developed with Laravel 12, Filament 4, Tailwind CSS, and Alpine.js, it unifies procurement, production, inventory, sales, and accounting into a single admin platform. The system covers the complete supply chain, from purchase orders, vendor management, and goods receipts, through recipe-driven production using Bill of Materials (BOM) and manufacturing orders, to real-time inventory tracking via stock movements and adjustments. On the sales side, it includes an integrated Point of Sale (POS), sales order processing, and a customer loyalty engine featuring tiered memberships, a points ledger, and configurable discount rules. A built-in double-entry accounting module with a Chart of Accounts, journal entries, and vendor payments ensures every transaction is financially reconciled, while role-based access control (Filament Shield), PDF invoicing, and Excel import/export round out a production-ready, business-grade solution.
+            - generic:
+              - generic [ref=f1e473]: PHP
+              - generic [ref=f1e474]: MySQL
+              - generic [ref=f1e475]: Laravel
+        - generic [ref=f1e476]:
+          - img "Daylight Asia - UI UX Design preview" [ref=f1e477]
+          - generic [ref=f1e478]: UI/UX
+          - generic [ref=f1e481]:
+            - heading "Daylight Asia - UI UX Design" [level=3] [ref=f1e482]
+            - paragraph
+            - generic:
+              - generic [ref=f1e483]: Figma
+              - generic [ref=f1e484]: Canva
+        - generic [ref=f1e485]:
+          - 'img "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi preview" [ref=f1e486]'
+          - generic [ref=f1e487]: Machine Learning
+          - generic [ref=f1e492]:
+            - 'heading "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi" [level=3] [ref=f1e493]'
+            - paragraph [ref=f1e494]: Analisis ini berhasil memetakan karakteristik pengguna, mulai dari kelompok Light Listener hingga Heavy Listener, serta menemukan pola unik seperti keterkaitan kuat antara genre Folk, Electronic, dan Metal pada kelompok tertentu. Informasi ini dapat digunakan Spotify untuk mengoptimalkan sistem rekomendasi dan strategi pemasaran yang lebih personal.
+            - generic: Python
+        - generic [ref=f1e496]:
+          - img "Gold Price Prediction with KNN and Linear Regression preview" [ref=f1e497]
+          - generic [ref=f1e498]: Machine Learning
+          - generic [ref=f1e503]:
+            - heading "Gold Price Prediction with KNN and Linear Regression" [level=3] [ref=f1e504]
+            - paragraph [ref=f1e505]: Projek ini merupakan studi kasus machine learning oleh Muhamad Galih yang bertujuan untuk memprediksi pergerakan harga emas (Gold Futures) menggunakan dataset historis dari Yahoo Finance periode 2015 hingga April 2025. Penelitian ini menerapkan dua pendekatan utama, yaitu klasifikasi menggunakan algoritma K-Nearest Neighbors (KNN) untuk menentukan arah harga (naik/turun) dengan akurasi terbaik sebesar 89,12%, serta regresi linear untuk memprediksi nilai numerik harga penutupan dengan performa $R^2$ mencapai 0,9958. Melalui proses feature engineering yang melibatkan indikator teknikal seperti Moving Averages (MA), Exponential Moving Averages (EMA), momentum, dan volatilitas, model ini berhasil memberikan prediksi harga emas untuk tanggal 24 April 2025 sebesar $3405.36 dengan keyakinan arah harga akan naik sebesar 100%.
+            - generic: Python
+        - generic [ref=f1e507]:
+          - img "Pareeduhub - Online Course Platform (LMS) preview" [ref=f1e508]
+          - generic [ref=f1e509]: Software
+          - generic [ref=f1e515]:
+            - heading "Pareeduhub - Online Course Platform (LMS)" [level=3] [ref=f1e516]
+            - paragraph [ref=f1e517]: "- Engineered a full-stack online course platform (Laravel 12, React, Inertia.js, TypeScript, MySQL) with course management, enrollment, and progress tracking. - Integrated Midtrans & Flip payment gateways and built secure video streaming with watermarking and anti-piracy protection."
+            - generic:
+              - generic [ref=f1e518]: PHP
+              - generic [ref=f1e519]: Laravel
+        - generic [ref=f1e520]:
+          - img "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA preview" [ref=f1e521]
+          - generic [ref=f1e522]: Machine Learning
+          - generic [ref=f1e527]:
+            - heading "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA" [level=3] [ref=f1e528]
+            - paragraph [ref=f1e529]: Menjelaskan implementasi Algoritma Genetika untuk menemukan solusi optimal dalam pemenuhan Angka Kecukupan Gizi (AKG) berdasarkan dataset makanan tertentu. Model ini mengevaluasi berbagai kombinasi makanan untuk memenuhi kriteria nutrisi seperti kalori, karbohidrat, protein, lemak, vitamin C, dan kalsium dengan batasan total berat dan biaya maksimal. Melalui proses evolusi yang mencakup seleksi (seperti roulette wheel, tournament, atau rank), one-point crossover, dan insert mutation, algoritma ini mampu mencapai kondisi konvergensi untuk menghasilkan daftar bahan makanan dengan nilai fitness terbaik. Berdasarkan pengujian dengan konfigurasi berbeda, penggunaan metode Tournament Selection menunjukkan performa paling unggul dalam mencapai nilai fitness tertinggi dibandingkan metode lainnya.
+            - generic: Python
+        - generic [ref=f1e531]:
+          - img "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik preview" [ref=f1e532]
+          - generic [ref=f1e533]: Machine Learning
+          - generic [ref=f1e538]:
+            - heading "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik" [level=3] [ref=f1e539]
+            - paragraph [ref=f1e540]: Dalam simulasi kasus mahasiswa dengan fokus bidang Rekayasa Perangkat Lunak (RPL), metode ini berhasil memberikan perangkingan alternatif, di mana Alternatif A3 memperoleh nilai preferensi tertinggi (2.49) dan terpilih sebagai alternatif terbaik.
+      - link "View all works →" [ref=f1e543]:
+        - /url: /works
+        - text: View all works
+        - generic [ref=f1e544]: →
+    - generic [ref=f1e546]:
+      - generic [ref=f1e547]:
+        - generic [ref=f1e548]:
+          - generic [ref=f1e549]:
+            - generic [ref=f1e550]: WHAT
+            - generic [ref=f1e552]: PEOPLE
+            - generic [ref=f1e554]: SAY
+          - paragraph [ref=f1e557]: Kind words from collaborators and clients I've had the pleasure of working with.
+        - button "Leave a testimonial" [ref=f1e560]
+      - generic [ref=f1e565]:
+        - generic [ref=f1e566]:
+          - generic [ref=f1e567]:
+            - button [ref=f1e568]
+            - button [ref=f1e571]
+            - button [ref=f1e574]
+            - button [ref=f1e577]
+            - button [ref=f1e580]
+          - paragraph [ref=f1e583]: “Desain Baju Ilustrasi dari beliau cukup bagus dan sangat memuaskan.”
+          - generic [ref=f1e584]:
+            - img "Ifan Maul" [ref=f1e585]
+            - generic [ref=f1e586]:
+              - paragraph [ref=f1e587]: Ifan Maul
+              - paragraph [ref=f1e588]: Fullstack Engineering @ Freelance
+        - generic [ref=f1e589]:
+          - generic [ref=f1e590]:
+            - button [ref=f1e591]
+            - button [ref=f1e594]
+            - button [ref=f1e597]
+            - button [ref=f1e600]
+            - button [ref=f1e603]
+          - paragraph [ref=f1e606]: “Hi Guysss”
+          - generic [ref=f1e607]:
+            - img "Muhamad Galih" [ref=f1e608]
+            - generic [ref=f1e609]:
+              - paragraph [ref=f1e610]: Muhamad Galih
+              - paragraph [ref=f1e611]: Illustrator @ MZR
+        - generic [ref=f1e612]:
+          - generic [ref=f1e613]:
+            - button [ref=f1e614]
+            - button [ref=f1e617]
+            - button [ref=f1e620]
+            - button [ref=f1e623]
+            - button [ref=f1e626]
+          - paragraph [ref=f1e629]: “Sangat keren sekali, terimakasih✨✨”
+          - generic [ref=f1e630]:
+            - img "Adinda Oktaviani" [ref=f1e631]
+            - paragraph [ref=f1e633]: Adinda Oktaviani
+    - generic [ref=f1e635]:
+      - generic [ref=f1e636]:
+        - generic [ref=f1e637]: LET'S
+        - generic [ref=f1e639]: CREATE
+        - generic [ref=f1e641]: SOMETHING
+        - generic [ref=f1e643]: COOL
+      - paragraph [ref=f1e646]: Have a project in mind, want to collaborate, or just want to say hi? My inbox is always open.
+      - link "muhamadgalih0803@gmail.com ↗" [ref=f1e648]:
+        - /url: mailto:muhamadgalih0803@gmail.com
+      - generic [ref=f1e650]:
+        - link "GitHub ↗" [ref=f1e651]:
+          - /url: https://github.com/muhgalihhh
+        - link "Download CV" [ref=f1e652]:
+          - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/cv/1779196548240.pdf
+      - generic [ref=f1e657]:
+        - paragraph [ref=f1e658]: © 2026 Muhamad Galih · MIZARIE · All rights reserved
+        - paragraph [ref=f1e659]: MG / MIZARIE
+  - button "Play music" [ref=f1e661]
+  - button "Open Next.js Dev Tools" [ref=f1e669] [cursor=pointer]
+  - alert [ref=f1e673]

@@ -60,7 +60,7 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText
-            text="LET'S CREATE SOMETHING COOL ✦"
+            text="LET'S CREATE SOMETHING COOL"
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] leading-tight mb-6 max-w-3xl"
             staggerDelay={0.03}
           />
@@ -148,7 +148,7 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
                     onClick={() => { setFormState("idle"); setErrorMsg(""); setFields({ name: "", email: "", subject: "", message: "" }); }}
                     className="card-surface mt-6 cartoon-border bg-ink text-cream font-body font-semibold px-6 py-2.5 rounded-full hover:-translate-y-0.5 transition-transform"
                   >
-                    Send another ✦
+                    Send another
                   </button>
                 </motion.div>
               ) : (
@@ -245,7 +245,7 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
       <footer className="py-8 bg-cream border-t-2 border-ink/10">
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <p className="font-body text-sm text-muted">
-            © 2025 Muhamad Galih · MIZARIE · All rights reserved
+            © {new Date().getFullYear()} Muhamad Galih · MIZARIE · All rights reserved
           </p>
           <p className="font-display font-extrabold text-ink/20 text-2xl">
             MG / MIZARIE

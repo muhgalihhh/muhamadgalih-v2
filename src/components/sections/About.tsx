@@ -14,10 +14,10 @@ import type { Profile, Skill } from "@/types/portfolio";
 
 function buildStats(profile?: Profile | null, projectsCount = 0) {
   return [
-    { value: projectsCount,                    suffix: "+", label: "Projects Shipped", color: "text-coral"  },
-    { value: profile?.years_experience ?? 3,   suffix: "+", label: "Years Experience", color: "text-yellow" },
-    { value: profile?.clients_count    ?? 2,   suffix: "+", label: "Happy Clients",    color: "text-mint"   },
-    { value: profile?.coffee_label     ?? "∞", suffix: "",  label: "Coffee Consumed",  color: "text-violet" },
+    { value: projectsCount,                    suffix: "+", label: "Projects shipped" },
+    { value: profile?.years_experience ?? 3,   suffix: "+", label: "Years across code & canvas" },
+    { value: profile?.clients_count    ?? 2,   suffix: "+", label: "Clients who came back" },
+    { value: profile?.coffee_label     ?? "∞", suffix: "",  label: "Cups of coffee, uncounted" },
   ];
 }
 
@@ -34,16 +34,8 @@ const FALLBACK_SKILLS = [
   { name: "Procreate",       color: "bg-violet text-cream" },
 ];
 
-function CountUp({
-  value,
-  suffix,
-  color,
-}: {
-  value: number | string;
-  suffix: string;
-  color: string;
-}) {
-  const ref = useRef<HTMLParagraphElement>(null);
+function CountUp({ value, suffix }: { value: number | string; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-80px" });
   const motionVal = useMotionValue(0);
   const rounded = useTransform(motionVal, (v) => Math.round(v));
@@ -58,18 +50,18 @@ function CountUp({
   }, [isInView, value, motionVal]);
 
   return (
-    <p ref={ref} className={`font-display font-extrabold ${color} text-[3.5rem] leading-none`}>
+    <span ref={ref} className="font-display font-extrabold text-cream text-2xl md:text-[1.75rem] leading-none tabular-nums">
       {typeof value === "string" ? (
         <>{value}{suffix}</>
       ) : (
         <><motion.span>{rounded}</motion.span>{suffix}</>
       )}
-    </p>
+    </span>
   );
 }
 
-const FALLBACK_BIO_1 = "I'm a passionate Full-Stack Engineer, UI/UX Designer, and Illustrator based in Indonesia. I love creating digital experiences that are both beautiful and functional. From writing clean backend code to crafting pixel-perfect interfaces and original artwork.";
-const FALLBACK_BIO_2 = "Whether it's a web app, a brand identity, or an illustration series, I bring the same energy and attention to detail to every single project.";
+const FALLBACK_BIO_1 = "Fluent in two very different codebases: React components by day, ink and gradients by night. I've spent the last few years shipping full-stack products end to end — then unwinding by drawing the characters that end up as their mascots.";
+const FALLBACK_BIO_2 = "Most of my work starts as a sketch, whether it's the interface or the illustration. If it needs building and it needs to look good doing it, that's the kind of project I want.";
 
 export default function About({ profile, skills: skillsProp, projectsCount = 0 }: { profile?: Profile | null; skills?: Skill[]; projectsCount?: number }) {
   const displaySkills = skillsProp && skillsProp.length > 0
@@ -96,13 +88,13 @@ export default function About({ profile, skills: skillsProp, projectsCount = 0 }
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
-          {/* ── Stats grid ── */}
-          <div className="grid grid-cols-2 gap-4 md:gap-5">
+          {/* ── Stats — a colophon, not a dashboard ── */}
+          <div className="border-l-2 border-cream/20 pl-5 md:pl-7 flex flex-col">
             {stats.map((stat, i) => (
-              <ScrollReveal key={stat.label} variant="scale-in" delay={i * 0.1}>
-                <div className="cartoon-border-light rounded-2xl p-4 md:p-6 bg-white/5 hover:-translate-y-1 transition-transform">
-                  <CountUp value={stat.value} suffix={stat.suffix} color={stat.color} />
-                  <p className="font-body text-xs md:text-sm text-cream/60 mt-2 leading-snug">
+              <ScrollReveal key={stat.label} variant="fade-left" delay={i * 0.08}>
+                <div className="flex items-baseline gap-4 py-3 md:py-3.5 border-b border-cream/10 last:border-0">
+                  <CountUp value={stat.value} suffix={stat.suffix} />
+                  <p className="font-body text-xs md:text-sm text-cream/55 leading-snug">
                     {stat.label}
                   </p>
                 </div>

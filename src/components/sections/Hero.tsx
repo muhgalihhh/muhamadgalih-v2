@@ -79,7 +79,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           {/* Eyebrow: alias + availability */}
           <motion.div variants={itemAnim} className="flex flex-wrap items-center gap-4">
             <span className="font-mono text-[11px] md:text-xs tracking-[0.3em] uppercase text-muted">
-              ✦ aka {alias}
+              a.k.a. {alias}
             </span>
             {isAvailable && (
               <span className="inline-flex items-center gap-2 cartoon-border-sm bg-mint px-3 py-1.5 rounded-full">
@@ -218,8 +218,8 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <span className="font-body text-[10px] font-bold text-cream tracking-wide">
-                      {artHovered && illustrationUrl ? "illustrated ✏️" : "real me 📷"}
+                    <span className="font-body text-[10px] font-bold text-cream tracking-wide uppercase">
+                      {artHovered && illustrationUrl ? "illustrated" : "photo"}
                     </span>
                   </motion.div>
                 </AnimatePresence>
@@ -236,9 +236,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                       exit={{ opacity: 0, scale: 0 }}
                       transition={{ delay: 1.2, type: "spring", stiffness: 400 }}
                     >
-                      <span className="font-body text-[10px] font-bold text-cream tracking-wide">
-                        <span className="hidden lg:inline">hover me ✦</span>
-                        <span className="lg:hidden">tap to flip ✦</span>
+                      <span className="font-body text-[10px] font-bold text-cream tracking-wide uppercase">
+                        <span className="hidden lg:inline">hover to flip</span>
+                        <span className="lg:hidden">tap to flip</span>
                       </span>
                     </motion.div>
                   )}

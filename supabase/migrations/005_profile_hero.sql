@@ -1,3 +1,4 @@
 ALTER TABLE profile
   ADD COLUMN IF NOT EXISTS tagline TEXT,
   ADD COLUMN IF NOT EXISTS avatar_url TEXT;
+  

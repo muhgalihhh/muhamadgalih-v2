@@ -35,7 +35,7 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
       </div>
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
         <AnimatedText
-          text="LET'S CREATE SOMETHING COOL ✦"
+          text="LET'S CREATE SOMETHING COOL"
           className="font-display font-extrabold text-ink text-[clamp(1.5rem,5vw,4.2rem)] leading-tight mb-8 max-w-3xl"
           staggerDelay={0.035}
         />
@@ -87,7 +87,7 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
         <ScrollReveal variant="fade-up" delay={0.5}>
           <div className="pt-8 border-t-2 border-ink/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <p className="font-body text-sm text-ink/50">
-              © 2025 Muhamad Galih · MIZARIE · All rights reserved
+              © {new Date().getFullYear()} Muhamad Galih · MIZARIE · All rights reserved
             </p>
             <p className="font-display font-extrabold text-ink/30 text-2xl">
               MG / MIZARIE

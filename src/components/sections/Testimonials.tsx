@@ -215,7 +215,7 @@ export default function TestimonialsSection({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
             <AnimatedText
-              text="WHAT PEOPLE SAY ✦"
+              text="WHAT PEOPLE SAY"
               className="font-display font-extrabold text-ink text-[clamp(1.6rem,4.5vw,3.5rem)] leading-tight mb-3"
               staggerDelay={0.03}
             />
@@ -267,7 +267,7 @@ export default function TestimonialsSection({
         {testimonials.length === 0 ? (
           <ScrollReveal variant="fade-up">
             <div className="text-center py-16 text-muted font-body">
-              No testimonials yet. Be the first! ✦
+              No testimonials yet. Be the first.
             </div>
           </ScrollReveal>
         ) : (
@@ -389,10 +389,15 @@ export default function TestimonialsSection({
                     <MessageSquareQuote size={22} className="text-ink" />
                   </div>
                   <h3 className="font-display font-extrabold text-ink text-xl mb-2">Your testimonial</h3>
-                  <p className="font-body text-muted text-xs mb-4">
-                    {ownTestimonial.approved
-                      ? "Your testimonial is live ✦"
-                      : "Pending review, will appear once approved."}
+                  <p className="font-body text-muted text-xs mb-4 inline-flex items-center gap-1.5">
+                    {ownTestimonial.approved ? (
+                      <>
+                        <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
+                        Live on the page
+                      </>
+                    ) : (
+                      "Pending review, will appear once approved."
+                    )}
                   </p>
                   <div className="cartoon-border-sm bg-ink/5 rounded-xl p-4 text-left mb-4">
                     <StarRating value={ownTestimonial.rating} />
@@ -421,7 +426,7 @@ export default function TestimonialsSection({
               {modalState === "form" && (
                 <>
                   <h3 className="font-display font-extrabold text-ink text-xl mb-1">
-                    {isEditing ? "Edit your testimonial ✦" : "Leave a testimonial ✦"}
+                    {isEditing ? "Edit your testimonial" : "Leave a testimonial"}
                   </h3>
                   <p className="font-body text-muted text-xs mb-5">
                     {isEditing

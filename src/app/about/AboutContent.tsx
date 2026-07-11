@@ -111,7 +111,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
       <section className="py-20 md:py-28 bg-navy text-cream relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText
-            text="ABOUT ME ✦"
+            text="ABOUT ME"
             className="font-display font-extrabold text-cream text-[clamp(2rem,7vw,5.5rem)] leading-none mb-6"
           />
           <ScrollReveal variant="fade-up" delay={0.2}>
@@ -203,7 +203,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
                       <ul className="flex flex-col gap-2">
                         {exp.points.map((pt, j) => (
                           <li key={j} className="font-body text-sm opacity-75 flex items-start gap-2">
-                            <span className="shrink-0 mt-0.5 text-base leading-none">✦</span>
+                            <span className="shrink-0 mt-[7px] w-1.5 h-1.5 rounded-full bg-current opacity-60" />
                             {pt}
                           </li>
                         ))}
@@ -255,7 +255,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
                   {(org.description || org.images.length > 0) && (
                     <p className="font-body text-xs font-semibold opacity-60 mt-4 inline-flex items-center gap-1.5">
                       View details
-                      {org.images.length > 0 && <span className="opacity-80">· {org.images.length} 📷</span>}
+                      {org.images.length > 0 && <span className="opacity-80">· {org.images.length} {org.images.length === 1 ? "photo" : "photos"}</span>}
                       <span>→</span>
                     </p>
                   )}
@@ -266,7 +266,8 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
         </div>
       </section>
 
-      {/* ── Certificates ── */}
+      {/* ── Certificates — hidden entirely until there's something to show ── */}
+      {certificates.length > 0 && (
       <section className="py-20 md:py-28 bg-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
@@ -280,8 +281,7 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
             <div className="w-16 h-1.5 bg-coral rounded-full mb-12 md:mb-16" />
           </ScrollReveal>
 
-          {certificates.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {certificates.map((cert, i) => (
                 <ScrollReveal key={cert.id} variant="scale-in" delay={i * 0.07}>
                   <div className="cartoon-border rounded-2xl overflow-hidden bg-cream group hover:-translate-y-1 transition-transform">
@@ -315,39 +315,17 @@ export default function AboutContent({ dbExperiences, dbSkills, dbCertificates, 
                           rel="noopener noreferrer"
                           className="inline-block mt-3 cartoon-border-sm bg-navy text-cream font-body font-semibold text-xs px-3 py-1.5 rounded-full hover:-translate-y-0.5 transition-transform"
                         >
-                          View Credential ↗
+                          View credential ↗
                         </a>
                       )}
                     </div>
                   </div>
                 </ScrollReveal>
               ))}
-            </div>
-          ) : (
-            <ScrollReveal variant="fade-up" delay={0.15}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-                {[1, 2, 3].map((n) => (
-                  <div
-                    key={n}
-                    className="cartoon-border rounded-2xl overflow-hidden opacity-30"
-                  >
-                    <div className="w-full h-36 bg-yellow flex items-center justify-center">
-                      <Award size={48} strokeWidth={1.2} className="text-ink/40" />
-                    </div>
-                    <div className="p-4 bg-cream">
-                      <div className="h-3 w-3/4 bg-ink/10 rounded-full mb-2" />
-                      <div className="h-2.5 w-1/2 bg-ink/10 rounded-full" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="font-body text-muted/50 text-sm text-center mt-8">
-                Certificates will appear here once added via the admin dashboard.
-              </p>
-            </ScrollReveal>
-          )}
+          </div>
         </div>
       </section>
+      )}
 
       <TestimonialsSection testimonials={testimonials} ownTestimonial={ownTestimonial} />
 

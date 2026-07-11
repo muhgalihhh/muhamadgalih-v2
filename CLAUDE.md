@@ -14,11 +14,27 @@ Personal portfolio site for Mizarie — a Full-Stack Engineer, UI/UX Designer, a
 - **Backend/Auth:** Supabase via `@supabase/ssr`
 - **Deployment:** Vercel (serverless monorepo, no separate backend)
 
+## Commands
+
+```bash
+npm run dev    # start dev server (localhost:3000)
+npm run build
+npm run lint
+```
+
 ## Architecture
 
 **Server-first, monorepo serverless:**
 - All Supabase communication goes through Next.js Server Actions in `app/actions/` — no separate API backend.
 - React Server Components (RSC) are the default. `'use client'` is used **only** for components that wrap Framer Motion animations or require UI interactivity.
+
+**Two apps in one:**
+- Public portfolio (`src/app/*` site routes) — the design-system rules below apply here.
+- Admin CMS at `src/app/admin/` — auth-gated dashboard (`(dashboard)/` route group) covering works, gallery, experience, skills, organizations, certificates, testimonials, contact messages. Plain/utilitarian UI (slate palette) — the playful design rules do NOT apply to admin screens.
+
+**Supabase clients (`src/lib/supabase/`):** three variants — `client.ts` (browser), `server.ts` (RSC/Server Actions, user-scoped via cookies), `service.ts` (service-role key, bypasses RLS — admin-only mutations, never use in public-facing code paths).
+
+**Admin auth:** no `middleware.ts`; each `(dashboard)/layout.tsx` calls `supabase.auth.getUser()` server-side and `redirect()`s to `/admin/login` if unauthenticated.
 
 ## Design System & UI Rules
 

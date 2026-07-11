@@ -131,7 +131,7 @@ export default function Works({ dbProjects, categories: categoriesProp }: { dbPr
                   </div>
 
                   {/* Bottom gradient + text overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-14 bg-gradient-to-t from-black/90 via-black/55 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-16 md:pt-24 bg-gradient-to-t from-black/95 via-black/75 to-transparent">
                     <h3 className="font-display font-extrabold text-cream text-lg md:text-2xl leading-tight line-clamp-2">
                       {project.title}
                     </h3>
@@ -158,9 +158,10 @@ export default function Works({ dbProjects, categories: categoriesProp }: { dbPr
           <div className="flex justify-center mt-10 md:mt-14">
             <Link
               href="/works"
-              className="cartoon-border bg-navy text-cream font-body font-semibold px-7 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2"
+              className="cartoon-border bg-navy text-cream font-body font-semibold px-7 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2 group"
             >
-              View all works ✦
+              View all works
+              <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </ScrollReveal>

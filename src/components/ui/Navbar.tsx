@@ -80,7 +80,7 @@ export default function Navbar() {
           className="cartoon-border bg-coral text-cream font-body font-semibold px-5 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center gap-1.5"
         >
           {loadingHref === "/contact" ? <Loader2 size={14} className="animate-spin" /> : null}
-          Hire Me ✦
+          Hire me
         </Link>
       </div>
     </motion.nav>

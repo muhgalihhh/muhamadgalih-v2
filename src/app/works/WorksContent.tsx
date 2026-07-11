@@ -161,13 +161,13 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
   return (
     <main className="md:pt-20">
       {/* ── Header ── */}
-      <section className="py-20 md:py-28 bg-cream relative overflow-hidden">
+      <section className="pt-20 md:pt-28 pb-10 md:pb-12 bg-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText
-            text="MY WORKS ✦"
+            text="MY WORKS"
             className="font-display font-extrabold text-ink text-[clamp(2rem,7vw,5.5rem)] leading-none mb-4"
           />
           <ScrollReveal variant="fade-up" delay={0.2}>
@@ -181,7 +181,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
       </section>
 
       {/* ── Projects accordion ── */}
-      <section className="py-16 md:py-20 bg-cream relative overflow-hidden">
+      <section className="pt-6 md:pt-8 pb-16 md:pb-20 bg-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
@@ -291,7 +291,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                                 onClick={() => setModalProject(project)}
                                 className="inline-flex items-center gap-2 cartoon-border-sm bg-black/20 font-body font-semibold text-sm px-4 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
                               >
-                                View Details ✦
+                                View details
                               </button>
                               {project.link && project.link !== "#" && (
                                 <a
@@ -315,7 +315,6 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
 
             {filtered.length === 0 && (
               <div className="text-center py-16 text-muted">
-                <p className="text-4xl mb-3">✦</p>
                 <p className="font-body">No projects in this category yet.</p>
               </div>
             )}
@@ -338,7 +337,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                     ♪ on repeat while building
                   </p>
                   <h2 className="font-display font-extrabold text-ink text-[clamp(2.5rem,5vw,5rem)] leading-none mb-4">
-                    Song when<br />I dev ✦
+                    Song when<br />I dev
                   </h2>
                   <div className="w-12 h-1.5 bg-coral rounded-full mb-5" />
                   <p className="font-body text-muted text-sm md:text-base max-w-xs leading-relaxed">
@@ -414,7 +413,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                       <span className="font-display font-bold text-xs md:text-sm text-ink/70">{item.label}</span>
                     </div>
                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="font-display font-bold text-cream text-sm">Coming soon ✦</span>
+                      <span className="font-display font-bold text-cream text-sm">Coming soon</span>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -425,7 +424,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
           {galleryItems.length === 0 && (
             <ScrollReveal variant="fade-up" delay={0.3}>
               <p className="font-body text-cream/30 text-sm text-center mt-12">
-                More works coming soon. Gallery uploading... ✦
+                More works coming soon. The gallery is still being uploaded.
               </p>
             </ScrollReveal>
           )}

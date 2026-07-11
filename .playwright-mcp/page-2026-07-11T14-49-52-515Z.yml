@@ -1,0 +1,148 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e4]:
+    - generic [ref=f10e5]: MG
+    - paragraph [ref=f10e6]: MIZARIE
+  - navigation [ref=f10e11]:
+    - link "MG / MIZARIE" [ref=f10e12]:
+      - /url: /
+      - generic [ref=f10e13]: MG
+      - generic [ref=f10e14]: / MIZARIE
+    - generic [ref=f10e15]:
+      - link "About" [ref=f10e16]:
+        - /url: /about
+      - link "Works" [ref=f10e17]:
+        - /url: /works
+      - link "Contact" [ref=f10e18]:
+        - /url: /contact
+    - generic [ref=f10e19]:
+      - button "Toggle dark mode" [ref=f10e20]
+      - link "Hire me" [ref=f10e24]:
+        - /url: /contact
+  - main [ref=f10e25]:
+    - generic [ref=f10e27]:
+      - generic [ref=f10e28]:
+        - generic [ref=f10e29]: ABOUT
+        - generic [ref=f10e31]: ME
+      - paragraph [ref=f10e35]:
+        - text: I'm
+        - strong [ref=f10e36]: Muhamad Galih
+        - text: ", also known as"
+        - strong [ref=f10e37]: MIZARIE
+        - text: . Full-Stack Engineer, UI/UX Designer, and Illustrator based in Indonesia. I bridge the gap between technical precision and artistic creativity.
+      - paragraph [ref=f10e39]: Whether it's architecting a scalable backend, crafting pixel-perfect interfaces, or drawing original characters. I bring the same obsessive attention to detail to every single project. Always learning, always building.
+      - generic [ref=f10e41]:
+        - generic [ref=f10e42]: React.js
+        - generic [ref=f10e45]: Figma
+        - generic [ref=f10e48]: PHP
+        - generic [ref=f10e51]: Adobe Photoshop
+        - generic [ref=f10e52]: Adobe Illustrator
+        - generic [ref=f10e53]: Canva
+        - generic [ref=f10e54]: Supabase
+        - generic [ref=f10e57]: Next.js
+        - generic [ref=f10e60]: HTML
+        - generic [ref=f10e63]: CSS
+        - generic [ref=f10e66]: Firebase
+        - generic [ref=f10e69]: Laravel
+        - generic [ref=f10e72]: Docker
+        - generic [ref=f10e75]: Python
+        - generic [ref=f10e78]: MySQL
+        - generic [ref=f10e81]: MongoDB
+        - generic [ref=f10e84]: JavaScript
+        - generic [ref=f10e87]: CapCut
+        - generic [ref=f10e88]: PostgreSQL
+    - generic [ref=f10e92]:
+      - generic [ref=f10e93]:
+        - generic [ref=f10e94]: WORK
+        - generic [ref=f10e96]: EXPERIENCE
+      - generic [ref=f10e102]:
+        - generic [ref=f10e106]:
+          - generic [ref=f10e107]:
+            - generic [ref=f10e114]:
+              - heading "Graphic Designer" [level=3] [ref=f10e115]
+              - paragraph [ref=f10e116]: PT Bukhori Group Indonesia
+            - generic [ref=f10e117]: Jan 2026 - Apr 2026
+          - list [ref=f10e118]:
+            - listitem [ref=f10e119]: Managed visual design requirements and branding across multiple company brands, including NUSA MUN, Youth Space Innovation, and Leaders.
+            - listitem [ref=f10e121]: Produced 50+ visual assets and engaging social media layouts for various national youth programs.
+            - listitem [ref=f10e123]: Designed event merchandise, including custom medals, and official certificates distributed to thousands of participants.
+            - listitem [ref=f10e125]: Optimized typography and vector graphics for both print and digital platforms utilizing Adobe Illustrator and Figma.
+        - generic [ref=f10e130]:
+          - generic [ref=f10e131]:
+            - generic [ref=f10e138]:
+              - heading "Fullstack Developer" [level=3] [ref=f10e139]
+              - paragraph [ref=f10e140]: BKPSDM Banjar
+            - generic [ref=f10e141]: Jun 2024 - Sep 2024
+          - list [ref=f10e142]:
+            - listitem [ref=f10e143]: Solo-developed SiTubel, a prototype web app to digitize the civil servant study leave application process, replacing a manual paper-based workflow within a 2-month internship.
+            - listitem [ref=f10e145]: Built role-based workflows for 3 user types (Admin/OPD/Employee) and automated official-letter generation.
+            - listitem [ref=f10e147]: Digitized and organized administrative documents into a structured digital archive.
+    - generic [ref=f10e150]:
+      - generic [ref=f10e151]: ORGANIZATIONS
+      - generic [ref=f10e156]:
+        - button "HMIF Universitas Jenderal Soedirman HMIF Universitas Jenderal Soedirman Staff of Medkominfo 2024 View details · 2 photos →" [ref=f10e158]:
+          - img "HMIF Universitas Jenderal Soedirman" [ref=f10e160]
+          - heading "HMIF Universitas Jenderal Soedirman" [level=3] [ref=f10e161]
+          - paragraph [ref=f10e162]: Staff of Medkominfo
+          - paragraph [ref=f10e163]: "2024"
+          - paragraph [ref=f10e164]:
+            - text: View details
+            - generic [ref=f10e165]: · 2 photos
+            - generic [ref=f10e166]: →
+        - button "HMIF Universitas Jenderal Soedirman HMIF Universitas Jenderal Soedirman Staff of Medkominfo 2023 View details →" [ref=f10e168]:
+          - img "HMIF Universitas Jenderal Soedirman" [ref=f10e170]
+          - heading "HMIF Universitas Jenderal Soedirman" [level=3] [ref=f10e171]
+          - paragraph [ref=f10e172]: Staff of Medkominfo
+          - paragraph [ref=f10e173]: "2023"
+          - paragraph [ref=f10e174]:
+            - text: View details
+            - generic [ref=f10e175]: →
+    - generic [ref=f10e177]:
+      - generic [ref=f10e178]:
+        - generic [ref=f10e179]:
+          - generic [ref=f10e180]:
+            - generic [ref=f10e181]: WHAT
+            - generic [ref=f10e183]: PEOPLE
+            - generic [ref=f10e185]: SAY
+          - paragraph [ref=f10e188]: Kind words from collaborators and clients I've had the pleasure of working with.
+        - button "Leave a testimonial" [ref=f10e191]
+      - generic [ref=f10e196]:
+        - generic [ref=f10e197]:
+          - generic [ref=f10e198]:
+            - button [ref=f10e199]
+            - button [ref=f10e202]
+            - button [ref=f10e205]
+            - button [ref=f10e208]
+            - button [ref=f10e211]
+          - paragraph [ref=f10e214]: “Desain Baju Ilustrasi dari beliau cukup bagus dan sangat memuaskan.”
+          - generic [ref=f10e215]:
+            - img "Ifan Maul" [ref=f10e216]
+            - generic [ref=f10e217]:
+              - paragraph [ref=f10e218]: Ifan Maul
+              - paragraph [ref=f10e219]: Fullstack Engineering @ Freelance
+        - generic [ref=f10e220]:
+          - generic [ref=f10e221]:
+            - button [ref=f10e222]
+            - button [ref=f10e225]
+            - button [ref=f10e228]
+            - button [ref=f10e231]
+            - button [ref=f10e234]
+          - paragraph [ref=f10e237]: “Hi Guysss”
+          - generic [ref=f10e238]:
+            - img "Muhamad Galih" [ref=f10e239]
+            - generic [ref=f10e240]:
+              - paragraph [ref=f10e241]: Muhamad Galih
+              - paragraph [ref=f10e242]: Illustrator @ MZR
+        - generic [ref=f10e243]:
+          - generic [ref=f10e244]:
+            - button [ref=f10e245]
+            - button [ref=f10e248]
+            - button [ref=f10e251]
+            - button [ref=f10e254]
+            - button [ref=f10e257]
+          - paragraph [ref=f10e260]: “Sangat keren sekali, terimakasih✨✨”
+          - generic [ref=f10e261]:
+            - img "Adinda Oktaviani" [ref=f10e262]
+            - paragraph [ref=f10e264]: Adinda Oktaviani
+  - button "Play music" [ref=f10e266]
+  - button "Open Next.js Dev Tools" [ref=f10e274] [cursor=pointer]
+  - alert [ref=f10e278]

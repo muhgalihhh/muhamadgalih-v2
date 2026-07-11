@@ -1,0 +1,59 @@
+[    1547ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[    1593ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  109116ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  110926ms] [ERROR] ./src/app/about/AboutContent.tsx:353:28
+Expected '</', got 'ident'
+  351 |       </section>
+  352 |
+> 353 |       <TestimonialsSection testimonials={testimonials} ownTestimonial={ownTestimonial} />
+      |                            ^^^^^^^^^^^^
+  354 |
+  355 |       {/* ── Organization detail modal ── */}
+  356 |       <AnimatePresence>
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./src/app/about/AboutContent.tsx
+    ./src/app/about/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3318
+[  111148ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  111262ms] [ERROR] ./src/app/about/AboutContent.tsx:353:28
+Expected '</', got 'ident'
+  351 |       </section>
+  352 |
+> 353 |       <TestimonialsSection testimonials={testimonials} ownTestimonial={ownTestimonial} />
+      |                            ^^^^^^^^^^^^
+  354 |
+  355 |       {/* ── Organization detail modal ── */}
+  356 |       <AnimatePresence>
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./src/app/about/AboutContent.tsx
+    ./src/app/about/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3318
+[  119368ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  119463ms] [ERROR] ./src/app/about/AboutContent.tsx:348:12
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  346 |               </p>
+  347 |             </ScrollReveal>
+> 348 |           )}
+      |            ^
+  349 |         </div>
+  350 |       </section>
+  351 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./src/app/about/AboutContent.tsx
+    ./src/app/about/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3318
+[  131217ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  131445ms] [LOG] [Fast Refresh] done in 167ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  132007ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  132013ms] [LOG] [Fast Refresh] done in 106ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  163091ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
+[  163161ms] [LOG] [Fast Refresh] done in 101ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477

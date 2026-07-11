@@ -61,9 +61,9 @@ function MarqueeRow({ items, baseSpeed }: RowProps) {
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="font-display font-bold text-base md:text-lg text-cream whitespace-nowrap px-5 md:px-8 flex items-center gap-2 shrink-0"
+            className="font-display font-bold text-base md:text-lg text-cream whitespace-nowrap px-5 md:px-8 flex items-center gap-3 shrink-0"
           >
-            <span className="text-coral shrink-0">✦</span>
+            <span className="text-coral shrink-0 text-[0.5em] -translate-y-0.5">●</span>
             {item}
           </span>
         ))}
