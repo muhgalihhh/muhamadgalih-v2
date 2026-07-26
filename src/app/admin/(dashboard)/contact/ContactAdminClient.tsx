@@ -193,7 +193,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
                 name="hero_roles"
                 rows={4}
                 defaultValue={(profile.hero_roles ?? []).join("\n")}
-                placeholder={`Full-Stack Engineering\nUI/UX Design\nIllustration & Art`}
+                placeholder={`Full-Stack Engineering\nUI/UX Design\nIllustration & Art\nData Science & Analysis`}
                 className={`${inputCls} resize-none font-mono text-xs`}
               />
               <span className="text-[11px] text-slate-400">Dipakai untuk cycling text & role pills di hero. Tiap baris = satu role.</span>

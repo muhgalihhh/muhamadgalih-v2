@@ -7,7 +7,7 @@ import CyclingText from "@/components/animations/CyclingText";
 import { handleAnchorClick } from "@/lib/smoothScroll";
 import type { Profile } from "@/types/portfolio";
 
-const DEFAULT_ROLES = ["Full-Stack Engineering", "UI/UX Design", "Illustration & Art"];
+const DEFAULT_ROLES = ["Full-Stack Engineering", "UI/UX Design", "Illustration & Art", "Data Science & Analysis"];
 
 const containerAnim = {
   hidden: {},
@@ -78,14 +78,13 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
         >
           {/* Eyebrow: alias + availability */}
           <motion.div variants={itemAnim} className="flex flex-wrap items-center gap-4">
-            <span className="font-mono text-[11px] md:text-xs tracking-[0.3em] uppercase text-muted">
-              a.k.a. {alias}
+            <span className="font-body text-sm md:text-base text-muted">
+              a.k.a. <span className="font-display font-bold text-coral">{alias}</span>
             </span>
             {isAvailable && (
-              <span className="inline-flex items-center gap-2 cartoon-border-sm bg-mint px-3 py-1.5 rounded-full">
-                <span className="w-2 h-2 bg-ink rounded-full animate-pulse" />
+              <span className="inline-flex items-center cartoon-border-sm bg-mint px-3 py-1.5 rounded-lg -rotate-2">
                 <span className="font-body font-semibold text-xs text-ink">
-                  Available for projects
+                  Taking on new projects
                 </span>
               </span>
             )}
@@ -122,7 +121,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                 variants={itemAnim}
                 className="font-body text-muted text-base md:text-lg leading-relaxed max-w-md"
               >
-                Engineer by day, illustrator by night — I make the web
+                Engineer by day, illustrator by night. I make the web
                 a little less boring.
               </motion.p>
 

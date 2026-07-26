@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink } from "lucide-react";
+import { X } from "lucide-react";
 import ProjectCarousel from "@/components/works/ProjectCarousel";
 import SkillIcon from "@/components/ui/SkillIcon";
-import type { Project } from "@/types/portfolio";
+import ProjectLinks from "@/components/works/ProjectLinks";
+import PdfPreviewModal from "@/components/works/PdfPreviewModal";
+import type { Project, ProjectLink } from "@/types/portfolio";
 
-type ProjectRow = Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "link">;
+type ProjectRow = Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">;
 
 export default function ProjectDetailModal({
   project,
@@ -18,6 +20,8 @@ export default function ProjectDetailModal({
   categoryLabel: Record<string, string>;
   onClose: () => void;
 }) {
+  const [previewLink, setPreviewLink] = useState<ProjectLink | null>(null);
+
   // Close on Escape key
   useEffect(() => {
     if (!project) return;
@@ -36,7 +40,13 @@ export default function ProjectDetailModal({
     return () => { document.body.style.overflow = ""; };
   }, [project]);
 
+  // Clear any open PDF preview once the project modal itself closes
+  useEffect(() => {
+    if (!project) setPreviewLink(null);
+  }, [project]);
+
   return (
+    <>
     <AnimatePresence>
       {project && (
         <motion.div
@@ -122,17 +132,13 @@ export default function ProjectDetailModal({
                 </div>
 
                 {/* CTA */}
-                {project.link && project.link !== "#" && (
-                  <div>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`card-surface inline-flex items-center gap-2 cartoon-border ${project.color_class} ${project.text_color_class} font-body font-semibold text-sm px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform`}
-                    >
-                      <ExternalLink size={14} />
-                      View Live Project
-                    </a>
+                {project.links.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    <ProjectLinks
+                      links={project.links}
+                      onPreviewPdf={setPreviewLink}
+                      linkClassName={`card-surface inline-flex items-center gap-2 cartoon-border ${project.color_class} ${project.text_color_class} font-body font-semibold text-sm px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform`}
+                    />
                   </div>
                 )}
 
@@ -142,5 +148,7 @@ export default function ProjectDetailModal({
         </motion.div>
       )}
     </AnimatePresence>
+    <PdfPreviewModal link={previewLink} onClose={() => setPreviewLink(null)} />
+    </>
   );
 }

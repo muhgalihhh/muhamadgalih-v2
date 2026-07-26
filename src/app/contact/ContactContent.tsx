@@ -60,14 +60,14 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText
-            text="LET'S CREATE SOMETHING COOL"
+            text="GOT SOMETHING IN MIND?"
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] leading-tight mb-6 max-w-3xl"
             staggerDelay={0.03}
           />
           <ScrollReveal variant="fade-up" delay={0.25}>
             <div className="w-20 h-1.5 bg-ink rounded-full mb-6" />
             <p className="font-body text-ink/70 text-lg max-w-xl">
-              Have a project in mind, want to collaborate, or just say hi? My inbox is always open.
+              Full product, a quick illustration, or just a question about tech, all of it lands in the same inbox and I read every message myself.
             </p>
           </ScrollReveal>
         </div>

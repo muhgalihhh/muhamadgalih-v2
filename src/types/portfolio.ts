@@ -31,6 +31,24 @@ export interface Experience {
   color_class: string;
   text_color_class: string;
   points: string[];
+  images: string[];
+  order_index: number;
+  created_at: string;
+}
+
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  institution_logo_url: string | null;
+  institution_logo_emoji: string;
+  period: string;
+  start_date: string | null;
+  end_date: string | null;
+  gpa: string | null;
+  color_class: string;
+  text_color_class: string;
+  points: string[];
   order_index: number;
   created_at: string;
 }
@@ -52,6 +70,11 @@ export interface Organization {
   created_at: string;
 }
 
+export interface ProjectLink {
+  label: string;
+  url: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -63,6 +86,7 @@ export interface Project {
   text_color_class: string;
   image_urls: string[];
   link: string;
+  links: ProjectLink[];
   project_date: string | null;
   order_index: number;
   published: boolean;
@@ -84,7 +108,7 @@ export interface GalleryItem {
   title: string;
   description: string;
   category: string;
-  image_url: string;
+  image_urls: string[];
   sort_order: number;
   published: boolean;
   created_at: string;

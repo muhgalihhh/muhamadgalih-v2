@@ -111,6 +111,8 @@ export async function createExperience(formData: FormData) {
   const supabase = await createClient();
   const pointsRaw = formData.get("points") as string;
   const points = pointsRaw.split("\n").map((p) => p.trim()).filter(Boolean);
+  const imagesRaw = (formData.get("images") as string) ?? "";
+  const images = imagesRaw.split("\n").map((u) => u.trim()).filter(Boolean);
   const { error } = await supabase.from("experiences").insert({
     role:                formData.get("role") as string,
     company:             formData.get("company") as string,
@@ -122,6 +124,7 @@ export async function createExperience(formData: FormData) {
     color_class:         formData.get("color_class") as string,
     text_color_class:    formData.get("text_color_class") as string,
     points,
+    images,
   });
   revalidatePath("/admin/(dashboard)/experience");
   revalidatePath("/about");
@@ -134,8 +137,10 @@ export async function updateExperience(id: string, formData: FormData) {
   const pointsRaw = formData.get("points") as string;
   const points = pointsRaw.split("\n").map((p) => p.trim()).filter(Boolean);
   const newLogo = (formData.get("company_logo_url") as string) || null;
+  const imagesRaw = (formData.get("images") as string) ?? "";
+  const images = imagesRaw.split("\n").map((u) => u.trim()).filter(Boolean);
 
-  const { data: old } = await supabase.from("experiences").select("company_logo_url").eq("id", id).single();
+  const { data: old } = await supabase.from("experiences").select("company_logo_url, images").eq("id", id).single();
 
   const { error } = await supabase.from("experiences").update({
     role:                formData.get("role") as string,
@@ -148,10 +153,14 @@ export async function updateExperience(id: string, formData: FormData) {
     color_class:         formData.get("color_class") as string,
     text_color_class:    formData.get("text_color_class") as string,
     points,
+    images,
   }).eq("id", id);
 
-  if (!error && old?.company_logo_url && old.company_logo_url !== newLogo) {
-    await deleteStorageFiles([old.company_logo_url]);
+  if (!error && old) {
+    const removed: (string | null)[] = [];
+    if (old.company_logo_url && old.company_logo_url !== newLogo) removed.push(old.company_logo_url);
+    removed.push(...((old.images ?? []) as string[]).filter((u) => !images.includes(u)));
+    await deleteStorageFiles(removed);
   }
   revalidatePath("/admin/(dashboard)/experience");
   revalidatePath("/about");
@@ -161,10 +170,85 @@ export async function updateExperience(id: string, formData: FormData) {
 
 export async function deleteExperience(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("experiences").select("company_logo_url").eq("id", id).single();
+  const { data: old } = await supabase.from("experiences").select("company_logo_url, images").eq("id", id).single();
   await supabase.from("experiences").delete().eq("id", id);
-  if (old) await deleteStorageFiles([old.company_logo_url]);
+  if (old) await deleteStorageFiles([old.company_logo_url, ...((old.images ?? []) as string[])]);
   revalidatePath("/admin/(dashboard)/experience");
+  revalidatePath("/about");
+}
+
+// ── Education ────────────────────────────────────────────────
+export async function getAdminEducation() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("education")
+    .select("*")
+    .order("end_date", { ascending: false, nullsFirst: true })
+    .order("start_date", { ascending: false, nullsFirst: false })
+    .order("order_index");
+  return data ?? [];
+}
+
+export async function createEducation(formData: FormData) {
+  const supabase = await createClient();
+  const pointsRaw = formData.get("points") as string;
+  const points = pointsRaw.split("\n").map((p) => p.trim()).filter(Boolean);
+  const { error } = await supabase.from("education").insert({
+    institution:             formData.get("institution") as string,
+    degree:                  formData.get("degree") as string,
+    institution_logo_emoji:  (formData.get("institution_logo_emoji") as string) || "",
+    institution_logo_url:    (formData.get("institution_logo_url") as string) || null,
+    period:                  formData.get("period") as string,
+    start_date:              (formData.get("start_date") as string) || null,
+    end_date:                (formData.get("end_date") as string) || null,
+    gpa:                     (formData.get("gpa") as string) || null,
+    color_class:             formData.get("color_class") as string,
+    text_color_class:        formData.get("text_color_class") as string,
+    points,
+  });
+  revalidatePath("/admin/(dashboard)/education");
+  revalidatePath("/about");
+  if (error) return { error: error.message };
+  return { ok: true };
+}
+
+export async function updateEducation(id: string, formData: FormData) {
+  const supabase = await createClient();
+  const pointsRaw = formData.get("points") as string;
+  const points = pointsRaw.split("\n").map((p) => p.trim()).filter(Boolean);
+  const newLogo = (formData.get("institution_logo_url") as string) || null;
+
+  const { data: old } = await supabase.from("education").select("institution_logo_url").eq("id", id).single();
+
+  const { error } = await supabase.from("education").update({
+    institution:             formData.get("institution") as string,
+    degree:                  formData.get("degree") as string,
+    institution_logo_emoji:  (formData.get("institution_logo_emoji") as string) || "",
+    institution_logo_url:    newLogo,
+    period:                  formData.get("period") as string,
+    start_date:              (formData.get("start_date") as string) || null,
+    end_date:                (formData.get("end_date") as string) || null,
+    gpa:                     (formData.get("gpa") as string) || null,
+    color_class:             formData.get("color_class") as string,
+    text_color_class:        formData.get("text_color_class") as string,
+    points,
+  }).eq("id", id);
+
+  if (!error && old?.institution_logo_url && old.institution_logo_url !== newLogo) {
+    await deleteStorageFiles([old.institution_logo_url]);
+  }
+  revalidatePath("/admin/(dashboard)/education");
+  revalidatePath("/about");
+  if (error) return { error: error.message };
+  return { ok: true };
+}
+
+export async function deleteEducation(id: string) {
+  const supabase = await createClient();
+  const { data: old } = await supabase.from("education").select("institution_logo_url").eq("id", id).single();
+  await supabase.from("education").delete().eq("id", id);
+  if (old) await deleteStorageFiles([old.institution_logo_url]);
+  revalidatePath("/admin/(dashboard)/education");
   revalidatePath("/about");
 }
 
@@ -249,6 +333,18 @@ export async function deleteOrganization(id: string) {
 }
 
 // ── Projects ─────────────────────────────────────────────────
+function parseProjectLinks(raw: string): { label: string; url: string }[] {
+  return raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [label, url] = line.split("|").map((s) => s.trim());
+      return { label: label || "Link", url: url || "" };
+    })
+    .filter((l) => l.url);
+}
+
 export async function getAdminProjects() {
   const supabase = await createClient();
   const { data } = await supabase
@@ -272,7 +368,7 @@ export async function createProject(formData: FormData) {
     emoji:            formData.get("emoji") as string,
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
-    link:             formData.get("link") as string,
+    links:            parseProjectLinks(formData.get("links") as string),
     project_date:     (formData.get("project_date") as string) || null,
     published:        formData.get("published") === "true",
     tech_stack,
@@ -301,7 +397,7 @@ export async function updateProject(id: string, formData: FormData) {
     emoji:            newEmoji,
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
-    link:             formData.get("link") as string,
+    links:            parseProjectLinks(formData.get("links") as string),
     project_date:     (formData.get("project_date") as string) || null,
     published:        formData.get("published") === "true",
     tech_stack,
@@ -428,7 +524,7 @@ export async function updateProfile(id: string, formData: FormData) {
     avatar_url:         newAvatar,
     illustration_url:   newIllustration,
     cv_url:             newCv,
-    hero_roles:         hero_roles.length > 0 ? hero_roles : ["Full-Stack Engineering", "UI/UX Design", "Illustration & Art"],
+    hero_roles:         hero_roles.length > 0 ? hero_roles : ["Full-Stack Engineering", "UI/UX Design", "Illustration & Art", "Data Science & Analysis"],
     years_experience:   parseInt((formData.get("years_experience") as string) || "0", 10),
     clients_count:      parseInt((formData.get("clients_count") as string) || "0", 10),
     coffee_label:       (formData.get("coffee_label") as string) || "∞",
@@ -462,7 +558,7 @@ export async function createGalleryItem(formData: FormData) {
     title:       (formData.get("title") as string) || "",
     description: (formData.get("description") as string) || "",
     category:    (formData.get("category") as string) || "illustration",
-    image_url:   formData.get("image_url") as string,
+    image_urls:  (formData.get("image_urls") as string).split("\n").map((u) => u.trim()).filter(Boolean),
     sort_order:  parseInt((formData.get("sort_order") as string) || "0", 10),
     published:   formData.get("published") === "true",
   });
@@ -474,21 +570,22 @@ export async function createGalleryItem(formData: FormData) {
 
 export async function updateGalleryItem(id: string, formData: FormData) {
   const supabase = await createClient();
-  const newImg = formData.get("image_url") as string;
+  const newImageUrls = (formData.get("image_urls") as string).split("\n").map((u) => u.trim()).filter(Boolean);
 
-  const { data: old } = await supabase.from("gallery_items").select("image_url").eq("id", id).single();
+  const { data: old } = await supabase.from("gallery_items").select("image_urls").eq("id", id).single();
 
   const { error } = await supabase.from("gallery_items").update({
     title:       (formData.get("title") as string) || "",
     description: (formData.get("description") as string) || "",
     category:    (formData.get("category") as string) || "illustration",
-    image_url:   newImg,
+    image_urls:  newImageUrls,
     sort_order:  parseInt((formData.get("sort_order") as string) || "0", 10),
     published:   formData.get("published") === "true",
   }).eq("id", id);
 
-  if (!error && old?.image_url && old.image_url !== newImg) {
-    await deleteStorageFiles([old.image_url]);
+  if (!error && old?.image_urls) {
+    const removed = (old.image_urls as string[]).filter((u) => !newImageUrls.includes(u));
+    if (removed.length) await deleteStorageFiles(removed);
   }
   revalidatePath("/admin/(dashboard)/gallery");
   revalidatePath("/works");
@@ -498,9 +595,9 @@ export async function updateGalleryItem(id: string, formData: FormData) {
 
 export async function deleteGalleryItem(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("gallery_items").select("image_url").eq("id", id).single();
+  const { data: old } = await supabase.from("gallery_items").select("image_urls").eq("id", id).single();
   await supabase.from("gallery_items").delete().eq("id", id);
-  if (old) await deleteStorageFiles([old.image_url]);
+  if (old?.image_urls?.length) await deleteStorageFiles(old.image_urls as string[]);
   revalidatePath("/admin/(dashboard)/gallery");
   revalidatePath("/works");
 }
@@ -519,6 +616,17 @@ export async function createCategory(formData: FormData) {
   const { data: last } = await supabase.from("project_categories").select("order_index").order("order_index", { ascending: false }).limit(1).single();
   const order_index = last ? (last.order_index as number) + 1 : 0;
   const { error } = await supabase.from("project_categories").insert({ slug, label, order_index });
+  revalidatePath("/admin/(dashboard)/works");
+  revalidatePath("/works");
+  if (error) return { error: error.message };
+  return { ok: true };
+}
+
+export async function updateCategory(id: string, label: string) {
+  const supabase = await createClient();
+  const trimmed = label.trim();
+  if (!trimmed) return { error: "Label can't be empty" };
+  const { error } = await supabase.from("project_categories").update({ label: trimmed }).eq("id", id);
   revalidatePath("/admin/(dashboard)/works");
   revalidatePath("/works");
   if (error) return { error: error.message };

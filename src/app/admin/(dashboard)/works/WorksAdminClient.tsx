@@ -2,12 +2,12 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { createProject, updateProject, deleteProject, uploadFile, createCategory, deleteCategory } from "@/app/actions/admin";
+import { createProject, updateProject, deleteProject, uploadFile, createCategory, updateCategory, deleteCategory } from "@/app/actions/admin";
 import ColorPicker from "@/components/admin/ColorPicker";
 import IconPicker from "@/components/admin/IconPicker";
 import SkillIcon from "@/components/ui/SkillIcon";
 import type { Project, Skill, ProjectCategoryRow } from "@/types/portfolio";
-import { Plus, Pencil, Trash2, X, Upload, Loader2, FolderOpen, ChevronDown, Tag } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Upload, Loader2, FolderOpen, ChevronDown, Tag, Check } from "lucide-react";
 
 type FormMode = "add" | "edit" | null;
 
@@ -78,6 +78,23 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
   const [icon, setIcon]                 = useState(defaultValues?.emoji ?? "");
   const [uploading, setUploading]       = useState(false);
   const [iconUploading, setIconUploading] = useState(false);
+  const [links, setLinks] = useState(
+    defaultValues?.links?.map((l) => `${l.label} | ${l.url}`).join("\n") ?? ""
+  );
+  const [pdfUploading, setPdfUploading] = useState(false);
+
+  const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setPdfUploading(true);
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("folder", "documents");
+    const res = await uploadFile(fd);
+    if (res.url) setLinks((prev) => (prev ? prev + "\n" : "") + `Paper | ${res.url}`);
+    setPdfUploading(false);
+    e.target.value = "";
+  };
 
   const handleIconUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -116,6 +133,7 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
         fd.set("image_urls", imageUrls.join("\n"));
         fd.set("tech_stack", techStack.join(","));
         fd.set("emoji", icon);
+        fd.set("links", links);
         onSubmit(fd);
       }}
       className="grid grid-cols-2 gap-5"
@@ -160,8 +178,19 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
         <TechStackPicker skills={skills} selected={techStack} onChange={setTechStack} />
       </Field>
 
-      <Field label="Project Link">
-        <input name="link" defaultValue={defaultValues?.link ?? "#"} className={inputCls} />
+      <Field label="Links — one per line: Label | URL" wide>
+        <textarea
+          value={links}
+          onChange={(e) => setLinks(e.target.value)}
+          rows={3}
+          placeholder={"Live Demo | https://myapp.com\nGitHub | https://github.com/user/repo\nPaper | https://arxiv.org/abs/..."}
+          className={`${inputCls} resize-none`}
+        />
+        <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-3.5 py-2 text-sm text-slate-600 transition-colors w-fit mt-2">
+          {pdfUploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
+          {pdfUploading ? "Uploading..." : "Upload PDF (adds a line below)"}
+          <input type="file" accept="application/pdf" className="hidden" onChange={handlePdfUpload} disabled={pdfUploading} />
+        </label>
       </Field>
 
       <Field label="Project Date — untuk urutan">
@@ -222,6 +251,8 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
   const [msg, setMsg] = useState("");
   const [catInput, setCatInput] = useState("");
   const [catMsg, setCatMsg]     = useState("");
+  const [editingCatId, setEditingCatId] = useState<string | null>(null);
+  const [editingLabel, setEditingLabel] = useState("");
 
   const router = useRouter();
   const reload   = () => { close(); router.refresh(); };
@@ -242,6 +273,23 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
   const handleDelete = (id: string) => {
     if (!confirm("Delete this project?")) return;
     startTransition(async () => { await deleteProject(id); reload(); });
+  };
+
+  const startEditCategory = (cat: ProjectCategoryRow) => {
+    setEditingCatId(cat.id);
+    setEditingLabel(cat.label);
+  };
+  const cancelEditCategory = () => {
+    setEditingCatId(null);
+    setEditingLabel("");
+  };
+  const saveEditCategory = (id: string) => {
+    if (!editingLabel.trim()) return;
+    startTransition(async () => {
+      const res = await updateCategory(id, editingLabel.trim());
+      if (res?.error) setCatMsg(res.error);
+      else { setCatMsg(""); cancelEditCategory(); router.refresh(); }
+    });
   };
 
   return (
@@ -266,24 +314,53 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
           <span className="ml-auto text-xs text-slate-400">{initialCategories.length} total</span>
         </div>
         <div className="p-4 flex flex-wrap gap-2 items-center">
-          {initialCategories.map((cat) => (
-            <div key={cat.id} className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-sm text-slate-700">
-              <span className="font-semibold">{cat.label}</span>
-              <span className="text-slate-400 text-xs ml-1">/{cat.slug}</span>
-              <button
-                onClick={() => {
-                  if (!confirm(`Delete category "${cat.label}"? Projects with this category won't be filtered.`)) return;
-                  startTransition(async () => {
-                    const res = await deleteCategory(cat.id);
-                    if (res?.error) setCatMsg(res.error); else { setCatMsg(""); router.refresh(); }
-                  });
-                }}
-                className="ml-1.5 text-slate-300 hover:text-red-400 transition-colors leading-none"
-              >
-                <X size={11} />
-              </button>
-            </div>
-          ))}
+          {initialCategories.map((cat) =>
+            editingCatId === cat.id ? (
+              <div key={cat.id} className="flex items-center gap-1 bg-white border border-violet/40 rounded-xl px-2 py-1 text-sm">
+                <input
+                  autoFocus
+                  value={editingLabel}
+                  onChange={(e) => setEditingLabel(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") saveEditCategory(cat.id);
+                    if (e.key === "Escape") cancelEditCategory();
+                  }}
+                  className="border border-slate-200 rounded-lg px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white w-28"
+                />
+                <button onClick={() => saveEditCategory(cat.id)} className="text-slate-400 hover:text-emerald-500 transition-colors leading-none p-0.5" title="Save">
+                  <Check size={13} />
+                </button>
+                <button onClick={cancelEditCategory} className="text-slate-300 hover:text-red-400 transition-colors leading-none p-0.5" title="Cancel">
+                  <X size={13} />
+                </button>
+              </div>
+            ) : (
+              <div key={cat.id} className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-sm text-slate-700">
+                <span className="font-semibold">{cat.label}</span>
+                <span className="text-slate-400 text-xs ml-1">/{cat.slug}</span>
+                <button
+                  onClick={() => startEditCategory(cat)}
+                  className="ml-1.5 text-slate-300 hover:text-violet transition-colors leading-none"
+                  title="Rename"
+                >
+                  <Pencil size={11} />
+                </button>
+                <button
+                  onClick={() => {
+                    if (!confirm(`Delete category "${cat.label}"? Projects with this category won't be filtered.`)) return;
+                    startTransition(async () => {
+                      const res = await deleteCategory(cat.id);
+                      if (res?.error) setCatMsg(res.error); else { setCatMsg(""); router.refresh(); }
+                    });
+                  }}
+                  className="text-slate-300 hover:text-red-400 transition-colors leading-none"
+                  title="Delete"
+                >
+                  <X size={11} />
+                </button>
+              </div>
+            )
+          )}
 
           {/* Add new */}
           <form

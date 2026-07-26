@@ -77,25 +77,30 @@ function ItemForm({
   onUploadError: (msg: string) => void;
   isPending: boolean;
 }) {
-  const [imageUrl, setImageUrl]   = useState(defaultValues?.image_url ?? "");
+  const [imageUrls, setImageUrls] = useState<string[]>(defaultValues?.image_urls ?? []);
   const [uploading, setUploading] = useState(false);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
     setUploading(true);
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("folder", "gallery");
-    const res = await uploadFile(fd);
-    if (res.url) {
-      setImageUrl(res.url);
-    } else {
-      onUploadError(res.error ?? "Upload gagal. Coba lagi.");
-    }
+    const results = await Promise.all(
+      files.map((file) => {
+        const fd = new FormData();
+        fd.append("file", file);
+        fd.append("folder", "gallery");
+        return uploadFile(fd);
+      })
+    );
+    const newUrls = results.map((r) => r.url).filter((u): u is string => !!u);
+    const failed = results.filter((r) => !r.url);
+    if (newUrls.length) setImageUrls((prev) => [...prev, ...newUrls]);
+    if (failed.length) onUploadError(failed[0].error ?? "Upload gagal. Coba lagi.");
     setUploading(false);
     e.target.value = "";
   };
+
+  const removeImage = (url: string) => setImageUrls((prev) => prev.filter((u) => u !== url));
 
   return (
     <form
@@ -103,40 +108,45 @@ function ItemForm({
       onSubmit={(e) => {
         e.preventDefault();
         const fd = new FormData(e.currentTarget);
-        fd.set("image_url", imageUrl);
+        fd.set("image_urls", imageUrls.join("\n"));
         onSubmit(fd);
       }}
       className="grid grid-cols-2 gap-5"
     >
-      <Field label="Image *">
+      <Field label="Images * — collage kalau lebih dari satu">
         <div className="flex flex-col gap-2">
           <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
             {uploading
               ? <Loader2 size={13} className="animate-spin text-violet" />
               : <Upload size={13} className="text-slate-400" />}
-            {uploading ? "Uploading..." : "Choose Image"}
+            {uploading ? "Uploading..." : "Choose Images"}
             <input
               type="file"
               accept="image/*"
+              multiple
               className="hidden"
               onChange={handleImageUpload}
               disabled={uploading}
             />
           </label>
-          {imageUrl && (
-            <div className="relative w-28 h-20 rounded-xl overflow-hidden border border-slate-200">
-              <img src={imageUrl} alt="" className="w-full h-full object-cover" />
-              <button
-                type="button"
-                onClick={() => setImageUrl("")}
-                className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] flex items-center justify-center"
-              >
-                <X size={9} />
-              </button>
+          {imageUrls.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {imageUrls.map((url) => (
+                <div key={url} className="relative w-28 h-20 rounded-xl overflow-hidden border border-slate-200">
+                  <img src={url} alt="" className="w-full h-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(url)}
+                    className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] flex items-center justify-center"
+                  >
+                    <X size={9} />
+                  </button>
+                </div>
+              ))}
             </div>
           )}
-          {!imageUrl && !uploading && (
-            <p className="text-[11px] text-red-400">Image wajib diisi.</p>
+          {imageUrls.length === 0 && !uploading && (
+            <p className="text-[11px] text-red-400">Minimal 1 gambar wajib diisi.</p>
           )}
         </div>
       </Field>
@@ -202,7 +212,7 @@ function ItemForm({
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
         <button
           type="submit"
-          disabled={isPending || uploading || !imageUrl}
+          disabled={isPending || uploading || imageUrls.length === 0}
           className="bg-violet hover:brightness-90 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors"
         >
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add to Gallery"}
@@ -274,7 +284,7 @@ export default function GalleryAdminClient({ initialItems }: { initialItems: Gal
       const res = await uploadFile(uploadFd);
       if (res.url) {
         const itemFd = new FormData();
-        itemFd.set("image_url", res.url);
+        itemFd.set("image_urls", res.url);
         itemFd.set("title", file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "));
         itemFd.set("description", "");
         itemFd.set("category", batchCategory);
@@ -417,11 +427,18 @@ export default function GalleryAdminClient({ initialItems }: { initialItems: Gal
               key={item.id}
               className="break-inside-avoid mb-3 relative group rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50"
             >
-              <img
-                src={item.image_url}
-                alt={item.title || "Gallery item"}
-                className="w-full h-auto block"
-              />
+              <div className="relative">
+                <img
+                  src={item.image_urls[0]}
+                  alt={item.title || "Gallery item"}
+                  className="w-full h-auto block"
+                />
+                {item.image_urls.length > 1 && (
+                  <span className="absolute top-2 right-2 flex items-center gap-1 bg-black/60 text-white text-[10px] font-semibold px-2 py-1 rounded-full">
+                    <Images size={11} /> {item.image_urls.length}
+                  </span>
+                )}
+              </div>
               <div className="p-3 bg-white">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">

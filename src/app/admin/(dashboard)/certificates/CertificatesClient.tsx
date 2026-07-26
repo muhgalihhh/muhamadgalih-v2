@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Award, Upload, Loader2, Plus, Pencil, Trash2, X, ExternalLink } from "lucide-react";
+import { Award, Upload, Loader2, Plus, Pencil, Trash2, X, ExternalLink, FileText } from "lucide-react";
 import { createCertificate, updateCertificate, deleteCertificate, uploadFile } from "@/app/actions/admin";
 import type { Certificate } from "@/types/portfolio";
 
@@ -54,20 +54,26 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
         <input name="credential_url" type="url" defaultValue={defaultValues?.credential_url ?? ""} placeholder="https://..." className={inputCls} />
       </Field>
 
-      <Field label="Certificate Image" wide>
+      <Field label="Certificate Image or PDF" wide>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
             {uploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
-            {uploading ? "Uploading..." : "Upload image"}
-            <input type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
+            {uploading ? "Uploading..." : "Upload image or PDF"}
+            <input type="file" accept="image/*,application/pdf" onChange={handleUpload} className="hidden" disabled={uploading} />
           </label>
           {imageUrl && (
             <div className="relative shrink-0">
-              <img src={imageUrl} alt="preview" className="w-16 h-10 object-cover rounded-lg border border-slate-200" />
+              {imageUrl.toLowerCase().endsWith(".pdf") ? (
+                <div className="w-16 h-10 rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center">
+                  <FileText size={16} className="text-slate-400" />
+                </div>
+              ) : (
+                <img src={imageUrl} alt="preview" className="w-16 h-10 object-cover rounded-lg border border-slate-200" />
+              )}
               <button
                 type="button"
                 onClick={() => setImageUrl("")}
-                title="Remove image"
+                title="Remove file"
                 className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow"
               >
                 <X size={11} />
@@ -75,7 +81,7 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
             </div>
           )}
         </div>
-        <input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Or paste image URL" className={`${inputCls} mt-1`} />
+        <input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Or paste image/PDF URL" className={`${inputCls} mt-1`} />
       </Field>
 
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
@@ -157,7 +163,11 @@ export default function CertificatesClient({ initialCertificates }: { initialCer
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {initialCertificates.map((cert) => (
             <div key={cert.id} className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group flex flex-col ${editing?.id === cert.id ? "ring-2 ring-violet ring-offset-1" : ""}`}>
-              {cert.image_url ? (
+              {cert.image_url && cert.image_url.toLowerCase().endsWith(".pdf") ? (
+                <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-violet/10 flex items-center justify-center">
+                  <FileText size={40} className="text-violet/40" strokeWidth={1} />
+                </div>
+              ) : cert.image_url ? (
                 <img src={cert.image_url} alt={cert.title} className="w-full h-32 object-cover" />
               ) : (
                 <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-violet/10 flex items-center justify-center">

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Images } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import ProjectCarousel from "@/components/works/ProjectCarousel";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
+import GalleryDetailModal from "@/components/works/GalleryDetailModal";
 import SpotifyCard from "@/components/ui/SpotifyCard";
-import type { Project, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
+import type { Project, GalleryItem, ProjectCategoryRow, ProjectLink } from "@/types/portfolio";
 
 type Category = string;
 
@@ -21,7 +22,7 @@ const staticProjects = [
     color_class: "bg-violet", text_color_class: "text-cream",
     tech_stack: ["Next.js", "TypeScript", "Supabase", "Tailwind"],
     image_urls: [],
-    emoji: "⚡", link: "#",
+    emoji: "⚡", link: "#", links: [],
   },
   {
     id: "s2",
@@ -31,7 +32,7 @@ const staticProjects = [
     color_class: "bg-coral", text_color_class: "text-cream",
     tech_stack: ["Figma", "Illustrator"],
     image_urls: [],
-    emoji: "🎨", link: "#",
+    emoji: "🎨", link: "#", links: [],
   },
   {
     id: "s3",
@@ -41,7 +42,7 @@ const staticProjects = [
     color_class: "bg-sky", text_color_class: "text-ink",
     tech_stack: ["React", "Recharts", "Figma"],
     image_urls: [],
-    emoji: "📊", link: "#",
+    emoji: "📊", link: "#", links: [],
   },
   {
     id: "s4",
@@ -51,7 +52,7 @@ const staticProjects = [
     color_class: "bg-yellow", text_color_class: "text-ink",
     tech_stack: ["Procreate", "Illustrator", "Photoshop"],
     image_urls: [],
-    emoji: "✏️", link: "#",
+    emoji: "✏️", link: "#", links: [],
   },
   {
     id: "s5",
@@ -61,7 +62,7 @@ const staticProjects = [
     color_class: "bg-mint", text_color_class: "text-ink",
     tech_stack: ["Figma", "ProtoPie"],
     image_urls: [],
-    emoji: "📱", link: "#",
+    emoji: "📱", link: "#", links: [],
   },
   {
     id: "s6",
@@ -71,7 +72,7 @@ const staticProjects = [
     color_class: "bg-pink", text_color_class: "text-ink",
     tech_stack: ["Node.js", "Express", "PostgreSQL", "Redis"],
     image_urls: [],
-    emoji: "🔧", link: "#",
+    emoji: "🔧", link: "#", links: [],
   },
 ];
 
@@ -101,6 +102,16 @@ const bentoSpans = [
 ];
 const bentoSpan = (i: number) => bentoSpans[i % bentoSpans.length];
 
+// Same asymmetric rhythm as the homepage's "Selected Works" bento — every
+// card stays tall (row-span-2) so the preview image reads clearly; only the
+// column width varies.
+const projectSizeMap = ["hero", "side", "half", "half", "side", "hero"];
+const projectSizeClasses: Record<string, string> = {
+  hero: "md:col-span-4 md:row-span-2",
+  half: "md:col-span-3 md:row-span-2",
+  side: "md:col-span-2 md:row-span-2",
+};
+
 const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
   { id: "1", slug: "software",     label: "Software",     order_index: 0, created_at: "" },
   { id: "2", slug: "uiux",         label: "UI/UX",        order_index: 1, created_at: "" },
@@ -117,7 +128,7 @@ type ProjectRow = {
   tech_stack: string[];
   image_urls: string[];
   emoji: string;
-  link: string;
+  links: ProjectLink[];
 };
 
 function toRow(p: Project): ProjectRow {
@@ -131,14 +142,14 @@ function toRow(p: Project): ProjectRow {
     tech_stack: p.tech_stack,
     image_urls: p.image_urls,
     emoji: p.emoji,
-    link: p.link,
+    links: p.links,
   };
 }
 
 export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp }: { dbProjects?: Project[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[] }) {
   const [active, setActive] = useState<Category>("all");
-  const [openId, setOpenId] = useState<string | null>(null);
   const [modalProject, setModalProject] = useState<ProjectRow | null>(null);
+  const [activeGalleryItem, setActiveGalleryItem] = useState<GalleryItem | null>(null);
 
   const categories = categoriesProp?.length ? categoriesProp : FALLBACK_CATEGORIES;
   const filters = [
@@ -152,11 +163,6 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
     : staticProjects;
 
   const filtered = projects.filter((p) => active === "all" || p.category === active);
-
-  const handleFilter = (val: Category) => {
-    setActive(val);
-    setOpenId(null);
-  };
 
   return (
     <main className="md:pt-20">
@@ -180,7 +186,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
         </div>
       </section>
 
-      {/* ── Projects accordion ── */}
+      {/* ── Projects bento grid ── */}
       <section className="pt-6 md:pt-8 pb-16 md:pb-20 bg-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
@@ -189,11 +195,11 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           {/* Filter tabs */}
           <ScrollReveal variant="fade-up" delay={0.1}>
-            <div className="flex gap-3 mb-10 overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
+            <div className="flex gap-3 mb-3 overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
               {filters.map((f) => (
                 <button
                   key={f.value}
-                  onClick={() => handleFilter(f.value)}
+                  onClick={() => setActive(f.value)}
                   className={`font-body font-semibold px-5 py-2 rounded-full transition-all cartoon-border text-sm whitespace-nowrap shrink-0 ${
                     active === f.value ? "bg-navy text-cream" : "bg-transparent text-ink hover:bg-yellow"
                   }`}
@@ -202,123 +208,91 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                 </button>
               ))}
             </div>
+            <p className="font-body text-muted text-xs md:text-sm mb-8 md:mb-10">
+              {filtered.length} {filtered.length === 1 ? "project" : "projects"}
+              {active !== "all" ? ` in ${categoryLabel[active] ?? active}` : ""}
+            </p>
           </ScrollReveal>
 
-          {/* Accordion list */}
-          <div className="flex flex-col gap-3">
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:gap-4 [grid-auto-rows:170px] md:[grid-auto-rows:175px]">
             <AnimatePresence mode="popLayout">
               {filtered.map((project, i) => {
-                const isOpen = openId === project.id;
+                const size = projectSizeMap[i % projectSizeMap.length];
+                const preview = project.image_urls?.[0];
                 return (
                   <motion.div
                     key={project.id}
                     layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                    className="cartoon-border rounded-2xl overflow-hidden"
+                    initial={{ opacity: 0, scale: 0.88 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.88 }}
+                    transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    className={`card-surface col-span-1 row-span-2 ${projectSizeClasses[size] ?? ""} ${project.color_class} cartoon-border rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform min-h-[320px]`}
+                    onClick={() => setModalProject(project)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setModalProject(project);
+                      }
+                    }}
                   >
-                    {/* Card header */}
-                    <button
-                      onClick={() => setOpenId(isOpen ? null : project.id)}
-                      className={`card-surface w-full flex items-center gap-4 p-4 md:p-5 text-left ${project.color_class} ${project.text_color_class} transition-opacity hover:opacity-90`}
-                    >
-                      <span className="text-2xl md:text-3xl shrink-0 select-none flex items-center justify-center w-8 h-8">
-                        {project.emoji ? <SkillIcon icon={project.emoji} className="w-7 h-7" /> : "✦"}
-                      </span>
-
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-display font-extrabold text-base md:text-lg leading-tight truncate">
-                          {project.title}
-                        </h3>
-                        <div className="flex flex-wrap gap-1 mt-1.5 overflow-hidden max-h-6">
-                          {project.tech_stack.map((t) => (
-                            <span
-                              key={t}
-                              className="font-body text-[10px] md:text-xs font-semibold bg-black/15 px-2 py-0.5 rounded-full"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
+                    {/* Full-bleed preview image */}
+                    {preview ? (
+                      <img
+                        src={preview}
+                        alt={`${project.title} preview`}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className={`absolute inset-0 flex items-center justify-center ${project.text_color_class}`}>
+                        {project.emoji ? <SkillIcon icon={project.emoji} className="w-20 h-20 md:w-24 md:h-24 opacity-90" /> : <span className="text-6xl">✦</span>}
                       </div>
+                    )}
 
-                      <span className="cartoon-border-sm bg-black/10 font-body text-xs px-2 md:px-3 py-1 rounded-full capitalize shrink-0 hidden sm:block">
+                    {/* Top row: emoji chip (over image) + category badge */}
+                    <div className="absolute top-0 left-0 right-0 z-20 p-4 md:p-5 flex items-start justify-between">
+                      {preview ? (
+                        <span className="cartoon-border-sm bg-cream/90 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center">
+                          {project.emoji ? <SkillIcon icon={project.emoji} className="w-6 h-6" /> : <span className="text-lg">✦</span>}
+                        </span>
+                      ) : <span />}
+                      <span className="cartoon-border-sm bg-black/40 text-cream backdrop-blur-sm font-body text-xs px-3 py-1 rounded-full">
                         {categoryLabel[project.category] ?? project.category}
                       </span>
+                    </div>
 
-                      <motion.span
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="shrink-0 font-display font-bold text-lg leading-none"
-                      >
-                        ↓
-                      </motion.span>
-                    </button>
-
-                    {/* Expanded content */}
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                          className={`card-surface overflow-hidden ${project.color_class}`}
-                        >
-                          <div className={`px-5 pb-5 pt-3 border-t-2 border-black/10 ${project.text_color_class}`}>
-                            {/* Screenshots carousel */}
-                            <ProjectCarousel images={project.image_urls} title={project.title} />
-
-                            <p className="font-body text-sm md:text-base opacity-80 leading-relaxed mb-4">
-                              {project.description}
-                            </p>
-
-                            <div className="flex flex-wrap gap-2 mb-5">
-                              {project.tech_stack.map((t) => (
-                                <span
-                                  key={t}
-                                  className="cartoon-border-sm bg-black/10 font-body font-semibold text-xs px-3 py-1.5 rounded-full"
-                                >
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-
-                            <div className="flex flex-wrap gap-2">
-                              <button
-                                onClick={() => setModalProject(project)}
-                                className="inline-flex items-center gap-2 cartoon-border-sm bg-black/20 font-body font-semibold text-sm px-4 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
-                              >
-                                View details
-                              </button>
-                              {project.link && project.link !== "#" && (
-                                <a
-                                  href={project.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 cartoon-border-sm bg-black/20 font-body font-semibold text-sm px-4 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
-                                >
-                                  Live ↗
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {/* Bottom gradient + text overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-16 md:pt-24 bg-gradient-to-t from-black/95 via-black/75 to-transparent">
+                      <h3 className="font-display font-extrabold text-cream text-lg md:text-2xl leading-tight line-clamp-2">
+                        {project.title}
+                      </h3>
+                      <p className="font-body text-cream/75 text-xs md:text-sm mt-1.5 line-clamp-2 leading-relaxed">
+                        {project.description}
+                      </p>
+                      {/* Tech badges reveal on hover */}
+                      <div className="flex flex-wrap gap-1.5 md:gap-2 mt-0 max-h-0 opacity-0 group-hover:mt-3 group-hover:max-h-24 group-hover:opacity-100 overflow-hidden transition-all duration-300">
+                        {project.tech_stack.map((tech) => (
+                          <span key={tech} className="cartoon-border-sm bg-cream text-ink px-2.5 py-0.5 md:py-1 text-[10px] md:text-xs font-body font-semibold rounded-full">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </motion.div>
                 );
               })}
             </AnimatePresence>
-
-            {filtered.length === 0 && (
-              <div className="text-center py-16 text-muted">
-                <p className="font-body">No projects in this category yet.</p>
-              </div>
-            )}
           </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-16 text-muted">
+              <p className="font-body">No projects in this category yet.</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -379,12 +353,20 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
                   delay={(i % 8) * 0.05}
                   className={`${bentoSpan(i)} min-h-0`}
                 >
-                  <div className="h-full w-full cartoon-border-light rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform">
+                  <div
+                    onClick={() => setActiveGalleryItem(item)}
+                    className="h-full w-full cartoon-border-light rounded-2xl relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform"
+                  >
                     <img
-                      src={item.image_url}
+                      src={item.image_urls[0]}
                       alt={item.title || "Gallery item"}
                       className="w-full h-full object-cover block"
                     />
+                    {item.image_urls.length > 1 && (
+                      <span className="absolute top-3 right-3 z-20 flex items-center gap-1 cartoon-border-sm bg-black/50 text-cream text-xs font-semibold px-2 py-1 rounded-full">
+                        <Images size={12} /> {item.image_urls.length}
+                      </span>
+                    )}
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-end justify-end p-3 gap-0.5">
                       {item.title && (
                         <span className="font-display font-bold text-cream text-sm leading-tight w-full">{item.title}</span>
@@ -435,6 +417,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
         categoryLabel={categoryLabel}
         onClose={() => setModalProject(null)}
       />
+      <GalleryDetailModal item={activeGalleryItem} onClose={() => setActiveGalleryItem(null)} />
     </main>
   );
 }

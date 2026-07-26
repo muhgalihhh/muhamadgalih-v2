@@ -22,7 +22,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Muhamad Galih · MIZARIE",
   description:
-    "Portfolio of Muhamad Galih (MIZARIE): Full-Stack Engineer, UI/UX Designer, and Illustrator based in Indonesia.",
+    "Portfolio of Muhamad Galih (MIZARIE): Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist based in Indonesia.",
   icons: {
     icon: "/icon",
     shortcut: "/icon",

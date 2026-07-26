@@ -14,7 +14,7 @@ import type { Skill } from "@/types/portfolio";
 
 const FALLBACK_ROW1 = [
   "Full-Stack Engineering", "UI/UX Design", "Illustration",
-  "Web Development", "Brand Identity", "Motion Design",
+  "Data Science", "Brand Identity", "Motion Design",
   "React & Next.js", "Figma", "TypeScript",
 ];
 const FALLBACK_ROW2 = [

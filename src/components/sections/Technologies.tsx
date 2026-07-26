@@ -61,7 +61,7 @@ export default function Technologies({ skills }: { skills?: Skill[] }) {
         <ScrollReveal variant="fade-up" delay={0.1}>
           <div className="w-16 h-1.5 bg-mint rounded-full mb-4" />
           <p className="font-body text-muted text-base md:text-lg mb-12 md:mb-16 max-w-xl">
-            The tools and technologies I use to bring ideas to life, from wireframe to production.
+            What's open in my editor and Figma tabs on any given day, from first sketch to shipped code.
           </p>
         </ScrollReveal>
 
