@@ -8,7 +8,7 @@ import type { Certificate } from "@/types/portfolio";
 
 type FormMode = "add" | "edit" | null;
 
-const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
+const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 const Field = ({ label, children, wide }: { label: string; children: React.ReactNode; wide?: boolean }) => (
   <div className={`flex flex-col gap-1.5 ${wide ? "col-span-2" : ""}`}>
     <label className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">{label}</label>
@@ -56,8 +56,8 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
 
       <Field label="Certificate Image" wide>
         <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
-            {uploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+          <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
+            {uploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
             {uploading ? "Uploading..." : "Upload image"}
             <input type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
           </label>
@@ -79,7 +79,7 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
       </Field>
 
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
-        <button type="submit" disabled={isPending || uploading} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
+        <button type="submit" disabled={isPending || uploading} className="bg-violet hover:brightness-90 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add Certificate"}
         </button>
       </div>
@@ -119,11 +119,11 @@ export default function CertificatesClient({ initialCertificates }: { initialCer
       {/* Header */}
       <div className="flex items-center justify-between mb-7">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Certificates</h1>
+          <h1 className="text-xl font-bold text-slate-900 font-display">Certificates</h1>
           <p className="text-slate-400 text-sm mt-0.5">{initialCertificates.length} certificates</p>
         </div>
         {!formMode && (
-          <button onClick={openAdd} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
+          <button onClick={openAdd} className="flex items-center gap-2 bg-violet hover:brightness-90 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
             <Plus size={15} /> Add Certificate
           </button>
         )}
@@ -156,12 +156,12 @@ export default function CertificatesClient({ initialCertificates }: { initialCer
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {initialCertificates.map((cert) => (
-            <div key={cert.id} className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group flex flex-col ${editing?.id === cert.id ? "ring-2 ring-indigo-400 ring-offset-1" : ""}`}>
+            <div key={cert.id} className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group flex flex-col ${editing?.id === cert.id ? "ring-2 ring-violet ring-offset-1" : ""}`}>
               {cert.image_url ? (
                 <img src={cert.image_url} alt={cert.title} className="w-full h-32 object-cover" />
               ) : (
-                <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-indigo-50 flex items-center justify-center">
-                  <Award size={44} className="text-indigo-200" strokeWidth={1} />
+                <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-violet/10 flex items-center justify-center">
+                  <Award size={44} className="text-violet/30" strokeWidth={1} />
                 </div>
               )}
 
@@ -177,12 +177,12 @@ export default function CertificatesClient({ initialCertificates }: { initialCer
                 <div className="flex items-center gap-1 mt-auto pt-3">
                   {cert.credential_url && (
                     <a href={cert.credential_url} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-indigo-600 text-xs font-semibold hover:underline">
+                      className="flex items-center gap-1 text-violet text-xs font-semibold hover:underline">
                       <ExternalLink size={10} /> View
                     </a>
                   )}
                   <div className="ml-auto flex gap-1">
-                    <button onClick={() => openEdit(cert)} className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" title="Edit">
+                    <button onClick={() => openEdit(cert)} className="p-1.5 rounded-lg text-slate-400 hover:text-violet hover:bg-violet/10 transition-colors" title="Edit">
                       <Pencil size={13} />
                     </button>
                     <button onClick={() => handleDelete(cert.id)} className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors" title="Delete">

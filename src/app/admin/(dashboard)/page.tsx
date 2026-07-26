@@ -22,8 +22,8 @@ export default async function AdminDashboard() {
       count: skillsCount ?? 0,
       href: "/admin/skills",
       icon: Wrench,
-      iconBg: "bg-indigo-100",
-      iconColor: "text-indigo-600",
+      iconBg: "bg-violet/10",
+      iconColor: "text-violet",
     },
     {
       label: "Experience",
@@ -63,8 +63,23 @@ export default async function AdminDashboard() {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-        <p className="text-slate-500 text-sm mt-1">Manage your portfolio content</p>
+        <h1 className="font-display text-3xl font-semibold text-slate-900">Hey, Mizarie 👋</h1>
+        <svg
+          className="admin-squiggle mt-1 -mb-1"
+          width="120"
+          height="10"
+          viewBox="0 0 120 10"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M2 6 Q 16 -1, 30 5 T 58 5 T 86 5 T 118 5"
+            stroke="#845EF7"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </svg>
+        <p className="text-slate-500 text-sm mt-2">Manage your portfolio content</p>
       </div>
 
       {/* Stat tiles */}
@@ -101,7 +116,7 @@ export default async function AdminDashboard() {
                 href={action.href}
                 target={"target" in action ? action.target : undefined}
                 rel={"target" in action ? "noopener noreferrer" : undefined}
-                className="flex items-center gap-2 text-sm bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 border border-slate-200 hover:border-indigo-200 px-4 py-2 rounded-xl transition-all font-medium"
+                className="flex items-center gap-2 text-sm bg-slate-50 hover:bg-violet/10 hover:text-violet text-slate-700 border border-slate-200 hover:border-violet/30 px-4 py-2 rounded-xl transition-all font-medium"
               >
                 <Icon size={14} />
                 {action.label}

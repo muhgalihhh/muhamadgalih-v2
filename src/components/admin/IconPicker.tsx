@@ -51,7 +51,7 @@ export default function IconPicker({ value, onChange, placeholder = "Search icon
       {/* Input */}
       <div
         className={`flex items-center gap-2.5 border rounded-xl px-3.5 py-2.5 bg-white cursor-text transition ${
-          open ? "border-indigo-400 ring-2 ring-indigo-500/20" : "border-slate-200"
+          open ? "border-violet ring-2 ring-violet/20" : "border-slate-200"
         }`}
         onClick={() => { setOpen(true); containerRef.current?.querySelector("input")?.focus(); }}
       >
@@ -94,13 +94,13 @@ export default function IconPicker({ value, onChange, placeholder = "Search icon
                   onMouseDown={(e) => { e.preventDefault(); select(entry.key); }}
                   className={`w-full flex items-center gap-3 px-3.5 py-2.5 text-sm text-left transition-colors ${
                     isActive
-                      ? "bg-indigo-600 text-white"
+                      ? "bg-violet text-white"
                       : "text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
                   <span className="flex-1">{entry.label}</span>
-                  {isActive && <span className="text-xs text-indigo-300">✓</span>}
+                  {isActive && <span className="text-xs text-white/70">✓</span>}
                 </button>
               );
             })}

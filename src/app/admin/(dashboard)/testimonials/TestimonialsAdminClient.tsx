@@ -55,7 +55,7 @@ export default function TestimonialsAdminClient({ testimonials: initial }: { tes
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Testimonials</h1>
+          <h1 className="text-2xl font-bold text-slate-900 font-display">Testimonials</h1>
           {pendingCount > 0 && (
             <p className="text-sm text-amber-600 font-medium mt-1">
               {pendingCount} pending review
@@ -69,7 +69,7 @@ export default function TestimonialsAdminClient({ testimonials: initial }: { tes
               onClick={() => setFilter(f)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-colors ${
                 filter === f
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-violet hover:brightness-90 text-white"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
@@ -103,7 +103,7 @@ export default function TestimonialsAdminClient({ testimonials: initial }: { tes
                     className="rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-600 text-sm">
+                  <div className="w-9 h-9 rounded-full bg-violet/10 flex items-center justify-center font-bold text-violet text-sm">
                     {t.author_name.charAt(0).toUpperCase()}
                   </div>
                 )}

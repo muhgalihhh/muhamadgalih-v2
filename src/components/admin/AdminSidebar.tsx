@@ -6,6 +6,7 @@ import { useTransition } from "react";
 import { signOut } from "@/app/actions/admin";
 import {
   LayoutDashboard,
+  TrendingUp,
   Wrench,
   Briefcase,
   FolderOpen,
@@ -21,6 +22,7 @@ import {
 
 const nav = [
   { label: "Overview",      href: "/admin",               icon: LayoutDashboard },
+  { label: "Analytics",     href: "/admin/analytics",     icon: TrendingUp },
   { label: "Skills",        href: "/admin/skills",        icon: Wrench },
   { label: "Experience",    href: "/admin/experience",    icon: Briefcase },
   { label: "Organizations", href: "/admin/organizations", icon: Users },
@@ -49,7 +51,7 @@ export default function AdminSidebar() {
       {/* Logo */}
       <div className="px-5 py-5 border-b border-slate-800">
         <Link href="/" target="_blank" className="flex items-baseline gap-1 group">
-          <span className="font-bold text-xl text-white group-hover:text-indigo-400 transition-colors">MG</span>
+          <span className="font-display font-semibold text-xl text-white group-hover:text-violet transition-colors">MG</span>
           <span className="text-slate-500 text-sm">/ CMS</span>
         </Link>
         <p className="text-slate-600 text-[10px] mt-0.5">Portfolio Admin</p>
@@ -66,10 +68,10 @@ export default function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center gap-3 pr-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 active
-                  ? "bg-indigo-600 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  ? "bg-violet/10 text-white border-l-2 border-violet pl-[10px] shadow-violet/20 shadow-sm"
+                  : "border-l-2 border-transparent pl-3 text-slate-400 hover:text-white hover:bg-slate-800"
               }`}
             >
               <Icon size={15} className="shrink-0" />

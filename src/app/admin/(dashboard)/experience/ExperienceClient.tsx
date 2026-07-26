@@ -11,7 +11,7 @@ import { Plus, Pencil, Trash2, X, Upload, Loader2, Briefcase } from "lucide-reac
 
 type FormMode = "add" | "edit" | null;
 
-const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
+const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 const Field = ({ label, children, wide }: { label: string; children: React.ReactNode; wide?: boolean }) => (
   <div className={`flex flex-col gap-1.5 ${wide ? "col-span-2" : ""}`}>
     <label className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">{label}</label>
@@ -91,8 +91,8 @@ function ExperienceForm({
             </div>
           )}
           <div className="flex flex-col gap-2 flex-1">
-            <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
-              {uploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+            <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
+              {uploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
               {uploading ? "Uploading..." : "Upload logo"}
               <input type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
             </label>
@@ -122,7 +122,7 @@ function ExperienceForm({
       </Field>
 
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
-        <button type="submit" disabled={isPending} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
+        <button type="submit" disabled={isPending} className="bg-violet hover:brightness-90 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add Experience"}
         </button>
       </div>
@@ -162,11 +162,11 @@ export default function ExperienceClient({ initialExperiences }: { initialExperi
       {/* Header */}
       <div className="flex items-center justify-between mb-7">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Work Experience</h1>
+          <h1 className="text-xl font-bold text-slate-900 font-display">Work Experience</h1>
           <p className="text-slate-400 text-sm mt-0.5">{initialExperiences.length} entries</p>
         </div>
         {!formMode && (
-          <button onClick={openAdd} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
+          <button onClick={openAdd} className="flex items-center gap-2 bg-violet hover:brightness-90 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
             <Plus size={15} /> Add Experience
           </button>
         )}
@@ -199,7 +199,7 @@ export default function ExperienceClient({ initialExperiences }: { initialExperi
       ) : (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm divide-y divide-slate-100 overflow-hidden">
           {initialExperiences.map((exp) => (
-            <div key={exp.id} className={`flex items-center gap-4 px-5 py-4 hover:bg-slate-50/60 transition-colors ${editing?.id === exp.id ? "bg-indigo-50/40" : ""}`}>
+            <div key={exp.id} className={`flex items-center gap-4 px-5 py-4 hover:bg-slate-50/60 transition-colors ${editing?.id === exp.id ? "bg-violet/10" : ""}`}>
               {/* Color dot + avatar */}
               <div className={`${exp.color_class} w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border-2 border-black/5 shadow-sm overflow-hidden`}>
                 {exp.company_logo_url
@@ -219,7 +219,7 @@ export default function ExperienceClient({ initialExperiences }: { initialExperi
               <div className="flex items-center gap-1 shrink-0">
                 <button
                   onClick={() => openEdit(exp)}
-                  className="p-2 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+                  className="p-2 rounded-lg text-slate-400 hover:text-violet hover:bg-violet/10 transition-colors"
                   title="Edit"
                 >
                   <Pencil size={14} />

@@ -6,6 +6,7 @@ import MobileNav from "./MobileNav";
 import MusicPlayer from "./MusicPlayer";
 import CustomCursor from "./CustomCursor";
 import SplashScreen from "./SplashScreen";
+import PageviewTracker from "@/components/analytics/PageviewTracker";
 
 interface PublicLayoutProps {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export default function PublicLayout({ children, musicUrl, songTitle }: PublicLa
       {!isAdmin && <SplashScreen />}
       {!isAdmin && <CustomCursor />}
       {!isAdmin && <Navbar />}
+      {!isAdmin && <PageviewTracker />}
       {children}
       {!isAdmin && <MobileNav />}
       {!isAdmin && <MusicPlayer musicUrl={musicUrl} songTitle={songTitle} />}

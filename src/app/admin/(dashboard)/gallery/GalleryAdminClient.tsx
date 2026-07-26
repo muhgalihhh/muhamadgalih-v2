@@ -18,7 +18,7 @@ type FormMode = "add" | "edit" | null;
 type ToastType = "success" | "error" | "info";
 interface Toast { type: ToastType; msg: string }
 
-const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
+const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="flex flex-col gap-1.5">
     <label className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">{label}</label>
@@ -110,9 +110,9 @@ function ItemForm({
     >
       <Field label="Image *">
         <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
+          <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
             {uploading
-              ? <Loader2 size={13} className="animate-spin text-indigo-500" />
+              ? <Loader2 size={13} className="animate-spin text-violet" />
               : <Upload size={13} className="text-slate-400" />}
             {uploading ? "Uploading..." : "Choose Image"}
             <input
@@ -203,7 +203,7 @@ function ItemForm({
         <button
           type="submit"
           disabled={isPending || uploading || !imageUrl}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors"
+          className="bg-violet hover:brightness-90 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors"
         >
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add to Gallery"}
         </button>
@@ -304,14 +304,14 @@ export default function GalleryAdminClient({ initialItems }: { initialItems: Gal
     <div className="p-6 lg:p-8">
       <div className="flex items-center justify-between mb-7">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Design Gallery</h1>
+          <h1 className="text-xl font-bold text-slate-900 font-display">Design Gallery</h1>
           <p className="text-slate-400 text-sm mt-0.5">{initialItems.length} items</p>
         </div>
         {!formMode && (
           <div className="flex items-center gap-2">
             <button
               onClick={openAdd}
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors"
+              className="flex items-center gap-2 bg-violet hover:brightness-90 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors"
             >
               <Plus size={15} /> Add Item
             </button>
@@ -328,7 +328,7 @@ export default function GalleryAdminClient({ initialItems }: { initialItems: Gal
               <label className="text-[11px] font-semibold uppercase tracking-widest text-slate-400 block mb-1.5">
                 Pilih Gambar
               </label>
-              <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
+              <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
                 <Upload size={13} className="text-slate-400" />
                 {batchFiles.length > 0 ? `${batchFiles.length} file dipilih` : "Pilih file (bisa banyak)"}
                 <input
@@ -443,7 +443,7 @@ export default function GalleryAdminClient({ initialItems }: { initialItems: Gal
                   <div className="flex items-center gap-0.5 shrink-0">
                     <button
                       onClick={() => openEdit(item)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-violet hover:bg-violet/10 transition-colors"
                       title="Edit"
                     >
                       <Pencil size={13} />

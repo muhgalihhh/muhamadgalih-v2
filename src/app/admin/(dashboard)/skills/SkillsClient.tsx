@@ -18,7 +18,7 @@ const Field = ({ label, children, wide }: { label: string; children: React.React
   </div>
 );
 
-const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
+const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 
 function SkillForm({ defaultValues, onSubmit, onCancel, isPending }: {
   defaultValues?: Partial<Skill>;
@@ -81,8 +81,8 @@ function SkillForm({ defaultValues, onSubmit, onCancel, isPending }: {
                 <img src={iconValue} alt="" className="w-5 h-5 object-contain" />
               </div>
             )}
-            <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-3.5 py-2 text-sm text-slate-600 transition-colors">
-              {uploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+            <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-3.5 py-2 text-sm text-slate-600 transition-colors">
+              {uploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
               {uploading ? "Uploading..." : "SVG / PNG"}
               <input type="file" accept="image/svg+xml,image/png,image/webp,image/jpeg" className="hidden" onChange={handleUpload} disabled={uploading} />
             </label>
@@ -102,7 +102,7 @@ function SkillForm({ defaultValues, onSubmit, onCancel, isPending }: {
       </div>
 
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
-        <button type="submit" disabled={isPending || uploading} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors disabled:opacity-50">
+        <button type="submit" disabled={isPending || uploading} className="bg-violet hover:brightness-90 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors disabled:opacity-50">
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add Skill"}
         </button>
         <button type="button" onClick={onCancel} className="text-slate-500 text-sm px-4 py-2.5 rounded-xl hover:bg-slate-100 transition-colors">
@@ -148,11 +148,11 @@ export default function SkillsClient({ initialSkills }: { initialSkills: Skill[]
       {/* Header */}
       <div className="flex items-center justify-between mb-7">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Skills</h1>
+          <h1 className="text-xl font-bold text-slate-900 font-display">Skills</h1>
           <p className="text-slate-400 text-sm mt-0.5">{initialSkills.length} skills</p>
         </div>
         {!formMode && (
-          <button onClick={openAdd} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
+          <button onClick={openAdd} className="flex items-center gap-2 bg-violet hover:brightness-90 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
             <Plus size={15} /> Add Skill
           </button>
         )}
@@ -194,12 +194,12 @@ export default function SkillsClient({ initialSkills }: { initialSkills: Skill[]
                 <div className="flex flex-wrap gap-2.5">
                   {items.map((skill) => (
                     <div key={skill.id} className="group/chip relative">
-                      <span className={`${skill.color_class} flex items-center gap-1.5 cartoon-border rounded-full px-3.5 py-1.5 text-sm font-semibold cursor-default ${editing?.id === skill.id ? "ring-2 ring-indigo-400 ring-offset-1" : ""}`}>
+                      <span className={`${skill.color_class} flex items-center gap-1.5 cartoon-border rounded-full px-3.5 py-1.5 text-sm font-semibold cursor-default ${editing?.id === skill.id ? "ring-2 ring-violet ring-offset-1" : ""}`}>
                         {skill.icon && <SkillIcon icon={skill.icon} className="w-4 h-4" />}
                         {skill.name}
                       </span>
                       <div className="absolute -top-2.5 -right-2 hidden group-hover/chip:flex gap-0.5">
-                        <button onClick={() => openEdit(skill)} className="w-5 h-5 bg-white border border-slate-200 shadow-sm rounded-full flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-200 transition-colors">
+                        <button onClick={() => openEdit(skill)} className="w-5 h-5 bg-white border border-slate-200 shadow-sm rounded-full flex items-center justify-center text-slate-500 hover:text-violet hover:border-violet/30 transition-colors">
                           <Pencil size={8} />
                         </button>
                         <button onClick={() => handleDelete(skill.id)} className="w-5 h-5 bg-white border border-slate-200 shadow-sm rounded-full flex items-center justify-center text-slate-500 hover:text-red-500 hover:border-red-200 transition-colors">

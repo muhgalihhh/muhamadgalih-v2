@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "15mb",
     },
   },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "nzmvgjjepavdtynscaui.supabase.co" },
+    ],
+  },
 };
 
 export default nextConfig;

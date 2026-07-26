@@ -37,9 +37,9 @@ export default function MessagesAdminClient({ messages: initial }: { messages: C
   return (
     <div className="p-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">Messages</h1>
+        <h1 className="text-2xl font-bold text-slate-900 font-display">Messages</h1>
         {unreadCount > 0 && (
-          <p className="text-sm text-indigo-600 font-medium mt-1">{unreadCount} unread</p>
+          <p className="text-sm text-violet font-medium mt-1">{unreadCount} unread</p>
         )}
       </div>
 
@@ -55,14 +55,14 @@ export default function MessagesAdminClient({ messages: initial }: { messages: C
                 onClick={() => handleSelect(msg)}
                 className={`w-full text-left rounded-xl border px-4 py-3 transition-colors ${
                   selected?.id === msg.id
-                    ? "border-indigo-400 bg-indigo-50"
+                    ? "border-violet bg-violet/10"
                     : msg.read
                     ? "border-slate-200 bg-white hover:bg-slate-50"
-                    : "border-indigo-200 bg-indigo-50/50 hover:bg-indigo-50"
+                    : "border-violet/30 bg-violet/10 hover:bg-violet/10"
                 }`}
               >
                 <div className="flex items-center gap-2 mb-1">
-                  {!msg.read && <span className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />}
+                  {!msg.read && <span className="w-2 h-2 rounded-full bg-violet shrink-0" />}
                   <p className={`text-sm truncate ${msg.read ? "font-medium text-slate-700" : "font-bold text-slate-900"}`}>
                     {msg.name}
                   </p>
@@ -94,7 +94,7 @@ export default function MessagesAdminClient({ messages: initial }: { messages: C
                 <div className="flex gap-2">
                   <a
                     href={`mailto:${selected.email}?subject=Re: ${encodeURIComponent(selected.subject)}`}
-                    className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors"
+                    className="flex items-center gap-1.5 bg-violet hover:brightness-90 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors"
                   >
                     <MailOpen size={12} />
                     Reply

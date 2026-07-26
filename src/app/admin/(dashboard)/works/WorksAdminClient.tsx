@@ -11,7 +11,7 @@ import { Plus, Pencil, Trash2, X, Upload, Loader2, FolderOpen, ChevronDown, Tag 
 
 type FormMode = "add" | "edit" | null;
 
-const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
+const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 const Field = ({ label, children, wide, note }: { label: string; children: React.ReactNode; wide?: boolean; note?: string }) => (
   <div className={`flex flex-col gap-1.5 ${wide ? "col-span-2" : ""}`}>
     <label className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">
@@ -43,7 +43,7 @@ function TechStackPicker({ skills, selected, onChange }: { skills: Skill[]; sele
               type="button"
               onClick={() => toggle(s.name)}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
-                active ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-slate-600 border-slate-200 hover:border-indigo-300"
+                active ? "bg-violet hover:brightness-90 text-white border-violet" : "bg-white text-slate-600 border-slate-200 hover:border-violet/30"
               }`}
             >
               {s.icon && <SkillIcon icon={s.icon} className="w-3.5 h-3.5" />}
@@ -55,9 +55,9 @@ function TechStackPicker({ skills, selected, onChange }: { skills: Skill[]; sele
       {selected.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {selected.map((t) => (
-            <span key={t} className="flex items-center gap-1 bg-indigo-50 text-indigo-700 border border-indigo-100 text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span key={t} className="flex items-center gap-1 bg-violet/10 text-violet border border-violet/30 text-xs font-semibold px-2.5 py-1 rounded-full">
               {t}
-              <button type="button" onClick={() => toggle(t)} className="text-indigo-400 hover:text-red-500 ml-0.5 leading-none">×</button>
+              <button type="button" onClick={() => toggle(t)} className="text-violet hover:text-red-500 ml-0.5 leading-none">×</button>
             </span>
           ))}
         </div>
@@ -143,8 +143,8 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
           <div className="flex-1 h-px bg-slate-100" />
         </div>
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-3.5 py-2 text-sm text-slate-600 transition-colors">
-            {iconUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+          <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-3.5 py-2 text-sm text-slate-600 transition-colors">
+            {iconUploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
             {iconUploading ? "Uploading..." : "SVG / PNG"}
             <input type="file" accept="image/svg+xml,image/png,image/webp,image/jpeg" className="hidden" onChange={handleIconUpload} disabled={iconUploading} />
           </label>
@@ -183,8 +183,8 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
       </div>
 
       <Field label="Screenshots" wide>
-        <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
-          {uploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+        <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors w-fit">
+          {uploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
           {uploading ? "Uploading..." : "Upload screenshots"}
           <input type="file" accept="image/*" multiple onChange={handleImageUpload} className="hidden" disabled={uploading} />
         </label>
@@ -207,7 +207,7 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
       </Field>
 
       <div className="col-span-2 pt-4 border-t border-slate-100 flex gap-2">
-        <button type="submit" disabled={isPending || uploading} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
+        <button type="submit" disabled={isPending || uploading} className="bg-violet hover:brightness-90 text-white font-semibold px-5 py-2.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
           {isPending ? "Saving..." : defaultValues?.id ? "Save Changes" : "Add Project"}
         </button>
       </div>
@@ -248,11 +248,11 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
     <div className="p-6 lg:p-8">
       <div className="flex items-center justify-between mb-7">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Works</h1>
+          <h1 className="text-xl font-bold text-slate-900 font-display">Works</h1>
           <p className="text-slate-400 text-sm mt-0.5">{initialProjects.length} projects</p>
         </div>
         {!formMode && (
-          <button onClick={openAdd} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
+          <button onClick={openAdd} className="flex items-center gap-2 bg-violet hover:brightness-90 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">
             <Plus size={15} /> Add Project
           </button>
         )}
@@ -303,9 +303,9 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
               value={catInput}
               onChange={(e) => setCatInput(e.target.value)}
               placeholder="New category…"
-              className="border border-slate-200 rounded-xl px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white w-36"
+              className="border border-slate-200 rounded-xl px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white w-36"
             />
-            <button type="submit" disabled={isPending || !catInput.trim()} className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-3 py-1.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
+            <button type="submit" disabled={isPending || !catInput.trim()} className="flex items-center gap-1.5 bg-violet hover:brightness-90 text-white font-semibold px-3 py-1.5 rounded-xl text-sm disabled:opacity-50 transition-colors">
               <Plus size={13} /> Add
             </button>
           </form>
@@ -338,7 +338,7 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
       ) : (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm divide-y divide-slate-100 overflow-hidden">
           {initialProjects.map((project) => (
-            <div key={project.id} className={`flex items-center gap-4 px-5 py-4 hover:bg-slate-50/60 transition-colors ${editing?.id === project.id ? "bg-indigo-50/40" : ""}`}>
+            <div key={project.id} className={`flex items-center gap-4 px-5 py-4 hover:bg-slate-50/60 transition-colors ${editing?.id === project.id ? "bg-violet/10" : ""}`}>
               <div className="w-12 h-12 rounded-xl shrink-0 overflow-hidden border border-slate-100 shadow-sm">
                 {project.image_urls[0] ? (
                   <img src={project.image_urls[0]} alt={project.title} className="w-full h-full object-cover" />
@@ -370,7 +370,7 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
               </div>
 
               <div className="flex items-center gap-1 shrink-0">
-                <button onClick={() => openEdit(project)} className="p-2 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" title="Edit">
+                <button onClick={() => openEdit(project)} className="p-2 rounded-lg text-slate-400 hover:text-violet hover:bg-violet/10 transition-colors" title="Edit">
                   <Pencil size={14} />
                 </button>
                 <button onClick={() => handleDelete(project.id)} className="p-2 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors" title="Delete">

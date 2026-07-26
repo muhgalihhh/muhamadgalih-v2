@@ -5,7 +5,7 @@ import { updateProfile, uploadFile } from "@/app/actions/admin";
 import { Upload, Loader2, CheckCircle, Music, ExternalLink, Image, X, FileText } from "lucide-react";
 import type { Profile } from "@/types/portfolio";
 
-const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition bg-white";
+const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 const labelCls = "text-[11px] font-semibold uppercase tracking-widest text-slate-400";
 
 const Field = ({ label, children, wide }: { label: string; children: React.ReactNode; wide?: boolean }) => (
@@ -120,7 +120,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
   if (!profile) {
     return (
       <div className="p-6 lg:p-8">
-        <h1 className="text-xl font-bold text-slate-900 mb-6">Contact / Profile</h1>
+        <h1 className="text-xl font-bold text-slate-900 mb-6 font-display">Contact / Profile</h1>
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 text-slate-500 text-sm">
           <p className="font-semibold text-slate-700 mb-1">No profile found in database.</p>
           <p>Run the SQL migration and insert a row into the <code className="bg-slate-100 px-1 rounded text-xs">profile</code> table first.</p>
@@ -133,7 +133,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
     <div className="p-6 lg:p-8">
       {/* Header */}
       <div className="mb-7">
-        <h1 className="text-xl font-bold text-slate-900">Contact / Profile</h1>
+        <h1 className="text-xl font-bold text-slate-900 font-display">Contact / Profile</h1>
         <p className="text-slate-400 text-sm mt-0.5">Edit your public contact info, social links, and media</p>
       </div>
 
@@ -245,13 +245,13 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
             </div>
             <div className="flex-1 space-y-3">
               <div className="flex items-center gap-3">
-                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
-                  {avatarUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
+                  {avatarUploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
                   {avatarUploading ? "Uploading..." : "Upload photo"}
                   <input type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} disabled={avatarUploading} />
                 </label>
                 {avatarUrl && (
-                  <a href={avatarUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-indigo-600 hover:underline">
+                  <a href={avatarUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-violet hover:underline">
                     <ExternalLink size={11} /> View
                   </a>
                 )}
@@ -290,13 +290,13 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
             </div>
             <div className="flex-1 space-y-3">
               <div className="flex items-center gap-3">
-                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
-                  {illustrationUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
+                  {illustrationUploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
                   {illustrationUploading ? "Uploading..." : "Upload illustration"}
                   <input type="file" accept="image/*" className="hidden" onChange={handleIllustrationUpload} disabled={illustrationUploading} />
                 </label>
                 {illustrationUrl && (
-                  <a href={illustrationUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-indigo-600 hover:underline">
+                  <a href={illustrationUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-violet hover:underline">
                     <ExternalLink size={11} /> View
                   </a>
                 )}
@@ -328,17 +328,17 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
           </div>
           <div className="p-6 flex items-start gap-5">
             <div className="w-20 h-20 rounded-xl border border-slate-200 overflow-hidden bg-slate-50 shrink-0 flex items-center justify-center">
-              <FileText size={28} className={cvUrl ? "text-indigo-500" : "text-slate-300"} />
+              <FileText size={28} className={cvUrl ? "text-violet" : "text-slate-300"} />
             </div>
             <div className="flex-1 space-y-3">
               <div className="flex items-center gap-3 flex-wrap">
-                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
-                  {cvUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
+                  {cvUploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
                   {cvUploading ? "Uploading..." : "Upload CV (PDF)"}
                   <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={handleCvUpload} disabled={cvUploading} />
                 </label>
                 {cvUrl && (
-                  <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-indigo-600 hover:underline">
+                  <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-violet hover:underline">
                     <ExternalLink size={11} /> View current
                   </a>
                 )}
@@ -399,18 +399,18 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
             <div className="space-y-3">
               <div>
                 <p className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                  <Music size={13} className="text-indigo-500" /> Background Music
+                  <Music size={13} className="text-violet" /> Background Music
                 </p>
                 <p className="text-slate-400 text-xs mt-0.5">Upload an audio file — plays in the floating music player on the public site.</p>
               </div>
               <div className="flex items-center gap-3">
-                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-indigo-300 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
-                  {musicUploading ? <Loader2 size={13} className="animate-spin text-indigo-500" /> : <Upload size={13} className="text-slate-400" />}
+                <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 hover:border-violet/30 rounded-xl px-4 py-2.5 text-sm text-slate-600 transition-colors">
+                  {musicUploading ? <Loader2 size={13} className="animate-spin text-violet" /> : <Upload size={13} className="text-slate-400" />}
                   {musicUploading ? "Uploading..." : "Choose audio file"}
                   <input type="file" accept="audio/*" className="hidden" onChange={handleMusicUpload} disabled={musicUploading} />
                 </label>
                 {musicUrl && (
-                  <a href={musicUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-indigo-600 hover:underline">
+                  <a href={musicUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-violet hover:underline">
                     <ExternalLink size={11} /> Current file
                   </a>
                 )}
@@ -443,7 +443,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
               />
               {spotifyInput && extractSpotifyUrl(spotifyInput) !== spotifyInput && (
                 <p className="text-xs text-slate-400">
-                  Extracted URL: <span className="text-indigo-600 break-all">{extractSpotifyUrl(spotifyInput)}</span>
+                  Extracted URL: <span className="text-violet break-all">{extractSpotifyUrl(spotifyInput)}</span>
                 </p>
               )}
             </div>
@@ -455,7 +455,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
           <button
             type="submit"
             disabled={isPending}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl disabled:opacity-60 transition-colors flex items-center gap-2"
+            className="bg-violet hover:brightness-90 text-white text-sm font-semibold px-6 py-2.5 rounded-xl disabled:opacity-60 transition-colors flex items-center gap-2"
           >
             {isPending && <Loader2 size={14} className="animate-spin" />}
             {isPending ? "Saving..." : "Save Profile"}
