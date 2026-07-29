@@ -7,7 +7,7 @@ import ColorPicker from "@/components/admin/ColorPicker";
 import IconPicker from "@/components/admin/IconPicker";
 import SkillIcon from "@/components/ui/SkillIcon";
 import type { Experience } from "@/types/portfolio";
-import { Plus, Pencil, Trash2, X, Upload, Loader2, Briefcase } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Upload, Loader2, Briefcase, Link2 } from "lucide-react";
 
 type FormMode = "add" | "edit" | null;
 
@@ -291,6 +291,11 @@ export default function ExperienceClient({ initialExperiences }: { initialExperi
                 <p className="text-slate-400 text-xs mt-0.5">
                   {exp.points.length} bullet points
                   {exp.images.length > 0 && <> · {exp.images.length} {exp.images.length === 1 ? "photo" : "photos"}</>}
+                  {!!exp.linked_projects?.length && (
+                    <span className="inline-flex items-center gap-0.5 text-violet ml-1">
+                      · <Link2 size={10} /> {exp.linked_projects.length} {exp.linked_projects.length === 1 ? "work linked" : "works linked"}
+                    </span>
+                  )}
                 </p>
               </div>
 

@@ -6,6 +6,7 @@ export interface ProjectCategoryRow {
   slug: string;
   label: string;
   order_index: number;
+  show_in_gallery: boolean;
   created_at: string;
 }
 
@@ -34,6 +35,7 @@ export interface Experience {
   images: string[];
   order_index: number;
   created_at: string;
+  linked_projects?: { id: string; title: string; image_urls: string[] }[];
 }
 
 export interface Education {
@@ -91,6 +93,7 @@ export interface Project {
   order_index: number;
   published: boolean;
   created_at: string;
+  experience_id: string | null;
 }
 
 export interface Certificate {

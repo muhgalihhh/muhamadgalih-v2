@@ -1,0 +1,90 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e2]:
+    - complementary [ref=f10e3]:
+      - generic [ref=f10e4]:
+        - link "MG / CMS" [ref=f10e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f10e6]: MG
+          - generic [ref=f10e7]: / CMS
+        - paragraph [ref=f10e8]: Portfolio Admin
+      - navigation [ref=f10e9]:
+        - link "Overview" [ref=f10e10] [cursor=pointer]:
+          - /url: /admin
+        - link "Analytics" [ref=f10e16] [cursor=pointer]:
+          - /url: /admin/analytics
+        - link "Skills" [ref=f10e20] [cursor=pointer]:
+          - /url: /admin/skills
+        - link "Experience" [ref=f10e23] [cursor=pointer]:
+          - /url: /admin/experience
+        - link "Education" [ref=f10e27] [cursor=pointer]:
+          - /url: /admin/education
+        - link "Organizations" [ref=f10e31] [cursor=pointer]:
+          - /url: /admin/organizations
+        - link "Works" [ref=f10e37] [cursor=pointer]:
+          - /url: /admin/works
+        - link "Gallery" [ref=f10e40] [cursor=pointer]:
+          - /url: /admin/gallery
+        - link "Certificates" [ref=f10e46] [cursor=pointer]:
+          - /url: /admin/certificates
+        - link "Testimonials" [ref=f10e50] [cursor=pointer]:
+          - /url: /admin/testimonials
+        - link "Messages" [ref=f10e55] [cursor=pointer]:
+          - /url: /admin/messages
+        - link "Contact" [ref=f10e59] [cursor=pointer]:
+          - /url: /admin/contact
+      - generic [ref=f10e63]:
+        - link "View Site" [ref=f10e64] [cursor=pointer]:
+          - /url: /
+        - button "Sign out" [ref=f10e69]
+    - main [ref=f10e73]:
+      - generic [ref=f10e74]:
+        - generic [ref=f10e75]:
+          - generic [ref=f10e76]:
+            - heading "Work Experience" [level=1] [ref=f10e77]
+            - paragraph [ref=f10e78]: 5 entries
+          - button "Add Experience" [ref=f10e79]
+        - generic [ref=f10e81]:
+          - generic [ref=f10e82]:
+            - img "Momentum Padel Series" [ref=f10e84]
+            - generic [ref=f10e85]:
+              - paragraph [ref=f10e86]: Graphic Designer
+              - paragraph [ref=f10e87]: Momentum Padel Series · Jun 2026 - Present
+              - paragraph [ref=f10e88]: 3 bullet points · 4 photos
+            - generic [ref=f10e89]:
+              - button "Edit" [ref=f10e90]
+              - button "Delete" [ref=f10e94]
+          - generic [ref=f10e98]:
+            - generic [ref=f10e104]:
+              - paragraph [ref=f10e105]: Fullstack Web Developer, Graphic Designer & UI/UX Designer
+              - paragraph [ref=f10e106]: Self-employed · Xharp.dev · MizarieDesign · Jun 2025 - Present
+              - paragraph [ref=f10e107]: 2 bullet points · 14 photos
+            - generic [ref=f10e108]:
+              - button "Edit" [ref=f10e109]
+              - button "Delete" [ref=f10e113]
+          - generic [ref=f10e117]:
+            - generic [ref=f10e123]:
+              - paragraph [ref=f10e124]: UI/UX Designer
+              - paragraph [ref=f10e125]: Daylight.asia & FoldIn.space · Jul 2025 - Jun 2026
+              - paragraph [ref=f10e126]:
+                - text: 3 bullet points
+                - generic [ref=f10e127]: · 1 work linked
+            - generic [ref=f10e131]:
+              - button "Edit" [ref=f10e132]
+              - button "Delete" [ref=f10e136]
+          - generic [ref=f10e140]:
+            - generic [ref=f10e146]:
+              - paragraph [ref=f10e147]: Graphic Designer Intern
+              - paragraph [ref=f10e148]: PT Bukhori Group Indonesia · Jan 2026 - Apr 2026
+              - paragraph [ref=f10e149]: 3 bullet points
+            - generic [ref=f10e150]:
+              - button "Edit" [ref=f10e151]
+              - button "Delete" [ref=f10e155]
+          - generic [ref=f10e159]:
+            - generic [ref=f10e165]:
+              - paragraph [ref=f10e166]: Fullstack Web Developer Intern
+              - paragraph [ref=f10e167]: BKPSDM Banjar · Jul 2024 - Sep 2024
+              - paragraph [ref=f10e168]: 2 bullet points
+            - generic [ref=f10e169]:
+              - button "Edit" [ref=f10e170]
+              - button "Delete" [ref=f10e174]
+  - button "Open Next.js Dev Tools" [ref=f10e183] [cursor=pointer]

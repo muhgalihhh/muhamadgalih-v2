@@ -2,12 +2,12 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { createProject, updateProject, deleteProject, uploadFile, createCategory, updateCategory, deleteCategory } from "@/app/actions/admin";
+import { createProject, updateProject, deleteProject, uploadFile, createCategory, updateCategory, deleteCategory, setCategoryShowInGallery } from "@/app/actions/admin";
 import ColorPicker from "@/components/admin/ColorPicker";
 import IconPicker from "@/components/admin/IconPicker";
 import SkillIcon from "@/components/ui/SkillIcon";
-import type { Project, Skill, ProjectCategoryRow } from "@/types/portfolio";
-import { Plus, Pencil, Trash2, X, Upload, Loader2, FolderOpen, ChevronDown, Tag, Check } from "lucide-react";
+import type { Project, Skill, ProjectCategoryRow, Experience } from "@/types/portfolio";
+import { Plus, Pencil, Trash2, X, Upload, Loader2, FolderOpen, ChevronDown, Tag, Check, Image as ImageIcon, Link2 } from "lucide-react";
 
 type FormMode = "add" | "edit" | null;
 
@@ -66,10 +66,11 @@ function TechStackPicker({ skills, selected, onChange }: { skills: Skill[]; sele
   );
 }
 
-function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }: {
+function ProjectForm({ defaultValues, skills, categories, experiences, onSubmit, isPending }: {
   defaultValues?: Partial<Project>;
   skills: Skill[];
   categories: ProjectCategoryRow[];
+  experiences: Experience[];
   onSubmit: (fd: FormData) => void;
   isPending: boolean;
 }) {
@@ -197,6 +198,18 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
         <input name="project_date" type="date" defaultValue={defaultValues?.project_date ?? ""} className={inputCls} />
       </Field>
 
+      <Field label="Link to Experience" note="— tampil juga di card experience terkait, gak perlu upload ulang foto">
+        <div className="relative">
+          <select name="experience_id" defaultValue={defaultValues?.experience_id ?? ""} className={`${inputCls} appearance-none pr-8 w-full`}>
+            <option value="">— None —</option>
+            {experiences.map((exp) => (
+              <option key={exp.id} value={exp.id}>{exp.role} @ {exp.company}</option>
+            ))}
+          </select>
+          <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+        </div>
+      </Field>
+
       <Field label="Visibility">
         <div className="relative">
           <select name="published" defaultValue={String(defaultValues?.published ?? true)} className={`${inputCls} appearance-none pr-8 w-full`}>
@@ -244,7 +257,7 @@ function ProjectForm({ defaultValues, skills, categories, onSubmit, isPending }:
   );
 }
 
-export default function WorksAdminClient({ initialProjects, skills, initialCategories }: { initialProjects: Project[]; skills: Skill[]; initialCategories: ProjectCategoryRow[] }) {
+export default function WorksAdminClient({ initialProjects, skills, initialCategories, experiences }: { initialProjects: Project[]; skills: Skill[]; initialCategories: ProjectCategoryRow[]; experiences: Experience[] }) {
   const [formMode, setFormMode] = useState<FormMode>(null);
   const [editing, setEditing]   = useState<Project | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -311,7 +324,9 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
         <div className="flex items-center gap-2 px-6 py-4 border-b border-slate-100 bg-slate-50/70">
           <Tag size={14} className="text-slate-400" />
           <span className="text-sm font-semibold text-slate-700">Categories</span>
-          <span className="ml-auto text-xs text-slate-400">{initialCategories.length} total</span>
+          <span className="ml-auto text-xs text-slate-400 flex items-center gap-1">
+            <ImageIcon size={11} className="text-violet" /> = tampil di Design Gallery
+          </span>
         </div>
         <div className="p-4 flex flex-wrap gap-2 items-center">
           {initialCategories.map((cat) =>
@@ -339,8 +354,20 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
                 <span className="font-semibold">{cat.label}</span>
                 <span className="text-slate-400 text-xs ml-1">/{cat.slug}</span>
                 <button
+                  onClick={() => {
+                    startTransition(async () => {
+                      const res = await setCategoryShowInGallery(cat.id, !cat.show_in_gallery);
+                      if (res?.error) setCatMsg(res.error); else { setCatMsg(""); router.refresh(); }
+                    });
+                  }}
+                  className={`ml-1.5 transition-colors leading-none ${cat.show_in_gallery ? "text-violet" : "text-slate-300 hover:text-violet"}`}
+                  title={cat.show_in_gallery ? "Tampil di Design Gallery — klik untuk sembunyikan" : "Tidak tampil di Design Gallery — klik untuk tampilkan"}
+                >
+                  <ImageIcon size={12} />
+                </button>
+                <button
                   onClick={() => startEditCategory(cat)}
-                  className="ml-1.5 text-slate-300 hover:text-violet transition-colors leading-none"
+                  className="ml-1 text-slate-300 hover:text-violet transition-colors leading-none"
                   title="Rename"
                 >
                   <Pencil size={11} />
@@ -402,7 +429,7 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
           </div>
           {msg && <p className="mx-6 mt-4 text-red-600 text-sm bg-red-50 border border-red-100 rounded-xl px-3 py-2">{msg}</p>}
           <div className="p-6">
-            <ProjectForm defaultValues={editing ?? undefined} skills={skills} categories={initialCategories} onSubmit={handleSubmit} isPending={isPending} />
+            <ProjectForm defaultValues={editing ?? undefined} skills={skills} categories={initialCategories} experiences={experiences} onSubmit={handleSubmit} isPending={isPending} />
           </div>
         </div>
       )}
@@ -443,7 +470,14 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
                   ))}
                   {project.tech_stack.length > 5 && <span className="text-[10px] text-slate-400">+{project.tech_stack.length - 5}</span>}
                 </div>
-                <p className="text-slate-400 text-xs mt-0.5">{project.category} · {project.image_urls.length} screenshots</p>
+                <p className="text-slate-400 text-xs mt-0.5 flex items-center gap-1">
+                  {project.category} · {project.image_urls.length} screenshots
+                  {project.experience_id && (
+                    <span className="inline-flex items-center gap-0.5 text-violet">
+                      · <Link2 size={10} /> linked
+                    </span>
+                  )}
+                </p>
               </div>
 
               <div className="flex items-center gap-1 shrink-0">

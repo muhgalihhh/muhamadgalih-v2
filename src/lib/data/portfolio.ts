@@ -27,7 +27,19 @@ export async function getPublicExperiences(): Promise<Experience[]> {
       .order("start_date", { ascending: false, nullsFirst: false })
       .order("order_index");
     if (error || !data?.length) return [];
-    return data as Experience[];
+
+    const { data: linkedProjects } = await supabase
+      .from("projects")
+      .select("id, title, image_urls, experience_id")
+      .eq("published", true)
+      .not("experience_id", "is", null);
+
+    return data.map((exp) => ({
+      ...exp,
+      linked_projects: (linkedProjects ?? [])
+        .filter((p) => p.experience_id === exp.id)
+        .map((p) => ({ id: p.id, title: p.title, image_urls: p.image_urls })),
+    })) as Experience[];
   } catch {
     return [];
   }
@@ -97,14 +109,44 @@ export async function getPublicCertificates(): Promise<Certificate[]> {
 export async function getPublicGalleryItems(): Promise<GalleryItem[]> {
   try {
     const supabase = await createClient();
-    const { data, error } = await supabase
-      .from("gallery_items")
-      .select("*")
-      .eq("published", true)
-      .order("sort_order")
-      .order("created_at", { ascending: false });
-    if (error || !data?.length) return [];
-    return data as GalleryItem[];
+
+    const [{ data: manualItems }, { data: galleryCategories }] = await Promise.all([
+      supabase
+        .from("gallery_items")
+        .select("*")
+        .eq("published", true)
+        .order("sort_order")
+        .order("created_at", { ascending: false }),
+      supabase.from("project_categories").select("slug").eq("show_in_gallery", true),
+    ]);
+
+    const gallerySlugs = (galleryCategories ?? []).map((c) => c.slug);
+    let derivedItems: GalleryItem[] = [];
+
+    if (gallerySlugs.length > 0) {
+      const { data: works } = await supabase
+        .from("projects")
+        .select("id, title, description, category, image_urls, project_date, order_index, created_at")
+        .eq("published", true)
+        .in("category", gallerySlugs)
+        .order("project_date", { ascending: false, nullsFirst: false })
+        .order("order_index");
+
+      derivedItems = (works ?? [])
+        .filter((w) => w.image_urls?.length > 0)
+        .map((w) => ({
+          id: w.id,
+          title: w.title,
+          description: w.description,
+          category: w.category,
+          image_urls: w.image_urls,
+          sort_order: w.order_index,
+          published: true,
+          created_at: w.created_at,
+        }));
+    }
+
+    return [...(manualItems as GalleryItem[] ?? []), ...derivedItems];
   } catch {
     return [];
   }

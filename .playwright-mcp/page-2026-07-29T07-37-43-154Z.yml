@@ -1,0 +1,278 @@
+- generic [ref=f9e1]:
+  - generic [ref=f9e2]:
+    - complementary [ref=f9e3]:
+      - generic [ref=f9e4]:
+        - link "MG / CMS" [ref=f9e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f9e6]: MG
+          - generic [ref=f9e7]: / CMS
+        - paragraph [ref=f9e8]: Portfolio Admin
+      - navigation [ref=f9e9]:
+        - link "Overview" [ref=f9e10] [cursor=pointer]:
+          - /url: /admin
+        - link "Analytics" [ref=f9e16] [cursor=pointer]:
+          - /url: /admin/analytics
+        - link "Skills" [ref=f9e20] [cursor=pointer]:
+          - /url: /admin/skills
+        - link "Experience" [ref=f9e23] [cursor=pointer]:
+          - /url: /admin/experience
+        - link "Education" [ref=f9e27] [cursor=pointer]:
+          - /url: /admin/education
+        - link "Organizations" [ref=f9e31] [cursor=pointer]:
+          - /url: /admin/organizations
+        - link "Works" [ref=f9e37] [cursor=pointer]:
+          - /url: /admin/works
+        - link "Gallery" [ref=f9e40] [cursor=pointer]:
+          - /url: /admin/gallery
+        - link "Certificates" [ref=f9e46] [cursor=pointer]:
+          - /url: /admin/certificates
+        - link "Testimonials" [ref=f9e50] [cursor=pointer]:
+          - /url: /admin/testimonials
+        - link "Messages" [ref=f9e55] [cursor=pointer]:
+          - /url: /admin/messages
+        - link "Contact" [ref=f9e59] [cursor=pointer]:
+          - /url: /admin/contact
+      - generic [ref=f9e63]:
+        - link "View Site" [ref=f9e64] [cursor=pointer]:
+          - /url: /
+        - button "Sign out" [ref=f9e69]
+    - main [ref=f9e73]:
+      - generic [ref=f9e74]:
+        - generic [ref=f9e76]:
+          - heading "Works" [level=1] [ref=f9e77]
+          - paragraph [ref=f9e78]: 8 projects
+        - generic [ref=f9e81]:
+          - generic [ref=f9e82]:
+            - generic [ref=f9e86]: Categories
+            - generic [ref=f9e87]: = tampil di Design Gallery
+          - generic [ref=f9e92]:
+            - generic [ref=f9e93]:
+              - generic [ref=f9e94]: Software
+              - generic [ref=f9e95]: /software
+              - button "Tidak tampil di Design Gallery — klik untuk tampilkan" [ref=f9e96]
+              - button "Rename" [ref=f9e101]
+              - button "Delete" [ref=f9e105]
+            - generic [ref=f9e109]:
+              - generic [ref=f9e110]: UI/UX
+              - generic [ref=f9e111]: /uiux
+              - button "Tampil di Design Gallery — klik untuk sembunyikan" [ref=f9e112]
+              - button "Rename" [ref=f9e117]
+              - button "Delete" [ref=f9e121]
+            - generic [ref=f9e125]:
+              - generic [ref=f9e126]: Illustration
+              - generic [ref=f9e127]: /illustration
+              - button "Tampil di Design Gallery — klik untuk sembunyikan" [ref=f9e128]
+              - button "Rename" [ref=f9e133]
+              - button "Delete" [ref=f9e137]
+            - generic [ref=f9e141]:
+              - generic [ref=f9e142]: Data Science & Analysis
+              - generic [ref=f9e143]: /machine_learning
+              - button "Tidak tampil di Design Gallery — klik untuk tampilkan" [ref=f9e144]
+              - button "Rename" [ref=f9e149]
+              - button "Delete" [ref=f9e153]
+            - generic [ref=f9e157]:
+              - textbox "New category…" [ref=f9e158]
+              - button "Add" [disabled] [ref=f9e159]
+        - generic [ref=f9e327]:
+          - generic [ref=f9e328]:
+            - generic [ref=f9e329]: Edit "Daylight Asia - UI UX Design"
+            - button [ref=f9e330]
+          - generic [ref=f9e335]:
+            - generic [ref=f9e336]:
+              - generic [ref=f9e337]: Title *
+              - textbox [ref=f9e338]: Daylight Asia - UI UX Design
+            - generic [ref=f9e339]:
+              - generic [ref=f9e340]: Category
+              - combobox [ref=f9e342]:
+                - option "Software"
+                - option "UI/UX" [selected]
+                - option "Illustration"
+                - option "Data Science & Analysis"
+            - generic [ref=f9e343]:
+              - generic [ref=f9e344]: Project Icon
+              - generic [ref=f9e346]:
+                - textbox "Search icon... (e.g. react, figma, globe)" [ref=f9e350]
+                - button [ref=f9e351]
+              - generic [ref=f9e357]: or upload custom
+              - generic [ref=f9e361]: SVG / PNG
+            - generic [ref=f9e366]:
+              - generic [ref=f9e367]: Description
+              - textbox [ref=f9e368]
+            - generic [ref=f9e369]:
+              - generic [ref=f9e370]: Tech Stack— select from your Skills database
+              - generic [ref=f9e371]:
+                - generic [ref=f9e372]:
+                  - button "React.js" [ref=f9e373]
+                  - button "Figma" [ref=f9e376]
+                  - button "PHP" [ref=f9e379]
+                  - button "Adobe Photoshop" [ref=f9e382]
+                  - button "Adobe Illustrator" [ref=f9e383]
+                  - button "Canva" [ref=f9e384]
+                  - button "Supabase" [ref=f9e385]
+                  - button "Next.js" [ref=f9e388]
+                  - button "HTML" [ref=f9e391]
+                  - button "CSS" [ref=f9e394]
+                  - button "Firebase" [ref=f9e397]
+                  - button "Laravel" [ref=f9e400]
+                  - button "Docker" [ref=f9e403]
+                  - button "Python" [ref=f9e406]
+                  - button "MySQL" [ref=f9e409]
+                  - button "MongoDB" [ref=f9e412]
+                  - button "JavaScript" [ref=f9e415]
+                  - button "CapCut" [ref=f9e418]
+                  - button "PostgreSQL" [ref=f9e419]
+                  - button "SQL" [ref=f9e422]
+                  - button "Git" [ref=f9e423]
+                  - button "FastAPI" [ref=f9e426]
+                  - button "Power BI" [ref=f9e429]
+                  - button "Pandas" [ref=f9e430]
+                  - button "NumPy" [ref=f9e431]
+                  - button "Microsoft Office" [ref=f9e432]
+                - generic [ref=f9e433]:
+                  - generic [ref=f9e434]:
+                    - text: Figma
+                    - button "×" [ref=f9e435]
+                  - generic [ref=f9e436]:
+                    - text: Canva
+                    - button "×" [ref=f9e437]
+            - generic [ref=f9e438]:
+              - generic [ref=f9e439]: "Links — one per line: Label | URL"
+              - textbox "Live Demo | https://myapp.com GitHub | https://github.com/user/repo Paper | https://arxiv.org/abs/..." [ref=f9e440]:
+                - /placeholder: "Live Demo | https://myapp.com\nGitHub | https://github.com/user/repo\nPaper | https://arxiv.org/abs/..."
+              - generic [ref=f9e441] [cursor=pointer]: Upload PDF (adds a line below)
+            - generic [ref=f9e445]:
+              - generic [ref=f9e446]: Project Date — untuk urutan
+              - textbox [ref=f9e447]: 2025-10-10
+            - generic [ref=f9e448]:
+              - generic [ref=f9e449]: Link to Experience— tampil juga di card experience terkait, gak perlu upload ulang foto
+              - combobox [ref=f9e451]:
+                - option "— None —" [selected]
+                - option "Graphic Designer @ Momentum Padel Series"
+                - option "Fullstack Web Developer, Graphic Designer & UI/UX Designer @ Self-employed · Xharp.dev · MizarieDesign"
+                - option "UI/UX Designer @ Daylight.asia & FoldIn.space"
+                - option "Graphic Designer Intern @ PT Bukhori Group Indonesia"
+                - option "Fullstack Web Developer Intern @ BKPSDM Banjar"
+            - generic [ref=f9e452]:
+              - generic [ref=f9e453]: Visibility
+              - combobox [ref=f9e455]:
+                - option "Published" [selected]
+                - option "Draft"
+            - generic [ref=f9e457]:
+              - generic [ref=f9e458]: Card Color
+              - generic [ref=f9e459]:
+                - button "violet" [ref=f9e460]
+                - button "coral" [ref=f9e461]
+                - button "sky" [ref=f9e462]
+                - button "mint" [ref=f9e463]
+                - button "yellow" [ref=f9e464]
+                - button "pink" [ref=f9e465]
+                - button "navy" [ref=f9e466]
+                - button "ink" [ref=f9e467]
+                - generic "Pick a custom color (snaps to nearest theme color)" [ref=f9e468] [cursor=pointer]:
+                  - text: 🎨
+                  - textbox "🎨" [ref=f9e469]: "#ff5757"
+              - generic [ref=f9e470]: Custom color otomatis disesuaikan ke warna tema terdekat (coral).
+              - generic [ref=f9e471]: Preview
+            - generic [ref=f9e472]:
+              - generic [ref=f9e473]: Screenshots
+              - generic [ref=f9e474] [cursor=pointer]: Upload screenshots
+            - button "Save Changes" [ref=f9e482]
+        - generic [ref=f9e161]:
+          - generic [ref=f9e162]:
+            - img "FoldIn.space - UI/UX Redesign & Design System" [ref=f9e164]
+            - generic [ref=f9e165]:
+              - generic [ref=f9e166]:
+                - paragraph [ref=f9e167]: FoldIn.space - UI/UX Redesign & Design System
+                - generic [ref=f9e168]: LIVE
+              - generic [ref=f9e169]:
+                - generic [ref=f9e170]: Figma
+                - generic [ref=f9e171]: Canva
+              - paragraph [ref=f9e172]: uiux · 2 screenshots
+            - generic [ref=f9e173]:
+              - button "Edit" [ref=f9e174]
+              - button "Delete" [ref=f9e178]
+          - generic [ref=f9e182]:
+            - img "Bakery Shop - Bakery ERP System" [ref=f9e184]
+            - generic [ref=f9e185]:
+              - generic [ref=f9e186]:
+                - paragraph [ref=f9e187]: Bakery Shop - Bakery ERP System
+                - generic [ref=f9e188]: LIVE
+              - generic [ref=f9e189]:
+                - generic [ref=f9e190]: PHP
+                - generic [ref=f9e191]: MySQL
+                - generic [ref=f9e192]: Laravel
+              - paragraph [ref=f9e193]: software · 2 screenshots
+            - generic [ref=f9e194]:
+              - button "Edit" [ref=f9e195]
+              - button "Delete" [ref=f9e199]
+          - generic [ref=f9e203]:
+            - img "Daylight Asia - UI UX Design" [ref=f9e205]
+            - generic [ref=f9e206]:
+              - generic [ref=f9e207]:
+                - paragraph [ref=f9e208]: Daylight Asia - UI UX Design
+                - generic [ref=f9e209]: LIVE
+              - generic [ref=f9e210]:
+                - generic [ref=f9e211]: Figma
+                - generic [ref=f9e212]: Canva
+              - paragraph [ref=f9e213]: uiux · 2 screenshots
+            - generic [ref=f9e214]:
+              - button "Edit" [active] [ref=f9e215]
+              - button "Delete" [ref=f9e219]
+          - generic [ref=f9e223]:
+            - 'img "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi" [ref=f9e225]'
+            - generic [ref=f9e226]:
+              - generic [ref=f9e227]:
+                - paragraph [ref=f9e228]: "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi"
+                - generic [ref=f9e229]: LIVE
+              - generic [ref=f9e230]: Python
+              - paragraph [ref=f9e232]: machine_learning · 2 screenshots
+            - generic [ref=f9e233]:
+              - button "Edit" [ref=f9e234]
+              - button "Delete" [ref=f9e238]
+          - generic [ref=f9e242]:
+            - img "Gold Price Prediction with KNN and Linear Regression" [ref=f9e244]
+            - generic [ref=f9e245]:
+              - generic [ref=f9e246]:
+                - paragraph [ref=f9e247]: Gold Price Prediction with KNN and Linear Regression
+                - generic [ref=f9e248]: LIVE
+              - generic [ref=f9e249]: Python
+              - paragraph [ref=f9e251]: machine_learning · 2 screenshots
+            - generic [ref=f9e252]:
+              - button "Edit" [ref=f9e253]
+              - button "Delete" [ref=f9e257]
+          - generic [ref=f9e261]:
+            - img "Pareeduhub - Online Course Platform (LMS)" [ref=f9e263]
+            - generic [ref=f9e264]:
+              - generic [ref=f9e265]:
+                - paragraph [ref=f9e266]: Pareeduhub - Online Course Platform (LMS)
+                - generic [ref=f9e267]: LIVE
+              - generic [ref=f9e268]:
+                - generic [ref=f9e269]: PHP
+                - generic [ref=f9e270]: Laravel
+              - paragraph [ref=f9e271]: software · 2 screenshots
+            - generic [ref=f9e272]:
+              - button "Edit" [ref=f9e273]
+              - button "Delete" [ref=f9e277]
+          - generic [ref=f9e281]:
+            - img "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA" [ref=f9e283]
+            - generic [ref=f9e284]:
+              - generic [ref=f9e285]:
+                - paragraph [ref=f9e286]: Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA
+                - generic [ref=f9e287]: LIVE
+              - generic [ref=f9e288]: Python
+              - paragraph [ref=f9e290]: machine_learning · 1 screenshots
+            - generic [ref=f9e291]:
+              - button "Edit" [ref=f9e292]
+              - button "Delete" [ref=f9e296]
+          - generic [ref=f9e300]:
+            - img "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik" [ref=f9e302]
+            - generic [ref=f9e303]:
+              - generic [ref=f9e304]:
+                - paragraph [ref=f9e305]: Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik
+                - generic [ref=f9e306]: LIVE
+              - paragraph [ref=f9e307]: machine_learning · 1 screenshots
+            - generic [ref=f9e308]:
+              - button "Edit" [ref=f9e309]
+              - button "Delete" [ref=f9e313]
+  - button "Open Next.js Dev Tools" [ref=f9e322] [cursor=pointer]
+  - alert [ref=f9e326]

@@ -196,7 +196,10 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
             <div className="absolute left-0 md:left-8 top-0 bottom-0 w-0.5 bg-ink/10 hidden md:block" />
 
             <div className="flex flex-col gap-8 md:gap-10">
-              {experience.map((exp, i) => (
+              {experience.map((exp, i) => {
+                const linkedImages = exp.linked_projects?.flatMap((p) => p.image_urls) ?? [];
+                const combinedImages = [...exp.images, ...linkedImages];
+                return (
                 <ScrollReveal key={exp.id} variant="fade-up" delay={i * 0.12}>
                   <div className="md:pl-24 relative">
                     {/* Timeline dot — plain color circle */}
@@ -236,10 +239,20 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                         ))}
                       </ul>
 
-                      {exp.images.length > 0 && (() => {
+                      {!!exp.linked_projects?.length && (
+                        <div className="flex flex-wrap gap-1.5 mt-4">
+                          {exp.linked_projects.map((p) => (
+                            <span key={p.id} className="cartoon-border-sm bg-black/10 font-body text-[11px] font-semibold px-2.5 py-1 rounded-full">
+                              🔗 {p.title}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {combinedImages.length > 0 && (() => {
                         const isExpanded = expandedExp.has(exp.id);
-                        const remaining = exp.images.length - EXP_PHOTO_LIMIT;
-                        const visible = isExpanded ? exp.images : exp.images.slice(0, EXP_PHOTO_LIMIT);
+                        const remaining = combinedImages.length - EXP_PHOTO_LIMIT;
+                        const visible = isExpanded ? combinedImages : combinedImages.slice(0, EXP_PHOTO_LIMIT);
                         return (
                           <>
                             <motion.div layout className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-5">
@@ -275,7 +288,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                                     className="aspect-square rounded-xl overflow-hidden cartoon-border-sm relative group/more"
                                   >
                                     <img
-                                      src={exp.images[EXP_PHOTO_LIMIT]}
+                                      src={combinedImages[EXP_PHOTO_LIMIT]}
                                       alt=""
                                       loading="lazy"
                                       className="w-full h-full object-cover"
@@ -310,7 +323,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                     </div>
                   </div>
                 </ScrollReveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

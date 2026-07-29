@@ -113,9 +113,9 @@ const projectSizeClasses: Record<string, string> = {
 };
 
 const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
-  { id: "1", slug: "software",     label: "Software",     order_index: 0, created_at: "" },
-  { id: "2", slug: "uiux",         label: "UI/UX",        order_index: 1, created_at: "" },
-  { id: "3", slug: "illustration", label: "Illustration", order_index: 2, created_at: "" },
+  { id: "1", slug: "software",     label: "Software",     order_index: 0, show_in_gallery: false, created_at: "" },
+  { id: "2", slug: "uiux",         label: "UI/UX",        order_index: 1, show_in_gallery: true,  created_at: "" },
+  { id: "3", slug: "illustration", label: "Illustration", order_index: 2, show_in_gallery: true,  created_at: "" },
 ];
 
 type ProjectRow = {

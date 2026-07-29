@@ -104,7 +104,19 @@ export async function getAdminExperiences() {
     .order("end_date", { ascending: false, nullsFirst: true })
     .order("start_date", { ascending: false, nullsFirst: false })
     .order("order_index");
-  return data ?? [];
+  if (!data?.length) return [];
+
+  const { data: linkedProjects } = await supabase
+    .from("projects")
+    .select("id, title, image_urls, experience_id")
+    .not("experience_id", "is", null);
+
+  return data.map((exp) => ({
+    ...exp,
+    linked_projects: (linkedProjects ?? [])
+      .filter((p) => p.experience_id === exp.id)
+      .map((p) => ({ id: p.id, title: p.title, image_urls: p.image_urls })),
+  }));
 }
 
 export async function createExperience(formData: FormData) {
@@ -371,6 +383,7 @@ export async function createProject(formData: FormData) {
     links:            parseProjectLinks(formData.get("links") as string),
     project_date:     (formData.get("project_date") as string) || null,
     published:        formData.get("published") === "true",
+    experience_id:    (formData.get("experience_id") as string) || null,
     tech_stack,
     image_urls,
   });
@@ -400,6 +413,7 @@ export async function updateProject(id: string, formData: FormData) {
     links:            parseProjectLinks(formData.get("links") as string),
     project_date:     (formData.get("project_date") as string) || null,
     published:        formData.get("published") === "true",
+    experience_id:    (formData.get("experience_id") as string) || null,
     tech_stack,
     image_urls,
   }).eq("id", id);
@@ -628,6 +642,15 @@ export async function updateCategory(id: string, label: string) {
   const trimmed = label.trim();
   if (!trimmed) return { error: "Label can't be empty" };
   const { error } = await supabase.from("project_categories").update({ label: trimmed }).eq("id", id);
+  revalidatePath("/admin/(dashboard)/works");
+  revalidatePath("/works");
+  if (error) return { error: error.message };
+  return { ok: true };
+}
+
+export async function setCategoryShowInGallery(id: string, show: boolean) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("project_categories").update({ show_in_gallery: show }).eq("id", id);
   revalidatePath("/admin/(dashboard)/works");
   revalidatePath("/works");
   if (error) return { error: error.message };

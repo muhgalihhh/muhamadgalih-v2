@@ -1,0 +1,246 @@
+- generic [active] [ref=f12e1]:
+  - generic [ref=f12e4]:
+    - generic [ref=f12e5]: MG
+    - paragraph [ref=f12e6]: MIZARIE
+  - navigation [ref=f12e11]:
+    - link "MG / MIZARIE" [ref=f12e12]:
+      - /url: /
+      - generic [ref=f12e13]: MG
+      - generic [ref=f12e14]: / MIZARIE
+    - generic [ref=f12e15]:
+      - link "About" [ref=f12e16]:
+        - /url: /about
+      - link "Works" [ref=f12e17]:
+        - /url: /works
+      - link "Contact" [ref=f12e18]:
+        - /url: /contact
+    - generic [ref=f12e19]:
+      - button "Toggle dark mode" [ref=f12e20]
+      - link "Hire me" [ref=f12e24]:
+        - /url: /contact
+  - main [ref=f12e25]:
+    - generic [ref=f12e27]:
+      - generic [ref=f12e28]:
+        - generic [ref=f12e29]: MY
+        - generic [ref=f12e31]: WORKS
+      - paragraph [ref=f12e35]: A curated selection of projects spanning full-stack engineering, UI/UX design, and illustration.
+    - generic [ref=f12e37]:
+      - generic [ref=f12e38]:
+        - generic [ref=f12e39]:
+          - button "All" [ref=f12e40]
+          - button "Software" [ref=f12e41]
+          - button "UI/UX" [ref=f12e42]
+          - button "Illustration" [ref=f12e43]
+          - button "Data Science & Analysis" [ref=f12e44]
+        - paragraph [ref=f12e45]: 8 projects
+      - generic [ref=f12e46]:
+        - button "FoldIn.space - UI/UX Redesign & Design System preview UI/UX FoldIn.space - UI/UX Redesign & Design System Led the end-to-end redesign of FoldIn, a social network for local events, building a token-driven Figma design system (~92 tokens, 6 collections, 5 breakpoints) that unified a fragmented UI from 8 fonts into one cohesive identity. Designed a 25+ component library, a custom flat icon system, and 50+ responsive screens spanning onboarding, events, checkout, wallet, and settings/KYC. Conceived and designed the flagship Ghost Match feature, turning verified event attendance into a connection-discovery experience. Figma Canva" [ref=f12e47]:
+          - img "FoldIn.space - UI/UX Redesign & Design System preview" [ref=f12e48]
+          - generic [ref=f12e49]: UI/UX
+          - generic [ref=f12e52]:
+            - heading "FoldIn.space - UI/UX Redesign & Design System" [level=3] [ref=f12e53]
+            - paragraph [ref=f12e54]: Led the end-to-end redesign of FoldIn, a social network for local events, building a token-driven Figma design system (~92 tokens, 6 collections, 5 breakpoints) that unified a fragmented UI from 8 fonts into one cohesive identity. Designed a 25+ component library, a custom flat icon system, and 50+ responsive screens spanning onboarding, events, checkout, wallet, and settings/KYC. Conceived and designed the flagship Ghost Match feature, turning verified event attendance into a connection-discovery experience.
+            - generic:
+              - generic [ref=f12e55]: Figma
+              - generic [ref=f12e56]: Canva
+        - button [ref=f12e57]:
+          - img "Bakery Shop - Bakery ERP System preview" [ref=f12e58]
+          - generic [ref=f12e59]: Software
+          - generic [ref=f12e62]:
+            - heading "Bakery Shop - Bakery ERP System" [level=3] [ref=f12e63]
+            - paragraph [ref=f12e64]: Bakery ERP System is a full-featured Enterprise Resource Planning application built to manage the end-to-end operations of a bakery business. Developed with Laravel 12, Filament 4, Tailwind CSS, and Alpine.js, it unifies procurement, production, inventory, sales, and accounting into a single admin platform. The system covers the complete supply chain, from purchase orders, vendor management, and goods receipts, through recipe-driven production using Bill of Materials (BOM) and manufacturing orders, to real-time inventory tracking via stock movements and adjustments. On the sales side, it includes an integrated Point of Sale (POS), sales order processing, and a customer loyalty engine featuring tiered memberships, a points ledger, and configurable discount rules. A built-in double-entry accounting module with a Chart of Accounts, journal entries, and vendor payments ensures every transaction is financially reconciled, while role-based access control (Filament Shield), PDF invoicing, and Excel import/export round out a production-ready, business-grade solution.
+            - generic:
+              - generic [ref=f12e65]: PHP
+              - generic [ref=f12e66]: MySQL
+              - generic [ref=f12e67]: Laravel
+        - button "Daylight Asia - UI UX Design preview UI/UX Daylight Asia - UI UX Design Figma Canva" [ref=f12e68]:
+          - img "Daylight Asia - UI UX Design preview" [ref=f12e69]
+          - generic [ref=f12e70]: UI/UX
+          - generic [ref=f12e73]:
+            - heading "Daylight Asia - UI UX Design" [level=3] [ref=f12e74]
+            - paragraph
+            - generic:
+              - generic [ref=f12e75]: Figma
+              - generic [ref=f12e76]: Canva
+        - 'button "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi preview Data Science & Analysis Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi Analisis ini berhasil memetakan karakteristik pengguna, mulai dari kelompok Light Listener hingga Heavy Listener, serta menemukan pola unik seperti keterkaitan kuat antara genre Folk, Electronic, dan Metal pada kelompok tertentu. Informasi ini dapat digunakan Spotify untuk mengoptimalkan sistem rekomendasi dan strategi pemasaran yang lebih personal. Python" [ref=f12e77]':
+          - 'img "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi preview" [ref=f12e78]'
+          - generic [ref=f12e79]: Data Science & Analysis
+          - generic [ref=f12e84]:
+            - 'heading "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi" [level=3] [ref=f12e85]'
+            - paragraph [ref=f12e86]: Analisis ini berhasil memetakan karakteristik pengguna, mulai dari kelompok Light Listener hingga Heavy Listener, serta menemukan pola unik seperti keterkaitan kuat antara genre Folk, Electronic, dan Metal pada kelompok tertentu. Informasi ini dapat digunakan Spotify untuk mengoptimalkan sistem rekomendasi dan strategi pemasaran yang lebih personal.
+            - generic: Python
+        - button [ref=f12e88]:
+          - img "Gold Price Prediction with KNN and Linear Regression preview" [ref=f12e89]
+          - generic [ref=f12e90]: Data Science & Analysis
+          - generic [ref=f12e95]:
+            - heading "Gold Price Prediction with KNN and Linear Regression" [level=3] [ref=f12e96]
+            - paragraph [ref=f12e97]: Projek ini merupakan studi kasus machine learning oleh Muhamad Galih yang bertujuan untuk memprediksi pergerakan harga emas (Gold Futures) menggunakan dataset historis dari Yahoo Finance periode 2015 hingga April 2025. Penelitian ini menerapkan dua pendekatan utama, yaitu klasifikasi menggunakan algoritma K-Nearest Neighbors (KNN) untuk menentukan arah harga (naik/turun) dengan akurasi terbaik sebesar 89,12%, serta regresi linear untuk memprediksi nilai numerik harga penutupan dengan performa $R^2$ mencapai 0,9958. Melalui proses feature engineering yang melibatkan indikator teknikal seperti Moving Averages (MA), Exponential Moving Averages (EMA), momentum, dan volatilitas, model ini berhasil memberikan prediksi harga emas untuk tanggal 24 April 2025 sebesar $3405.36 dengan keyakinan arah harga akan naik sebesar 100%.
+            - generic: Python
+        - button "Pareeduhub - Online Course Platform (LMS) preview Software Pareeduhub - Online Course Platform (LMS) - Engineered a full-stack online course platform (Laravel 12, React, Inertia.js, TypeScript, MySQL) with course management, enrollment, and progress tracking. - Integrated Midtrans & Flip payment gateways and built secure video streaming with watermarking and anti-piracy protection. PHP Laravel" [ref=f12e99]:
+          - img "Pareeduhub - Online Course Platform (LMS) preview" [ref=f12e100]
+          - generic [ref=f12e101]: Software
+          - generic [ref=f12e107]:
+            - heading "Pareeduhub - Online Course Platform (LMS)" [level=3] [ref=f12e108]
+            - paragraph [ref=f12e109]: "- Engineered a full-stack online course platform (Laravel 12, React, Inertia.js, TypeScript, MySQL) with course management, enrollment, and progress tracking. - Integrated Midtrans & Flip payment gateways and built secure video streaming with watermarking and anti-piracy protection."
+            - generic:
+              - generic [ref=f12e110]: PHP
+              - generic [ref=f12e111]: Laravel
+        - button [ref=f12e112]:
+          - img "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA preview" [ref=f12e113]
+          - generic [ref=f12e114]: Data Science & Analysis
+          - generic [ref=f12e119]:
+            - heading "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA" [level=3] [ref=f12e120]
+            - paragraph [ref=f12e121]: Menjelaskan implementasi Algoritma Genetika untuk menemukan solusi optimal dalam pemenuhan Angka Kecukupan Gizi (AKG) berdasarkan dataset makanan tertentu. Model ini mengevaluasi berbagai kombinasi makanan untuk memenuhi kriteria nutrisi seperti kalori, karbohidrat, protein, lemak, vitamin C, dan kalsium dengan batasan total berat dan biaya maksimal. Melalui proses evolusi yang mencakup seleksi (seperti roulette wheel, tournament, atau rank), one-point crossover, dan insert mutation, algoritma ini mampu mencapai kondisi konvergensi untuk menghasilkan daftar bahan makanan dengan nilai fitness terbaik. Berdasarkan pengujian dengan konfigurasi berbeda, penggunaan metode Tournament Selection menunjukkan performa paling unggul dalam mencapai nilai fitness tertinggi dibandingkan metode lainnya.
+            - generic: Python
+        - button "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik preview Data Science & Analysis Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik Dalam simulasi kasus mahasiswa dengan fokus bidang Rekayasa Perangkat Lunak (RPL), metode ini berhasil memberikan perangkingan alternatif, di mana Alternatif A3 memperoleh nilai preferensi tertinggi (2.49) dan terpilih sebagai alternatif terbaik." [ref=f12e123]:
+          - img "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik preview" [ref=f12e124]
+          - generic [ref=f12e125]: Data Science & Analysis
+          - generic [ref=f12e130]:
+            - heading "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik" [level=3] [ref=f12e131]
+            - paragraph [ref=f12e132]: Dalam simulasi kasus mahasiswa dengan fokus bidang Rekayasa Perangkat Lunak (RPL), metode ini berhasil memberikan perangkingan alternatif, di mana Alternatif A3 memperoleh nilai preferensi tertinggi (2.49) dan terpilih sebagai alternatif terbaik.
+    - generic [ref=f12e136]:
+      - generic [ref=f12e137]:
+        - paragraph [ref=f12e138]: ♪ on repeat while building
+        - heading "Song when I dev" [level=2] [ref=f12e139]: Song whenI dev
+        - paragraph [ref=f12e141]: Music running in the background while I write code, design screens, or draw characters.
+      - generic [ref=f12e142]:
+        - generic [ref=f12e143]: Now listening
+        - iframe [ref=f12e149]:
+          - generic [ref=f13e1]:
+            - generic [ref=f13e4]:
+              - generic [ref=f13e5]:
+                - img "Saatnya Dev cover" [ref=f13e8] [cursor=pointer]
+                - button "Play on Spotify" [ref=f13e10] [cursor=pointer]
+                - generic [ref=f13e13]:
+                  - heading [level=1] [ref=f13e14]:
+                    - link "Saatnya Dev" [ref=f13e18] [cursor=pointer]:
+                      - /url: ""
+                  - generic [ref=f13e19]:
+                    - list "Tags" [ref=f13e20]:
+                      - generic "Preview" [ref=f13e21]
+                    - heading [level=2] [ref=f13e22]:
+                      - link "Lihhh" [ref=f13e27] [cursor=pointer]:
+                        - /url: ""
+                - generic [ref=f13e29]:
+                  - generic [ref=f13e30]:
+                    - button "Previous" [disabled] [ref=f13e31]
+                    - button "Next" [disabled] [ref=f13e35]
+                  - button "More" [ref=f13e40] [cursor=pointer]
+                  - button "Play" [disabled] [ref=f13e45]
+              - list "Track list" [ref=f13e51]:
+                - listitem [ref=f13e52]:
+                  - button "Play track" [ref=f13e54] [cursor=pointer]:
+                    - generic [ref=f13e55]: "1"
+                  - heading "Pikiran Yang Matang" [level=3] [ref=f13e56]
+                  - heading "Perunggu" [level=4] [ref=f13e57]
+                  - generic [ref=f13e58]: 03:12
+                - listitem [ref=f13e59]:
+                  - button "Play track" [ref=f13e61] [cursor=pointer]:
+                    - generic [ref=f13e62]: "2"
+                  - heading "Biang Lara" [level=3] [ref=f13e63]
+                  - heading "Perunggu" [level=4] [ref=f13e64]
+                  - generic [ref=f13e65]: 04:00
+                - listitem [ref=f13e66]:
+                  - button "Play track" [ref=f13e68] [cursor=pointer]:
+                    - generic [ref=f13e69]: "3"
+                  - heading "Pastikan Riuh Akhiri Malammu" [level=3] [ref=f13e70]
+                  - heading "Perunggu" [level=4] [ref=f13e71]
+                  - generic [ref=f13e72]: 04:12
+                - listitem [ref=f13e73]:
+                  - button "Play track" [ref=f13e75] [cursor=pointer]:
+                    - generic [ref=f13e76]: "4"
+                  - heading "Ini Abadi" [level=3] [ref=f13e77]
+                  - heading "Perunggu" [level=4] [ref=f13e78]
+                  - generic [ref=f13e79]: 03:52
+                - listitem [ref=f13e80]:
+                  - button "Play track" [ref=f13e82] [cursor=pointer]:
+                    - generic [ref=f13e83]: "5"
+                  - heading "33x" [level=3] [ref=f13e84]
+                  - heading "Perunggu" [level=4] [ref=f13e85]
+                  - generic [ref=f13e86]: 07:14
+                - listitem [ref=f13e87]:
+                  - button "Play track" [ref=f13e89] [cursor=pointer]:
+                    - generic [ref=f13e90]: "6"
+                  - heading "Pancarona" [level=3] [ref=f13e91]
+                  - heading "Barasuara" [level=4] [ref=f13e92]
+                  - generic [ref=f13e93]: 04:21
+                - listitem [ref=f13e94]:
+                  - button "Play track" [ref=f13e96] [cursor=pointer]:
+                    - generic [ref=f13e97]: "7"
+                  - heading "Kalah Lagi" [level=3] [ref=f13e98]
+                  - heading "Biru Baru" [level=4] [ref=f13e99]
+                  - generic [ref=f13e100]: 04:43
+                - listitem [ref=f13e101]:
+                  - button "Play track" [ref=f13e103] [cursor=pointer]:
+                    - generic [ref=f13e104]: "8"
+                  - heading "Timur" [level=3] [ref=f13e105]
+                  - heading "The Adams" [level=4] [ref=f13e106]
+                  - generic [ref=f13e107]: 04:59
+                - listitem [ref=f13e108]:
+                  - button "Play track" [ref=f13e110] [cursor=pointer]:
+                    - generic [ref=f13e111]: "9"
+                  - heading "Sandiwara Semu" [level=3] [ref=f13e112]
+                  - heading "rumahsakit" [level=4] [ref=f13e113]
+                  - generic [ref=f13e114]: 04:24
+                - listitem [ref=f13e115]:
+                  - button "Play track" [ref=f13e117] [cursor=pointer]:
+                    - generic [ref=f13e118]: "10"
+                  - heading "Kabar Bahagia" [level=3] [ref=f13e119]
+                  - heading "rumahsakit" [level=4] [ref=f13e120]
+                  - generic [ref=f13e121]: 03:36
+                - listitem [ref=f13e122]:
+                  - button "Play track" [ref=f13e124] [cursor=pointer]:
+                    - generic [ref=f13e125]: "11"
+                  - heading "Masa-Masa" [level=3] [ref=f13e126]
+                  - heading "The Adams" [level=4] [ref=f13e127]
+                  - generic [ref=f13e128]: 04:59
+                - listitem [ref=f13e129]:
+                  - button "Play track" [ref=f13e131] [cursor=pointer]:
+                    - generic [ref=f13e132]: "12"
+                  - heading "Sssst..." [level=3] [ref=f13e133]
+                  - heading "Sore" [level=4] [ref=f13e134]
+                  - generic [ref=f13e135]: 04:29
+                - listitem [ref=f13e136]:
+                  - button "Play track" [ref=f13e138] [cursor=pointer]:
+                    - generic [ref=f13e139]: "13"
+                  - heading "Tanah Indah Untuk Para Terabaikan Rusak Dan Ditinggalkan" [level=3] [ref=f13e140]
+                  - heading "Fstvlst" [level=4] [ref=f13e141]
+                  - generic [ref=f13e142]: 05:01
+                - listitem [ref=f13e143]:
+                  - button "Play track" [ref=f13e145] [cursor=pointer]:
+                    - generic [ref=f13e146]: "14"
+                  - heading "Berdansalah, Karir Ini Tak Ada Artinya" [level=3] [ref=f13e147]
+                  - heading "Hindia" [level=4] [ref=f13e148]
+                  - generic [ref=f13e149]: 03:44
+                - listitem [ref=f13e150]:
+                  - button "Play track" [ref=f13e152] [cursor=pointer]:
+                    - generic [ref=f13e153]: "15"
+                  - heading "Pasti Ada Jalan" [level=3] [ref=f13e154]
+                  - heading "Perunggu" [level=4] [ref=f13e155]
+                  - generic [ref=f13e156]: 02:19
+                - listitem [ref=f13e157]:
+                  - button "Play track" [ref=f13e159] [cursor=pointer]:
+                    - generic [ref=f13e160]: "16"
+                  - heading "Panasea" [level=3] [ref=f13e161]
+                  - heading "rumahsakit" [level=4] [ref=f13e162]
+                  - generic [ref=f13e163]: 04:31
+            - alert [ref=f13e164]
+    - generic [ref=f12e151]:
+      - generic [ref=f12e152]:
+        - generic [ref=f12e153]: DESIGN
+        - generic [ref=f12e155]: GALLERY
+      - paragraph [ref=f12e159]: Illustrations, visual design, branding, and motion work. A glimpse into the creative side.
+      - generic [ref=f12e160]:
+        - generic [ref=f12e162]:
+          - img "FoldIn.space - UI/UX Redesign & Design System" [ref=f12e163]
+          - generic [ref=f12e164]: "2"
+          - generic [ref=f12e170]:
+            - generic [ref=f12e171]: FoldIn.space - UI/UX Redesign & Design System
+            - generic [ref=f12e172]: Led the end-to-end redesign of FoldIn, a social network for local events, building a token-driven Figma design system (~92 tokens, 6 collections, 5 breakpoints) that unified a fragmented UI from 8 fonts into one cohesive identity. Designed a 25+ component library, a custom flat icon system, and 50+ responsive screens spanning onboarding, events, checkout, wallet, and settings/KYC. Conceived and designed the flagship Ghost Match feature, turning verified event attendance into a connection-discovery experience.
+        - generic [ref=f12e174]:
+          - img "Daylight Asia - UI UX Design" [ref=f12e175]
+          - generic [ref=f12e176]: "2"
+          - generic [ref=f12e182]: Daylight Asia - UI UX Design
+  - button "Play music" [ref=f12e185]
+  - button "Open Next.js Dev Tools" [ref=f12e193] [cursor=pointer]
+  - alert [ref=f12e197]
