@@ -1,0 +1,388 @@
+- generic [active] [ref=f17e1]:
+  - generic [ref=f17e4]:
+    - generic [ref=f17e5]: MG
+    - paragraph [ref=f17e6]: MIZARIE
+  - navigation [ref=f17e11]:
+    - link "MG / MIZARIE" [ref=f17e12]:
+      - /url: /
+      - generic [ref=f17e13]: MG
+      - generic [ref=f17e14]: / MIZARIE
+    - generic [ref=f17e15]:
+      - link "About" [ref=f17e16]:
+        - /url: /about
+      - link "Works" [ref=f17e17]:
+        - /url: /works
+      - link "Contact" [ref=f17e18]:
+        - /url: /contact
+    - generic [ref=f17e19]:
+      - button "Toggle dark mode" [ref=f17e20]
+      - link "Hire me" [ref=f17e24]:
+        - /url: /contact
+  - main [ref=f17e25]:
+    - generic [ref=f17e27]:
+      - generic [ref=f17e28]:
+        - generic [ref=f17e29]: ABOUT
+        - generic [ref=f17e31]: ME
+      - paragraph [ref=f17e35]:
+        - text: I'm
+        - strong [ref=f17e36]: Muhamad Galih
+        - text: ", also known as"
+        - strong [ref=f17e37]: MIZARIE
+        - text: . Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist based in Indonesia. I bridge the gap between technical precision, data-driven thinking, and artistic creativity.
+      - paragraph [ref=f17e39]: "Whether it's architecting a scalable backend, crafting pixel-perfect interfaces, or drawing original characters, they all get pulled through the same filter: does this actually feel good to use?"
+      - generic [ref=f17e40]:
+        - generic [ref=f17e41]:
+          - generic [ref=f17e42]: Development
+          - generic [ref=f17e44]:
+            - generic [ref=f17e45]: React.js
+            - generic [ref=f17e48]: PHP
+            - generic [ref=f17e51]: Supabase
+            - generic [ref=f17e54]: Next.js
+            - generic [ref=f17e57]: HTML
+            - generic [ref=f17e60]: CSS
+            - generic [ref=f17e63]: Firebase
+            - generic [ref=f17e66]: Laravel
+            - generic [ref=f17e69]: Docker
+            - generic [ref=f17e72]: Python
+            - generic [ref=f17e75]: MySQL
+            - generic [ref=f17e78]: MongoDB
+            - generic [ref=f17e81]: JavaScript
+            - generic [ref=f17e84]: PostgreSQL
+            - generic [ref=f17e87]: SQL
+            - generic [ref=f17e88]: Git
+            - generic [ref=f17e91]: FastAPI
+            - generic [ref=f17e94]: Power BI
+            - generic [ref=f17e95]: Pandas
+            - generic [ref=f17e96]: NumPy
+            - generic [ref=f17e97]: Microsoft Office
+        - generic [ref=f17e98]:
+          - generic [ref=f17e99]: Design
+          - generic [ref=f17e101]:
+            - generic [ref=f17e102]: Figma
+            - generic [ref=f17e105]: Adobe Photoshop
+            - generic [ref=f17e106]: Adobe Illustrator
+            - generic [ref=f17e107]: Canva
+            - generic [ref=f17e108]: CapCut
+    - generic [ref=f17e110]:
+      - generic [ref=f17e111]:
+        - generic [ref=f17e112]: WORK
+        - generic [ref=f17e114]: EXPERIENCE
+      - generic [ref=f17e120]:
+        - generic [ref=f17e124]:
+          - generic [ref=f17e125]:
+            - generic [ref=f17e126]:
+              - img "Momentum Padel Series" [ref=f17e128]
+              - generic [ref=f17e129]:
+                - heading "Graphic Designer" [level=3] [ref=f17e130]
+                - paragraph [ref=f17e131]: Momentum Padel Series
+            - generic [ref=f17e132]: Jun 2026 - Present
+          - list [ref=f17e133]:
+            - listitem [ref=f17e134]: Produced ~20 design assets per event across 3 padel tournaments (feed, story, poster, jersey, medal, banner, certificate) with a consistent brand identity.
+            - listitem [ref=f17e136]: Designed social media content to support tournament publicity at a 20+ participant scale, building event awareness from the ground up.
+            - listitem [ref=f17e138]: Built the brand's social media presence from scratch as the visual foundation for engagement growth.
+          - generic [ref=f17e140]:
+            - button [ref=f17e141]:
+              - img "Momentum Padel Series" [ref=f17e142]
+            - button [ref=f17e143]:
+              - img "Momentum Padel Series" [ref=f17e144]
+            - button [ref=f17e145]:
+              - img "Momentum Padel Series" [ref=f17e146]
+            - button [ref=f17e147]:
+              - img "Momentum Padel Series" [ref=f17e148]
+        - generic [ref=f17e152]:
+          - generic [ref=f17e153]:
+            - generic [ref=f17e160]:
+              - heading "Fullstack Web Developer, Graphic Designer & UI/UX Designer" [level=3] [ref=f17e161]
+              - paragraph [ref=f17e162]: Self-employed · Xharp.dev · MizarieDesign
+            - generic [ref=f17e163]: Jun 2025 - Present
+          - list [ref=f17e164]:
+            - listitem [ref=f17e165]: Delivered 3 web development projects, 10+ graphic design and illustration pieces, and 2 UI/UX projects for online and personal clients.
+            - listitem [ref=f17e167]: Worked directly with clients from requirements gathering through final delivery, ensuring every design met expectations and deadlines.
+          - button "Bakery Shop - Bakery ERP System 2 Bakery Shop - Bakery ERP System" [ref=f17e170]:
+            - img "Bakery Shop - Bakery ERP System" [ref=f17e171]
+            - generic [ref=f17e172]: "2"
+            - generic [ref=f17e178]: Bakery Shop - Bakery ERP System
+        - generic [ref=f17e183]:
+          - generic [ref=f17e184]:
+            - generic [ref=f17e191]:
+              - heading "UI/UX Designer" [level=3] [ref=f17e192]
+              - paragraph [ref=f17e193]: Daylight.asia & FoldIn.space
+            - generic [ref=f17e194]: Jul 2025 - Jun 2026
+          - list [ref=f17e195]:
+            - listitem [ref=f17e196]: Designed 70+ high-fidelity screens for DayLight (mobile app, company profile, blog, and a 12-step onboarding quiz) from 375+ reusable component instances.
+            - listitem [ref=f17e198]: "Led a full redesign into FoldIn: built a design system from scratch (~92 tokens, 25 text styles) and migrated 3,700+ hardcoded colors to semantic tokens."
+            - listitem [ref=f17e200]: Designed 40+ component sets and 90+ screens end-to-end (auth, feed, chat, wallet, KYC, leaderboard) for the FoldIn redesign.
+          - generic [ref=f17e202]:
+            - button "Daylight Asia - UI UX Design 2 Daylight Asia - UI UX Design" [ref=f17e203]:
+              - img "Daylight Asia - UI UX Design" [ref=f17e204]
+              - generic [ref=f17e205]: "2"
+              - generic [ref=f17e211]: Daylight Asia - UI UX Design
+            - button "FoldIn.space - UI/UX Redesign & Design System 2 FoldIn.space - UI/UX Redesign & Design System" [ref=f17e213]:
+              - img "FoldIn.space - UI/UX Redesign & Design System" [ref=f17e214]
+              - generic [ref=f17e215]: "2"
+              - generic [ref=f17e221]: FoldIn.space - UI/UX Redesign & Design System
+        - generic [ref=f17e226]:
+          - generic [ref=f17e227]:
+            - generic [ref=f17e234]:
+              - heading "Graphic Designer Intern" [level=3] [ref=f17e235]
+              - paragraph [ref=f17e236]: PT Bukhori Group Indonesia
+            - generic [ref=f17e237]: Jan 2026 - Apr 2026
+          - list [ref=f17e238]:
+            - listitem [ref=f17e239]: Handled design needs across 3 company brands (Nusa MUN, Leaders, Youthspace Indonesia), maintaining a consistent visual identity for each.
+            - listitem [ref=f17e241]: Designed promotional materials for 5+ competitions and events, averaging ~10 assets per event, spanning Instagram feeds, posters, and competition guidebooks.
+            - listitem [ref=f17e243]: Prepared merchandise assets for competitions with up to 1,000 participants, including shirts, medals, certificates, and stickers.
+        - generic [ref=f17e248]:
+          - generic [ref=f17e249]:
+            - generic [ref=f17e256]:
+              - heading "Fullstack Web Developer Intern" [level=3] [ref=f17e257]
+              - paragraph [ref=f17e258]: BKPSDM Banjar
+            - generic [ref=f17e259]: Jul 2024 - Sep 2024
+          - list [ref=f17e260]:
+            - listitem [ref=f17e261]: Supported ASN (civil servant) administrative services, processing ~20-30 documents and verifying independent study leave (Tugas Belajar Mandiri) files for ~10-15 civil servants.
+            - listitem [ref=f17e263]: Developed a web-based prototype for the independent study leave request system (Laravel, multi-role), with the potential to cut the administrative process from ~10-15 working days down to 3-5.
+    - generic [ref=f17e266]:
+      - generic [ref=f17e267]: EDUCATION
+      - generic [ref=f17e274]:
+        - generic [ref=f17e278]:
+          - generic [ref=f17e279]:
+            - generic [ref=f17e280]:
+              - img "Universitas Jenderal Soedirman" [ref=f17e282]
+              - generic [ref=f17e283]:
+                - heading "Bachelor of Computer Science" [level=3] [ref=f17e284]
+                - paragraph [ref=f17e285]: Universitas Jenderal Soedirman
+            - generic [ref=f17e286]:
+              - generic [ref=f17e287]: Aug 2022 - May 2026
+              - generic [ref=f17e288]: GPA 3.78 / 4.00 (cumlaude)
+          - list [ref=f17e289]:
+            - listitem [ref=f17e290]: "Thesis: analyzed the evolution of research topics across 473 Informatics undergraduate thesis documents (2018-2026) using BERTopic, producing 11 coherent topics with 44.6% higher topic coherence than the LDA baseline."
+            - listitem [ref=f17e292]: Built an interactive dashboard with Laravel and FastAPI, integrated with the Google Gemini API, to present the analysis results.
+            - listitem [ref=f17e294]: Graduated cumlaude in 3 years and 9 months, faster than the standard study duration.
+        - generic [ref=f17e299]:
+          - generic [ref=f17e300]:
+            - generic [ref=f17e301]:
+              - img "Madrasah Aliyah Negeri 02 Cilacap" [ref=f17e303]
+              - generic [ref=f17e304]:
+                - heading "Senior High School" [level=3] [ref=f17e305]
+                - paragraph [ref=f17e306]: Madrasah Aliyah Negeri 02 Cilacap
+            - generic [ref=f17e307]:
+              - generic [ref=f17e308]: Jun 2019 - Jun 2022
+              - generic [ref=f17e309]: GPA 91
+          - list [ref=f17e310]:
+            - listitem [ref=f17e311]: Awarded a 3-year scholarship that covers all school tuition.
+            - listitem [ref=f17e313]: Vice President of Fine Arts Extracurricular, successfully organizing an exhibition with 65+ participants
+    - generic [ref=f17e316]:
+      - generic [ref=f17e317]: ORGANIZATIONS
+      - generic [ref=f17e322]:
+        - button "Kuliah Kerja Nyata (KKN) — Desa Kalitengah Kuliah Kerja Nyata (KKN) — Desa Kalitengah Coordinator, Publication, Decoration & Documentation Jan 2025 - Feb 2025 View details · 2 photos →" [ref=f17e324]:
+          - img "Kuliah Kerja Nyata (KKN) — Desa Kalitengah" [ref=f17e326]
+          - heading "Kuliah Kerja Nyata (KKN) — Desa Kalitengah" [level=3] [ref=f17e327]
+          - paragraph [ref=f17e328]: Coordinator, Publication, Decoration & Documentation
+          - paragraph [ref=f17e329]: Jan 2025 - Feb 2025
+          - paragraph [ref=f17e330]:
+            - text: View details
+            - generic [ref=f17e331]: · 2 photos
+            - generic [ref=f17e332]: →
+        - button "HMIF Universitas Jenderal Soedirman HMIF Universitas Jenderal Soedirman Staff of Medkominfo 2022 - 2024 View details · 12 photos →" [ref=f17e334]:
+          - img "HMIF Universitas Jenderal Soedirman" [ref=f17e336]
+          - heading "HMIF Universitas Jenderal Soedirman" [level=3] [ref=f17e337]
+          - paragraph [ref=f17e338]: Staff of Medkominfo
+          - paragraph [ref=f17e339]: 2022 - 2024
+          - paragraph [ref=f17e340]:
+            - text: View details
+            - generic [ref=f17e341]: · 12 photos
+            - generic [ref=f17e342]: →
+    - generic [ref=f17e344]:
+      - generic [ref=f17e345]: CERTIFICATES
+      - generic [ref=f17e350]:
+        - generic [ref=f17e352]:
+          - button [ref=f17e353]
+          - generic [ref=f17e357]:
+            - heading "TOEFL Prediction — Score 473" [level=3] [ref=f17e358]
+            - paragraph [ref=f17e359]: YEC - English Proficiency Test
+            - paragraph [ref=f17e360]: Jul 2026
+        - generic [ref=f17e362]:
+          - button [ref=f17e363]
+          - generic [ref=f17e367]:
+            - heading "LLM-Based Tools & Gemini API Integration for Data Scientists" [level=3] [ref=f17e368]
+            - paragraph [ref=f17e369]: Hacktiv8
+            - paragraph [ref=f17e370]: Jul 2026
+            - link "View credential ↗" [ref=f17e371]:
+              - /url: https://students.hacktiv8.com/certificates/e037541e-6e19-4917-a98f-f0d42581a7fc
+        - generic [ref=f17e373]:
+          - button [ref=f17e374]
+          - generic [ref=f17e378]:
+            - heading "Membangun Aplikasi Gen AI dengan Microsoft Azure" [level=3] [ref=f17e379]
+            - paragraph [ref=f17e380]: Dicoding
+            - paragraph [ref=f17e381]: Jul 2026
+            - link "View credential ↗" [ref=f17e382]:
+              - /url: https://www.dicoding.com/certificates/JLX1VOKQGZ72
+        - generic [ref=f17e384]:
+          - button [ref=f17e385]
+          - generic [ref=f17e389]:
+            - heading "Belajar Penerapan Data Science dengan Microsoft Fabric" [level=3] [ref=f17e390]
+            - paragraph [ref=f17e391]: Dicoding
+            - paragraph [ref=f17e392]: Jul 2026
+            - link "View credential ↗" [ref=f17e393]:
+              - /url: https://www.dicoding.com/certificates/2VX30QJ34XYQ
+        - generic [ref=f17e395]:
+          - button [ref=f17e396]
+          - generic [ref=f17e400]:
+            - heading "Spec-Driven Development dengan Kiro" [level=3] [ref=f17e401]
+            - paragraph [ref=f17e402]: Dicoding
+            - paragraph [ref=f17e403]: Jul 2026
+            - link "View credential ↗" [ref=f17e404]:
+              - /url: https://www.dicoding.com/certificates/1RXYW8K2MZVM
+        - generic [ref=f17e406]:
+          - button [ref=f17e407]
+          - generic [ref=f17e411]:
+            - heading "SQL (Intermediate) — 100/100" [level=3] [ref=f17e412]
+            - paragraph [ref=f17e413]: HackerRank
+            - paragraph [ref=f17e414]: Jun 2026
+        - generic [ref=f17e416]:
+          - button [ref=f17e417]
+          - generic [ref=f17e421]:
+            - heading "Software Engineer — 100/100" [level=3] [ref=f17e422]
+            - paragraph [ref=f17e423]: HackerRank
+            - paragraph [ref=f17e424]: Jun 2026
+        - generic [ref=f17e426]:
+          - button [ref=f17e427]
+          - generic [ref=f17e431]:
+            - heading "The Complete 2024 Web Development Bootcamp" [level=3] [ref=f17e432]
+            - paragraph [ref=f17e433]: Udemy
+            - paragraph [ref=f17e434]: Jun 2026
+            - link "View credential ↗" [ref=f17e435]:
+              - /url: https://www.udemy.com/certificate/UC-d3cb96b1-7ac6-4e95-a4d0-4ef4526386d1/
+        - generic [ref=f17e437]:
+          - button [ref=f17e438]
+          - generic [ref=f17e442]:
+            - heading "Belajar Machine Learning untuk Pemula" [level=3] [ref=f17e443]
+            - paragraph [ref=f17e444]: Dicoding
+            - paragraph [ref=f17e445]: Jan 2026
+            - link "View credential ↗" [ref=f17e446]:
+              - /url: https://www.dicoding.com/certificates/GRX5JVL1YX0M
+        - generic [ref=f17e448]:
+          - button [ref=f17e449]
+          - generic [ref=f17e453]:
+            - 'heading "Talent Class #19 - ENERGY DATA ANALYST" [level=3] [ref=f17e454]'
+            - paragraph [ref=f17e455]: Kemnaker, Pasker ID, talenthub
+            - paragraph [ref=f17e456]: Sep 2025
+        - generic [ref=f17e458]:
+          - button [ref=f17e459]
+          - generic [ref=f17e463]:
+            - heading "Belajar Dasar Cloud dan Gen AI di AWS" [level=3] [ref=f17e464]
+            - paragraph [ref=f17e465]: Dicoding
+            - paragraph [ref=f17e466]: Aug 2025
+            - link "View credential ↗" [ref=f17e467]:
+              - /url: https://www.dicoding.com/certificates/6RPNG8749Z2M
+        - generic [ref=f17e469]:
+          - button [ref=f17e470]
+          - generic [ref=f17e474]:
+            - heading "Belajar Back-End Pemula dengan JavaScript" [level=3] [ref=f17e475]
+            - paragraph [ref=f17e476]: Dicoding
+            - paragraph [ref=f17e477]: Jul 2025
+            - link "View credential ↗" [ref=f17e478]:
+              - /url: https://www.dicoding.com/certificates/4EXG3Y42DZRL
+        - generic [ref=f17e480]:
+          - button [ref=f17e481]
+          - generic [ref=f17e485]:
+            - heading "Belajar Dasar Pemrograman JavaScript" [level=3] [ref=f17e486]
+            - paragraph [ref=f17e487]: Dicoding
+            - paragraph [ref=f17e488]: Jul 2025
+            - link "View credential ↗" [ref=f17e489]:
+              - /url: https://www.dicoding.com/certificates/0LZ05DQ03X65
+        - generic [ref=f17e491]:
+          - button [ref=f17e492]
+          - generic [ref=f17e496]:
+            - 'heading "PZN - Laravel : Pemula sampai Mahir" [level=3] [ref=f17e497]'
+            - paragraph [ref=f17e498]: Udemy
+            - paragraph [ref=f17e499]: Jul 2025
+            - link "View credential ↗" [ref=f17e500]:
+              - /url: https://www.udemy.com/certificate/UC-65165d76-5b9e-40b6-abf7-05d8a9555b5d/
+        - generic [ref=f17e502]:
+          - button [ref=f17e503]
+          - generic [ref=f17e507]:
+            - 'heading "Laravel 11 & Spatie User Roles: Bikin Website Apotek Online" [level=3] [ref=f17e508]'
+            - paragraph [ref=f17e509]: Buildwithangga
+            - paragraph [ref=f17e510]: Jun 2025
+        - generic [ref=f17e512]:
+          - button [ref=f17e513]
+          - generic [ref=f17e517]:
+            - heading "Memulai Pemrograman dengan Python" [level=3] [ref=f17e518]
+            - paragraph [ref=f17e519]: Dicoding
+            - paragraph [ref=f17e520]: Apr 2025
+            - link "View credential ↗" [ref=f17e521]:
+              - /url: https://www.dicoding.com/certificates/N9ZO9GW3RXG5
+        - generic [ref=f17e523]:
+          - button [ref=f17e524]
+          - generic [ref=f17e528]:
+            - heading "Belajar Dasar Structured Query Language (SQL)" [level=3] [ref=f17e529]
+            - paragraph [ref=f17e530]: Dicoding
+            - paragraph [ref=f17e531]: Apr 2025
+            - link "View credential ↗" [ref=f17e532]:
+              - /url: https://www.dicoding.com/certificates/98XWE3DW9XM3
+        - generic [ref=f17e534]:
+          - button [ref=f17e535]
+          - generic [ref=f17e539]:
+            - heading "Belajar Dasar Visualisasi Data" [level=3] [ref=f17e540]
+            - paragraph [ref=f17e541]: Dicoding
+            - paragraph [ref=f17e542]: Mar 2025
+            - link "View credential ↗" [ref=f17e543]:
+              - /url: https://www.dicoding.com/certificates/1OP82GQDLPQK
+        - generic [ref=f17e545]:
+          - button [ref=f17e546]
+          - generic [ref=f17e550]:
+            - heading "Belajar Dasar Data Science" [level=3] [ref=f17e551]
+            - paragraph [ref=f17e552]: Dicoding
+            - paragraph [ref=f17e553]: Mar 2025
+            - link "View credential ↗" [ref=f17e554]:
+              - /url: https://www.dicoding.com/certificates/MRZMNOR1KPYQ
+        - generic [ref=f17e556]:
+          - button [ref=f17e557]
+          - generic [ref=f17e561]:
+            - heading "TSA - Cyber Champion Talent Scouting Academy Digital Talent Scholarship 2024" [level=3] [ref=f17e562]
+            - paragraph [ref=f17e563]: Pusbang Proserti Kominfo
+            - paragraph [ref=f17e564]: Dec 2024
+        - generic [ref=f17e566]:
+          - button [ref=f17e567]
+          - generic [ref=f17e571]:
+            - heading "Belajar Dasar Pemrograman Web" [level=3] [ref=f17e572]
+            - paragraph [ref=f17e573]: Dicoding
+            - paragraph [ref=f17e574]: Nov 2024
+            - link "View credential ↗" [ref=f17e575]:
+              - /url: https://www.dicoding.com/certificates/JLX14NR3JX72
+    - generic [ref=f17e577]:
+      - generic [ref=f17e578]:
+        - generic [ref=f17e579]:
+          - generic [ref=f17e580]:
+            - generic [ref=f17e581]: WHAT
+            - generic [ref=f17e583]: PEOPLE
+            - generic [ref=f17e585]: SAY
+          - paragraph [ref=f17e588]: Kind words from collaborators and clients I've had the pleasure of working with.
+        - button "Leave a testimonial" [ref=f17e591]
+      - generic [ref=f17e596]:
+        - generic [ref=f17e597]:
+          - generic [ref=f17e598]:
+            - button [ref=f17e599]
+            - button [ref=f17e602]
+            - button [ref=f17e605]
+            - button [ref=f17e608]
+            - button [ref=f17e611]
+          - paragraph [ref=f17e614]: “Desain Baju Ilustrasi dari beliau cukup bagus dan sangat memuaskan.”
+          - generic [ref=f17e615]:
+            - img "Ifan Maul" [ref=f17e616]
+            - generic [ref=f17e617]:
+              - paragraph [ref=f17e618]: Ifan Maul
+              - paragraph [ref=f17e619]: Fullstack Engineering @ Freelance
+        - generic [ref=f17e620]:
+          - generic [ref=f17e621]:
+            - button [ref=f17e622]
+            - button [ref=f17e625]
+            - button [ref=f17e628]
+            - button [ref=f17e631]
+            - button [ref=f17e634]
+          - paragraph [ref=f17e637]: “Sangat keren sekali, terimakasih✨✨”
+          - generic [ref=f17e638]:
+            - img "Adinda Oktaviani" [ref=f17e639]
+            - paragraph [ref=f17e641]: Adinda Oktaviani
+  - button "Play music" [ref=f17e643]
+  - alert [ref=f17e646]

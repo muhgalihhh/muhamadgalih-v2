@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, Users, X, FileText, ChevronUp } from "lucide-react";
+import { Award, Users, X, FileText, ChevronUp, Images } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
@@ -242,15 +242,36 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                       </ul>
 
                       {!!exp.linked_projects?.length && (
-                        <div className="flex flex-wrap gap-1.5 mt-4">
+                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-5">
                           {exp.linked_projects.map((p) => (
                             <button
                               key={p.id}
                               type="button"
                               onClick={() => setModalProject(p)}
-                              className="cartoon-border-sm bg-black/10 hover:bg-black/20 transition-colors font-body text-[11px] font-semibold px-2.5 py-1 rounded-full"
+                              className="aspect-square rounded-xl overflow-hidden cartoon-border-sm relative group/work text-left"
                             >
-                              🔗 {p.title}
+                              {p.image_urls[0] ? (
+                                <img
+                                  src={p.image_urls[0]}
+                                  alt={p.title}
+                                  loading="lazy"
+                                  className="w-full h-full object-cover group-hover/work:scale-105 transition-transform duration-300"
+                                />
+                              ) : (
+                                <div className={`w-full h-full ${p.color_class} flex items-center justify-center`}>
+                                  <SkillIcon icon={p.emoji} className="w-8 h-8 opacity-70" />
+                                </div>
+                              )}
+                              {p.image_urls.length > 0 && (
+                                <span className="absolute top-1.5 right-1.5 z-10 flex items-center gap-0.5 cartoon-border-sm bg-black/50 text-cream text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
+                                  <Images size={10} /> {p.image_urls.length}
+                                </span>
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end p-2">
+                                <span className="font-display font-bold text-cream text-[11px] leading-tight line-clamp-2">
+                                  {p.title}
+                                </span>
+                              </div>
                             </button>
                           ))}
                         </div>
