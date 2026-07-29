@@ -1,0 +1,419 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: MG
+    - paragraph [ref=e6]: MIZARIE
+  - navigation [ref=e11]:
+    - link "MG / MIZARIE" [ref=e12]:
+      - /url: /
+      - generic [ref=e13]: MG
+      - generic [ref=e14]: / MIZARIE
+    - generic [ref=e15]:
+      - link "About" [ref=e16]:
+        - /url: /about
+      - link "Works" [ref=e17]:
+        - /url: /works
+      - link "Contact" [ref=e18]:
+        - /url: /contact
+    - generic [ref=e19]:
+      - button "Toggle dark mode" [ref=e20]
+      - link "Hire me" [ref=e24]:
+        - /url: /contact
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: ABOUT
+        - generic [ref=e31]: ME
+      - paragraph [ref=e35]:
+        - text: I'm
+        - strong [ref=e36]: Muhamad Galih
+        - text: ", also known as"
+        - strong [ref=e37]: MIZARIE
+        - text: . Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist based in Indonesia. I bridge the gap between technical precision, data-driven thinking, and artistic creativity.
+      - paragraph [ref=e39]: "Whether it's architecting a scalable backend, crafting pixel-perfect interfaces, or drawing original characters, they all get pulled through the same filter: does this actually feel good to use?"
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]: Development
+          - generic [ref=e44]:
+            - generic [ref=e45]: React.js
+            - generic [ref=e48]: PHP
+            - generic [ref=e51]: Supabase
+            - generic [ref=e54]: Next.js
+            - generic [ref=e57]: HTML
+            - generic [ref=e60]: CSS
+            - generic [ref=e63]: Firebase
+            - generic [ref=e66]: Laravel
+            - generic [ref=e69]: Docker
+            - generic [ref=e72]: Python
+            - generic [ref=e75]: MySQL
+            - generic [ref=e78]: MongoDB
+            - generic [ref=e81]: JavaScript
+            - generic [ref=e84]: PostgreSQL
+            - generic [ref=e87]: SQL
+            - generic [ref=e88]: Git
+            - generic [ref=e91]: FastAPI
+            - generic [ref=e94]: Power BI
+            - generic [ref=e95]: Pandas
+            - generic [ref=e96]: NumPy
+            - generic [ref=e97]: Microsoft Office
+        - generic [ref=e98]:
+          - generic [ref=e99]: Design
+          - generic [ref=e101]:
+            - generic [ref=e102]: Figma
+            - generic [ref=e105]: Adobe Photoshop
+            - generic [ref=e106]: Adobe Illustrator
+            - generic [ref=e107]: Canva
+            - generic [ref=e108]: CapCut
+    - generic [ref=e110]:
+      - generic [ref=e111]:
+        - generic [ref=e112]: WORK
+        - generic [ref=e114]: EXPERIENCE
+      - generic [ref=e120]:
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - img "Momentum Padel Series" [ref=e128]
+              - generic [ref=e129]:
+                - heading "Graphic Designer" [level=3] [ref=e130]
+                - paragraph [ref=e131]: Momentum Padel Series
+            - generic [ref=e132]: Jun 2026 - Present
+          - list [ref=e133]:
+            - listitem [ref=e134]: Produced ~20 design assets per event across 3 padel tournaments (feed, story, poster, jersey, medal, banner, certificate) with a consistent brand identity.
+            - listitem [ref=e136]: Designed social media content to support tournament publicity at a 20+ participant scale, building event awareness from the ground up.
+            - listitem [ref=e138]: Built the brand's social media presence from scratch as the visual foundation for engagement growth.
+          - generic [ref=e140]:
+            - button [ref=e141]:
+              - img "Momentum Padel Series" [ref=e142]
+            - button [ref=e143]:
+              - img "Momentum Padel Series" [ref=e144]
+            - button [ref=e145]:
+              - img "Momentum Padel Series" [ref=e146]
+            - button [ref=e147]:
+              - img "Momentum Padel Series" [ref=e148]
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - generic [ref=e160]:
+              - heading "Fullstack Web Developer, Graphic Designer & UI/UX Designer" [level=3] [ref=e161]
+              - paragraph [ref=e162]: Self-employed · Xharp.dev · MizarieDesign
+            - generic [ref=e163]: Jun 2025 - Present
+          - list [ref=e164]:
+            - listitem [ref=e165]: Delivered 3 web development projects, 10+ graphic design and illustration pieces, and 2 UI/UX projects for online and personal clients.
+            - listitem [ref=e167]: Worked directly with clients from requirements gathering through final delivery, ensuring every design met expectations and deadlines.
+          - generic [ref=e169]:
+            - button "Pareeduhub - Online Course Platform (LMS) 2 Pareeduhub - Online Course Platform (LMS)" [ref=e170]:
+              - img "Pareeduhub - Online Course Platform (LMS)" [ref=e171]
+              - generic [ref=e172]: "2"
+              - generic [ref=e178]: Pareeduhub - Online Course Platform (LMS)
+            - button "Bakery Shop - Bakery ERP System 2 Bakery Shop - Bakery ERP System" [ref=e180]:
+              - img "Bakery Shop - Bakery ERP System" [ref=e181]
+              - generic [ref=e182]: "2"
+              - generic [ref=e188]: Bakery Shop - Bakery ERP System
+        - generic [ref=e193]:
+          - generic [ref=e194]:
+            - generic [ref=e201]:
+              - heading "UI/UX Designer" [level=3] [ref=e202]
+              - paragraph [ref=e203]: Daylight.asia & FoldIn.space
+            - generic [ref=e204]: Jul 2025 - Jun 2026
+          - list [ref=e205]:
+            - listitem [ref=e206]: Designed 70+ high-fidelity screens for DayLight (mobile app, company profile, blog, and a 12-step onboarding quiz) from 375+ reusable component instances.
+            - listitem [ref=e208]: "Led a full redesign into FoldIn: built a design system from scratch (~92 tokens, 25 text styles) and migrated 3,700+ hardcoded colors to semantic tokens."
+            - listitem [ref=e210]: Designed 40+ component sets and 90+ screens end-to-end (auth, feed, chat, wallet, KYC, leaderboard) for the FoldIn redesign.
+          - generic [ref=e212]:
+            - button "Daylight Asia - UI UX Design 2 Daylight Asia - UI UX Design" [ref=e213]:
+              - img "Daylight Asia - UI UX Design" [ref=e214]
+              - generic [ref=e215]: "2"
+              - generic [ref=e221]: Daylight Asia - UI UX Design
+            - button "FoldIn.space - UI/UX Redesign & Design System 2 FoldIn.space - UI/UX Redesign & Design System" [ref=e223]:
+              - img "FoldIn.space - UI/UX Redesign & Design System" [ref=e224]
+              - generic [ref=e225]: "2"
+              - generic [ref=e231]: FoldIn.space - UI/UX Redesign & Design System
+        - generic [ref=e236]:
+          - generic [ref=e237]:
+            - generic [ref=e238]:
+              - img "Universitas Jenderal Soedirman" [ref=e240]
+              - generic [ref=e241]:
+                - heading "Machine Learning, Data Science & Analysis (Asignment)" [level=3] [ref=e242]
+                - paragraph [ref=e243]: Universitas Jenderal Soedirman
+            - generic [ref=e244]: Jul 2022 - May 2026
+          - list
+          - generic [ref=e245]:
+            - button "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik 1 Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik" [ref=e246]:
+              - img "Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik" [ref=e247]
+              - generic [ref=e248]: "1"
+              - generic [ref=e254]: Implementasi Fuzzy SAW dalam Penentuan Dosen Pembimbing Kerja Praktik
+            - button "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA 1 Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA" [ref=e256]:
+              - img "Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA" [ref=e257]
+              - generic [ref=e258]: "1"
+              - generic [ref=e264]: Optimalisasi Pemenuhan Gizi dengan Algoritma Genetika untuk RDA
+            - button "Gold Price Prediction with KNN and Linear Regression 2 Gold Price Prediction with KNN and Linear Regression" [ref=e266]:
+              - img "Gold Price Prediction with KNN and Linear Regression" [ref=e267]
+              - generic [ref=e268]: "2"
+              - generic [ref=e274]: Gold Price Prediction with KNN and Linear Regression
+            - 'button "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi 2 Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi" [ref=e276]':
+              - 'img "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi" [ref=e277]'
+              - generic [ref=e278]: "2"
+              - generic [ref=e284]: "Pemodelan Pengguna Spotify Menggunakan Machine Learning: Reduksi Dimensi, Klasterisasi, dan Analisis Aturan Asosiasi"
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - generic [ref=e297]:
+              - heading "Graphic Designer Intern" [level=3] [ref=e298]
+              - paragraph [ref=e299]: PT Bukhori Group Indonesia
+            - generic [ref=e300]: Jan 2026 - Apr 2026
+          - list [ref=e301]:
+            - listitem [ref=e302]: Handled design needs across 3 company brands (Nusa MUN, Leaders, Youthspace Indonesia), maintaining a consistent visual identity for each.
+            - listitem [ref=e304]: Designed promotional materials for 5+ competitions and events, averaging ~10 assets per event, spanning Instagram feeds, posters, and competition guidebooks.
+            - listitem [ref=e306]: Prepared merchandise assets for competitions with up to 1,000 participants, including shirts, medals, certificates, and stickers.
+        - generic [ref=e311]:
+          - generic [ref=e312]:
+            - generic [ref=e319]:
+              - heading "Fullstack Web Developer Intern" [level=3] [ref=e320]
+              - paragraph [ref=e321]: BKPSDM Banjar
+            - generic [ref=e322]: Jul 2024 - Sep 2024
+          - list [ref=e323]:
+            - listitem [ref=e324]: Supported ASN (civil servant) administrative services, processing ~20-30 documents and verifying independent study leave (Tugas Belajar Mandiri) files for ~10-15 civil servants.
+            - listitem [ref=e326]: Developed a web-based prototype for the independent study leave request system (Laravel, multi-role), with the potential to cut the administrative process from ~10-15 working days down to 3-5.
+    - generic [ref=e329]:
+      - generic [ref=e330]: EDUCATION
+      - generic [ref=e337]:
+        - generic [ref=e341]:
+          - generic [ref=e342]:
+            - generic [ref=e343]:
+              - img "Universitas Jenderal Soedirman" [ref=e345]
+              - generic [ref=e346]:
+                - heading "Bachelor of Computer Science" [level=3] [ref=e347]
+                - paragraph [ref=e348]: Universitas Jenderal Soedirman
+            - generic [ref=e349]:
+              - generic [ref=e350]: Aug 2022 - May 2026
+              - generic [ref=e351]: GPA 3.78 / 4.00 (cumlaude)
+          - list [ref=e352]:
+            - listitem [ref=e353]: "Thesis: analyzed the evolution of research topics across 473 Informatics undergraduate thesis documents (2018-2026) using BERTopic, producing 11 coherent topics with 44.6% higher topic coherence than the LDA baseline."
+            - listitem [ref=e355]: Built an interactive dashboard with Laravel and FastAPI, integrated with the Google Gemini API, to present the analysis results.
+            - listitem [ref=e357]: Graduated cumlaude in 3 years and 9 months, faster than the standard study duration.
+        - generic [ref=e362]:
+          - generic [ref=e363]:
+            - generic [ref=e364]:
+              - img "Madrasah Aliyah Negeri 02 Cilacap" [ref=e366]
+              - generic [ref=e367]:
+                - heading "Senior High School" [level=3] [ref=e368]
+                - paragraph [ref=e369]: Madrasah Aliyah Negeri 02 Cilacap
+            - generic [ref=e370]:
+              - generic [ref=e371]: Jun 2019 - Jun 2022
+              - generic [ref=e372]: GPA 91
+          - list [ref=e373]:
+            - listitem [ref=e374]: Awarded a 3-year scholarship that covers all school tuition.
+            - listitem [ref=e376]: Vice President of Fine Arts Extracurricular, successfully organizing an exhibition with 65+ participants
+    - generic [ref=e379]:
+      - generic [ref=e380]: ORGANIZATIONS
+      - generic [ref=e385]:
+        - button "Kuliah Kerja Nyata (KKN) — Desa Kalitengah Kuliah Kerja Nyata (KKN) — Desa Kalitengah Coordinator, Publication, Decoration & Documentation Jan 2025 - Feb 2025 View details · 2 photos →" [ref=e387]:
+          - img "Kuliah Kerja Nyata (KKN) — Desa Kalitengah" [ref=e389]
+          - heading "Kuliah Kerja Nyata (KKN) — Desa Kalitengah" [level=3] [ref=e390]
+          - paragraph [ref=e391]: Coordinator, Publication, Decoration & Documentation
+          - paragraph [ref=e392]: Jan 2025 - Feb 2025
+          - paragraph [ref=e393]:
+            - text: View details
+            - generic [ref=e394]: · 2 photos
+            - generic [ref=e395]: →
+        - button "HMIF Universitas Jenderal Soedirman HMIF Universitas Jenderal Soedirman Staff of Medkominfo 2022 - 2024 View details · 12 photos →" [ref=e397]:
+          - img "HMIF Universitas Jenderal Soedirman" [ref=e399]
+          - heading "HMIF Universitas Jenderal Soedirman" [level=3] [ref=e400]
+          - paragraph [ref=e401]: Staff of Medkominfo
+          - paragraph [ref=e402]: 2022 - 2024
+          - paragraph [ref=e403]:
+            - text: View details
+            - generic [ref=e404]: · 12 photos
+            - generic [ref=e405]: →
+    - generic [ref=e407]:
+      - generic [ref=e408]: CERTIFICATES
+      - generic [ref=e413]:
+        - generic [ref=e415]:
+          - button [ref=e416]
+          - generic [ref=e421]:
+            - heading "TOEFL Prediction — Score 473" [level=3] [ref=e422]
+            - paragraph [ref=e423]: YEC - English Proficiency Test
+            - paragraph [ref=e424]: Jul 2026
+        - generic [ref=e426]:
+          - button [ref=e427]
+          - generic [ref=e432]:
+            - heading "LLM-Based Tools & Gemini API Integration for Data Scientists" [level=3] [ref=e433]
+            - paragraph [ref=e434]: Hacktiv8
+            - paragraph [ref=e435]: Jul 2026
+            - link "View credential ↗" [ref=e436]:
+              - /url: https://students.hacktiv8.com/certificates/e037541e-6e19-4917-a98f-f0d42581a7fc
+        - generic [ref=e438]:
+          - button [ref=e439]
+          - generic [ref=e444]:
+            - heading "Membangun Aplikasi Gen AI dengan Microsoft Azure" [level=3] [ref=e445]
+            - paragraph [ref=e446]: Dicoding
+            - paragraph [ref=e447]: Jul 2026
+            - link "View credential ↗" [ref=e448]:
+              - /url: https://www.dicoding.com/certificates/JLX1VOKQGZ72
+        - generic [ref=e450]:
+          - button [ref=e451]
+          - generic [ref=e456]:
+            - heading "Belajar Penerapan Data Science dengan Microsoft Fabric" [level=3] [ref=e457]
+            - paragraph [ref=e458]: Dicoding
+            - paragraph [ref=e459]: Jul 2026
+            - link "View credential ↗" [ref=e460]:
+              - /url: https://www.dicoding.com/certificates/2VX30QJ34XYQ
+        - generic [ref=e462]:
+          - button [ref=e463]
+          - generic [ref=e468]:
+            - heading "Spec-Driven Development dengan Kiro" [level=3] [ref=e469]
+            - paragraph [ref=e470]: Dicoding
+            - paragraph [ref=e471]: Jul 2026
+            - link "View credential ↗" [ref=e472]:
+              - /url: https://www.dicoding.com/certificates/1RXYW8K2MZVM
+        - generic [ref=e474]:
+          - button [ref=e475]
+          - generic [ref=e480]:
+            - heading "SQL (Intermediate) — 100/100" [level=3] [ref=e481]
+            - paragraph [ref=e482]: HackerRank
+            - paragraph [ref=e483]: Jun 2026
+        - generic [ref=e485]:
+          - button [ref=e486]
+          - generic [ref=e491]:
+            - heading "Software Engineer — 100/100" [level=3] [ref=e492]
+            - paragraph [ref=e493]: HackerRank
+            - paragraph [ref=e494]: Jun 2026
+        - generic [ref=e496]:
+          - button [ref=e497]
+          - generic [ref=e502]:
+            - heading "The Complete 2024 Web Development Bootcamp" [level=3] [ref=e503]
+            - paragraph [ref=e504]: Udemy
+            - paragraph [ref=e505]: Jun 2026
+            - link "View credential ↗" [ref=e506]:
+              - /url: https://www.udemy.com/certificate/UC-d3cb96b1-7ac6-4e95-a4d0-4ef4526386d1/
+        - generic [ref=e508]:
+          - button [ref=e509]
+          - generic [ref=e514]:
+            - heading "Belajar Machine Learning untuk Pemula" [level=3] [ref=e515]
+            - paragraph [ref=e516]: Dicoding
+            - paragraph [ref=e517]: Jan 2026
+            - link "View credential ↗" [ref=e518]:
+              - /url: https://www.dicoding.com/certificates/GRX5JVL1YX0M
+        - generic [ref=e520]:
+          - button [ref=e521]
+          - generic [ref=e526]:
+            - 'heading "Talent Class #19 - ENERGY DATA ANALYST" [level=3] [ref=e527]'
+            - paragraph [ref=e528]: Kemnaker, Pasker ID, talenthub
+            - paragraph [ref=e529]: Sep 2025
+        - generic [ref=e531]:
+          - button [ref=e532]
+          - generic [ref=e537]:
+            - heading "Belajar Dasar Cloud dan Gen AI di AWS" [level=3] [ref=e538]
+            - paragraph [ref=e539]: Dicoding
+            - paragraph [ref=e540]: Aug 2025
+            - link "View credential ↗" [ref=e541]:
+              - /url: https://www.dicoding.com/certificates/6RPNG8749Z2M
+        - generic [ref=e543]:
+          - button [ref=e544]
+          - generic [ref=e549]:
+            - heading "Belajar Back-End Pemula dengan JavaScript" [level=3] [ref=e550]
+            - paragraph [ref=e551]: Dicoding
+            - paragraph [ref=e552]: Jul 2025
+            - link "View credential ↗" [ref=e553]:
+              - /url: https://www.dicoding.com/certificates/4EXG3Y42DZRL
+        - generic [ref=e555]:
+          - button [ref=e556]
+          - generic [ref=e561]:
+            - heading "Belajar Dasar Pemrograman JavaScript" [level=3] [ref=e562]
+            - paragraph [ref=e563]: Dicoding
+            - paragraph [ref=e564]: Jul 2025
+            - link "View credential ↗" [ref=e565]:
+              - /url: https://www.dicoding.com/certificates/0LZ05DQ03X65
+        - generic [ref=e567]:
+          - button [ref=e568]
+          - generic [ref=e573]:
+            - 'heading "PZN - Laravel : Pemula sampai Mahir" [level=3] [ref=e574]'
+            - paragraph [ref=e575]: Udemy
+            - paragraph [ref=e576]: Jul 2025
+            - link "View credential ↗" [ref=e577]:
+              - /url: https://www.udemy.com/certificate/UC-65165d76-5b9e-40b6-abf7-05d8a9555b5d/
+        - generic [ref=e579]:
+          - button [ref=e580]
+          - generic [ref=e585]:
+            - 'heading "Laravel 11 & Spatie User Roles: Bikin Website Apotek Online" [level=3] [ref=e586]'
+            - paragraph [ref=e587]: Buildwithangga
+            - paragraph [ref=e588]: Jun 2025
+        - generic [ref=e590]:
+          - button [ref=e591]
+          - generic [ref=e596]:
+            - heading "Memulai Pemrograman dengan Python" [level=3] [ref=e597]
+            - paragraph [ref=e598]: Dicoding
+            - paragraph [ref=e599]: Apr 2025
+            - link "View credential ↗" [ref=e600]:
+              - /url: https://www.dicoding.com/certificates/N9ZO9GW3RXG5
+        - generic [ref=e602]:
+          - button [ref=e603]
+          - generic [ref=e608]:
+            - heading "Belajar Dasar Structured Query Language (SQL)" [level=3] [ref=e609]
+            - paragraph [ref=e610]: Dicoding
+            - paragraph [ref=e611]: Apr 2025
+            - link "View credential ↗" [ref=e612]:
+              - /url: https://www.dicoding.com/certificates/98XWE3DW9XM3
+        - generic [ref=e614]:
+          - button [ref=e615]
+          - generic [ref=e620]:
+            - heading "Belajar Dasar Visualisasi Data" [level=3] [ref=e621]
+            - paragraph [ref=e622]: Dicoding
+            - paragraph [ref=e623]: Mar 2025
+            - link "View credential ↗" [ref=e624]:
+              - /url: https://www.dicoding.com/certificates/1OP82GQDLPQK
+        - generic [ref=e626]:
+          - button [ref=e627]
+          - generic [ref=e632]:
+            - heading "Belajar Dasar Data Science" [level=3] [ref=e633]
+            - paragraph [ref=e634]: Dicoding
+            - paragraph [ref=e635]: Mar 2025
+            - link "View credential ↗" [ref=e636]:
+              - /url: https://www.dicoding.com/certificates/MRZMNOR1KPYQ
+        - generic [ref=e638]:
+          - button [ref=e639]
+          - generic [ref=e644]:
+            - heading "TSA - Cyber Champion Talent Scouting Academy Digital Talent Scholarship 2024" [level=3] [ref=e645]
+            - paragraph [ref=e646]: Pusbang Proserti Kominfo
+            - paragraph [ref=e647]: Dec 2024
+        - generic [ref=e649]:
+          - button [ref=e650]
+          - generic [ref=e655]:
+            - heading "Belajar Dasar Pemrograman Web" [level=3] [ref=e656]
+            - paragraph [ref=e657]: Dicoding
+            - paragraph [ref=e658]: Nov 2024
+            - link "View credential ↗" [ref=e659]:
+              - /url: https://www.dicoding.com/certificates/JLX14NR3JX72
+    - generic [ref=e661]:
+      - generic [ref=e662]:
+        - generic [ref=e663]:
+          - generic [ref=e664]:
+            - generic [ref=e665]: WHAT
+            - generic [ref=e667]: PEOPLE
+            - generic [ref=e669]: SAY
+          - paragraph [ref=e672]: Kind words from collaborators and clients I've had the pleasure of working with.
+        - button "Leave a testimonial" [ref=e675]
+      - generic [ref=e680]:
+        - generic [ref=e681]:
+          - generic [ref=e682]:
+            - button [ref=e683]
+            - button [ref=e686]
+            - button [ref=e689]
+            - button [ref=e692]
+            - button [ref=e695]
+          - paragraph [ref=e698]: “Desain Baju Ilustrasi dari beliau cukup bagus dan sangat memuaskan.”
+          - generic [ref=e699]:
+            - img "Ifan Maul" [ref=e700]
+            - generic [ref=e701]:
+              - paragraph [ref=e702]: Ifan Maul
+              - paragraph [ref=e703]: Fullstack Engineering @ Freelance
+        - generic [ref=e704]:
+          - generic [ref=e705]:
+            - button [ref=e706]
+            - button [ref=e709]
+            - button [ref=e712]
+            - button [ref=e715]
+            - button [ref=e718]
+          - paragraph [ref=e721]: “Sangat keren sekali, terimakasih✨✨”
+          - generic [ref=e722]:
+            - img "Adinda Oktaviani" [ref=e723]
+            - paragraph [ref=e725]: Adinda Oktaviani
+  - button "Play music" [ref=e727]
+  - alert [ref=e730]

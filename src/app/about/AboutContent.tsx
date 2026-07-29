@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, Users, X, FileText, ChevronUp, Images } from "lucide-react";
+import { Award, Users, X, ChevronUp, Images } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
+import PdfThumbnail from "@/components/ui/PdfThumbnail";
 import TestimonialsSection from "@/components/sections/Testimonials";
 import PdfPreviewModal from "@/components/works/PdfPreviewModal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
@@ -499,9 +500,14 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                       <button
                         type="button"
                         onClick={() => setPreviewCert({ label: cert.title, url: cert.image_url! })}
-                        className="w-full h-36 bg-yellow flex items-center justify-center cursor-pointer"
+                        className="w-full h-36 cursor-pointer block"
                       >
-                        <FileText size={44} strokeWidth={1.2} className="text-ink/40" />
+                        <PdfThumbnail
+                          url={cert.image_url}
+                          className="w-full h-36 group-hover:scale-105 transition-transform duration-300"
+                          fallbackClassName="bg-yellow"
+                          iconClassName="text-ink/40"
+                        />
                       </button>
                     ) : cert.image_url ? (
                       <div className="w-full h-36 overflow-hidden">

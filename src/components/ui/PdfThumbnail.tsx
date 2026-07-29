@@ -3,7 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import { FileText, Loader2 } from "lucide-react";
 
-export default function PdfThumbnail({ url, className }: { url: string; className?: string }) {
+export default function PdfThumbnail({
+  url,
+  className,
+  fallbackClassName = "bg-slate-50",
+  iconClassName = "text-slate-400",
+}: {
+  url: string;
+  className?: string;
+  fallbackClassName?: string;
+  iconClassName?: string;
+}) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState<"loading" | "ok" | "error">("loading");
@@ -47,10 +57,10 @@ export default function PdfThumbnail({ url, className }: { url: string; classNam
   }, [url]);
 
   return (
-    <div ref={wrapperRef} className={`relative bg-slate-50 flex items-center justify-center overflow-hidden ${className ?? ""}`}>
+    <div ref={wrapperRef} className={`relative flex items-center justify-center overflow-hidden ${status === "ok" ? "" : fallbackClassName} ${className ?? ""}`}>
       <canvas ref={canvasRef} className={`w-full h-full object-contain ${status === "ok" ? "" : "opacity-0 absolute"}`} />
-      {status === "loading" && <Loader2 size={16} className="animate-spin text-slate-300" />}
-      {status === "error" && <FileText size={20} className="text-slate-400" strokeWidth={1.2} />}
+      {status === "loading" && <Loader2 size={16} className={`animate-spin ${iconClassName}`} />}
+      {status === "error" && <FileText size={20} className={iconClassName} strokeWidth={1.2} />}
     </div>
   );
 }
