@@ -1,0 +1,239 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - complementary [ref=f1e3]:
+      - generic [ref=f1e4]:
+        - link "MG / CMS" [ref=f1e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f1e6]: MG
+          - generic [ref=f1e7]: / CMS
+        - paragraph [ref=f1e8]: Portfolio Admin
+      - navigation [ref=f1e9]:
+        - link "Overview" [ref=f1e10] [cursor=pointer]:
+          - /url: /admin
+        - link "Analytics" [ref=f1e16] [cursor=pointer]:
+          - /url: /admin/analytics
+        - link "Skills" [ref=f1e20] [cursor=pointer]:
+          - /url: /admin/skills
+        - link "Experience" [ref=f1e23] [cursor=pointer]:
+          - /url: /admin/experience
+        - link "Education" [ref=f1e27] [cursor=pointer]:
+          - /url: /admin/education
+        - link "Organizations" [ref=f1e31] [cursor=pointer]:
+          - /url: /admin/organizations
+        - link "Works" [ref=f1e37] [cursor=pointer]:
+          - /url: /admin/works
+        - link "Gallery" [ref=f1e40] [cursor=pointer]:
+          - /url: /admin/gallery
+        - link "Certificates" [ref=f1e46] [cursor=pointer]:
+          - /url: /admin/certificates
+        - link "Testimonials" [ref=f1e50] [cursor=pointer]:
+          - /url: /admin/testimonials
+        - link "Messages" [ref=f1e55] [cursor=pointer]:
+          - /url: /admin/messages
+        - link "Contact" [ref=f1e59] [cursor=pointer]:
+          - /url: /admin/contact
+      - generic [ref=f1e63]:
+        - link "View Site" [ref=f1e64] [cursor=pointer]:
+          - /url: /
+        - button "Sign out" [ref=f1e69]
+    - main [ref=f1e73]:
+      - generic [ref=f1e74]:
+        - generic [ref=f1e75]:
+          - generic [ref=f1e76]:
+            - heading "Certificates" [level=1] [ref=f1e77]
+            - paragraph [ref=f1e78]: 21 certificates
+          - button "Add Certificate" [ref=f1e79]
+        - generic [ref=f1e81]:
+          - generic [ref=f1e87]:
+            - paragraph [ref=f1e88]: TOEFL Prediction — Score 473
+            - paragraph [ref=f1e89]: YEC - English Proficiency Test
+            - paragraph [ref=f1e90]: Jul 2026
+            - generic [ref=f1e92]:
+              - button "Edit" [ref=f1e93]
+              - button "Delete" [ref=f1e97]
+          - generic [ref=f1e106]:
+            - paragraph [ref=f1e107]: LLM-Based Tools & Gemini API Integration for Data Scientists
+            - paragraph [ref=f1e108]: Hacktiv8
+            - paragraph [ref=f1e109]: Jul 2026
+            - generic [ref=f1e110]:
+              - link "View" [ref=f1e111] [cursor=pointer]:
+                - /url: https://students.hacktiv8.com/certificates/e037541e-6e19-4917-a98f-f0d42581a7fc
+              - generic [ref=f1e116]:
+                - button "Edit" [ref=f1e117]
+                - button "Delete" [ref=f1e121]
+          - generic [ref=f1e130]:
+            - paragraph [ref=f1e131]: Membangun Aplikasi Gen AI dengan Microsoft Azure
+            - paragraph [ref=f1e132]: Dicoding
+            - paragraph [ref=f1e133]: Jul 2026
+            - generic [ref=f1e134]:
+              - link "View" [ref=f1e135] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/JLX1VOKQGZ72
+              - generic [ref=f1e140]:
+                - button "Edit" [ref=f1e141]
+                - button "Delete" [ref=f1e145]
+          - generic [ref=f1e154]:
+            - paragraph [ref=f1e155]: Belajar Penerapan Data Science dengan Microsoft Fabric
+            - paragraph [ref=f1e156]: Dicoding
+            - paragraph [ref=f1e157]: Jul 2026
+            - generic [ref=f1e158]:
+              - link "View" [ref=f1e159] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/2VX30QJ34XYQ
+              - generic [ref=f1e164]:
+                - button "Edit" [ref=f1e165]
+                - button "Delete" [ref=f1e169]
+          - generic [ref=f1e178]:
+            - paragraph [ref=f1e179]: Spec-Driven Development dengan Kiro
+            - paragraph [ref=f1e180]: Dicoding
+            - paragraph [ref=f1e181]: Jul 2026
+            - generic [ref=f1e182]:
+              - link "View" [ref=f1e183] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/1RXYW8K2MZVM
+              - generic [ref=f1e188]:
+                - button "Edit" [ref=f1e189]
+                - button "Delete" [ref=f1e193]
+          - generic [ref=f1e202]:
+            - paragraph [ref=f1e203]: SQL (Intermediate) — 100/100
+            - paragraph [ref=f1e204]: HackerRank
+            - paragraph [ref=f1e205]: Jun 2026
+            - generic [ref=f1e207]:
+              - button "Edit" [ref=f1e208]
+              - button "Delete" [ref=f1e212]
+          - generic [ref=f1e221]:
+            - paragraph [ref=f1e222]: Software Engineer — 100/100
+            - paragraph [ref=f1e223]: HackerRank
+            - paragraph [ref=f1e224]: Jun 2026
+            - generic [ref=f1e226]:
+              - button "Edit" [ref=f1e227]
+              - button "Delete" [ref=f1e231]
+          - generic [ref=f1e240]:
+            - paragraph [ref=f1e241]: The Complete 2024 Web Development Bootcamp
+            - paragraph [ref=f1e242]: Udemy
+            - paragraph [ref=f1e243]: Jun 2026
+            - generic [ref=f1e244]:
+              - link "View" [ref=f1e245] [cursor=pointer]:
+                - /url: https://www.udemy.com/certificate/UC-d3cb96b1-7ac6-4e95-a4d0-4ef4526386d1/
+              - generic [ref=f1e250]:
+                - button "Edit" [ref=f1e251]
+                - button "Delete" [ref=f1e255]
+          - generic [ref=f1e264]:
+            - paragraph [ref=f1e265]: Belajar Machine Learning untuk Pemula
+            - paragraph [ref=f1e266]: Dicoding
+            - paragraph [ref=f1e267]: Jan 2026
+            - generic [ref=f1e268]:
+              - link "View" [ref=f1e269] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/GRX5JVL1YX0M
+              - generic [ref=f1e274]:
+                - button "Edit" [ref=f1e275]
+                - button "Delete" [ref=f1e279]
+          - generic [ref=f1e288]:
+            - paragraph [ref=f1e289]: "Talent Class #19 - ENERGY DATA ANALYST"
+            - paragraph [ref=f1e290]: Kemnaker, Pasker ID, talenthub
+            - paragraph [ref=f1e291]: Sep 2025
+            - generic [ref=f1e293]:
+              - button "Edit" [ref=f1e294]
+              - button "Delete" [ref=f1e298]
+          - generic [ref=f1e307]:
+            - paragraph [ref=f1e308]: Belajar Dasar Cloud dan Gen AI di AWS
+            - paragraph [ref=f1e309]: Dicoding
+            - paragraph [ref=f1e310]: Aug 2025
+            - generic [ref=f1e311]:
+              - link "View" [ref=f1e312] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/6RPNG8749Z2M
+              - generic [ref=f1e317]:
+                - button "Edit" [ref=f1e318]
+                - button "Delete" [ref=f1e322]
+          - generic [ref=f1e331]:
+            - paragraph [ref=f1e332]: Belajar Back-End Pemula dengan JavaScript
+            - paragraph [ref=f1e333]: Dicoding
+            - paragraph [ref=f1e334]: Jul 2025
+            - generic [ref=f1e335]:
+              - link "View" [ref=f1e336] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/4EXG3Y42DZRL
+              - generic [ref=f1e341]:
+                - button "Edit" [ref=f1e342]
+                - button "Delete" [ref=f1e346]
+          - generic [ref=f1e355]:
+            - paragraph [ref=f1e356]: Belajar Dasar Pemrograman JavaScript
+            - paragraph [ref=f1e357]: Dicoding
+            - paragraph [ref=f1e358]: Jul 2025
+            - generic [ref=f1e359]:
+              - link "View" [ref=f1e360] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/0LZ05DQ03X65
+              - generic [ref=f1e365]:
+                - button "Edit" [ref=f1e366]
+                - button "Delete" [ref=f1e370]
+          - generic [ref=f1e379]:
+            - paragraph [ref=f1e380]: "PZN - Laravel : Pemula sampai Mahir"
+            - paragraph [ref=f1e381]: Udemy
+            - paragraph [ref=f1e382]: Jul 2025
+            - generic [ref=f1e383]:
+              - link "View" [ref=f1e384] [cursor=pointer]:
+                - /url: https://www.udemy.com/certificate/UC-65165d76-5b9e-40b6-abf7-05d8a9555b5d/
+              - generic [ref=f1e389]:
+                - button "Edit" [ref=f1e390]
+                - button "Delete" [ref=f1e394]
+          - generic [ref=f1e403]:
+            - paragraph [ref=f1e404]: "Laravel 11 & Spatie User Roles: Bikin Website Apotek Online"
+            - paragraph [ref=f1e405]: Buildwithangga
+            - paragraph [ref=f1e406]: Jun 2025
+            - generic [ref=f1e408]:
+              - button "Edit" [ref=f1e409]
+              - button "Delete" [ref=f1e413]
+          - generic [ref=f1e422]:
+            - paragraph [ref=f1e423]: Memulai Pemrograman dengan Python
+            - paragraph [ref=f1e424]: Dicoding
+            - paragraph [ref=f1e425]: Apr 2025
+            - generic [ref=f1e426]:
+              - link "View" [ref=f1e427] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/N9ZO9GW3RXG5
+              - generic [ref=f1e432]:
+                - button "Edit" [ref=f1e433]
+                - button "Delete" [ref=f1e437]
+          - generic [ref=f1e446]:
+            - paragraph [ref=f1e447]: Belajar Dasar Structured Query Language (SQL)
+            - paragraph [ref=f1e448]: Dicoding
+            - paragraph [ref=f1e449]: Apr 2025
+            - generic [ref=f1e450]:
+              - link "View" [ref=f1e451] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/98XWE3DW9XM3
+              - generic [ref=f1e456]:
+                - button "Edit" [ref=f1e457]
+                - button "Delete" [ref=f1e461]
+          - generic [ref=f1e470]:
+            - paragraph [ref=f1e471]: Belajar Dasar Visualisasi Data
+            - paragraph [ref=f1e472]: Dicoding
+            - paragraph [ref=f1e473]: Mar 2025
+            - generic [ref=f1e474]:
+              - link "View" [ref=f1e475] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/1OP82GQDLPQK
+              - generic [ref=f1e480]:
+                - button "Edit" [ref=f1e481]
+                - button "Delete" [ref=f1e485]
+          - generic [ref=f1e494]:
+            - paragraph [ref=f1e495]: Belajar Dasar Data Science
+            - paragraph [ref=f1e496]: Dicoding
+            - paragraph [ref=f1e497]: Mar 2025
+            - generic [ref=f1e498]:
+              - link "View" [ref=f1e499] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/MRZMNOR1KPYQ
+              - generic [ref=f1e504]:
+                - button "Edit" [ref=f1e505]
+                - button "Delete" [ref=f1e509]
+          - generic [ref=f1e518]:
+            - paragraph [ref=f1e519]: TSA - Cyber Champion Talent Scouting Academy Digital Talent Scholarship 2024
+            - paragraph [ref=f1e520]: Pusbang Proserti Kominfo
+            - paragraph [ref=f1e521]: Dec 2024
+            - generic [ref=f1e523]:
+              - button "Edit" [ref=f1e524]
+              - button "Delete" [ref=f1e528]
+          - generic [ref=f1e537]:
+            - paragraph [ref=f1e538]: Belajar Dasar Pemrograman Web
+            - paragraph [ref=f1e539]: Dicoding
+            - paragraph [ref=f1e540]: Nov 2024
+            - generic [ref=f1e541]:
+              - link "View" [ref=f1e542] [cursor=pointer]:
+                - /url: https://www.dicoding.com/certificates/JLX14NR3JX72
+              - generic [ref=f1e547]:
+                - button "Edit" [ref=f1e548]
+                - button "Delete" [ref=f1e552]
+  - button "Open Next.js Dev Tools" [ref=f1e561] [cursor=pointer]

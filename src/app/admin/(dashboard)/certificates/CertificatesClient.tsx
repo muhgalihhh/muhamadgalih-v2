@@ -2,9 +2,10 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Award, Upload, Loader2, Plus, Pencil, Trash2, X, ExternalLink, FileText } from "lucide-react";
+import { Award, Upload, Loader2, Plus, Pencil, Trash2, X, ExternalLink } from "lucide-react";
 import { createCertificate, updateCertificate, deleteCertificate, uploadFile } from "@/app/actions/admin";
 import type { Certificate } from "@/types/portfolio";
+import PdfThumbnail from "@/components/admin/PdfThumbnail";
 
 type FormMode = "add" | "edit" | null;
 
@@ -64,9 +65,7 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
           {imageUrl && (
             <div className="relative shrink-0">
               {imageUrl.toLowerCase().endsWith(".pdf") ? (
-                <div className="w-16 h-10 rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center">
-                  <FileText size={16} className="text-slate-400" />
-                </div>
+                <PdfThumbnail url={imageUrl} className="w-16 h-10 rounded-lg border border-slate-200" />
               ) : (
                 <img src={imageUrl} alt="preview" className="w-16 h-10 object-cover rounded-lg border border-slate-200" />
               )}
@@ -164,9 +163,7 @@ export default function CertificatesClient({ initialCertificates }: { initialCer
           {initialCertificates.map((cert) => (
             <div key={cert.id} className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group flex flex-col ${editing?.id === cert.id ? "ring-2 ring-violet ring-offset-1" : ""}`}>
               {cert.image_url && cert.image_url.toLowerCase().endsWith(".pdf") ? (
-                <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-violet/10 flex items-center justify-center">
-                  <FileText size={40} className="text-violet/40" strokeWidth={1} />
-                </div>
+                <PdfThumbnail url={cert.image_url} className="w-full h-32" />
               ) : cert.image_url ? (
                 <img src={cert.image_url} alt={cert.title} className="w-full h-32 object-cover" />
               ) : (
