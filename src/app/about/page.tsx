@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPublicExperiences, getPublicSkills, getPublicCertificates, getPublicOrganizations, getPublicEducation } from "@/lib/data/portfolio";
+import { getPublicExperiences, getPublicSkills, getPublicCertificates, getPublicOrganizations, getPublicEducation, getPublicCategories } from "@/lib/data/portfolio";
 import { getApprovedTestimonials, getOwnTestimonial } from "@/app/actions/testimonials";
 import AboutContent from "./AboutContent";
 import type { Testimonial } from "@/types/portfolio";
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const [experiences, skills, certificates, organizations, education, testimonials, ownTestimonial] = await Promise.all([
+  const [experiences, skills, certificates, organizations, education, testimonials, ownTestimonial, categories] = await Promise.all([
     getPublicExperiences(),
     getPublicSkills(),
     getPublicCertificates(),
@@ -18,6 +18,7 @@ export default async function AboutPage() {
     getPublicEducation(),
     getApprovedTestimonials(),
     getOwnTestimonial(),
+    getPublicCategories(),
   ]);
   return (
     <AboutContent
@@ -28,6 +29,7 @@ export default async function AboutPage() {
       dbEducation={education}
       testimonials={testimonials as Testimonial[]}
       ownTestimonial={ownTestimonial}
+      dbCategories={categories}
     />
   );
 }

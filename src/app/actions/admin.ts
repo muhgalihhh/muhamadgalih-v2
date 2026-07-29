@@ -108,14 +108,18 @@ export async function getAdminExperiences() {
 
   const { data: linkedProjects } = await supabase
     .from("projects")
-    .select("id, title, image_urls, experience_id")
+    .select("id, title, category, description, color_class, text_color_class, tech_stack, image_urls, emoji, links, experience_id")
     .not("experience_id", "is", null);
 
   return data.map((exp) => ({
     ...exp,
     linked_projects: (linkedProjects ?? [])
       .filter((p) => p.experience_id === exp.id)
-      .map((p) => ({ id: p.id, title: p.title, image_urls: p.image_urls })),
+      .map((p) => ({
+        id: p.id, title: p.title, category: p.category, description: p.description,
+        color_class: p.color_class, text_color_class: p.text_color_class,
+        tech_stack: p.tech_stack, image_urls: p.image_urls, emoji: p.emoji, links: p.links,
+      })),
   }));
 }
 

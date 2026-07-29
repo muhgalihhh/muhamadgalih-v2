@@ -35,7 +35,7 @@ export interface Experience {
   images: string[];
   order_index: number;
   created_at: string;
-  linked_projects?: { id: string; title: string; image_urls: string[] }[];
+  linked_projects?: Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">[];
 }
 
 export interface Education {

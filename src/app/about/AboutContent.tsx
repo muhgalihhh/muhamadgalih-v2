@@ -8,7 +8,8 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import TestimonialsSection from "@/components/sections/Testimonials";
 import PdfPreviewModal from "@/components/works/PdfPreviewModal";
-import type { Experience, Education, Skill, Certificate, Organization, Testimonial, ProjectLink } from "@/types/portfolio";
+import ProjectDetailModal from "@/components/works/ProjectDetailModal";
+import type { Experience, Education, Skill, Certificate, Organization, Testimonial, ProjectLink, ProjectCategoryRow } from "@/types/portfolio";
 
 const staticExperience = [
   {
@@ -104,18 +105,21 @@ interface Props {
   dbOrganizations?: Organization[];
   testimonials?: Testimonial[];
   ownTestimonial?: Testimonial | null;
+  dbCategories?: ProjectCategoryRow[];
 }
 
-export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbCertificates, dbOrganizations, testimonials = [], ownTestimonial = null }: Props) {
+export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbCertificates, dbOrganizations, testimonials = [], ownTestimonial = null, dbCategories }: Props) {
   const experience: Experience[] = dbExperiences?.length ? dbExperiences : staticExperience;
   const education: Education[] = dbEducation?.length ? dbEducation : staticEducation;
   const skills: Skill[] = dbSkills?.length ? dbSkills : staticSkills;
   const certificates: Certificate[] = dbCertificates ?? [];
   const organizations: Organization[] = dbOrganizations?.length ? dbOrganizations : staticOrganizations;
+  const categoryLabel = Object.fromEntries((dbCategories ?? []).map((c) => [c.slug, c.label]));
   const [activeOrg, setActiveOrg] = useState<Organization | null>(null);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [previewCert, setPreviewCert] = useState<ProjectLink | null>(null);
   const [expandedExp, setExpandedExp] = useState<Set<string>>(new Set());
+  const [modalProject, setModalProject] = useState<NonNullable<Experience["linked_projects"]>[number] | null>(null);
   const EXP_PHOTO_LIMIT = 7;
 
   return (
@@ -197,8 +201,6 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
 
             <div className="flex flex-col gap-8 md:gap-10">
               {experience.map((exp, i) => {
-                const linkedImages = exp.linked_projects?.flatMap((p) => p.image_urls) ?? [];
-                const combinedImages = [...exp.images, ...linkedImages];
                 return (
                 <ScrollReveal key={exp.id} variant="fade-up" delay={i * 0.12}>
                   <div className="md:pl-24 relative">
@@ -242,17 +244,22 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                       {!!exp.linked_projects?.length && (
                         <div className="flex flex-wrap gap-1.5 mt-4">
                           {exp.linked_projects.map((p) => (
-                            <span key={p.id} className="cartoon-border-sm bg-black/10 font-body text-[11px] font-semibold px-2.5 py-1 rounded-full">
+                            <button
+                              key={p.id}
+                              type="button"
+                              onClick={() => setModalProject(p)}
+                              className="cartoon-border-sm bg-black/10 hover:bg-black/20 transition-colors font-body text-[11px] font-semibold px-2.5 py-1 rounded-full"
+                            >
                               🔗 {p.title}
-                            </span>
+                            </button>
                           ))}
                         </div>
                       )}
 
-                      {combinedImages.length > 0 && (() => {
+                      {exp.images.length > 0 && (() => {
                         const isExpanded = expandedExp.has(exp.id);
-                        const remaining = combinedImages.length - EXP_PHOTO_LIMIT;
-                        const visible = isExpanded ? combinedImages : combinedImages.slice(0, EXP_PHOTO_LIMIT);
+                        const remaining = exp.images.length - EXP_PHOTO_LIMIT;
+                        const visible = isExpanded ? exp.images : exp.images.slice(0, EXP_PHOTO_LIMIT);
                         return (
                           <>
                             <motion.div layout className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-5">
@@ -288,7 +295,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                                     className="aspect-square rounded-xl overflow-hidden cartoon-border-sm relative group/more"
                                   >
                                     <img
-                                      src={combinedImages[EXP_PHOTO_LIMIT]}
+                                      src={exp.images[EXP_PHOTO_LIMIT]}
                                       alt=""
                                       loading="lazy"
                                       className="w-full h-full object-cover"
@@ -627,6 +634,11 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
         )}
       </AnimatePresence>
       <PdfPreviewModal link={previewCert} onClose={() => setPreviewCert(null)} />
+      <ProjectDetailModal
+        project={modalProject}
+        categoryLabel={categoryLabel}
+        onClose={() => setModalProject(null)}
+      />
     </main>
   );
 }
