@@ -16,9 +16,30 @@ export default function PdfThumbnail({
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
   const [status, setStatus] = useState<"loading" | "ok" | "error">("loading");
 
+  // Defer the pdfjs-dist load + rasterization until the card is actually
+  // near the viewport — mounting them all at once (e.g. a grid of certs)
+  // fires that work in parallel for every card and stalls the page.
   useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(wrapper);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldRender) return;
     let cancelled = false;
 
     async function render() {
@@ -54,7 +75,7 @@ export default function PdfThumbnail({
 
     render();
     return () => { cancelled = true; };
-  }, [url]);
+  }, [shouldRender, url]);
 
   return (
     <div ref={wrapperRef} className={`relative flex items-center justify-center overflow-hidden ${status === "ok" ? "" : fallbackClassName} ${className ?? ""}`}>
