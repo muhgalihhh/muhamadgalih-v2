@@ -511,6 +511,7 @@ export async function updateProfile(id: string, formData: FormData) {
     name:               formData.get("name") as string,
     alias:              formData.get("alias") as string,
     email:              formData.get("email") as string,
+    phone:              (formData.get("phone") as string) || null,
     location:           formData.get("location") as string,
     availability:       formData.get("availability") === "true",
     bio:                formData.get("bio") as string,

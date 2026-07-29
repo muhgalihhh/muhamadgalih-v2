@@ -1,0 +1,174 @@
+- generic [ref=f7e2]:
+  - complementary [ref=f7e3]:
+    - generic [ref=f7e4]:
+      - link "MG / CMS" [ref=f7e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f7e6]: MG
+        - generic [ref=f7e7]: / CMS
+      - paragraph [ref=f7e8]: Portfolio Admin
+    - navigation [ref=f7e9]:
+      - link "Overview" [ref=f7e10] [cursor=pointer]:
+        - /url: /admin
+      - link "Analytics" [ref=f7e16] [cursor=pointer]:
+        - /url: /admin/analytics
+      - link "Skills" [ref=f7e20] [cursor=pointer]:
+        - /url: /admin/skills
+      - link "Experience" [ref=f7e23] [cursor=pointer]:
+        - /url: /admin/experience
+      - link "Education" [ref=f7e27] [cursor=pointer]:
+        - /url: /admin/education
+      - link "Organizations" [ref=f7e31] [cursor=pointer]:
+        - /url: /admin/organizations
+      - link "Works" [ref=f7e37] [cursor=pointer]:
+        - /url: /admin/works
+      - link "Gallery" [ref=f7e40] [cursor=pointer]:
+        - /url: /admin/gallery
+      - link "Certificates" [ref=f7e46] [cursor=pointer]:
+        - /url: /admin/certificates
+      - link "Testimonials" [ref=f7e50] [cursor=pointer]:
+        - /url: /admin/testimonials
+      - link "Messages" [ref=f7e55] [cursor=pointer]:
+        - /url: /admin/messages
+      - link "Contact" [ref=f7e59] [cursor=pointer]:
+        - /url: /admin/contact
+    - generic [ref=f7e63]:
+      - link "View Site" [ref=f7e64] [cursor=pointer]:
+        - /url: /
+      - button "Sign out" [ref=f7e69]
+  - main [ref=f7e73]:
+    - generic [ref=f7e74]:
+      - generic [ref=f7e75]:
+        - heading "Contact / Profile" [level=1] [ref=f7e76]
+        - paragraph [ref=f7e77]: Edit your public contact info, social links, and media
+      - generic [ref=f7e78]:
+        - generic [ref=f7e79]:
+          - generic [ref=f7e80]: Basic Info
+          - generic [ref=f7e81]:
+            - generic [ref=f7e82]:
+              - generic [ref=f7e83]: Name *
+              - textbox [ref=f7e84]: Muhamad Galih
+            - generic [ref=f7e85]:
+              - generic [ref=f7e86]: Alias / Artist Name
+              - textbox "MIZARIE" [ref=f7e87]: muhgalihhh
+            - generic [ref=f7e88]:
+              - generic [ref=f7e89]: Email
+              - textbox [ref=f7e90]: muhamadgalih0803@gmail.com
+            - generic [ref=f7e91]:
+              - generic [ref=f7e92]: Phone / WhatsApp
+              - textbox "+6281234567890" [ref=f7e93]
+              - generic [ref=f7e94]: Pakai kode negara, mis. +62. Dipakai untuk tombol WhatsApp di halaman Contact.
+            - generic [ref=f7e95]:
+              - generic [ref=f7e96]: Location
+              - textbox "Indonesia" [ref=f7e97]
+            - generic [ref=f7e98]:
+              - generic [ref=f7e99]: Availability
+              - combobox [ref=f7e100]:
+                - option "Open for opportunities" [selected]
+                - option "Not available"
+            - generic [ref=f7e101]:
+              - generic [ref=f7e102]: Hero Tagline
+              - textbox "aka ✦ MIZARIE ✦" [ref=f7e103]: Designed, built, and measured.
+            - generic [ref=f7e104]:
+              - generic [ref=f7e105]: Bio
+              - textbox [ref=f7e106]: Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist & Analyst based in Indonesia.
+        - generic [ref=f7e107]:
+          - generic [ref=f7e108]:
+            - text: Hero Roles & About Stats
+            - paragraph [ref=f7e109]: Running text di hero & angka stats di section About (home page).
+          - generic [ref=f7e110]:
+            - generic [ref=f7e111]:
+              - generic [ref=f7e112]: Hero Roles (1 per baris)
+              - textbox "Full-Stack Engineering UI/UX Design Illustration & Art Data Science & Analysis" [ref=f7e113]:
+                - /placeholder: "Full-Stack Engineering\nUI/UX Design\nIllustration & Art\nData Science & Analysis"
+              - generic [ref=f7e114]: Dipakai untuk cycling text & role pills di hero. Tiap baris = satu role.
+            - generic [ref=f7e115]:
+              - generic [ref=f7e116]: Years of Experience
+              - spinbutton [ref=f7e117]: "4"
+            - generic [ref=f7e118]:
+              - generic [ref=f7e119]: Happy Clients
+              - spinbutton [ref=f7e120]: "5"
+            - generic [ref=f7e121]:
+              - generic [ref=f7e122]: Coffee Label
+              - textbox "∞ atau 1000+" [ref=f7e123]: ∞
+              - generic [ref=f7e124]: Boleh angka atau simbol seperti ∞. Projects Shipped auto-hitung dari DB.
+        - generic [ref=f7e125]:
+          - generic [ref=f7e126]: Profile Photo
+          - generic [ref=f7e127]:
+            - img "avatar" [ref=f7e129]
+            - generic [ref=f7e130]:
+              - generic [ref=f7e131]:
+                - generic [ref=f7e132] [cursor=pointer]: Upload photo
+                - link "View" [ref=f7e136] [cursor=pointer]:
+                  - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819193499.jpg
+                - button "Remove" [ref=f7e141]
+              - generic [ref=f7e145]:
+                - generic [ref=f7e146]: Or paste a direct image URL
+                - textbox "https://..." [ref=f7e147]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819193499.jpg
+        - generic [ref=f7e148]:
+          - generic [ref=f7e149]:
+            - text: Illustration / Avatar
+            - paragraph [ref=f7e150]: Versi ilustrasi foto — akan bergantian tampil di hero section.
+          - generic [ref=f7e151]:
+            - img "illustration" [ref=f7e153]
+            - generic [ref=f7e154]:
+              - generic [ref=f7e155]:
+                - generic [ref=f7e156] [cursor=pointer]: Upload illustration
+                - link "View" [ref=f7e160] [cursor=pointer]:
+                  - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819389741.jpg
+                - button "Remove" [ref=f7e165]
+              - generic [ref=f7e169]:
+                - generic [ref=f7e170]: Or paste a direct image URL
+                - textbox "https://..." [ref=f7e171]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819389741.jpg
+        - generic [ref=f7e172]:
+          - generic [ref=f7e173]:
+            - text: CV / Resume
+            - paragraph [ref=f7e174]: Upload PDF — akan muncul sebagai tombol Download CV di hero & contact section.
+          - generic [ref=f7e180]:
+            - generic [ref=f7e181]:
+              - generic [ref=f7e182] [cursor=pointer]: Upload CV (PDF)
+              - link "View current" [ref=f7e186] [cursor=pointer]:
+                - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/cv/1779196548240.pdf
+              - button "Remove" [ref=f7e191]
+            - generic [ref=f7e195]:
+              - generic [ref=f7e196]: Or paste a direct PDF URL
+              - textbox "https://..." [ref=f7e197]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/cv/1779196548240.pdf
+        - generic [ref=f7e198]:
+          - generic [ref=f7e199]: Social Links
+          - generic [ref=f7e200]:
+            - generic [ref=f7e201]:
+              - generic [ref=f7e202]: GitHub URL
+              - textbox "https://github.com/username" [ref=f7e203]: https://github.com/muhgalihhh
+            - generic [ref=f7e204]:
+              - generic [ref=f7e205]: Dribbble URL
+              - textbox "https://dribbble.com/username" [ref=f7e206]
+            - generic [ref=f7e207]:
+              - generic [ref=f7e208]: LinkedIn URL
+              - textbox "https://linkedin.com/in/username" [ref=f7e209]: https://www.linkedin.com/in/muhamadgalih0803/
+            - generic [ref=f7e210]:
+              - generic [ref=f7e211]: Instagram URL
+              - textbox "https://instagram.com/username" [ref=f7e212]: https://www.instagram.com/muhgalihhh/
+        - generic [ref=f7e213]:
+          - generic [ref=f7e214]: Music & Media
+          - generic [ref=f7e215]:
+            - generic [ref=f7e216]:
+              - generic [ref=f7e217]:
+                - paragraph [ref=f7e218]: Background Music
+                - paragraph [ref=f7e223]: Upload an audio file — plays in the floating music player on the public site.
+              - generic [ref=f7e224]:
+                - generic [ref=f7e225] [cursor=pointer]: Choose audio file
+                - link "Current file" [ref=f7e229] [cursor=pointer]:
+                  - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/music/1778783679063.mp3
+              - generic [ref=f7e234]:
+                - generic [ref=f7e235]: Or paste a direct audio URL
+                - textbox "https://..." [ref=f7e236]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/music/1778783679063.mp3
+            - generic [ref=f7e237]:
+              - generic [ref=f7e238]:
+                - paragraph [ref=f7e239]: Spotify Embed
+                - paragraph [ref=f7e240]:
+                  - text: "In Spotify: Share → Embed → Copy. Paste the full"
+                  - code [ref=f7e241]: <iframe>
+                  - text: code or just the embed URL.
+              - 'textbox "<iframe src=\"https://open.spotify.com/embed/track/...\" ...></iframe> or just: https://open.spotify.com/embed/track/..." [ref=f7e242]':
+                - /placeholder: "<iframe src=\"https://open.spotify.com/embed/track/...\" ...></iframe>\nor just: https://open.spotify.com/embed/track/..."
+                - text: https://open.spotify.com/embed/playlist/6IgJsA9K7k4UXrR5AUDbJ4?utm_source=generator
+        - button "Save Profile" [ref=f7e244]

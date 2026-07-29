@@ -3,20 +3,24 @@
 import { useState, useTransition } from "react";
 import { sendContactMessage } from "@/app/actions/contact";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Palette, Network, Camera, MapPin, Clock, Briefcase, Loader2, Send, CheckCircle } from "lucide-react";
+import { MapPin, Clock, Briefcase, Loader2, Send, CheckCircle } from "lucide-react";
+import { SiGithub, SiDribbble, SiInstagram, SiWhatsapp } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SpotifyCard from "@/components/ui/SpotifyCard";
 import type { Profile } from "@/types/portfolio";
+import { toWhatsAppUrl } from "@/lib/whatsapp";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
 function getSocials(profile: Profile | null) {
   const raw = [
-    { label: "GitHub",    href: profile?.github_url    || "https://github.com/muhgalihhh", color: "bg-navy text-cream",  Icon: Code2   },
-    { label: "Dribbble",  href: profile?.dribbble_url  || "#",                              color: "bg-pink text-ink",    Icon: Palette },
-    { label: "LinkedIn",  href: profile?.linkedin_url  || "#",                              color: "bg-sky text-ink",     Icon: Network },
-    { label: "Instagram", href: profile?.instagram_url || "#",                              color: "bg-coral text-cream", Icon: Camera  },
+    { label: "GitHub",    href: profile?.github_url    || "https://github.com/muhgalihhh", color: "bg-navy text-cream",  Icon: SiGithub    },
+    { label: "Dribbble",  href: profile?.dribbble_url  || "#",                              color: "bg-pink text-ink",    Icon: SiDribbble  },
+    { label: "LinkedIn",  href: profile?.linkedin_url  || "#",                              color: "bg-sky text-ink",     Icon: FaLinkedin  },
+    { label: "Instagram", href: profile?.instagram_url || "#",                              color: "bg-coral text-cream", Icon: SiInstagram },
+    { label: "WhatsApp",  href: toWhatsAppUrl(profile?.phone) || "#",                       color: "bg-mint text-ink",    Icon: SiWhatsapp  },
   ];
   return raw.filter((s) => s.href !== "#");
 }

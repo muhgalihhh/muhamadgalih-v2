@@ -163,6 +163,10 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
             <Field label="Email">
               <input name="email" type="email" defaultValue={profile.email ?? ""} className={inputCls} />
             </Field>
+            <Field label="Phone / WhatsApp">
+              <input name="phone" type="tel" defaultValue={profile.phone ?? ""} placeholder="+6281234567890" className={inputCls} />
+              <span className="text-[11px] text-slate-400">Pakai kode negara, mis. +62. Dipakai untuk tombol WhatsApp di halaman Contact.</span>
+            </Field>
             <Field label="Location">
               <input name="location" defaultValue={profile.location ?? ""} placeholder="Indonesia" className={inputCls} />
             </Field>

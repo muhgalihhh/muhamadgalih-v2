@@ -1,24 +1,28 @@
 "use client";
 
 import { Download } from "lucide-react";
+import { SiGithub, SiDribbble, SiInstagram, SiWhatsapp } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import type { Profile } from "@/types/portfolio";
+import { toWhatsAppUrl } from "@/lib/whatsapp";
 
 const staticSocials = [
-  { label: "GitHub",    href: "https://github.com/muhgalihhh", color: "bg-navy text-cream" },
-  { label: "Dribbble",  href: "#",                              color: "bg-pink text-ink"   },
-  { label: "LinkedIn",  href: "#",                              color: "bg-sky text-ink"    },
-  { label: "Instagram", href: "#",                              color: "bg-coral text-cream"},
+  { label: "GitHub",    href: "https://github.com/muhgalihhh", color: "bg-navy text-cream",   Icon: SiGithub    },
+  { label: "Dribbble",  href: "#",                              color: "bg-pink text-ink",     Icon: SiDribbble  },
+  { label: "LinkedIn",  href: "#",                              color: "bg-sky text-ink",      Icon: FaLinkedin  },
+  { label: "Instagram", href: "#",                              color: "bg-coral text-cream",  Icon: SiInstagram },
 ];
 
 function getSocials(profile: Profile | null) {
   if (!profile) return staticSocials;
   return [
-    { label: "GitHub",    href: profile.github_url    || "#", color: "bg-navy text-cream"  },
-    { label: "Dribbble",  href: profile.dribbble_url  || "#", color: "bg-pink text-ink"    },
-    { label: "LinkedIn",  href: profile.linkedin_url  || "#", color: "bg-sky text-ink"     },
-    { label: "Instagram", href: profile.instagram_url || "#", color: "bg-coral text-cream" },
+    { label: "GitHub",    href: profile.github_url    || "#", color: "bg-navy text-cream",  Icon: SiGithub    },
+    { label: "Dribbble",  href: profile.dribbble_url  || "#", color: "bg-pink text-ink",     Icon: SiDribbble  },
+    { label: "LinkedIn",  href: profile.linkedin_url  || "#", color: "bg-sky text-ink",      Icon: FaLinkedin  },
+    { label: "Instagram", href: profile.instagram_url || "#", color: "bg-coral text-cream",  Icon: SiInstagram },
+    { label: "WhatsApp",  href: toWhatsAppUrl(profile.phone) || "#", color: "bg-mint text-ink", Icon: SiWhatsapp },
   ].filter((s) => s.href !== "#");
 }
 
@@ -64,9 +68,10 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${social.color} cartoon-border font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform text-sm`}
+                className={`${social.color} cartoon-border font-body font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform text-sm flex items-center gap-2`}
               >
-                {social.label} ↗
+                <social.Icon size={15} />
+                {social.label}
               </a>
             ))}
             {cvUrl && (

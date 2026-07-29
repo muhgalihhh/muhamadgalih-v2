@@ -143,6 +143,7 @@ export interface Profile {
   name: string;
   alias: string;
   email: string;
+  phone: string | null;
   location: string;
   availability: boolean;
   bio: string;

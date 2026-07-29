@@ -1,0 +1,177 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - complementary [ref=f5e3]:
+      - generic [ref=f5e4]:
+        - link "MG / CMS" [ref=f5e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f5e6]: MG
+          - generic [ref=f5e7]: / CMS
+        - paragraph [ref=f5e8]: Portfolio Admin
+      - navigation [ref=f5e9]:
+        - link "Overview" [ref=f5e10] [cursor=pointer]:
+          - /url: /admin
+        - link "Analytics" [ref=f5e16] [cursor=pointer]:
+          - /url: /admin/analytics
+        - link "Skills" [ref=f5e20] [cursor=pointer]:
+          - /url: /admin/skills
+        - link "Experience" [ref=f5e23] [cursor=pointer]:
+          - /url: /admin/experience
+        - link "Education" [ref=f5e27] [cursor=pointer]:
+          - /url: /admin/education
+        - link "Organizations" [ref=f5e31] [cursor=pointer]:
+          - /url: /admin/organizations
+        - link "Works" [ref=f5e37] [cursor=pointer]:
+          - /url: /admin/works
+        - link "Gallery" [ref=f5e40] [cursor=pointer]:
+          - /url: /admin/gallery
+        - link "Certificates" [ref=f5e46] [cursor=pointer]:
+          - /url: /admin/certificates
+        - link "Testimonials" [ref=f5e50] [cursor=pointer]:
+          - /url: /admin/testimonials
+        - link "Messages" [ref=f5e55] [cursor=pointer]:
+          - /url: /admin/messages
+        - link "Contact" [ref=f5e59] [cursor=pointer]:
+          - /url: /admin/contact
+      - generic [ref=f5e63]:
+        - link "View Site" [ref=f5e64] [cursor=pointer]:
+          - /url: /
+        - button "Sign out" [ref=f5e69]
+    - main [ref=f5e73]:
+      - generic [ref=f5e74]:
+        - generic [ref=f5e75]:
+          - heading "Contact / Profile" [level=1] [ref=f5e76]
+          - paragraph [ref=f5e77]: Edit your public contact info, social links, and media
+        - generic [ref=f5e78]:
+          - generic [ref=f5e79]:
+            - generic [ref=f5e80]: Basic Info
+            - generic [ref=f5e81]:
+              - generic [ref=f5e82]:
+                - generic [ref=f5e83]: Name *
+                - textbox [ref=f5e84]: Muhamad Galih
+              - generic [ref=f5e85]:
+                - generic [ref=f5e86]: Alias / Artist Name
+                - textbox "MIZARIE" [ref=f5e87]: muhgalihhh
+              - generic [ref=f5e88]:
+                - generic [ref=f5e89]: Email
+                - textbox [ref=f5e90]: muhamadgalih0803@gmail.com
+              - generic [ref=f5e91]:
+                - generic [ref=f5e92]: Phone / WhatsApp
+                - textbox "+6281234567890" [ref=f5e93]
+                - generic [ref=f5e94]: Pakai kode negara, mis. +62. Dipakai untuk tombol WhatsApp di halaman Contact.
+              - generic [ref=f5e95]:
+                - generic [ref=f5e96]: Location
+                - textbox "Indonesia" [ref=f5e97]
+              - generic [ref=f5e98]:
+                - generic [ref=f5e99]: Availability
+                - combobox [ref=f5e100]:
+                  - option "Open for opportunities" [selected]
+                  - option "Not available"
+              - generic [ref=f5e101]:
+                - generic [ref=f5e102]: Hero Tagline
+                - textbox "aka ✦ MIZARIE ✦" [ref=f5e103]: Designed, built, and measured.
+              - generic [ref=f5e104]:
+                - generic [ref=f5e105]: Bio
+                - textbox [ref=f5e106]: Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist & Analyst based in Indonesia.
+          - generic [ref=f5e107]:
+            - generic [ref=f5e108]:
+              - text: Hero Roles & About Stats
+              - paragraph [ref=f5e109]: Running text di hero & angka stats di section About (home page).
+            - generic [ref=f5e110]:
+              - generic [ref=f5e111]:
+                - generic [ref=f5e112]: Hero Roles (1 per baris)
+                - textbox "Full-Stack Engineering UI/UX Design Illustration & Art Data Science & Analysis" [ref=f5e113]:
+                  - /placeholder: "Full-Stack Engineering\nUI/UX Design\nIllustration & Art\nData Science & Analysis"
+                - generic [ref=f5e114]: Dipakai untuk cycling text & role pills di hero. Tiap baris = satu role.
+              - generic [ref=f5e115]:
+                - generic [ref=f5e116]: Years of Experience
+                - spinbutton [ref=f5e117]: "4"
+              - generic [ref=f5e118]:
+                - generic [ref=f5e119]: Happy Clients
+                - spinbutton [ref=f5e120]: "5"
+              - generic [ref=f5e121]:
+                - generic [ref=f5e122]: Coffee Label
+                - textbox "∞ atau 1000+" [ref=f5e123]: ∞
+                - generic [ref=f5e124]: Boleh angka atau simbol seperti ∞. Projects Shipped auto-hitung dari DB.
+          - generic [ref=f5e125]:
+            - generic [ref=f5e126]: Profile Photo
+            - generic [ref=f5e127]:
+              - img "avatar" [ref=f5e129]
+              - generic [ref=f5e130]:
+                - generic [ref=f5e131]:
+                  - generic [ref=f5e132] [cursor=pointer]: Upload photo
+                  - link "View" [ref=f5e136] [cursor=pointer]:
+                    - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819193499.jpg
+                  - button "Remove" [ref=f5e141]
+                - generic [ref=f5e145]:
+                  - generic [ref=f5e146]: Or paste a direct image URL
+                  - textbox "https://..." [ref=f5e147]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819193499.jpg
+          - generic [ref=f5e148]:
+            - generic [ref=f5e149]:
+              - text: Illustration / Avatar
+              - paragraph [ref=f5e150]: Versi ilustrasi foto — akan bergantian tampil di hero section.
+            - generic [ref=f5e151]:
+              - img "illustration" [ref=f5e153]
+              - generic [ref=f5e154]:
+                - generic [ref=f5e155]:
+                  - generic [ref=f5e156] [cursor=pointer]: Upload illustration
+                  - link "View" [ref=f5e160] [cursor=pointer]:
+                    - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819389741.jpg
+                  - button "Remove" [ref=f5e165]
+                - generic [ref=f5e169]:
+                  - generic [ref=f5e170]: Or paste a direct image URL
+                  - textbox "https://..." [ref=f5e171]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/avatars/1778819389741.jpg
+          - generic [ref=f5e172]:
+            - generic [ref=f5e173]:
+              - text: CV / Resume
+              - paragraph [ref=f5e174]: Upload PDF — akan muncul sebagai tombol Download CV di hero & contact section.
+            - generic [ref=f5e180]:
+              - generic [ref=f5e181]:
+                - generic [ref=f5e182] [cursor=pointer]: Upload CV (PDF)
+                - link "View current" [ref=f5e186] [cursor=pointer]:
+                  - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/cv/1779196548240.pdf
+                - button "Remove" [ref=f5e191]
+              - generic [ref=f5e195]:
+                - generic [ref=f5e196]: Or paste a direct PDF URL
+                - textbox "https://..." [ref=f5e197]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/cv/1779196548240.pdf
+          - generic [ref=f5e198]:
+            - generic [ref=f5e199]: Social Links
+            - generic [ref=f5e200]:
+              - generic [ref=f5e201]:
+                - generic [ref=f5e202]: GitHub URL
+                - textbox "https://github.com/username" [ref=f5e203]: https://github.com/muhgalihhh
+              - generic [ref=f5e204]:
+                - generic [ref=f5e205]: Dribbble URL
+                - textbox "https://dribbble.com/username" [ref=f5e206]
+              - generic [ref=f5e207]:
+                - generic [ref=f5e208]: LinkedIn URL
+                - textbox "https://linkedin.com/in/username" [ref=f5e209]: https://www.linkedin.com/in/muhamadgalih0803/
+              - generic [ref=f5e210]:
+                - generic [ref=f5e211]: Instagram URL
+                - textbox "https://instagram.com/username" [ref=f5e212]: https://www.instagram.com/muhgalihhh/
+          - generic [ref=f5e213]:
+            - generic [ref=f5e214]: Music & Media
+            - generic [ref=f5e215]:
+              - generic [ref=f5e216]:
+                - generic [ref=f5e217]:
+                  - paragraph [ref=f5e218]: Background Music
+                  - paragraph [ref=f5e223]: Upload an audio file — plays in the floating music player on the public site.
+                - generic [ref=f5e224]:
+                  - generic [ref=f5e225] [cursor=pointer]: Choose audio file
+                  - link "Current file" [ref=f5e229] [cursor=pointer]:
+                    - /url: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/music/1778783679063.mp3
+                - generic [ref=f5e234]:
+                  - generic [ref=f5e235]: Or paste a direct audio URL
+                  - textbox "https://..." [ref=f5e236]: https://nzmvgjjepavdtynscaui.supabase.co/storage/v1/object/public/portfolio/music/1778783679063.mp3
+              - generic [ref=f5e237]:
+                - generic [ref=f5e238]:
+                  - paragraph [ref=f5e239]: Spotify Embed
+                  - paragraph [ref=f5e240]:
+                    - text: "In Spotify: Share → Embed → Copy. Paste the full"
+                    - code [ref=f5e241]: <iframe>
+                    - text: code or just the embed URL.
+                - 'textbox "<iframe src=\"https://open.spotify.com/embed/track/...\" ...></iframe> or just: https://open.spotify.com/embed/track/..." [ref=f5e242]':
+                  - /placeholder: "<iframe src=\"https://open.spotify.com/embed/track/...\" ...></iframe>\nor just: https://open.spotify.com/embed/track/..."
+                  - text: https://open.spotify.com/embed/playlist/6IgJsA9K7k4UXrR5AUDbJ4?utm_source=generator
+          - button "Save Profile" [ref=f5e244]
+  - button "Open Next.js Dev Tools" [ref=f5e250] [cursor=pointer]
+  - alert [ref=f5e254]
