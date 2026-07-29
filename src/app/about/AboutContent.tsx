@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, Users, X, FileText } from "lucide-react";
+import { Award, Users, X, FileText, ChevronUp } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
@@ -115,6 +115,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
   const [activeOrg, setActiveOrg] = useState<Organization | null>(null);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [previewCert, setPreviewCert] = useState<ProjectLink | null>(null);
+  const [expandedExp, setExpandedExp] = useState<Set<string>>(new Set());
+  const EXP_PHOTO_LIMIT = 7;
 
   return (
     <main className="md:pt-20">
@@ -234,25 +236,77 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                         ))}
                       </ul>
 
-                      {exp.images.length > 0 && (
-                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-5">
-                          {exp.images.map((url) => (
-                            <button
-                              key={url}
-                              type="button"
-                              onClick={() => setLightbox(url)}
-                              className="aspect-square rounded-xl overflow-hidden cartoon-border-sm group/img"
-                            >
-                              <img
-                                src={url}
-                                alt={exp.company}
-                                loading="lazy"
-                                className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300"
-                              />
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                      {exp.images.length > 0 && (() => {
+                        const isExpanded = expandedExp.has(exp.id);
+                        const remaining = exp.images.length - EXP_PHOTO_LIMIT;
+                        const visible = isExpanded ? exp.images : exp.images.slice(0, EXP_PHOTO_LIMIT);
+                        return (
+                          <>
+                            <motion.div layout className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-5">
+                              <AnimatePresence initial={false}>
+                                {visible.map((url, idx) => (
+                                  <motion.button
+                                    key={url}
+                                    layout
+                                    initial={idx >= EXP_PHOTO_LIMIT ? { opacity: 0, scale: 0.85 } : false}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.85 }}
+                                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                                    type="button"
+                                    onClick={() => setLightbox(url)}
+                                    className="aspect-square rounded-xl overflow-hidden cartoon-border-sm group/img"
+                                  >
+                                    <img
+                                      src={url}
+                                      alt={exp.company}
+                                      loading="lazy"
+                                      className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300"
+                                    />
+                                  </motion.button>
+                                ))}
+                                {!isExpanded && remaining > 0 && (
+                                  <motion.button
+                                    key="more-tile"
+                                    layout
+                                    exit={{ opacity: 0, scale: 0.85 }}
+                                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                                    type="button"
+                                    onClick={() => setExpandedExp((prev) => new Set(prev).add(exp.id))}
+                                    className="aspect-square rounded-xl overflow-hidden cartoon-border-sm relative group/more"
+                                  >
+                                    <img
+                                      src={exp.images[EXP_PHOTO_LIMIT]}
+                                      alt=""
+                                      loading="lazy"
+                                      className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/60 group-hover/more:bg-ink/70 transition-colors flex items-center justify-center">
+                                      <span className="font-display font-extrabold text-cream text-sm md:text-base">
+                                        +{remaining}
+                                      </span>
+                                    </div>
+                                  </motion.button>
+                                )}
+                              </AnimatePresence>
+                            </motion.div>
+                            {isExpanded && remaining > 0 && (
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setExpandedExp((prev) => {
+                                    const next = new Set(prev);
+                                    next.delete(exp.id);
+                                    return next;
+                                  })
+                                }
+                                className="mt-3 font-body font-semibold text-xs opacity-70 hover:opacity-100 transition-opacity inline-flex items-center gap-1"
+                              >
+                                <ChevronUp size={14} /> Sembunyikan foto
+                              </button>
+                            )}
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
                 </ScrollReveal>
