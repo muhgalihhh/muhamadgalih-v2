@@ -2,22 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Briefcase } from "lucide-react";
 import ProjectCarousel from "@/components/works/ProjectCarousel";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectLinks from "@/components/works/ProjectLinks";
 import PdfPreviewModal from "@/components/works/PdfPreviewModal";
-import type { Project, ProjectLink } from "@/types/portfolio";
+import type { Experience, Project, ProjectLink } from "@/types/portfolio";
 
 type ProjectRow = Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">;
+type ExperienceTag = Pick<Experience, "role" | "company" | "company_logo_emoji">;
 
 export default function ProjectDetailModal({
   project,
   categoryLabel,
+  experience,
   onClose,
 }: {
   project: ProjectRow | null;
   categoryLabel: Record<string, string>;
+  experience?: ExperienceTag | null;
   onClose: () => void;
 }) {
   const [previewLink, setPreviewLink] = useState<ProjectLink | null>(null);
@@ -83,12 +86,20 @@ export default function ProjectDetailModal({
                   <SkillIcon icon={project.emoji} className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="font-display font-extrabold text-xl md:text-2xl leading-tight">
+                  <h2 className="font-display font-extrabold text-xl md:text-2xl leading-tight mb-1.5">
                     {project.title}
                   </h2>
-                  <span className="font-body text-xs font-semibold bg-black/15 px-2.5 py-0.5 rounded-full capitalize">
-                    {categoryLabel[project.category] ?? project.category}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="font-body text-xs font-semibold bg-black/15 px-2.5 py-0.5 rounded-full capitalize">
+                      {categoryLabel[project.category] ?? project.category}
+                    </span>
+                    {experience && (
+                      <span className="font-body text-xs font-semibold bg-black/15 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                        <Briefcase size={11} className="shrink-0" />
+                        {experience.role} · {experience.company}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 

@@ -120,6 +120,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
   const [previewCert, setPreviewCert] = useState<ProjectLink | null>(null);
   const [expandedExp, setExpandedExp] = useState<Set<string>>(new Set());
   const [modalProject, setModalProject] = useState<NonNullable<Experience["linked_projects"]>[number] | null>(null);
+  const [modalExperience, setModalExperience] = useState<Experience | null>(null);
   const EXP_PHOTO_LIMIT = 7;
 
   return (
@@ -247,7 +248,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                             <button
                               key={p.id}
                               type="button"
-                              onClick={() => setModalProject(p)}
+                              onClick={() => { setModalProject(p); setModalExperience(exp); }}
                               className="aspect-square rounded-xl overflow-hidden cartoon-border-sm relative group/work text-left"
                             >
                               {p.image_urls[0] ? (
@@ -658,7 +659,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
       <ProjectDetailModal
         project={modalProject}
         categoryLabel={categoryLabel}
-        onClose={() => setModalProject(null)}
+        experience={modalExperience}
+        onClose={() => { setModalProject(null); setModalExperience(null); }}
       />
     </main>
   );

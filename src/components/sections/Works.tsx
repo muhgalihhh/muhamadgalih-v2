@@ -7,7 +7,7 @@ import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
-import type { Project, ProjectCategoryRow } from "@/types/portfolio";
+import type { Project, ProjectCategoryRow, Experience } from "@/types/portfolio";
 
 type Category = string;
 
@@ -35,7 +35,7 @@ const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
   { id: "3", slug: "illustration", label: "Illustration", order_index: 2, show_in_gallery: true,  created_at: "" },
 ];
 
-export default function Works({ dbProjects, categories: categoriesProp }: { dbProjects?: Project[]; categories?: ProjectCategoryRow[] }) {
+export default function Works({ dbProjects, categories: categoriesProp, experiences = [] }: { dbProjects?: Project[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -45,6 +45,7 @@ export default function Works({ dbProjects, categories: categoriesProp }: { dbPr
     ...categories.map((c) => ({ label: c.label, value: c.slug })),
   ];
   const categoryLabel = Object.fromEntries(filters.map((f) => [f.value, f.label]));
+  const experienceById = Object.fromEntries(experiences.map((e) => [e.id, e]));
 
   const projects = dbProjects?.length ? dbProjects : staticProjects;
 
@@ -170,6 +171,7 @@ export default function Works({ dbProjects, categories: categoriesProp }: { dbPr
       <ProjectDetailModal
         project={selectedProject}
         categoryLabel={categoryLabel}
+        experience={selectedProject?.experience_id ? experienceById[selectedProject.experience_id] : null}
         onClose={() => setSelectedProject(null)}
       />
     </section>

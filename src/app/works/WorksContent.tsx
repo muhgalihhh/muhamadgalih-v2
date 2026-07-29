@@ -9,7 +9,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import GalleryDetailModal from "@/components/works/GalleryDetailModal";
 import SpotifyCard from "@/components/ui/SpotifyCard";
-import type { Project, GalleryItem, ProjectCategoryRow, ProjectLink } from "@/types/portfolio";
+import type { Project, GalleryItem, ProjectCategoryRow, ProjectLink, Experience } from "@/types/portfolio";
 
 type Category = string;
 
@@ -22,7 +22,7 @@ const staticProjects = [
     color_class: "bg-violet", text_color_class: "text-cream",
     tech_stack: ["Next.js", "TypeScript", "Supabase", "Tailwind"],
     image_urls: [],
-    emoji: "⚡", link: "#", links: [],
+    emoji: "⚡", link: "#", links: [], experience_id: null,
   },
   {
     id: "s2",
@@ -32,7 +32,7 @@ const staticProjects = [
     color_class: "bg-coral", text_color_class: "text-cream",
     tech_stack: ["Figma", "Illustrator"],
     image_urls: [],
-    emoji: "🎨", link: "#", links: [],
+    emoji: "🎨", link: "#", links: [], experience_id: null,
   },
   {
     id: "s3",
@@ -42,7 +42,7 @@ const staticProjects = [
     color_class: "bg-sky", text_color_class: "text-ink",
     tech_stack: ["React", "Recharts", "Figma"],
     image_urls: [],
-    emoji: "📊", link: "#", links: [],
+    emoji: "📊", link: "#", links: [], experience_id: null,
   },
   {
     id: "s4",
@@ -52,7 +52,7 @@ const staticProjects = [
     color_class: "bg-yellow", text_color_class: "text-ink",
     tech_stack: ["Procreate", "Illustrator", "Photoshop"],
     image_urls: [],
-    emoji: "✏️", link: "#", links: [],
+    emoji: "✏️", link: "#", links: [], experience_id: null,
   },
   {
     id: "s5",
@@ -62,7 +62,7 @@ const staticProjects = [
     color_class: "bg-mint", text_color_class: "text-ink",
     tech_stack: ["Figma", "ProtoPie"],
     image_urls: [],
-    emoji: "📱", link: "#", links: [],
+    emoji: "📱", link: "#", links: [], experience_id: null,
   },
   {
     id: "s6",
@@ -72,7 +72,7 @@ const staticProjects = [
     color_class: "bg-pink", text_color_class: "text-ink",
     tech_stack: ["Node.js", "Express", "PostgreSQL", "Redis"],
     image_urls: [],
-    emoji: "🔧", link: "#", links: [],
+    emoji: "🔧", link: "#", links: [], experience_id: null,
   },
 ];
 
@@ -129,6 +129,7 @@ type ProjectRow = {
   image_urls: string[];
   emoji: string;
   links: ProjectLink[];
+  experience_id: string | null;
 };
 
 function toRow(p: Project): ProjectRow {
@@ -143,10 +144,11 @@ function toRow(p: Project): ProjectRow {
     image_urls: p.image_urls,
     emoji: p.emoji,
     links: p.links,
+    experience_id: p.experience_id,
   };
 }
 
-export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp }: { dbProjects?: Project[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[] }) {
+export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp, experiences = [] }: { dbProjects?: Project[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
   const [active, setActive] = useState<Category>("all");
   const [modalProject, setModalProject] = useState<ProjectRow | null>(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState<GalleryItem | null>(null);
@@ -157,6 +159,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
     ...categories.map((c) => ({ label: c.label, value: c.slug })),
   ];
   const categoryLabel = Object.fromEntries(filters.map((f) => [f.value, f.label]));
+  const experienceById = Object.fromEntries(experiences.map((e) => [e.id, e]));
 
   const projects: ProjectRow[] = dbProjects?.length
     ? dbProjects.map(toRow)
@@ -415,6 +418,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
       <ProjectDetailModal
         project={modalProject}
         categoryLabel={categoryLabel}
+        experience={modalProject?.experience_id ? experienceById[modalProject.experience_id] : null}
         onClose={() => setModalProject(null)}
       />
       <GalleryDetailModal item={activeGalleryItem} onClose={() => setActiveGalleryItem(null)} />
