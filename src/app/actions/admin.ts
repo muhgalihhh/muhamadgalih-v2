@@ -1,7 +1,6 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import sharp from "sharp";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/service";
 import { slugify, uniqueSlug, parseContent, extractContentImageUrls, cleanupUrls } from "@/lib/projectContent";
@@ -733,6 +732,9 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
   let contentType = file.type || undefined;
 
   if (convertible) {
+    // Loaded here, not at module top: a native-module problem should only break
+    // uploads, never sign-in or the other admin actions in this file.
+    const sharp = (await import("sharp")).default;
     const buf = Buffer.from(await file.arrayBuffer());
     const webp = await sharp(buf)
       .rotate()
