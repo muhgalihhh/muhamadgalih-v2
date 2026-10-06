@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import sharp from "sharp";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/service";
+import { slugify, uniqueSlug, parseContent, extractContentImageUrls, cleanupUrls } from "@/lib/projectContent";
 import type { Profile, GalleryItem, ProjectCategoryRow, ContactMessage } from "@/types/portfolio";
 
 // ── Storage cleanup helpers ──────────────────────────────────
@@ -377,10 +378,22 @@ export async function createProject(formData: FormData) {
   const tech_stack = techRaw.split(",").map((t) => t.trim()).filter(Boolean);
   const imageRaw = formData.get("image_urls") as string;
   const image_urls = imageRaw.split("\n").map((u) => u.trim()).filter(Boolean);
+  const parsed = parseContent(formData.get("content"));
+  if (!parsed.ok) return { error: "Content tidak valid — coba simpan ulang." };
+
+  const title = formData.get("title") as string;
+  const { data: taken } = await supabase.from("projects").select("slug");
+  const slug = uniqueSlug(
+    slugify((formData.get("slug") as string) || title),
+    (taken ?? []).map((r) => r.slug),
+  );
+
   const { error } = await supabase.from("projects").insert({
-    title:            formData.get("title") as string,
+    title,
+    slug,
     category:         formData.get("category") as string,
     description:      formData.get("description") as string,
+    content:          parsed.content,
     emoji:            formData.get("emoji") as string,
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
@@ -392,7 +405,7 @@ export async function createProject(formData: FormData) {
     image_urls,
   });
   revalidatePath("/admin/(dashboard)/works");
-  revalidatePath("/works");
+  revalidatePath("/works", "layout");
   if (error) return { error: error.message };
   return { ok: true };
 }
@@ -404,13 +417,24 @@ export async function updateProject(id: string, formData: FormData) {
   const imageRaw = formData.get("image_urls") as string;
   const image_urls = imageRaw.split("\n").map((u) => u.trim()).filter(Boolean);
   const newEmoji = formData.get("emoji") as string;
+  const parsed = parseContent(formData.get("content"));
+  if (!parsed.ok) return { error: "Content tidak valid — coba simpan ulang." };
 
-  const { data: old } = await supabase.from("projects").select("image_urls, emoji").eq("id", id).single();
+  const { data: old } = await supabase.from("projects").select("image_urls, emoji, content, slug").eq("id", id).single();
+
+  const title = formData.get("title") as string;
+  let slug = slugify((formData.get("slug") as string) || old?.slug || title);
+  if (slug !== old?.slug) {
+    const { data: taken } = await supabase.from("projects").select("slug").neq("id", id);
+    slug = uniqueSlug(slug, (taken ?? []).map((r) => r.slug));
+  }
 
   const { error } = await supabase.from("projects").update({
-    title:            formData.get("title") as string,
+    title,
+    slug,
     category:         formData.get("category") as string,
     description:      formData.get("description") as string,
+    content:          parsed.content,
     emoji:            newEmoji,
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
@@ -423,25 +447,26 @@ export async function updateProject(id: string, formData: FormData) {
   }).eq("id", id);
 
   if (!error && old) {
-    const removed: (string | null)[] = (old.image_urls ?? []).filter(
-      (u: string) => !image_urls.includes(u)
+    const removed: (string | null)[] = cleanupUrls(
+      { imageUrls: old.image_urls ?? [], content: old.content },
+      { imageUrls: image_urls, content: parsed.content },
     );
     if (old.emoji && old.emoji !== newEmoji) removed.push(old.emoji);
     await deleteStorageFiles(removed);
   }
   revalidatePath("/admin/(dashboard)/works");
-  revalidatePath("/works");
+  revalidatePath("/works", "layout");
   if (error) return { error: error.message };
   return { ok: true };
 }
 
 export async function deleteProject(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("projects").select("image_urls, emoji").eq("id", id).single();
+  const { data: old } = await supabase.from("projects").select("image_urls, emoji, content").eq("id", id).single();
   await supabase.from("projects").delete().eq("id", id);
-  if (old) await deleteStorageFiles([...(old.image_urls ?? []), old.emoji]);
+  if (old) await deleteStorageFiles([...(old.image_urls ?? []), ...extractContentImageUrls(old.content), old.emoji]);
   revalidatePath("/admin/(dashboard)/works");
-  revalidatePath("/works");
+  revalidatePath("/works", "layout");
 }
 
 // ── Certificates ─────────────────────────────────────────────
@@ -703,7 +728,7 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
     contentType = "image/webp";
   }
 
-  const path = `${folder}/${Date.now()}.${ext}`;
+  const path = `${folder}/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`;
   const { error } = await supabase.storage.from("portfolio").upload(path, body, {
     upsert: false,
     contentType,
