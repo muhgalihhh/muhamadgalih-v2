@@ -104,6 +104,15 @@ body {
 .cursor-custom * {
   cursor: none !important;
 }
+/* …except where people type: they need the I-beam to place the caret */
+.cursor-custom input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+.cursor-custom textarea,
+.cursor-custom [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Splash already shown this session (set by the head script in app/layout.tsx) */
+.splash-seen [data-splash] { display: none; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {

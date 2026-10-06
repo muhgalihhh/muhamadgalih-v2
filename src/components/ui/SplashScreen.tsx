@@ -5,11 +5,21 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type Phase = "loading" | "reveal" | "exit" | "done";
 
+// Once per browser session: a visitor opening a second page (or a shared
+// /works/<slug> link after browsing) shouldn't wait for the intro again.
+// The head script in app/layout.tsx hides it before hydration via .splash-seen.
+const SEEN_KEY = "splash-seen";
+
 export default function SplashScreen() {
   const [phase, setPhase] = useState<Phase>("loading");
 
   useEffect(() => {
-    const t = setTimeout(() => setPhase("reveal"), 1900);
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem(SEEN_KEY) === "1";
+      sessionStorage.setItem(SEEN_KEY, "1");
+    } catch {}
+    const t = setTimeout(() => setPhase(seen ? "done" : "reveal"), seen ? 0 : 700);
     return () => clearTimeout(t);
   }, []);
 
@@ -17,10 +27,11 @@ export default function SplashScreen() {
 
   return (
     <motion.div
+      data-splash
       className="fixed inset-0 select-none"
       style={{ zIndex: 9999 }}
       animate={{ opacity: phase === "exit" ? 0 : 1 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       onAnimationComplete={() => {
         if (phase === "exit") setPhase("done");
       }}
@@ -63,7 +74,7 @@ export default function SplashScreen() {
               className="flex gap-2.5"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.55 }}
+              transition={{ delay: 0.3 }}
             >
               {[0, 0.12, 0.24].map((d, i) => (
                 <motion.span
@@ -88,7 +99,7 @@ export default function SplashScreen() {
             style={{ zIndex: 1 }}
             initial={{ clipPath: "circle(0% at 5% 50%)" }}
             animate={{ clipPath: "circle(160% at 5% 50%)" }}
-            transition={{ duration: 0.88, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             onAnimationComplete={() => setPhase("exit")}
           />
         )}
