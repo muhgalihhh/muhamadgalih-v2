@@ -56,21 +56,21 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
 
   return (
     <main className="md:pt-20">
-      {/* ── Hero header ── */}
-      <section className="py-20 md:py-28 bg-yellow relative overflow-hidden">
+      {/* ── Hero header — kept short so the form shows above the fold ── */}
+      <section className="pt-20 pb-10 md:pt-12 md:pb-12 bg-yellow relative overflow-hidden">
         {/* Grid line texture */}
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
           <div className="w-full h-full grid-pattern-lines" />
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h1"
             text="GOT SOMETHING IN MIND?"
-            className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] leading-tight mb-6 max-w-3xl"
+            className="font-display font-extrabold text-ink text-[clamp(1.6rem,4.5vw,3.5rem)] leading-tight mb-4 max-w-3xl"
             staggerDelay={0.03}
           />
           <ScrollReveal variant="fade-up" delay={0.25}>
-            <div className="w-20 h-1.5 bg-ink rounded-full mb-6" />
-            <p className="font-body text-ink/70 text-lg max-w-xl">
+            <div className="w-20 h-1.5 bg-ink rounded-full mb-4" />
+            <p className="font-body text-ink/70 text-base md:text-lg max-w-xl">
               Full product, a quick illustration, or just a question about tech, all of it lands in the same inbox and I read every message myself.
             </p>
           </ScrollReveal>
@@ -78,7 +78,7 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
       </section>
 
       {/* ── Main content ── */}
-      <section className="py-20 md:py-28 bg-cream relative overflow-hidden">
+      <section className="py-12 md:py-14 bg-cream relative overflow-hidden">
         {/* Grid line texture */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
           <div className="w-full h-full grid-pattern-lines" />

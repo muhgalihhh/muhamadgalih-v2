@@ -8,7 +8,6 @@ import SkillIcon from "@/components/ui/SkillIcon";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import GalleryDetailModal from "@/components/works/GalleryDetailModal";
-import SpotifyCard from "@/components/ui/SpotifyCard";
 import type { ProjectSummary, GalleryItem, ProjectCategoryRow, ProjectLink, Experience } from "@/types/portfolio";
 
 type Category = string;
@@ -150,7 +149,7 @@ function toRow(p: ProjectSummary): ProjectRow {
   };
 }
 
-export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp, experiences = [] }: { dbProjects?: ProjectSummary[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
+export default function WorksContent({ dbProjects, galleryItems = [], categories: categoriesProp, experiences = [] }: { dbProjects?: ProjectSummary[]; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
   const [active, setActive] = useState<Category>("all");
   const [modalProject, setModalProject] = useState<ProjectRow | null>(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState<GalleryItem | null>(null);
@@ -177,7 +176,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h1"
             text="MY WORKS"
             className="font-display font-extrabold text-ink text-[clamp(2rem,7vw,5.5rem)] leading-none mb-4"
           />
@@ -272,7 +271,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
 
                     {/* Bottom gradient + text overlay */}
                     <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-16 md:pt-24 bg-gradient-to-t from-black/95 via-black/75 to-transparent">
-                      <h3 className="font-display font-extrabold text-cream text-lg md:text-2xl leading-tight line-clamp-2">
+                      <h3 className="font-display font-extrabold text-cream text-base md:text-xl leading-tight line-clamp-3">
                         {project.title}
                       </h3>
                       <p className="font-body text-cream/75 text-xs md:text-sm mt-1.5 line-clamp-2 leading-relaxed">
@@ -301,36 +300,6 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
         </div>
       </section>
 
-      {/* ── Song when I dev ── */}
-      {spotifyEmbedUrl && (
-        <section className="py-16 md:py-24 bg-cream relative overflow-hidden">
-          <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
-            <div className="w-full h-full grid-pattern-lines" />
-          </div>
-          <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-            <ScrollReveal variant="fade-up" delay={0.1}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                {/* Left: heading */}
-                <div>
-                  <p className="font-body text-muted text-[11px] tracking-[0.3em] uppercase font-semibold mb-3">
-                    ♪ on repeat while building
-                  </p>
-                  <h2 className="font-display font-extrabold text-ink text-[clamp(2.5rem,5vw,5rem)] leading-none mb-4">
-                    Song when<br />I dev
-                  </h2>
-                  <div className="w-12 h-1.5 bg-coral rounded-full mb-5" />
-                  <p className="font-body text-muted text-sm md:text-base max-w-xs leading-relaxed">
-                    Music running in the background while I write code, design screens, or draw characters.
-                  </p>
-                </div>
-                {/* Right: Spotify embed */}
-                <SpotifyCard embedUrl={spotifyEmbedUrl} height={352} />
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
-      )}
-
       {/* ── Design Gallery ── */}
       <section className="py-20 md:py-28 bg-navy text-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
@@ -338,7 +307,7 @@ export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h2"
             text="DESIGN GALLERY"
             className="font-display font-extrabold text-cream text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />

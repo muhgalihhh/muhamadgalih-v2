@@ -49,9 +49,11 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
 
   const projects = dbProjects?.length ? dbProjects : staticProjects;
 
-  const filtered = projects.filter(
-    (p) => activeFilter === "all" || p.category === activeFilter
-  );
+  // Home is a teaser: newest few per filter, the rest live on /works.
+  const HOME_LIMIT = 6;
+  const filtered = projects
+    .filter((p) => activeFilter === "all" || p.category === activeFilter)
+    .slice(0, HOME_LIMIT);
 
   return (
     <section id="works" className="py-20 md:py-32 bg-cream relative overflow-hidden">
@@ -60,7 +62,7 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
         <div className="w-full h-full grid-pattern-lines" />
       </div>
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
-        <AnimatedText
+        <AnimatedText as="h2"
           text="SELECTED WORKS"
           className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] mb-4 leading-none"
         />
@@ -133,7 +135,7 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
 
                   {/* Bottom gradient + text overlay */}
                   <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-16 md:pt-24 bg-gradient-to-t from-black/95 via-black/75 to-transparent">
-                    <h3 className="font-display font-extrabold text-cream text-lg md:text-2xl leading-tight line-clamp-2">
+                    <h3 className="font-display font-extrabold text-cream text-base md:text-xl leading-tight line-clamp-3">
                       {project.title}
                     </h3>
                     <p className="font-body text-cream/75 text-xs md:text-sm mt-1.5 line-clamp-2 leading-relaxed">
@@ -161,7 +163,7 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
               href="/works"
               className="cartoon-border bg-navy text-cream font-body font-semibold px-7 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2 group"
             >
-              View all works
+              View all {projects.length} works
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
           </div>

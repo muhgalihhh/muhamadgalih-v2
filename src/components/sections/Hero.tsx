@@ -110,7 +110,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             <div className="flex flex-col gap-5 items-start">
               {/* Cycling role line */}
               <motion.div variants={itemAnim} className="flex items-center gap-2.5 flex-wrap">
-                <span className="font-body text-muted text-lg md:text-2xl">I build</span>
+                <span className="font-body text-muted text-lg md:text-2xl">I work on</span>
                 <CyclingText
                   texts={heroRoles}
                   className="font-display font-bold text-[clamp(1.25rem,3vw,2rem)] text-coral"
