@@ -110,6 +110,7 @@ export interface Certificate {
   issue_date: string | null;
   credential_url: string | null;
   image_url: string | null;
+  thumbnail_url: string | null; // WebP of a PDF certificate's first page
   created_at: string;
 }
 

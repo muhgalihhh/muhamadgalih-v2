@@ -502,12 +502,23 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                         onClick={() => setPreviewCert({ label: cert.title, url: cert.image_url! })}
                         className="w-full h-36 cursor-pointer block"
                       >
-                        <PdfThumbnail
-                          url={cert.image_url}
-                          className="w-full h-36 group-hover:scale-105 transition-transform duration-300"
-                          fallbackClassName="bg-yellow"
-                          iconClassName="text-ink/40"
-                        />
+                        {cert.thumbnail_url ? (
+                          // Pre-rendered at upload time — a plain image, nothing to render while scrolling.
+                          <img
+                            src={cert.thumbnail_url}
+                            alt={cert.title}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-36 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <PdfThumbnail
+                            url={cert.image_url}
+                            className="w-full h-36 group-hover:scale-105 transition-transform duration-300"
+                            fallbackClassName="bg-yellow"
+                            iconClassName="text-ink/40"
+                          />
+                        )}
                       </button>
                     ) : cert.image_url ? (
                       <div className="w-full h-36 overflow-hidden">

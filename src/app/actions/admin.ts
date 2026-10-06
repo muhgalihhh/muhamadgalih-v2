@@ -502,6 +502,7 @@ export async function createCertificate(formData: FormData) {
     issue_date:     (formData.get("issue_date") as string) || null,
     credential_url: (formData.get("credential_url") as string) || null,
     image_url:      (formData.get("image_url") as string) || null,
+    thumbnail_url:  (formData.get("thumbnail_url") as string) || null,
   });
   revalidatePath("/admin/(dashboard)/certificates");
   revalidatePath("/about");
@@ -512,8 +513,9 @@ export async function createCertificate(formData: FormData) {
 export async function updateCertificate(id: string, formData: FormData) {
   const supabase = await createClient();
   const newImg = (formData.get("image_url") as string) || null;
+  const newThumb = (formData.get("thumbnail_url") as string) || null;
 
-  const { data: old } = await supabase.from("certificates").select("image_url").eq("id", id).single();
+  const { data: old } = await supabase.from("certificates").select("image_url, thumbnail_url").eq("id", id).single();
 
   const { error } = await supabase.from("certificates").update({
     title:          formData.get("title") as string,
@@ -521,10 +523,14 @@ export async function updateCertificate(id: string, formData: FormData) {
     issue_date:     (formData.get("issue_date") as string) || null,
     credential_url: (formData.get("credential_url") as string) || null,
     image_url:      newImg,
+    thumbnail_url:  newThumb,
   }).eq("id", id);
 
-  if (!error && old?.image_url && old.image_url !== newImg) {
-    await deleteStorageFiles([old.image_url]);
+  if (!error && old) {
+    await deleteStorageFiles([
+      old.image_url !== newImg ? old.image_url : null,
+      old.thumbnail_url !== newThumb ? old.thumbnail_url : null,
+    ]);
   }
   revalidatePath("/admin/(dashboard)/certificates");
   revalidatePath("/about");
@@ -534,9 +540,9 @@ export async function updateCertificate(id: string, formData: FormData) {
 
 export async function deleteCertificate(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("certificates").select("image_url").eq("id", id).single();
+  const { data: old } = await supabase.from("certificates").select("image_url, thumbnail_url").eq("id", id).single();
   await supabase.from("certificates").delete().eq("id", id);
-  if (old) await deleteStorageFiles([old.image_url]);
+  if (old) await deleteStorageFiles([old.image_url, old.thumbnail_url]);
   revalidatePath("/admin/(dashboard)/certificates");
   revalidatePath("/about");
 }
