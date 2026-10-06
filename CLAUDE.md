@@ -20,6 +20,7 @@ Personal portfolio site for Mizarie — a Full-Stack Engineer, UI/UX Designer, a
 npm run dev    # start dev server (localhost:3000)
 npm run build
 npm run lint
+npm test       # node --test unit tests (src/lib/*.test.ts)
 ```
 
 ## Architecture

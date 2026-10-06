@@ -80,7 +80,6 @@ function buildOptions(highlighted: Map<string, string>): RenderOptions {
               title="YouTube video"
               loading="lazy"
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-              allowFullScreen
               className="w-full h-full"
             />
           </div>
