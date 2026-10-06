@@ -245,17 +245,6 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer className="py-8 bg-cream border-t-2 border-ink/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <p className="font-body text-sm text-muted">
-            © {new Date().getFullYear()} Muhamad Galih · MIZARIE · All rights reserved
-          </p>
-          <p className="font-display font-extrabold text-ink/20 text-2xl">
-            MG / MIZARIE
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }

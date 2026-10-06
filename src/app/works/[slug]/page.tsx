@@ -50,7 +50,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
       )}
 
-      <article className="max-w-[720px] mx-auto px-6 pt-12 pb-28 md:pb-24">
+      <article className="max-w-[720px] mx-auto px-6 pt-12 pb-16 md:pb-24">
         <ProjectContent content={project.content} description={project.description} />
       </article>
     </main>

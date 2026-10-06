@@ -51,7 +51,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>
-          <PublicLayout musicUrl={profile?.music_url} songTitle={profile?.name ?? undefined}>
+          <PublicLayout musicUrl={profile?.music_url} songTitle={profile?.name ?? undefined} profile={profile}>
             {children}
           </PublicLayout>
         </ThemeProvider>

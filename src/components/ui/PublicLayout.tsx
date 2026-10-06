@@ -8,14 +8,17 @@ import MusicPlayer from "./MusicPlayer";
 import CustomCursor from "./CustomCursor";
 import SplashScreen from "./SplashScreen";
 import PageviewTracker from "@/components/analytics/PageviewTracker";
+import Footer from "./Footer";
+import type { Profile } from "@/types/portfolio";
 
 interface PublicLayoutProps {
   children: React.ReactNode;
   musicUrl?: string | null;
   songTitle?: string | null;
+  profile?: Profile | null;
 }
 
-export default function PublicLayout({ children, musicUrl, songTitle }: PublicLayoutProps) {
+export default function PublicLayout({ children, musicUrl, songTitle, profile = null }: PublicLayoutProps) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
@@ -27,6 +30,8 @@ export default function PublicLayout({ children, musicUrl, songTitle }: PublicLa
       {!isAdmin && <Navbar />}
       {!isAdmin && <PageviewTracker />}
       {children}
+      {/* Home closes with its own Contact section; every other page gets the footer */}
+      {!isAdmin && pathname !== "/" && <Footer profile={profile} />}
       {!isAdmin && <MobileNav />}
       {!isAdmin && <MusicPlayer musicUrl={musicUrl} songTitle={songTitle} />}
     </MotionConfig>
