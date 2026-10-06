@@ -132,7 +132,6 @@ function ProjectForm({ defaultValues, skills, categories, experiences, onSubmit,
 
   return (
     <form
-      key={defaultValues?.id ?? "new"}
       onSubmit={(e) => {
         e.preventDefault();
         const fd = new FormData(e.currentTarget);
@@ -446,7 +445,7 @@ export default function WorksAdminClient({ initialProjects, skills, initialCateg
           </div>
           {msg && <p className="mx-6 mt-4 text-red-600 text-sm bg-red-50 border border-red-100 rounded-xl px-3 py-2">{msg}</p>}
           <div className="p-6">
-            <ProjectForm defaultValues={editing ?? undefined} skills={skills} categories={initialCategories} experiences={experiences} onSubmit={handleSubmit} isPending={isPending} />
+            <ProjectForm key={editing?.id ?? "new"} defaultValues={editing ?? undefined} skills={skills} categories={initialCategories} experiences={experiences} onSubmit={handleSubmit} isPending={isPending} />
           </div>
         </div>
       )}
