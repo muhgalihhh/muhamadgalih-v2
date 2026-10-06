@@ -93,12 +93,30 @@ test("extractContentImageUrls", () => {
 });
 
 test("cleanupUrls keeps anything still referenced", () => {
+  const B = "https://x.supabase.co/storage/v1/object/public/portfolio/";
   const img = (src: string) => ({ type: "image", attrs: { src } });
+  const [shot1, shot2] = [`${B}projects/1.webp`, `${B}projects/2.webp`];
+  const [c1, c2] = [`${B}projects/content/1.webp`, `${B}projects/content/2.webp`];
   const removed = cleanupUrls(
-    { imageUrls: ["shot1", "shot2"], content: { type: "doc", content: [img("c1"), img("c2"), img("shot2")] } },
-    { imageUrls: ["shot1", "c1"], content: { type: "doc", content: [img("c2")] } },
+    { imageUrls: [shot1, shot2], content: { type: "doc", content: [img(c1), img(c2), img(shot2)] } },
+    { imageUrls: [shot1, c1], content: { type: "doc", content: [img(c2)] } },
   );
   // shot2 moved out of both; c1 left content but became a screenshot; c2 still in content.
-  assert.deepEqual(removed, ["shot2"]);
+  assert.deepEqual(removed, [shot2]);
   assert.deepEqual(cleanupUrls({ imageUrls: [], content: null }, { imageUrls: [], content: null }), []);
+});
+
+test("cleanupUrls never deletes files another record still uses", () => {
+  const B = "https://x.supabase.co/storage/v1/object/public/portfolio/";
+  const img = (src: string) => ({ type: "image", attrs: { src } });
+  const shared = `${B}projects/content/shared.webp`; // pasted from another project's content
+  const own = `${B}projects/content/own.webp`;
+  const galleryItem = `${B}gallery/item.webp`; // pasted from the public gallery
+  const removed = cleanupUrls(
+    { imageUrls: [], content: { type: "doc", content: [img(shared), img(own), img(galleryItem)] } },
+    { imageUrls: [], content: null },
+    [shared],
+  );
+  // shared: still used by another project; galleryItem: not an editor upload, so not ours to delete.
+  assert.deepEqual(removed, [own]);
 });

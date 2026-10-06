@@ -4,12 +4,12 @@ import { useState } from "react";
 import { NodeViewWrapper, type ReactNodeViewProps } from "@tiptap/react";
 import { ChevronLeft, ChevronRight, Loader2, Plus, X } from "lucide-react";
 import { uploadFile } from "@/app/actions/admin";
-import type { GalleryImage } from "@/lib/projectContent";
+import { CONTENT_UPLOAD_FOLDER, type GalleryImage } from "@/lib/projectContent";
 
 export async function uploadContentImage(file: File): Promise<{ url?: string; error?: string }> {
   const fd = new FormData();
   fd.append("file", file);
-  fd.append("folder", "projects/content");
+  fd.append("folder", CONTENT_UPLOAD_FOLDER);
   try {
     return await uploadFile(fd);
   } catch {

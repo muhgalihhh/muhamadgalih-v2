@@ -111,13 +111,22 @@ export function extractContentImageUrls(content: unknown): string[] {
   return [...new Set(out)];
 }
 
-/** URLs referenced before but by neither screenshots nor content after. */
+/** Storage folder the editor uploads into. */
+export const CONTENT_UPLOAD_FOLDER = "projects/content";
+
+/**
+ * URLs safe to delete from storage: referenced before, not after, and not used
+ * by any other record. Content images only count when the editor uploaded them
+ * (an <img> pasted from elsewhere points at a file that isn't ours to delete).
+ */
 export function cleanupUrls(
   old: { imageUrls: string[]; content: unknown },
   next: { imageUrls: string[]; content: unknown },
+  inUseElsewhere: string[] = [],
 ): string[] {
-  const keep = new Set([...next.imageUrls, ...extractContentImageUrls(next.content)]);
-  return [...new Set([...old.imageUrls, ...extractContentImageUrls(old.content)])].filter((u) => !keep.has(u));
+  const keep = new Set([...next.imageUrls, ...extractContentImageUrls(next.content), ...inUseElsewhere]);
+  const ownContent = extractContentImageUrls(old.content).filter((u) => u.includes(`/${CONTENT_UPLOAD_FOLDER}/`));
+  return [...new Set([...old.imageUrls, ...ownContent])].filter((u) => !keep.has(u));
 }
 
 export const Callout = Node.create({

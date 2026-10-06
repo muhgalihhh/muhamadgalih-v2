@@ -5,6 +5,12 @@ import sharp from "sharp";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/service";
 import { slugify, uniqueSlug, parseContent, extractContentImageUrls, cleanupUrls } from "@/lib/projectContent";
+
+// Every image URL other projects still reference — never delete those from storage.
+async function projectUrlsInUse(supabase: Awaited<ReturnType<typeof createClient>>, exceptId: string): Promise<string[]> {
+  const { data } = await supabase.from("projects").select("image_urls, content").neq("id", exceptId);
+  return (data ?? []).flatMap((p) => [...(p.image_urls ?? []), ...extractContentImageUrls(p.content)]);
+}
 import type { Profile, GalleryItem, ProjectCategoryRow, ContactMessage } from "@/types/portfolio";
 
 // ── Storage cleanup helpers ──────────────────────────────────
@@ -450,6 +456,7 @@ export async function updateProject(id: string, formData: FormData) {
     const removed: (string | null)[] = cleanupUrls(
       { imageUrls: old.image_urls ?? [], content: old.content },
       { imageUrls: image_urls, content: parsed.content },
+      await projectUrlsInUse(supabase, id),
     );
     if (old.emoji && old.emoji !== newEmoji) removed.push(old.emoji);
     await deleteStorageFiles(removed);
@@ -464,7 +471,14 @@ export async function deleteProject(id: string) {
   const supabase = await createClient();
   const { data: old } = await supabase.from("projects").select("image_urls, emoji, content").eq("id", id).single();
   await supabase.from("projects").delete().eq("id", id);
-  if (old) await deleteStorageFiles([...(old.image_urls ?? []), ...extractContentImageUrls(old.content), old.emoji]);
+  if (old) {
+    const removed = cleanupUrls(
+      { imageUrls: old.image_urls ?? [], content: old.content },
+      { imageUrls: [], content: null },
+      await projectUrlsInUse(supabase, id),
+    );
+    await deleteStorageFiles([...removed, old.emoji]);
+  }
   revalidatePath("/admin/(dashboard)/works");
   revalidatePath("/works", "layout");
 }
