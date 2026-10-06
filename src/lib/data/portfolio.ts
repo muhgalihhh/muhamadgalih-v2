@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import type { Skill, Experience, Education, Organization, Project, Certificate, Profile, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
 
@@ -17,6 +18,25 @@ export async function getPublicProjects(): Promise<Project[]> {
   }
 }
 
+export type ProjectWithExperience = Project & { experience: { role: string; company: string } | null };
+
+// cache(): generateMetadata and the page both call this in one request.
+export const getPublicProjectBySlug = cache(async (slug: string): Promise<ProjectWithExperience | null> => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*, experience:experiences(role, company)")
+      .eq("slug", slug)
+      .eq("published", true)
+      .maybeSingle();
+    if (error || !data) return null;
+    return data as ProjectWithExperience;
+  } catch {
+    return null;
+  }
+});
+
 export async function getPublicExperiences(): Promise<Experience[]> {
   try {
     const supabase = await createClient();
@@ -30,7 +50,7 @@ export async function getPublicExperiences(): Promise<Experience[]> {
 
     const { data: linkedProjects } = await supabase
       .from("projects")
-      .select("id, title, category, description, color_class, text_color_class, tech_stack, image_urls, emoji, links, experience_id")
+      .select("id, slug, title, category, description, color_class, text_color_class, tech_stack, image_urls, emoji, links, experience_id")
       .eq("published", true)
       .not("experience_id", "is", null);
 
@@ -39,7 +59,7 @@ export async function getPublicExperiences(): Promise<Experience[]> {
       linked_projects: (linkedProjects ?? [])
         .filter((p) => p.experience_id === exp.id)
         .map((p) => ({
-          id: p.id, title: p.title, category: p.category, description: p.description,
+          id: p.id, slug: p.slug, title: p.title, category: p.category, description: p.description,
           color_class: p.color_class, text_color_class: p.text_color_class,
           tech_stack: p.tech_stack, image_urls: p.image_urls, emoji: p.emoji, links: p.links,
         })),
@@ -130,7 +150,7 @@ export async function getPublicGalleryItems(): Promise<GalleryItem[]> {
     if (gallerySlugs.length > 0) {
       const { data: works } = await supabase
         .from("projects")
-        .select("id, title, description, category, image_urls, project_date, order_index, created_at")
+        .select("id, slug, title, description, category, image_urls, project_date, order_index, created_at")
         .eq("published", true)
         .in("category", gallerySlugs)
         .order("project_date", { ascending: false, nullsFirst: false })
@@ -140,6 +160,7 @@ export async function getPublicGalleryItems(): Promise<GalleryItem[]> {
         .filter((w) => w.image_urls?.length > 0)
         .map((w) => ({
           id: w.id,
+          slug: w.slug,
           title: w.title,
           description: w.description,
           category: w.category,

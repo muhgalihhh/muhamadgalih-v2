@@ -1,3 +1,5 @@
+import type { JSONContent } from "@tiptap/core";
+
 export type SkillCategory = "design" | "development";
 export type ProjectCategory = string; // dynamic — stored in project_categories table
 
@@ -35,7 +37,7 @@ export interface Experience {
   images: string[];
   order_index: number;
   created_at: string;
-  linked_projects?: Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">[];
+  linked_projects?: Pick<Project, "id" | "slug" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">[];
 }
 
 export interface Education {
@@ -79,6 +81,7 @@ export interface ProjectLink {
 
 export interface Project {
   id: string;
+  slug: string;
   title: string;
   category: ProjectCategory;
   description: string;
@@ -94,6 +97,7 @@ export interface Project {
   published: boolean;
   created_at: string;
   experience_id: string | null;
+  content: JSONContent | null;
 }
 
 export interface Certificate {
@@ -108,6 +112,7 @@ export interface Certificate {
 
 export interface GalleryItem {
   id: string;
+  slug?: string; // only on items derived from a project
   title: string;
   description: string;
   category: string;
