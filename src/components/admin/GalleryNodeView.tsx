@@ -10,7 +10,12 @@ export async function uploadContentImage(file: File): Promise<{ url?: string; er
   const fd = new FormData();
   fd.append("file", file);
   fd.append("folder", "projects/content");
-  return uploadFile(fd);
+  try {
+    return await uploadFile(fd);
+  } catch {
+    // The server action rejects outright when the body exceeds its 15 MB limit.
+    return { error: `Upload gagal: ${file.name} — file terlalu besar? (maks 15 MB)` };
+  }
 }
 
 export default function GalleryNodeView({ node, updateAttributes, deleteNode, selected }: ReactNodeViewProps) {
