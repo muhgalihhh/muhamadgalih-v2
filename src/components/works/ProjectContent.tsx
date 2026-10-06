@@ -19,19 +19,23 @@ const CALLOUT_CLASS: Record<CalloutVariant, string> = {
 };
 
 const codeKey = (lang: string, code: string) => `${lang}\u0000${code}`;
+// Node attrs come from the DB; the mappings run during React render (outside
+// renderBlocks' try/catch), so treat every attr as untrusted.
+const str = (v: unknown) => (typeof v === "string" ? v : "");
 
 function collectCodeBlocks(node: JSONContent, out: { lang: string; code: string }[]) {
+  const children = Array.isArray(node.content) ? node.content : [];
   if (node.type === "codeBlock") {
-    out.push({ lang: node.attrs?.language ?? "", code: (node.content ?? []).map((c) => c.text ?? "").join("") });
+    out.push({ lang: str(node.attrs?.language), code: children.map((c) => str(c?.text)).join("") });
   }
-  node.content?.forEach((child) => collectCodeBlocks(child, out));
+  children.forEach((child) => collectCodeBlocks(child, out));
 }
 
 function buildOptions(highlighted: Map<string, string>): RenderOptions {
   return {
     nodeMapping: {
       codeBlock: ({ node }) => {
-        const lang: string = node.attrs.language ?? "";
+        const lang = str(node.attrs.language);
         const html = highlighted.get(codeKey(lang, node.textContent));
         return (
           <div className="cartoon-border rounded-xl overflow-hidden my-6 bg-cream">
@@ -45,17 +49,20 @@ function buildOptions(highlighted: Map<string, string>): RenderOptions {
           </div>
         );
       },
-      image: ({ node }) => (
-        <div className="my-6">
-          <ZoomImage src={node.attrs.src} alt={node.attrs.alt ?? ""} className="cartoon-border rounded-xl" />
-        </div>
-      ),
+      image: ({ node }) =>
+        str(node.attrs.src) ? (
+          <div className="my-6">
+            <ZoomImage src={str(node.attrs.src)} alt={str(node.attrs.alt)} className="cartoon-border rounded-xl" />
+          </div>
+        ) : null,
       gallery: ({ node }) => {
-        const images: GalleryImage[] = Array.isArray(node.attrs.images) ? node.attrs.images : [];
+        const images: GalleryImage[] = (Array.isArray(node.attrs.images) ? node.attrs.images : [])
+          .filter((img: unknown) => !!str((img as GalleryImage | null)?.src))
+          .map((img: GalleryImage) => ({ src: img.src, alt: str(img.alt) }));
         return (
           <div className="columns-2 md:columns-3 gap-3 my-6">
             {images.map((img, i) => (
-              <ZoomImage key={i} src={img.src} alt={img.alt ?? ""} className="cartoon-border-sm rounded-xl mb-3 break-inside-avoid" />
+              <ZoomImage key={i} src={img.src} alt={img.alt} className="cartoon-border-sm rounded-xl mb-3 break-inside-avoid" />
             ))}
           </div>
         );
