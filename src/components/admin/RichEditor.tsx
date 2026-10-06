@@ -15,7 +15,7 @@ import {
   Heading2, Heading3, ImagePlus, SquareCode, Table as TableIcon, SquarePlay,
   MessageSquareQuote, Images, Loader2,
 } from "lucide-react";
-import { Callout, Gallery, CALLOUT_VARIANTS } from "@/lib/projectContent";
+import { Callout, Gallery, CALLOUT_VARIANTS, htmlHasText } from "@/lib/projectContent";
 import GalleryNodeView, { uploadContentImage } from "@/components/admin/GalleryNodeView";
 
 const lowlight = createLowlight(common);
@@ -81,6 +81,8 @@ export default function RichEditor({ initialContent, onChange }: { initialConten
     editorProps: {
       attributes: { class: "rich-editor min-h-[320px] px-4 py-3 outline-none text-sm text-slate-800" },
       handlePaste: (view, event) => {
+        // Word/Excel attach a bitmap next to the rich text — let ProseMirror paste the text.
+        if (htmlHasText(event.clipboardData?.getData("text/html") ?? "")) return false;
         const files = imageFiles(event.clipboardData?.files);
         if (!files.length) return false;
         void insertImages(view, files);

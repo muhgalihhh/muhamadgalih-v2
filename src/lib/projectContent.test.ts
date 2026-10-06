@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   slugify, uniqueSlug, safeHref, youtubeId, isContentDoc, parseContent,
-  descriptionToDoc, extractContentImageUrls, cleanupUrls,
+  descriptionToDoc, extractContentImageUrls, cleanupUrls, htmlHasText,
 } from "./projectContent.ts";
 
 test("slugify", () => {
@@ -104,6 +104,15 @@ test("cleanupUrls keeps anything still referenced", () => {
   // shot2 moved out of both; c1 left content but became a screenshot; c2 still in content.
   assert.deepEqual(removed, [shot2]);
   assert.deepEqual(cleanupUrls({ imageUrls: [], content: null }, { imageUrls: [], content: null }), []);
+});
+
+test("htmlHasText tells rich-text pastes apart from image pastes", () => {
+  // Word/Excel put HTML text AND a bitmap on the clipboard — paste the text.
+  assert.equal(htmlHasText('<html><head><style>p{}</style></head><body><!--[if gte mso]>x<![endif]--><p class="MsoNormal">Hello&nbsp;world</p></body></html>'), true);
+  // Copying an image from a web page: HTML is just the <img>.
+  assert.equal(htmlHasText('<meta charset="utf-8"><img src="https://x/y.png" alt="logo">'), false);
+  assert.equal(htmlHasText('<b id="docs-internal-guid-1"><img src="a.png"></b> &nbsp; '), false);
+  assert.equal(htmlHasText(""), false);
 });
 
 test("cleanupUrls never deletes files another record still uses", () => {

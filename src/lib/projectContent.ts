@@ -96,6 +96,15 @@ export function descriptionToDoc(description: string): JSONContent {
   return { type: "doc", content: paragraphs.length ? paragraphs : [{ type: "paragraph" }] };
 }
 
+/** True when clipboard HTML carries real text (Word/Excel also attach a bitmap of it). */
+export function htmlHasText(html: string): boolean {
+  return html
+    .replace(/<!--[\s\S]*?-->|<(style|script|head)[\s\S]*?<\/\1>/gi, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .trim().length > 0;
+}
+
 export function extractContentImageUrls(content: unknown): string[] {
   const out: string[] = [];
   const walk = (n: unknown) => {
