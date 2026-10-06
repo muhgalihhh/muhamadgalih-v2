@@ -33,7 +33,14 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <main className="md:pt-20 bg-cream min-h-screen">
-      <ProjectHeader project={project} categoryLabel={categoryLabel} experience={project.experience} />
+      <ProjectHeader
+        project={{
+          title: project.title, emoji: project.emoji, color_class: project.color_class,
+          text_color_class: project.text_color_class, tech_stack: project.tech_stack, links: project.links,
+        }}
+        categoryLabel={categoryLabel}
+        experience={project.experience}
+      />
 
       {project.image_urls.length > 0 && (
         <div className="max-w-5xl mx-auto px-6 md:px-12 -mt-12 md:-mt-14 relative z-10">

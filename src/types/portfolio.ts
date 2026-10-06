@@ -100,6 +100,9 @@ export interface Project {
   content: JSONContent | null;
 }
 
+/** What list pages ship to the browser — everything except the heavy rich content. */
+export type ProjectSummary = Omit<Project, "content">;
+
 export interface Certificate {
   id: string;
   title: string;

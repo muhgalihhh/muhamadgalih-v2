@@ -1,18 +1,23 @@
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
-import type { Skill, Experience, Education, Organization, Project, Certificate, Profile, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
+import type { Skill, Experience, Education, Organization, Project, ProjectSummary, Certificate, Profile, GalleryItem, ProjectCategoryRow } from "@/types/portfolio";
 
-export async function getPublicProjects(): Promise<Project[]> {
+// Everything but `content`: list pages pass these rows to client components,
+// and every project's full rich content would otherwise ride along.
+const PROJECT_SUMMARY_COLUMNS =
+  "id, slug, title, category, description, tech_stack, emoji, color_class, text_color_class, image_urls, link, links, project_date, order_index, published, created_at, experience_id";
+
+export async function getPublicProjects(): Promise<ProjectSummary[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("projects")
-      .select("*")
+      .select(PROJECT_SUMMARY_COLUMNS)
       .eq("published", true)
       .order("project_date", { ascending: false, nullsFirst: false })
       .order("order_index");
     if (error || !data?.length) return [];
-    return data as Project[];
+    return data as ProjectSummary[];
   } catch {
     return [];
   }

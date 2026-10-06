@@ -9,7 +9,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import GalleryDetailModal from "@/components/works/GalleryDetailModal";
 import SpotifyCard from "@/components/ui/SpotifyCard";
-import type { Project, GalleryItem, ProjectCategoryRow, ProjectLink, Experience } from "@/types/portfolio";
+import type { ProjectSummary, GalleryItem, ProjectCategoryRow, ProjectLink, Experience } from "@/types/portfolio";
 
 type Category = string;
 
@@ -133,7 +133,7 @@ type ProjectRow = {
   experience_id: string | null;
 };
 
-function toRow(p: Project): ProjectRow {
+function toRow(p: ProjectSummary): ProjectRow {
   return {
     id: p.id,
     slug: p.slug,
@@ -150,7 +150,7 @@ function toRow(p: Project): ProjectRow {
   };
 }
 
-export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp, experiences = [] }: { dbProjects?: Project[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
+export default function WorksContent({ dbProjects, spotifyEmbedUrl, galleryItems = [], categories: categoriesProp, experiences = [] }: { dbProjects?: ProjectSummary[]; spotifyEmbedUrl?: string | null; galleryItems?: GalleryItem[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
   const [active, setActive] = useState<Category>("all");
   const [modalProject, setModalProject] = useState<ProjectRow | null>(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState<GalleryItem | null>(null);
