@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import Link from "next/link";
+import { X, ArrowRight } from "lucide-react";
 import ProjectCarousel from "@/components/works/ProjectCarousel";
 import type { GalleryItem } from "@/types/portfolio";
 
@@ -69,6 +70,14 @@ export default function GalleryDetailModal({
                   <p className="font-body text-sm md:text-base text-ink/80 leading-relaxed">
                     {item.description}
                   </p>
+                )}
+                {item.slug && (
+                  <Link
+                    href={`/works/${item.slug}`}
+                    className="self-start inline-flex items-center gap-2 cartoon-border bg-yellow text-ink font-body font-semibold text-sm px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+                  >
+                    View full details <ArrowRight size={14} />
+                  </Link>
                 )}
               </div>
             </div>

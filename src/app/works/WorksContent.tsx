@@ -120,6 +120,7 @@ const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
 
 type ProjectRow = {
   id: string;
+  slug?: string;
   title: string;
   category: Category;
   description: string;
@@ -135,6 +136,7 @@ type ProjectRow = {
 function toRow(p: Project): ProjectRow {
   return {
     id: p.id,
+    slug: p.slug,
     title: p.title,
     category: p.category as Category,
     description: p.description,
