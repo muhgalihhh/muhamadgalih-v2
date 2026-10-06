@@ -35,7 +35,7 @@ export default function ProjectHeader({
           <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-black/15 cartoon-border-sm flex items-center justify-center shrink-0">
             <SkillIcon icon={project.emoji} className="w-7 h-7 md:w-8 md:h-8" />
           </div>
-          <AnimatedText
+          <AnimatedText as="h1"
             text={project.title}
             once
             className="font-display font-extrabold text-[clamp(1.6rem,4.5vw,3.25rem)] leading-[1.08]"

@@ -7,6 +7,8 @@ interface AnimatedTextProps {
   className?: string;
   staggerDelay?: number;
   once?: boolean;
+  /** Render as a real heading so pages have an outline for screen readers and SEO. */
+  as?: "div" | "h1" | "h2";
 }
 
 const containerVariants = {
@@ -38,11 +40,13 @@ export default function AnimatedText({
   className,
   staggerDelay = 0.04,
   once = false,
+  as = "div",
 }: AnimatedTextProps) {
   const words = text.split(" ");
+  const Tag = motion[as];
 
   return (
-    <motion.div
+    <Tag
       className={`max-w-full ${className ?? ""}`}
       custom={staggerDelay}
       variants={containerVariants}
@@ -61,6 +65,6 @@ export default function AnimatedText({
           </motion.span>
         </motion.span>
       ))}
-    </motion.div>
+    </Tag>
   );
 }

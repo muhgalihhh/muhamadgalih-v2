@@ -38,7 +38,7 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
         <div className="w-full h-full grid-pattern-lines" />
       </div>
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
-        <AnimatedText
+        <AnimatedText as="h2"
           text="LET'S CREATE SOMETHING COOL"
           className="font-display font-extrabold text-ink text-[clamp(1.5rem,5vw,4.2rem)] leading-tight mb-8 max-w-3xl"
           staggerDelay={0.035}

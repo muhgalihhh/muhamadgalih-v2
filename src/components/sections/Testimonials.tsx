@@ -214,7 +214,7 @@ export default function TestimonialsSection({
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <AnimatedText
+            <AnimatedText as="h2"
               text="WHAT PEOPLE SAY"
               className="font-display font-extrabold text-ink text-[clamp(1.6rem,4.5vw,3.5rem)] leading-tight mb-3"
               staggerDelay={0.03}
