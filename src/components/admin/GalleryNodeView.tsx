@@ -56,6 +56,17 @@ export default function GalleryNodeView({ node, updateAttributes, deleteNode, se
         {images.map((img, i) => (
           <div key={`${img.src}-${i}`} className="relative group aspect-square">
             <img src={img.src} alt={img.alt} className="w-full h-full object-cover rounded-lg border border-slate-200" />
+            <button
+              type="button"
+              title={img.alt ? `Alt: ${img.alt}` : "Isi alt text"}
+              onClick={() => {
+                const alt = window.prompt("Alt text — jelaskan isi gambar", img.alt);
+                if (alt !== null) set(images.map((x, j) => (j === i ? { ...x, alt: alt.trim() } : x)));
+              }}
+              className={`absolute top-1 left-1 px-1.5 h-5 rounded-full text-[9px] font-bold ${img.alt ? "bg-emerald-500 text-white" : "bg-white/90 text-slate-600 hidden group-hover:block"}`}
+            >
+              Alt
+            </button>
             <div className="absolute inset-x-1 bottom-1 hidden group-hover:flex justify-between">
               <button type="button" disabled={i === 0} onClick={() => move(i, -1)} className="w-6 h-6 bg-white/90 rounded-full flex items-center justify-center disabled:opacity-30">
                 <ChevronLeft size={12} />

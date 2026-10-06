@@ -139,6 +139,7 @@ export default function RichEditor({ initialContent, onChange }: { initialConten
   const inCallout = editor.isActive("callout");
   const inTable = editor.isActive("table");
   const inCode = editor.isActive("codeBlock");
+  const inImage = editor.isActive("image");
 
   return (
     <div className="border border-slate-200 rounded-xl bg-white">
@@ -172,7 +173,7 @@ export default function RichEditor({ initialContent, onChange }: { initialConten
         {busy && <Loader2 size={15} className="animate-spin text-violet ml-2" />}
       </div>
 
-      {(inCode || inTable || inCallout) && (
+      {(inCode || inTable || inCallout || inImage) && (
         <div className="flex flex-wrap items-center gap-2 px-3 py-1.5 border-b border-slate-100 bg-slate-50 text-xs text-slate-500">
           {inCode && (
             <label className="flex items-center gap-1.5">
@@ -184,6 +185,17 @@ export default function RichEditor({ initialContent, onChange }: { initialConten
               >
                 {CODE_LANGUAGES.map((l) => <option key={l} value={l}>{l}</option>)}
               </select>
+            </label>
+          )}
+          {inImage && (
+            <label className="flex flex-1 min-w-[220px] items-center gap-1.5">
+              Alt
+              <input
+                className={`${selectCls} flex-1`}
+                placeholder="Alt text — jelaskan isi gambar"
+                value={(editor.getAttributes("image").alt as string | null) ?? ""}
+                onChange={(e) => editor.commands.updateAttributes("image", { alt: e.target.value })}
+              />
             </label>
           )}
           {inCallout && (
