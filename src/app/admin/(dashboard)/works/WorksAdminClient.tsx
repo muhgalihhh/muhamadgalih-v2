@@ -7,6 +7,9 @@ import ColorPicker from "@/components/admin/ColorPicker";
 import IconPicker from "@/components/admin/IconPicker";
 import SkillIcon from "@/components/ui/SkillIcon";
 import type { Project, Skill, ProjectCategoryRow, Experience } from "@/types/portfolio";
+import type { JSONContent } from "@tiptap/core";
+import RichEditor from "@/components/admin/RichEditor";
+import { descriptionToDoc } from "@/lib/projectContent";
 import { Plus, Pencil, Trash2, X, Upload, Loader2, FolderOpen, ChevronDown, Tag, Check, Image as ImageIcon, Link2 } from "lucide-react";
 
 type FormMode = "add" | "edit" | null;
@@ -83,6 +86,8 @@ function ProjectForm({ defaultValues, skills, categories, experiences, onSubmit,
     defaultValues?.links?.map((l) => `${l.label} | ${l.url}`).join("\n") ?? ""
   );
   const [pdfUploading, setPdfUploading] = useState(false);
+  // null = untouched: the server keeps content null and the page falls back to the description.
+  const [content, setContent] = useState<JSONContent | null>(defaultValues?.content ?? null);
 
   const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -135,6 +140,7 @@ function ProjectForm({ defaultValues, skills, categories, experiences, onSubmit,
         fd.set("tech_stack", techStack.join(","));
         fd.set("emoji", icon);
         fd.set("links", links);
+        fd.set("content", content ? JSON.stringify(content) : "");
         onSubmit(fd);
       }}
       className="grid grid-cols-2 gap-5"
@@ -154,6 +160,10 @@ function ProjectForm({ defaultValues, skills, categories, experiences, onSubmit,
         </div>
       </Field>
 
+      <Field label="Slug" wide note="— URL /works/<slug>; kosongkan = otomatis dari judul. Ganti slug = link lama mati.">
+        <input name="slug" defaultValue={defaultValues?.slug ?? ""} placeholder="otomatis dari judul" className={inputCls} />
+      </Field>
+
       <Field label="Project Icon" wide>
         <IconPicker value={icon} onChange={setIcon} placeholder="Search icon... (e.g. react, figma, globe)" />
         <div className="flex items-center gap-2 mt-1">
@@ -171,8 +181,15 @@ function ProjectForm({ defaultValues, skills, categories, experiences, onSubmit,
         </div>
       </Field>
 
-      <Field label="Description" wide>
+      <Field label="Ringkasan (card & SEO)" wide>
         <textarea name="description" rows={2} defaultValue={defaultValues?.description ?? ""} className={`${inputCls} resize-none`} />
+      </Field>
+
+      <Field label="Content" wide note="— isi halaman detail. Paste / drag gambar langsung ke editor.">
+        <RichEditor
+          initialContent={defaultValues?.content ?? descriptionToDoc(defaultValues?.description ?? "")}
+          onChange={setContent}
+        />
       </Field>
 
       <Field label="Tech Stack" wide note="— select from your Skills database">
