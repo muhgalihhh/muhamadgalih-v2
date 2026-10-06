@@ -239,3 +239,28 @@ body {
     animation-play-state: paused;
   }
 }
+
+/* ── Project detail content (public) ───────────────────────── */
+.project-content { @apply font-body text-ink/85 text-base md:text-lg leading-relaxed; }
+.project-content h2 { @apply font-display font-extrabold text-2xl md:text-3xl text-ink mt-12 mb-4; }
+.project-content h3 { @apply font-display font-bold text-xl md:text-2xl text-ink mt-8 mb-3; }
+.project-content p { @apply my-4; }
+.project-content ul { @apply list-disc pl-6 my-4 space-y-1.5; }
+.project-content ol { @apply list-decimal pl-6 my-4 space-y-1.5; }
+.project-content blockquote { @apply border-l-4 border-coral pl-4 italic my-6; }
+.project-content hr { @apply my-10 border-0 border-t-2 border-dashed border-ink/20; }
+.project-content a { @apply text-violet font-semibold underline underline-offset-4 decoration-2 hover:decoration-coral; }
+.project-content :not(pre) > code { @apply font-mono text-[0.88em] bg-ink/10 px-1.5 py-0.5 rounded; }
+.project-content aside > :first-child { @apply mt-0; }
+.project-content aside > :last-child { @apply mb-0; }
+.project-content table { @apply w-full text-sm md:text-base border-collapse; }
+.project-content th,
+.project-content td { @apply border border-ink/20 px-3 py-2 text-left align-top; }
+.project-content th { @apply bg-yellow text-ink font-semibold; }
+.project-content th p,
+.project-content td p { @apply m-0; }
+.project-content .shiki { @apply m-0 p-4 text-sm leading-relaxed overflow-x-auto; }
+
+/* Shiki dual theme (rendered with defaultColor: false) */
+.shiki, .shiki span { color: var(--shiki-light); background-color: var(--shiki-light-bg); }
+.dark .shiki, .dark .shiki span { color: var(--shiki-dark); background-color: var(--shiki-dark-bg); }
