@@ -16,7 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const [loadingHref, setLoadingHref] = useState<string | null>(null);
+  const [loadingKey, setLoadingKey] = useState<string | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -25,7 +25,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setLoadingHref(null);
+    setLoadingKey(null);
   }, [pathname]);
 
   return (
@@ -52,13 +52,13 @@ export default function Navbar() {
       {/* Links */}
       <div className="flex items-center gap-8">
         {navLinks.map((link) => {
-          const isLoading = loadingHref === link.href;
+          const isLoading = loadingKey === link.href;
           const isActive = pathname === link.href;
           return (
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => { if (!isActive) setLoadingHref(link.href); }}
+              onClick={() => { if (!isActive) setLoadingKey(link.href); }}
               className={`font-body font-medium transition-colors relative group flex items-center gap-1.5 ${
                 isLoading ? "text-coral/60" : "text-ink hover:text-coral"
               }`}
@@ -76,10 +76,10 @@ export default function Navbar() {
         <ThemeToggle />
         <Link
           href="/contact"
-          onClick={() => { if (pathname !== "/contact") setLoadingHref("/contact"); }}
+          onClick={() => { if (pathname !== "/contact") setLoadingKey("hire-me"); }}
           className="cartoon-border bg-coral text-cream font-body font-semibold px-5 py-2 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform flex items-center gap-1.5"
         >
-          {loadingHref === "/contact" ? <Loader2 size={14} className="animate-spin" /> : null}
+          {loadingKey === "hire-me" ? <Loader2 size={14} className="animate-spin" /> : null}
           Hire me
         </Link>
       </div>
