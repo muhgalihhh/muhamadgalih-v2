@@ -129,7 +129,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
       {/* ── Hero header ── */}
       <section className="py-20 md:py-28 bg-navy text-cream relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h1"
             text="ABOUT ME"
             className="font-display font-extrabold text-cream text-[clamp(2rem,7vw,5.5rem)] leading-none mb-6"
           />
@@ -190,7 +190,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h2"
             text="WORK EXPERIENCE"
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
@@ -363,7 +363,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
       {/* ── Education ── */}
       <section className="py-20 md:py-28 bg-cream relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h2"
             text="EDUCATION"
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
@@ -435,7 +435,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
           <div className="w-full h-full grid-pattern-lines-light" />
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h2"
             text="ORGANIZATIONS"
             className="font-display font-extrabold text-cream text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
@@ -484,7 +484,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <AnimatedText
+          <AnimatedText as="h2"
             text="CERTIFICATES"
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
@@ -502,12 +502,23 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                         onClick={() => setPreviewCert({ label: cert.title, url: cert.image_url! })}
                         className="w-full h-36 cursor-pointer block"
                       >
-                        <PdfThumbnail
-                          url={cert.image_url}
-                          className="w-full h-36 group-hover:scale-105 transition-transform duration-300"
-                          fallbackClassName="bg-yellow"
-                          iconClassName="text-ink/40"
-                        />
+                        {cert.thumbnail_url ? (
+                          // Pre-rendered at upload time — a plain image, nothing to render while scrolling.
+                          <img
+                            src={cert.thumbnail_url}
+                            alt={cert.title}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-36 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <PdfThumbnail
+                            url={cert.image_url}
+                            className="w-full h-36 group-hover:scale-105 transition-transform duration-300"
+                            fallbackClassName="bg-yellow"
+                            iconClassName="text-ink/40"
+                          />
+                        )}
                       </button>
                     ) : cert.image_url ? (
                       <div className="w-full h-36 overflow-hidden">

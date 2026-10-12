@@ -7,17 +7,17 @@ import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
-import type { Project, ProjectCategoryRow, Experience } from "@/types/portfolio";
+import type { ProjectSummary, ProjectCategoryRow, Experience } from "@/types/portfolio";
 
 type Category = string;
 
 const staticProjects = [
-  { id: "s1", title: "Full-Stack Web App",    category: "software" as const,      description: "End-to-end web application with real-time features, authentication, and a dashboard built with Next.js and Supabase.", color_class: "bg-violet", text_color_class: "text-cream", tech_stack: ["Next.js", "TypeScript", "Supabase", "Tailwind"], image_urls: [], emoji: "⚡", link: "/works", links: [], order_index: 0, project_date: null, published: true, created_at: "", experience_id: null },
-  { id: "s2", title: "Brand Identity",        category: "uiux" as const,          description: "Complete brand identity design for an Indonesian startup.",                                                                color_class: "bg-coral",  text_color_class: "text-cream", tech_stack: ["Figma", "Illustrator"],                          image_urls: [], emoji: "🎨", link: "/works", links: [], order_index: 1, project_date: null, published: true, created_at: "", experience_id: null },
-  { id: "s3", title: "Dashboard UI",          category: "uiux" as const,          description: "Data analytics dashboard with complex visualizations and dark mode support.",                                              color_class: "bg-sky",    text_color_class: "text-ink",   tech_stack: ["React", "Recharts", "Figma"],                    image_urls: [], emoji: "📊", link: "/works", links: [], order_index: 2, project_date: null, published: true, created_at: "", experience_id: null },
-  { id: "s4", title: "Character Illustration",category: "illustration" as const,  description: "Original cartoon character series featuring 12 unique illustrated characters.",                                           color_class: "bg-yellow", text_color_class: "text-ink",   tech_stack: ["Procreate", "Illustrator", "Photoshop"],         image_urls: [], emoji: "✏️", link: "/works", links: [], order_index: 3, project_date: null, published: true, created_at: "", experience_id: null },
-  { id: "s5", title: "Fintech Mobile App",    category: "uiux" as const,          description: "UI/UX design for a fintech mobile app with 40+ screens and an interactive prototype.",                                   color_class: "bg-mint",   text_color_class: "text-ink",   tech_stack: ["Figma", "ProtoPie"],                             image_urls: [], emoji: "📱", link: "/works", links: [], order_index: 4, project_date: null, published: true, created_at: "", experience_id: null },
-  { id: "s6", title: "REST API Service",      category: "software" as const,      description: "Scalable REST API with auth, rate limiting, and auto-generated OpenAPI docs.",                                           color_class: "bg-pink",   text_color_class: "text-ink",   tech_stack: ["Node.js", "Express", "PostgreSQL", "Redis"],    image_urls: [], emoji: "🔧", link: "/works", links: [], order_index: 5, project_date: null, published: true, created_at: "", experience_id: null },
+  { id: "s1", title: "Full-Stack Web App",    category: "software" as const,      description: "End-to-end web application with real-time features, authentication, and a dashboard built with Next.js and Supabase.", color_class: "bg-violet", text_color_class: "text-cream", tech_stack: ["Next.js", "TypeScript", "Supabase", "Tailwind"], image_urls: [], emoji: "⚡", link: "/works", links: [], order_index: 0, project_date: null, published: true, created_at: "", experience_id: null, slug: "" },
+  { id: "s2", title: "Brand Identity",        category: "uiux" as const,          description: "Complete brand identity design for an Indonesian startup.",                                                                color_class: "bg-coral",  text_color_class: "text-cream", tech_stack: ["Figma", "Illustrator"],                          image_urls: [], emoji: "🎨", link: "/works", links: [], order_index: 1, project_date: null, published: true, created_at: "", experience_id: null, slug: "" },
+  { id: "s3", title: "Dashboard UI",          category: "uiux" as const,          description: "Data analytics dashboard with complex visualizations and dark mode support.",                                              color_class: "bg-sky",    text_color_class: "text-ink",   tech_stack: ["React", "Recharts", "Figma"],                    image_urls: [], emoji: "📊", link: "/works", links: [], order_index: 2, project_date: null, published: true, created_at: "", experience_id: null, slug: "" },
+  { id: "s4", title: "Character Illustration",category: "illustration" as const,  description: "Original cartoon character series featuring 12 unique illustrated characters.",                                           color_class: "bg-yellow", text_color_class: "text-ink",   tech_stack: ["Procreate", "Illustrator", "Photoshop"],         image_urls: [], emoji: "✏️", link: "/works", links: [], order_index: 3, project_date: null, published: true, created_at: "", experience_id: null, slug: "" },
+  { id: "s5", title: "Fintech Mobile App",    category: "uiux" as const,          description: "UI/UX design for a fintech mobile app with 40+ screens and an interactive prototype.",                                   color_class: "bg-mint",   text_color_class: "text-ink",   tech_stack: ["Figma", "ProtoPie"],                             image_urls: [], emoji: "📱", link: "/works", links: [], order_index: 4, project_date: null, published: true, created_at: "", experience_id: null, slug: "" },
+  { id: "s6", title: "REST API Service",      category: "software" as const,      description: "Scalable REST API with auth, rate limiting, and auto-generated OpenAPI docs.",                                           color_class: "bg-pink",   text_color_class: "text-ink",   tech_stack: ["Node.js", "Express", "PostgreSQL", "Redis"],    image_urls: [], emoji: "🔧", link: "/works", links: [], order_index: 5, project_date: null, published: true, created_at: "", experience_id: null, slug: "" },
 ];
 
 // Asymmetric bento — every card is tall (row-span-2) so the preview image stays
@@ -35,9 +35,9 @@ const FALLBACK_CATEGORIES: ProjectCategoryRow[] = [
   { id: "3", slug: "illustration", label: "Illustration", order_index: 2, show_in_gallery: true,  created_at: "" },
 ];
 
-export default function Works({ dbProjects, categories: categoriesProp, experiences = [] }: { dbProjects?: Project[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
+export default function Works({ dbProjects, categories: categoriesProp, experiences = [] }: { dbProjects?: ProjectSummary[]; categories?: ProjectCategoryRow[]; experiences?: Experience[] }) {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectSummary | null>(null);
 
   const categories = categoriesProp?.length ? categoriesProp : FALLBACK_CATEGORIES;
   const filters = [
@@ -49,9 +49,11 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
 
   const projects = dbProjects?.length ? dbProjects : staticProjects;
 
-  const filtered = projects.filter(
-    (p) => activeFilter === "all" || p.category === activeFilter
-  );
+  // Home is a teaser: newest few per filter, the rest live on /works.
+  const HOME_LIMIT = 6;
+  const filtered = projects
+    .filter((p) => activeFilter === "all" || p.category === activeFilter)
+    .slice(0, HOME_LIMIT);
 
   return (
     <section id="works" className="py-20 md:py-32 bg-cream relative overflow-hidden">
@@ -60,7 +62,7 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
         <div className="w-full h-full grid-pattern-lines" />
       </div>
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
-        <AnimatedText
+        <AnimatedText as="h2"
           text="SELECTED WORKS"
           className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] mb-4 leading-none"
         />
@@ -133,7 +135,7 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
 
                   {/* Bottom gradient + text overlay */}
                   <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6 pt-16 md:pt-24 bg-gradient-to-t from-black/95 via-black/75 to-transparent">
-                    <h3 className="font-display font-extrabold text-cream text-lg md:text-2xl leading-tight line-clamp-2">
+                    <h3 className="font-display font-extrabold text-cream text-base md:text-xl leading-tight line-clamp-3">
                       {project.title}
                     </h3>
                     <p className="font-body text-cream/75 text-xs md:text-sm mt-1.5 line-clamp-2 leading-relaxed">
@@ -161,7 +163,7 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
               href="/works"
               className="cartoon-border bg-navy text-cream font-body font-semibold px-7 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform inline-flex items-center gap-2 group"
             >
-              View all works
+              View all {projects.length} works
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
           </div>

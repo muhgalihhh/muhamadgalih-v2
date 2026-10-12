@@ -1,30 +1,10 @@
 "use client";
 
 import { Download } from "lucide-react";
-import { SiGithub, SiDribbble, SiInstagram, SiWhatsapp } from "react-icons/si";
-import { FaLinkedin } from "react-icons/fa6";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import type { Profile } from "@/types/portfolio";
-import { toWhatsAppUrl } from "@/lib/whatsapp";
-
-const staticSocials = [
-  { label: "GitHub",    href: "https://github.com/muhgalihhh", color: "bg-navy text-cream",   Icon: SiGithub    },
-  { label: "Dribbble",  href: "#",                              color: "bg-pink text-ink",     Icon: SiDribbble  },
-  { label: "LinkedIn",  href: "#",                              color: "bg-sky text-ink",      Icon: FaLinkedin  },
-  { label: "Instagram", href: "#",                              color: "bg-coral text-cream",  Icon: SiInstagram },
-];
-
-function getSocials(profile: Profile | null) {
-  if (!profile) return staticSocials;
-  return [
-    { label: "GitHub",    href: profile.github_url    || "#", color: "bg-navy text-cream",  Icon: SiGithub    },
-    { label: "Dribbble",  href: profile.dribbble_url  || "#", color: "bg-pink text-ink",     Icon: SiDribbble  },
-    { label: "LinkedIn",  href: profile.linkedin_url  || "#", color: "bg-sky text-ink",      Icon: FaLinkedin  },
-    { label: "Instagram", href: profile.instagram_url || "#", color: "bg-coral text-cream",  Icon: SiInstagram },
-    { label: "WhatsApp",  href: toWhatsAppUrl(profile.phone) || "#", color: "bg-mint text-ink", Icon: SiWhatsapp },
-  ].filter((s) => s.href !== "#");
-}
+import { getSocials } from "@/lib/socials";
 
 export default function Contact({ profile }: { profile?: Profile | null }) {
   const email = profile?.email || "galihslank79@gmail.com";
@@ -32,13 +12,13 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
   const cvUrl = profile?.cv_url ?? null;
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-yellow relative overflow-hidden">
+    <section id="contact" className="pt-24 pb-[calc(72px_+_env(safe-area-inset-bottom)_+_2.5rem)] md:py-32 bg-yellow relative overflow-hidden">
       {/* Grid line texture */}
       <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
         <div className="w-full h-full grid-pattern-lines" />
       </div>
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
-        <AnimatedText
+        <AnimatedText as="h2"
           text="LET'S CREATE SOMETHING COOL"
           className="font-display font-extrabold text-ink text-[clamp(1.5rem,5vw,4.2rem)] leading-tight mb-8 max-w-3xl"
           staggerDelay={0.035}

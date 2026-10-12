@@ -23,7 +23,7 @@ export default async function Home() {
     <main>
       <Hero profile={profile} />
       <Marquee skills={skills} />
-      <About profile={profile} skills={skills} projectsCount={projects.length} />
+      <About profile={profile} projectsCount={projects.length} />
       <Technologies skills={skills} />
       <Works dbProjects={projects} categories={categories} experiences={experiences} />
       <TestimonialsSection testimonials={testimonials} ownTestimonial={ownTestimonial} />

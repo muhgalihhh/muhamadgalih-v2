@@ -1,3 +1,5 @@
+import type { JSONContent } from "@tiptap/core";
+
 export type SkillCategory = "design" | "development";
 export type ProjectCategory = string; // dynamic — stored in project_categories table
 
@@ -35,7 +37,7 @@ export interface Experience {
   images: string[];
   order_index: number;
   created_at: string;
-  linked_projects?: Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">[];
+  linked_projects?: Pick<Project, "id" | "slug" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">[];
 }
 
 export interface Education {
@@ -79,6 +81,7 @@ export interface ProjectLink {
 
 export interface Project {
   id: string;
+  slug: string;
   title: string;
   category: ProjectCategory;
   description: string;
@@ -94,7 +97,11 @@ export interface Project {
   published: boolean;
   created_at: string;
   experience_id: string | null;
+  content: JSONContent | null;
 }
+
+/** What list pages ship to the browser — everything except the heavy rich content. */
+export type ProjectSummary = Omit<Project, "content">;
 
 export interface Certificate {
   id: string;
@@ -103,11 +110,13 @@ export interface Certificate {
   issue_date: string | null;
   credential_url: string | null;
   image_url: string | null;
+  thumbnail_url: string | null; // WebP of a PDF certificate's first page
   created_at: string;
 }
 
 export interface GalleryItem {
   id: string;
+  slug?: string; // only on items derived from a project
   title: string;
   description: string;
   category: string;

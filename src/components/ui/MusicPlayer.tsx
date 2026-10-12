@@ -81,8 +81,9 @@ export default function MusicPlayer({ musicUrl, songTitle }: MusicPlayerProps) {
     return `${m}:${sec.toString().padStart(2, "0")}`;
   };
 
+  // Desktop only: on phones the floating button sat on top of CTAs and cards.
   return (
-    <div className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-[300] flex flex-col items-end gap-2">
+    <div className="fixed bottom-8 right-8 z-[300] hidden md:flex flex-col items-end gap-2">
       <audio ref={audioRef} loop preload="metadata">
         {audioUrl && <source src={audioUrl} type={audioMimeType(audioUrl)} />}
       </audio>

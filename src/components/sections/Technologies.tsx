@@ -54,7 +54,7 @@ export default function Technologies({ skills }: { skills?: Skill[] }) {
       </div>
 
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
-        <AnimatedText
+        <AnimatedText as="h2"
           text="TOOLS & TECH"
           className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] mb-4 leading-none"
         />

@@ -1,9 +1,15 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import sharp from "sharp";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/service";
+import { slugify, uniqueSlug, parseContent, extractContentImageUrls, cleanupUrls } from "@/lib/projectContent";
+
+// Every image URL other projects still reference — never delete those from storage.
+async function projectUrlsInUse(supabase: Awaited<ReturnType<typeof createClient>>, exceptId: string): Promise<string[]> {
+  const { data } = await supabase.from("projects").select("image_urls, content").neq("id", exceptId);
+  return (data ?? []).flatMap((p) => [...(p.image_urls ?? []), ...extractContentImageUrls(p.content)]);
+}
 import type { Profile, GalleryItem, ProjectCategoryRow, ContactMessage } from "@/types/portfolio";
 
 // ── Storage cleanup helpers ──────────────────────────────────
@@ -377,10 +383,22 @@ export async function createProject(formData: FormData) {
   const tech_stack = techRaw.split(",").map((t) => t.trim()).filter(Boolean);
   const imageRaw = formData.get("image_urls") as string;
   const image_urls = imageRaw.split("\n").map((u) => u.trim()).filter(Boolean);
+  const parsed = parseContent(formData.get("content"));
+  if (!parsed.ok) return { error: "Content tidak valid — coba simpan ulang." };
+
+  const title = formData.get("title") as string;
+  const { data: taken } = await supabase.from("projects").select("slug");
+  const slug = uniqueSlug(
+    slugify((formData.get("slug") as string) || title),
+    (taken ?? []).map((r) => r.slug),
+  );
+
   const { error } = await supabase.from("projects").insert({
-    title:            formData.get("title") as string,
+    title,
+    slug,
     category:         formData.get("category") as string,
     description:      formData.get("description") as string,
+    content:          parsed.content,
     emoji:            formData.get("emoji") as string,
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
@@ -392,7 +410,7 @@ export async function createProject(formData: FormData) {
     image_urls,
   });
   revalidatePath("/admin/(dashboard)/works");
-  revalidatePath("/works");
+  revalidatePath("/works", "layout");
   if (error) return { error: error.message };
   return { ok: true };
 }
@@ -404,13 +422,24 @@ export async function updateProject(id: string, formData: FormData) {
   const imageRaw = formData.get("image_urls") as string;
   const image_urls = imageRaw.split("\n").map((u) => u.trim()).filter(Boolean);
   const newEmoji = formData.get("emoji") as string;
+  const parsed = parseContent(formData.get("content"));
+  if (!parsed.ok) return { error: "Content tidak valid — coba simpan ulang." };
 
-  const { data: old } = await supabase.from("projects").select("image_urls, emoji").eq("id", id).single();
+  const { data: old } = await supabase.from("projects").select("image_urls, emoji, content, slug").eq("id", id).single();
+
+  const title = formData.get("title") as string;
+  let slug = slugify((formData.get("slug") as string) || old?.slug || title);
+  if (slug !== old?.slug) {
+    const { data: taken } = await supabase.from("projects").select("slug").neq("id", id);
+    slug = uniqueSlug(slug, (taken ?? []).map((r) => r.slug));
+  }
 
   const { error } = await supabase.from("projects").update({
-    title:            formData.get("title") as string,
+    title,
+    slug,
     category:         formData.get("category") as string,
     description:      formData.get("description") as string,
+    content:          parsed.content,
     emoji:            newEmoji,
     color_class:      formData.get("color_class") as string,
     text_color_class: formData.get("text_color_class") as string,
@@ -423,25 +452,34 @@ export async function updateProject(id: string, formData: FormData) {
   }).eq("id", id);
 
   if (!error && old) {
-    const removed: (string | null)[] = (old.image_urls ?? []).filter(
-      (u: string) => !image_urls.includes(u)
+    const removed: (string | null)[] = cleanupUrls(
+      { imageUrls: old.image_urls ?? [], content: old.content },
+      { imageUrls: image_urls, content: parsed.content },
+      await projectUrlsInUse(supabase, id),
     );
     if (old.emoji && old.emoji !== newEmoji) removed.push(old.emoji);
     await deleteStorageFiles(removed);
   }
   revalidatePath("/admin/(dashboard)/works");
-  revalidatePath("/works");
+  revalidatePath("/works", "layout");
   if (error) return { error: error.message };
   return { ok: true };
 }
 
 export async function deleteProject(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("projects").select("image_urls, emoji").eq("id", id).single();
+  const { data: old } = await supabase.from("projects").select("image_urls, emoji, content").eq("id", id).single();
   await supabase.from("projects").delete().eq("id", id);
-  if (old) await deleteStorageFiles([...(old.image_urls ?? []), old.emoji]);
+  if (old) {
+    const removed = cleanupUrls(
+      { imageUrls: old.image_urls ?? [], content: old.content },
+      { imageUrls: [], content: null },
+      await projectUrlsInUse(supabase, id),
+    );
+    await deleteStorageFiles([...removed, old.emoji]);
+  }
   revalidatePath("/admin/(dashboard)/works");
-  revalidatePath("/works");
+  revalidatePath("/works", "layout");
 }
 
 // ── Certificates ─────────────────────────────────────────────
@@ -463,6 +501,7 @@ export async function createCertificate(formData: FormData) {
     issue_date:     (formData.get("issue_date") as string) || null,
     credential_url: (formData.get("credential_url") as string) || null,
     image_url:      (formData.get("image_url") as string) || null,
+    thumbnail_url:  (formData.get("thumbnail_url") as string) || null,
   });
   revalidatePath("/admin/(dashboard)/certificates");
   revalidatePath("/about");
@@ -473,8 +512,9 @@ export async function createCertificate(formData: FormData) {
 export async function updateCertificate(id: string, formData: FormData) {
   const supabase = await createClient();
   const newImg = (formData.get("image_url") as string) || null;
+  const newThumb = (formData.get("thumbnail_url") as string) || null;
 
-  const { data: old } = await supabase.from("certificates").select("image_url").eq("id", id).single();
+  const { data: old } = await supabase.from("certificates").select("image_url, thumbnail_url").eq("id", id).single();
 
   const { error } = await supabase.from("certificates").update({
     title:          formData.get("title") as string,
@@ -482,10 +522,14 @@ export async function updateCertificate(id: string, formData: FormData) {
     issue_date:     (formData.get("issue_date") as string) || null,
     credential_url: (formData.get("credential_url") as string) || null,
     image_url:      newImg,
+    thumbnail_url:  newThumb,
   }).eq("id", id);
 
-  if (!error && old?.image_url && old.image_url !== newImg) {
-    await deleteStorageFiles([old.image_url]);
+  if (!error && old) {
+    await deleteStorageFiles([
+      old.image_url !== newImg ? old.image_url : null,
+      old.thumbnail_url !== newThumb ? old.thumbnail_url : null,
+    ]);
   }
   revalidatePath("/admin/(dashboard)/certificates");
   revalidatePath("/about");
@@ -495,9 +539,9 @@ export async function updateCertificate(id: string, formData: FormData) {
 
 export async function deleteCertificate(id: string) {
   const supabase = await createClient();
-  const { data: old } = await supabase.from("certificates").select("image_url").eq("id", id).single();
+  const { data: old } = await supabase.from("certificates").select("image_url, thumbnail_url").eq("id", id).single();
   await supabase.from("certificates").delete().eq("id", id);
-  if (old) await deleteStorageFiles([old.image_url]);
+  if (old) await deleteStorageFiles([old.image_url, old.thumbnail_url]);
   revalidatePath("/admin/(dashboard)/certificates");
   revalidatePath("/about");
 }
@@ -688,6 +732,9 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
   let contentType = file.type || undefined;
 
   if (convertible) {
+    // Loaded here, not at module top: a native-module problem should only break
+    // uploads, never sign-in or the other admin actions in this file.
+    const sharp = (await import("sharp")).default;
     const buf = Buffer.from(await file.arrayBuffer());
     const webp = await sharp(buf)
       .rotate()
@@ -703,7 +750,7 @@ export async function uploadFile(formData: FormData): Promise<{ url?: string; er
     contentType = "image/webp";
   }
 
-  const path = `${folder}/${Date.now()}.${ext}`;
+  const path = `${folder}/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`;
   const { error } = await supabase.storage.from("portfolio").upload(path, body, {
     upsert: false,
     contentType,

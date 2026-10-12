@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FileText, Loader2 } from "lucide-react";
+import { renderPdfFirstPage } from "@/lib/pdfRender";
 
 export default function PdfThumbnail({
   url,
@@ -45,28 +46,10 @@ export default function PdfThumbnail({
     async function render() {
       setStatus("loading");
       try {
-        const pdfjs = await import("pdfjs-dist");
-        pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-          "pdfjs-dist/build/pdf.worker.min.mjs",
-          import.meta.url
-        ).toString();
-
-        const pdf = await pdfjs.getDocument({ url }).promise;
-        const page = await pdf.getPage(1);
         const canvas = canvasRef.current;
         const wrapper = wrapperRef.current;
-        if (cancelled || !canvas || !wrapper) return;
-
-        const viewport = page.getViewport({ scale: 1 });
-        const scale = wrapper.clientWidth / viewport.width;
-        const scaledViewport = page.getViewport({ scale });
-
-        canvas.width = scaledViewport.width;
-        canvas.height = scaledViewport.height;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-
-        await page.render({ canvas, canvasContext: ctx, viewport: scaledViewport }).promise;
+        if (!canvas || !wrapper) return;
+        await renderPdfFirstPage(url, canvas, wrapper.clientWidth);
         if (!cancelled) setStatus("ok");
       } catch {
         if (!cancelled) setStatus("error");

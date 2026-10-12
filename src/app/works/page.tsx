@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPublicProjects, getProfile, getPublicGalleryItems, getPublicCategories, getPublicExperiences } from "@/lib/data/portfolio";
+import { getPublicProjects, getPublicGalleryItems, getPublicCategories, getPublicExperiences } from "@/lib/data/portfolio";
 import WorksContent from "./WorksContent";
 
 export const metadata: Metadata = {
@@ -8,9 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default async function WorksPage() {
-  const [projects, profile, galleryItems, categories, experiences] = await Promise.all([
+  const [projects, galleryItems, categories, experiences] = await Promise.all([
     getPublicProjects(),
-    getProfile(),
     getPublicGalleryItems(),
     getPublicCategories(),
     getPublicExperiences(),
@@ -18,7 +17,6 @@ export default async function WorksPage() {
   return (
     <WorksContent
       dbProjects={projects}
-      spotifyEmbedUrl={profile?.spotify_embed_url}
       galleryItems={galleryItems}
       categories={categories}
       experiences={experiences}

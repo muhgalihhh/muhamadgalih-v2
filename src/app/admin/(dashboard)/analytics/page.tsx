@@ -15,6 +15,7 @@ const REFERRER_LABELS: Record<string, string> = {
 export default async function AnalyticsAdminPage() {
   const summary = await getAnalyticsSummary();
   const maxDaily = Math.max(1, ...summary.dailySeries.map((d) => d.count));
+  const totalDaily = summary.dailySeries.reduce((sum, d) => sum + d.count, 0);
 
   return (
     <div className="p-8">
@@ -48,18 +49,49 @@ export default async function AnalyticsAdminPage() {
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-8">
-        <h2 className="font-semibold text-slate-900 mb-4">Daily Pageviews (14 days)</h2>
-        <div className="flex gap-2 h-40">
-          {summary.dailySeries.map((d) => (
-            <div key={d.date} className="flex-1 flex flex-col items-center justify-end h-full gap-1.5">
+        <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+          <h2 className="font-semibold text-slate-900">Daily Pageviews (14 days)</h2>
+          {/* The key numbers stay readable without hovering */}
+          <p className="text-xs text-slate-500">
+            Total <span className="font-semibold text-slate-900">{totalDaily.toLocaleString("en-US")}</span>
+            <span className="mx-2 text-slate-300">·</span>
+            Peak <span className="font-semibold text-slate-900">{maxDaily.toLocaleString("en-US")}</span>
+          </p>
+        </div>
+        {/* pt-10 leaves room for the tooltip above the tallest bar */}
+        <div className="flex gap-2 h-48 pt-10">
+          {summary.dailySeries.map((d) => {
+            const pct = (d.count / maxDaily) * 100;
+            const day = new Date(`${d.date}T00:00:00Z`).toLocaleDateString("en-GB", {
+              weekday: "short", day: "numeric", month: "short", timeZone: "UTC",
+            });
+            return (
+              // The whole column is the hover/focus target, so even a 2px bar is easy to hit.
               <div
-                className="w-full bg-violet/80 rounded-t-md min-h-[2px]"
-                style={{ height: `${(d.count / maxDaily) * 100}%` }}
-                title={`${d.date}: ${d.count}`}
-              />
-              <span className="text-[10px] text-slate-400">{d.date.slice(8, 10)}</span>
-            </div>
-          ))}
+                key={d.date}
+                tabIndex={0}
+                aria-label={`${day}: ${d.count} ${d.count === 1 ? "pageview" : "pageviews"}`}
+                className="group flex-1 flex flex-col items-center justify-end h-full gap-1.5 outline-none cursor-default"
+              >
+                <div className="relative w-full flex-1 flex items-end">
+                  <div
+                    className="w-full bg-violet/70 group-hover:bg-violet group-focus-visible:bg-violet rounded-t-md min-h-[2px] transition-colors"
+                    style={{ height: `${pct}%` }}
+                  />
+                  <div
+                    className="pointer-events-none absolute left-1/2 -translate-x-1/2 mb-2 z-10 whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1.5 text-center shadow-lg opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity"
+                    style={{ bottom: `${pct}%` }}
+                  >
+                    <p className="text-sm font-semibold text-white leading-none">{d.count.toLocaleString("en-US")}</p>
+                    <p className="text-[10px] text-slate-300 mt-1 leading-none">{day}</p>
+                  </div>
+                </div>
+                <span className="text-[10px] text-slate-400 group-hover:text-slate-700 group-focus-visible:text-slate-700">
+                  {d.date.slice(8, 10)}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 

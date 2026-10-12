@@ -6,8 +6,22 @@ import { Award, Upload, Loader2, Plus, Pencil, Trash2, X, ExternalLink } from "l
 import { createCertificate, updateCertificate, deleteCertificate, uploadFile } from "@/app/actions/admin";
 import type { Certificate } from "@/types/portfolio";
 import PdfThumbnail from "@/components/ui/PdfThumbnail";
+import { renderPdfFirstPage } from "@/lib/pdfRender";
 
 type FormMode = "add" | "edit" | null;
+
+// Render a PDF's first page once, here, so the public page can show a small image
+// instead of every visitor's browser rendering every certificate PDF.
+async function pdfThumbnailFile(file: File): Promise<File | null> {
+  try {
+    const canvas = document.createElement("canvas");
+    await renderPdfFirstPage(await file.arrayBuffer(), canvas, 800);
+    const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/webp", 0.85));
+    return blob ? new File([blob], "thumb.webp", { type: "image/webp" }) : null;
+  } catch {
+    return null; // public page falls back to rendering the PDF
+  }
+}
 
 const inputCls = "border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-violet/20 focus:border-violet transition bg-white";
 const Field = ({ label, children, wide }: { label: string; children: React.ReactNode; wide?: boolean }) => (
@@ -23,6 +37,7 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
   isPending: boolean;
 }) {
   const [imageUrl, setImageUrl] = useState(defaultValues?.image_url ?? "");
+  const [thumbnailUrl, setThumbnailUrl] = useState(defaultValues?.thumbnail_url ?? "");
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,15 +46,22 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
     setUploading(true);
     const fd = new FormData();
     fd.append("file", file); fd.append("folder", "certificates");
-    const res = await uploadFile(fd);
-    if (res.url) setImageUrl(res.url);
+    const isPdf = file.type === "application/pdf";
+    const [res, thumb] = await Promise.all([uploadFile(fd), isPdf ? pdfThumbnailFile(file) : null]);
+    let thumbUrl = "";
+    if (res.url && thumb) {
+      const tfd = new FormData();
+      tfd.append("file", thumb); tfd.append("folder", "certificates/thumbs");
+      thumbUrl = (await uploadFile(tfd)).url ?? "";
+    }
+    if (res.url) { setImageUrl(res.url); setThumbnailUrl(thumbUrl); }
     setUploading(false);
   };
 
   return (
     <form
       key={defaultValues?.id ?? "new"}
-      onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.currentTarget); fd.set("image_url", imageUrl); onSubmit(fd); }}
+      onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.currentTarget); fd.set("image_url", imageUrl); fd.set("thumbnail_url", thumbnailUrl); onSubmit(fd); }}
       className="grid grid-cols-2 gap-5"
     >
       <Field label="Title *">
@@ -64,14 +86,16 @@ function CertificateForm({ defaultValues, onSubmit, isPending }: {
           </label>
           {imageUrl && (
             <div className="relative shrink-0">
-              {imageUrl.toLowerCase().endsWith(".pdf") ? (
+              {thumbnailUrl ? (
+                <img src={thumbnailUrl} alt="preview" className="w-16 h-10 object-cover object-top rounded-lg border border-slate-200" />
+              ) : imageUrl.toLowerCase().endsWith(".pdf") ? (
                 <PdfThumbnail url={imageUrl} className="w-16 h-10 rounded-lg border border-slate-200" />
               ) : (
                 <img src={imageUrl} alt="preview" className="w-16 h-10 object-cover rounded-lg border border-slate-200" />
               )}
               <button
                 type="button"
-                onClick={() => setImageUrl("")}
+                onClick={() => { setImageUrl(""); setThumbnailUrl(""); }}
                 title="Remove file"
                 className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow"
               >
@@ -163,7 +187,9 @@ export default function CertificatesClient({ initialCertificates }: { initialCer
           {initialCertificates.map((cert) => (
             <div key={cert.id} className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group flex flex-col ${editing?.id === cert.id ? "ring-2 ring-violet ring-offset-1" : ""}`}>
               {cert.image_url && cert.image_url.toLowerCase().endsWith(".pdf") ? (
-                <PdfThumbnail url={cert.image_url} className="w-full h-32" />
+                cert.thumbnail_url
+                  ? <img src={cert.thumbnail_url} alt={cert.title} loading="lazy" className="w-full h-32 object-cover object-top" />
+                  : <PdfThumbnail url={cert.image_url} className="w-full h-32" />
               ) : cert.image_url ? (
                 <img src={cert.image_url} alt={cert.title} className="w-full h-32 object-cover" />
               ) : (

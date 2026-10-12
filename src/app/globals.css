@@ -104,6 +104,15 @@ body {
 .cursor-custom * {
   cursor: none !important;
 }
+/* …except where people type: they need the I-beam to place the caret */
+.cursor-custom input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+.cursor-custom textarea,
+.cursor-custom [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Splash already shown this session (set by the head script in app/layout.tsx) */
+.splash-seen [data-splash] { display: none; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
@@ -239,3 +248,59 @@ body {
     animation-play-state: paused;
   }
 }
+
+/* ── Project detail content (public) ───────────────────────── */
+.project-content { @apply font-body text-ink/85 text-base md:text-lg leading-relaxed; }
+.project-content h2 { @apply font-display font-extrabold text-2xl md:text-3xl text-ink mt-12 mb-4; }
+.project-content h3 { @apply font-display font-bold text-xl md:text-2xl text-ink mt-8 mb-3; }
+.project-content p { @apply my-4; }
+.project-content ul { @apply list-disc pl-6 my-4 space-y-1.5; }
+.project-content ol { @apply list-decimal pl-6 my-4 space-y-1.5; }
+.project-content blockquote { @apply border-l-4 border-coral pl-4 italic my-6; }
+.project-content hr { @apply my-10 border-0 border-t-2 border-dashed border-ink/20; }
+.project-content a { @apply text-violet font-semibold underline underline-offset-4 decoration-2 hover:decoration-coral; }
+.project-content :not(pre) > code { @apply font-mono text-[0.88em] bg-ink/10 px-1.5 py-0.5 rounded; }
+.project-content aside > :first-child { @apply mt-0; }
+.project-content aside > :last-child { @apply mb-0; }
+.project-content table { @apply w-full text-sm md:text-base border-collapse; }
+.project-content th,
+.project-content td { @apply border border-ink/20 px-3 py-2 text-left align-top; }
+.project-content th { @apply bg-yellow text-ink font-semibold; }
+.dark .project-content th { --color-ink: #0D0B1E; } /* same contrast fix as .dark .bg-yellow */
+.project-content th p,
+.project-content td p { @apply m-0; }
+.project-content .shiki { @apply m-0 p-4 text-sm leading-relaxed overflow-x-auto; }
+
+/* Shiki dual theme (rendered with defaultColor: false) */
+.shiki, .shiki span { color: var(--shiki-light); background-color: var(--shiki-light-bg); }
+.dark .shiki, .dark .shiki span { color: var(--shiki-dark); background-color: var(--shiki-dark-bg); }
+
+/* ── Admin rich editor (plain slate, not the public design) ── */
+.rich-editor h2 { @apply text-xl font-bold mt-6 mb-2; }
+.rich-editor h3 { @apply text-lg font-semibold mt-4 mb-2; }
+.rich-editor p { @apply my-2; }
+.rich-editor ul { @apply list-disc pl-6 my-2; }
+.rich-editor ol { @apply list-decimal pl-6 my-2; }
+.rich-editor blockquote { @apply border-l-4 border-slate-300 pl-3 text-slate-500 my-3; }
+.rich-editor hr { @apply my-6 border-slate-200; }
+.rich-editor a { @apply text-violet underline; }
+.rich-editor :not(pre) > code { @apply bg-slate-100 px-1 rounded text-[0.9em]; }
+.rich-editor pre { @apply bg-slate-900 text-slate-100 rounded-lg p-3 my-3 text-[13px] overflow-x-auto; }
+.rich-editor img { @apply max-w-full rounded-lg my-3; }
+.rich-editor img.ProseMirror-selectednode { @apply ring-2 ring-violet; }
+.rich-editor table { @apply w-full border-collapse my-3; }
+.rich-editor th, .rich-editor td { @apply border border-slate-300 px-2 py-1 align-top; }
+.rich-editor th { @apply bg-slate-100 font-semibold; }
+.rich-editor .selectedCell { @apply bg-violet/10; }
+.rich-editor div[data-youtube-video] iframe { @apply w-full h-auto aspect-video rounded-lg my-3; }
+.rich-editor div[data-callout] { @apply rounded-lg border-l-4 px-3 py-1 my-3; }
+.rich-editor div[data-callout][data-variant="info"] { @apply bg-sky-50 border-sky-400; }
+.rich-editor div[data-callout][data-variant="success"] { @apply bg-emerald-50 border-emerald-400; }
+.rich-editor div[data-callout][data-variant="warning"] { @apply bg-amber-50 border-amber-400; }
+.rich-editor div[data-callout][data-variant="highlight"] { @apply bg-pink-50 border-pink-400; }
+.rich-editor .hljs-keyword, .rich-editor .hljs-built_in, .rich-editor .hljs-selector-tag { color: #c792ea; }
+.rich-editor .hljs-string, .rich-editor .hljs-attr, .rich-editor .hljs-template-variable { color: #c3e88d; }
+.rich-editor .hljs-number, .rich-editor .hljs-literal { color: #f78c6c; }
+.rich-editor .hljs-comment { color: #7f88b0; font-style: italic; }
+.rich-editor .hljs-title, .rich-editor .hljs-function, .rich-editor .hljs-name { color: #82aaff; }
+.rich-editor .hljs-variable, .rich-editor .hljs-params, .rich-editor .hljs-tag { color: #f07178; }

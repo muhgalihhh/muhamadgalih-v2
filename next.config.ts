@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "15mb",
     },
   },
+  // sharp's native module loads libvips-cpp.so through the dynamic linker, which
+  // file tracing can't see — without this the .so is missing on Vercel and every
+  // admin server action (including sign-in) fails at import time.
+  outputFileTracingIncludes: {
+    "/admin/**": ["./node_modules/@img/sharp-libvips-linux-x64/lib/**/*"],
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "lh3.googleusercontent.com" },

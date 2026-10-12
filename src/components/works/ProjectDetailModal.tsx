@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Briefcase } from "lucide-react";
+import Link from "next/link";
+import { X, Briefcase, ArrowRight } from "lucide-react";
 import ProjectCarousel from "@/components/works/ProjectCarousel";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectLinks from "@/components/works/ProjectLinks";
 import PdfPreviewModal from "@/components/works/PdfPreviewModal";
 import type { Experience, Project, ProjectLink } from "@/types/portfolio";
 
-type ProjectRow = Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links">;
+type ProjectRow = Pick<Project, "id" | "title" | "category" | "description" | "color_class" | "text_color_class" | "tech_stack" | "image_urls" | "emoji" | "links"> & { slug?: string };
 type ExperienceTag = Pick<Experience, "role" | "company" | "company_logo_emoji">;
 
 export default function ProjectDetailModal({
@@ -141,6 +142,15 @@ export default function ProjectDetailModal({
                     {project.description}
                   </p>
                 </div>
+
+                {project.slug && (
+                  <Link
+                    href={`/works/${project.slug}`}
+                    className="self-start inline-flex items-center gap-2 cartoon-border bg-yellow text-ink font-body font-semibold text-sm px-5 py-2.5 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+                  >
+                    View full details <ArrowRight size={14} />
+                  </Link>
+                )}
 
                 {/* CTA */}
                 {project.links.length > 0 && (
