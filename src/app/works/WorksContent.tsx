@@ -9,6 +9,7 @@ import SkillIcon from "@/components/ui/SkillIcon";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import GalleryDetailModal from "@/components/works/GalleryDetailModal";
+import Pagination, { usePaged } from "@/components/ui/Pagination";
 import type { ProjectSummary, GalleryItem, ProjectCategoryRow, ProjectLink, Experience } from "@/types/portfolio";
 
 type Category = string;
@@ -168,6 +169,10 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
     : staticProjects;
 
   const filtered = projects.filter((p) => active === "all" || p.category === active);
+  // 6 per page = one full round of the bento size rhythm
+  const { page, pageCount, setPage, visible: pagedProjects } = usePaged(filtered, 6);
+  // 8 per page = one full round of the gallery bento pattern
+  const gallery = usePaged(galleryItems, 8);
 
   return (
     <main className="md:pt-20">
@@ -197,7 +202,7 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
       </section>
 
       {/* ── Projects bento grid ── */}
-      <section className="pt-6 md:pt-8 pb-16 md:pb-20 bg-cream relative overflow-hidden">
+      <section id="works-list" className="scroll-mt-20 pt-6 md:pt-8 pb-16 md:pb-20 bg-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
@@ -209,7 +214,10 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
               {filters.map((f) => (
                 <button
                   key={f.value}
-                  onClick={() => setActive(f.value)}
+                  onClick={() => {
+                    setActive(f.value);
+                    setPage(1);
+                  }}
                   className={`font-body font-semibold px-5 py-2 rounded-full transition-all cartoon-border text-sm whitespace-nowrap shrink-0 ${
                     active === f.value ? "bg-navy text-cream" : "bg-transparent text-ink hover:bg-yellow"
                   }`}
@@ -227,7 +235,7 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
           {/* Bento grid */}
           <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:gap-4 [grid-auto-rows:170px] md:[grid-auto-rows:175px]">
             <AnimatePresence mode="popLayout">
-              {filtered.map((project, i) => {
+              {pagedProjects.map((project, i) => {
                 const size = projectSizeMap[i % projectSizeMap.length];
                 const preview = project.image_urls?.[0];
                 return (
@@ -303,11 +311,13 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
               <p className="font-body">No projects in this category yet.</p>
             </div>
           )}
+
+          <Pagination page={page} pageCount={pageCount} onChange={setPage} scrollTargetId="works-list" />
         </div>
       </section>
 
       {/* ── Design Gallery ── */}
-      <section className="py-20 md:py-28 bg-navy text-cream relative overflow-hidden">
+      <section id="gallery" className="scroll-mt-20 py-20 md:py-28 bg-navy text-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         </div>
@@ -328,7 +338,7 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
 
           <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[130px] md:auto-rows-[175px] gap-3 md:gap-4 grid-flow-row-dense">
             {galleryItems.length > 0 ? (
-              galleryItems.map((item, i) => (
+              gallery.visible.map((item, i) => (
                 <ScrollReveal
                   key={item.id}
                   variant="scale-in"
@@ -342,6 +352,8 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
                     <img
                       src={item.image_urls[0]}
                       alt={item.title || "Gallery item"}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover block"
                     />
                     {item.image_urls.length > 1 && (
@@ -384,6 +396,8 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
               ))
             )}
           </div>
+
+          <Pagination page={gallery.page} pageCount={gallery.pageCount} onChange={gallery.setPage} scrollTargetId="gallery" onDark />
 
           {galleryItems.length === 0 && (
             <ScrollReveal variant="fade-up" delay={0.3}>

@@ -8,6 +8,7 @@ import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import PdfThumbnail from "@/components/ui/PdfThumbnail";
+import Pagination, { usePaged } from "@/components/ui/Pagination";
 import TestimonialsSection from "@/components/sections/Testimonials";
 import PdfPreviewModal from "@/components/works/PdfPreviewModal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
@@ -123,6 +124,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
   const [expandedExp, setExpandedExp] = useState<Set<string>>(new Set());
   const [modalProject, setModalProject] = useState<NonNullable<Experience["linked_projects"]>[number] | null>(null);
   const [modalExperience, setModalExperience] = useState<Experience | null>(null);
+  // 6 per page = two rows of three; keeps PDF thumbnails from all rendering at once
+  const certs = usePaged(certificates, 6);
   const EXP_PHOTO_LIMIT = 7;
 
   return (
@@ -491,7 +494,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
 
       {/* ── Certificates — hidden entirely until there's something to show ── */}
       {certificates.length > 0 && (
-      <section className="py-20 md:py-28 bg-cream relative overflow-hidden">
+      <section id="certificates" className="scroll-mt-20 py-20 md:py-28 bg-cream relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
@@ -507,7 +510,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
           </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {certificates.map((cert, i) => (
+              {certs.visible.map((cert, i) => (
                 <ScrollReveal key={cert.id} variant="scale-in" delay={i * 0.07}>
                   <div className="cartoon-border rounded-2xl overflow-hidden bg-cream group hover:-translate-y-1 transition-transform">
                     {cert.image_url && cert.image_url.toLowerCase().endsWith(".pdf") ? (
@@ -572,6 +575,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
                 </ScrollReveal>
               ))}
           </div>
+
+          <Pagination page={certs.page} pageCount={certs.pageCount} onChange={certs.setPage} scrollTargetId="certificates" />
         </div>
       </section>
       )}
