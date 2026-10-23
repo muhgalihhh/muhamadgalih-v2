@@ -75,6 +75,22 @@
   }
 }
 
+/* ── Extruded 3D block letters for headings (AnimatedText `depth`) ──
+   The extruded side is the text colour faded into the section background: one tone, no new colour. */
+.text-3d {
+  --surface: var(--color-cream);
+  --depth: color-mix(in srgb, currentColor 30%, var(--surface));
+  text-shadow:
+    0.016em 0.016em 0 var(--depth),
+    0.032em 0.032em 0 var(--depth),
+    0.048em 0.048em 0 var(--depth),
+    0.064em 0.064em 0 var(--depth),
+    0.08em 0.08em 0 var(--depth);
+}
+.dark .text-3d   { --surface: #0F0E17; }
+.bg-navy .text-3d   { --surface: var(--color-navy); }
+.bg-yellow .text-3d { --surface: var(--color-yellow); }
+
 /* ── Base reset ── */
 *,
 *::before,

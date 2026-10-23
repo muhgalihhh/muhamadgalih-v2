@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import type { Profile } from "@/types/portfolio";
 
 function buildStats(profile?: Profile | null, projectsCount = 0) {
@@ -61,10 +62,12 @@ export default function About({ profile, projectsCount = 0 }: { profile?: Profil
       <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
         <div className="w-full h-full grid-pattern-lines-light" />
       </div>
+      <Sticker3DSpot set="about" surface="dark" className="right-6 top-14 w-24 h-24 md:right-16 md:top-20 md:w-44 md:h-44" />
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
         {/* Heading */}
         <AnimatedText as="h2"
           text="ABOUT ME"
+          depth
           className="font-display font-extrabold text-cream text-[clamp(1.6rem,5.5vw,4.5rem)] mb-4 leading-none"
         />
         <ScrollReveal variant="fade-up" delay={0.1}>

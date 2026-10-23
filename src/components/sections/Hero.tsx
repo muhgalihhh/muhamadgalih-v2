@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useReducedMotion, AnimatePresence } from "framer-motion";
 import { ArrowDown, Mail, Download } from "lucide-react";
 import CyclingText from "@/components/animations/CyclingText";
+import { Stickers3D } from "@/components/animations/Sticker3DSpot";
 import { handleAnchorClick } from "@/lib/smoothScroll";
 import type { Profile } from "@/types/portfolio";
 
@@ -51,6 +52,15 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
   });
   const yPhoto  = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
   const fadeOut = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
+
+  // 3D stickers follow the photo card: pop in when it shows up, scatter as it scrolls away
+  const photoRef = useRef<HTMLDivElement>(null);
+  const photoInView = useInView(photoRef);
+  const { scrollYProgress: photoProgress } = useScroll({
+    target: photoRef,
+    offset: ["center center", "end start"],
+  });
+  const reduceMotion = useReducedMotion() ?? false;
 
   return (
     <section
@@ -160,8 +170,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
 
             {/* ── Right: photo card — flips between real photo and illustration ── */}
             <motion.div
+              ref={photoRef}
               style={{ y: yPhoto }}
-              className="justify-self-center lg:justify-self-end lg:-mt-44 pr-2 pb-2"
+              className="relative justify-self-center lg:justify-self-end lg:-mt-44 pr-2 pb-2"
             >
           <motion.div
             className="relative w-64 h-80 md:w-72 md:h-[22rem] lg:w-80 lg:h-[26rem] cursor-pointer select-none"
@@ -245,6 +256,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               )}
               </motion.div>
             </motion.div>
+            <Stickers3D set="hero" progress={photoProgress} active={photoInView} still={reduceMotion} bounce={artHovered} />
             </motion.div>
           </div>
         </motion.div>

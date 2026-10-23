@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, Users, X, ChevronUp, Images } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SkillIcon from "@/components/ui/SkillIcon";
 import PdfThumbnail from "@/components/ui/PdfThumbnail";
@@ -128,9 +129,15 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
     <main className="md:pt-20">
       {/* ── Hero header ── */}
       <section className="py-20 md:py-28 bg-navy text-cream relative overflow-hidden">
+        <Sticker3DSpot
+          set="aboutHero"
+          surface="dark"
+          className="hidden md:block md:right-16 md:top-24 md:w-72 md:h-72"
+        />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h1"
             text="ABOUT ME"
+            depth
             className="font-display font-extrabold text-cream text-[clamp(2rem,7vw,5.5rem)] leading-none mb-6"
           />
           <ScrollReveal variant="fade-up" delay={0.2}>
@@ -189,9 +196,11 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
+        <Sticker3DSpot set="experience" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h2"
             text="WORK EXPERIENCE"
+            depth
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
           <ScrollReveal variant="fade-up" delay={0.1}>
@@ -362,9 +371,11 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
 
       {/* ── Education ── */}
       <section className="py-20 md:py-28 bg-cream relative overflow-hidden">
+        <Sticker3DSpot set="education" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h2"
             text="EDUCATION"
+            depth
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
           <ScrollReveal variant="fade-up" delay={0.1}>
@@ -437,6 +448,7 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h2"
             text="ORGANIZATIONS"
+            depth
             className="font-display font-extrabold text-cream text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
           <ScrollReveal variant="fade-up" delay={0.1}>
@@ -483,9 +495,11 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
+        <Sticker3DSpot set="certificates" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h2"
             text="CERTIFICATES"
+            depth
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
           <ScrollReveal variant="fade-up" delay={0.1}>

@@ -7,6 +7,7 @@ import { MapPin, Clock, Briefcase, Loader2, Send, CheckCircle } from "lucide-rea
 import { SiGithub, SiDribbble, SiInstagram, SiWhatsapp } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import AnimatedText from "@/components/animations/AnimatedText";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SpotifyCard from "@/components/ui/SpotifyCard";
 import type { Profile } from "@/types/portfolio";
@@ -62,9 +63,15 @@ export default function ContactContent({ profile }: { profile?: Profile | null }
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
           <div className="w-full h-full grid-pattern-lines" />
         </div>
+        <Sticker3DSpot
+          set="mail"
+          surface="light"
+          className="right-4 top-4 w-16 h-16 md:right-24 md:top-8 md:w-40 md:h-40"
+        />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h1"
             text="GOT SOMETHING IN MIND?"
+            depth
             className="font-display font-extrabold text-ink text-[clamp(1.6rem,4.5vw,3.5rem)] leading-tight mb-4 max-w-3xl"
             staggerDelay={0.03}
           />

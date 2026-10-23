@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Images } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
@@ -175,9 +176,14 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
         </div>
+        <Sticker3DSpot
+          set="works"
+          className="right-4 top-6 w-24 h-24 md:right-20 md:top-16 md:w-48 md:h-48"
+        />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h1"
             text="MY WORKS"
+            depth
             className="font-display font-extrabold text-ink text-[clamp(2rem,7vw,5.5rem)] leading-none mb-4"
           />
           <ScrollReveal variant="fade-up" delay={0.2}>
@@ -306,9 +312,11 @@ export default function WorksContent({ dbProjects, galleryItems = [], categories
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         </div>
 
+        <Sticker3DSpot set="gallery" surface="dark" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h2"
             text="DESIGN GALLERY"
+            depth
             className="font-display font-extrabold text-cream text-[clamp(1.6rem,5vw,4rem)] mb-4 leading-none"
           />
           <ScrollReveal variant="fade-up" delay={0.1}>

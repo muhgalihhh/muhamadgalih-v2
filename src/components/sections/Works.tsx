@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import SkillIcon from "@/components/ui/SkillIcon";
 import ProjectDetailModal from "@/components/works/ProjectDetailModal";
 import type { ProjectSummary, ProjectCategoryRow, Experience } from "@/types/portfolio";
@@ -61,9 +62,12 @@ export default function Works({ dbProjects, categories: categoriesProp, experien
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
         <div className="w-full h-full grid-pattern-lines" />
       </div>
+      {/* Desktop only: in the gap right of the filter tabs (the heading fills the row on phones) */}
+      <Sticker3DSpot set="works" className="hidden md:block md:right-24 md:top-[200px] md:w-36 md:h-36" />
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
         <AnimatedText as="h2"
           text="SELECTED WORKS"
+          depth
           className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] mb-4 leading-none"
         />
         <ScrollReveal variant="fade-up" delay={0.1}>

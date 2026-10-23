@@ -3,6 +3,7 @@
 import { Download } from "lucide-react";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import type { Profile } from "@/types/portfolio";
 import { getSocials } from "@/lib/socials";
 
@@ -17,9 +18,12 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
       <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
         <div className="w-full h-full grid-pattern-lines" />
       </div>
+      {/* Last section: the flight finishes as the page bottoms out */}
+      <Sticker3DSpot set="contact" surface="light" offset={["start end", "end end"]} className="inset-0" />
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
         <AnimatedText as="h2"
           text="LET'S CREATE SOMETHING COOL"
+          depth
           className="font-display font-extrabold text-ink text-[clamp(1.5rem,5vw,4.2rem)] leading-tight mb-8 max-w-3xl"
           staggerDelay={0.035}
         />

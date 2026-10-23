@@ -2,6 +2,7 @@
 
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import Sticker3DSpot from "@/components/animations/Sticker3DSpot";
 import SkillIcon from "@/components/ui/SkillIcon";
 import type { Skill } from "@/types/portfolio";
 
@@ -52,10 +53,12 @@ export default function Technologies({ skills }: { skills?: Skill[] }) {
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(#0D0B1E 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
       </div>
+      <Sticker3DSpot set="tech" className="right-4 top-2 w-20 h-20 md:right-20 md:top-14 md:w-48 md:h-48" />
 
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10">
         <AnimatedText as="h2"
           text="TOOLS & TECH"
+          depth
           className="font-display font-extrabold text-ink text-[clamp(1.6rem,5.5vw,4.5rem)] mb-4 leading-none"
         />
         <ScrollReveal variant="fade-up" delay={0.1}>

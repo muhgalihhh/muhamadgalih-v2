@@ -216,6 +216,7 @@ export default function TestimonialsSection({
           <div>
             <AnimatedText as="h2"
               text="WHAT PEOPLE SAY"
+              depth
               className="font-display font-extrabold text-ink text-[clamp(1.6rem,4.5vw,3.5rem)] leading-tight mb-3"
               staggerDelay={0.03}
             />
