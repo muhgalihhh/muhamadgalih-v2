@@ -29,9 +29,16 @@ export default function Sticker3DSpot({
   const { scrollYProgress } = useScroll({ target: ref, offset });
   const still = useReducedMotion() ?? false;
 
+  // `className` positions the anchor inside the content column (max-w-7xl, every section's container),
+  // not the full-bleed section: zooming out widens the section but not the column, so a sticker placed
+  // against the section's edge would drift away from its heading.
   return (
-    <div ref={ref} aria-hidden className={`absolute z-0 pointer-events-none ${className}`}>
-      <Stickers3D set={set} progress={scrollYProgress} active={active} still={still} surface={surface} />
+    <div aria-hidden className="absolute inset-0 pointer-events-none">
+      <div className="relative max-w-7xl h-full mx-auto">
+        <div ref={ref} className={`absolute z-0 ${className}`}>
+          <Stickers3D set={set} progress={scrollYProgress} active={active} still={still} surface={surface} />
+        </div>
+      </div>
     </div>
   );
 }

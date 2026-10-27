@@ -199,7 +199,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
           <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(var(--color-ink) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         </div>
-        <Sticker3DSpot set="experience" />
+        {/* The longest heading: only ~110px left beside it, so a smaller briefcase tucked into the corner */}
+        <Sticker3DSpot set="experience" className="right-4 top-2 w-20 h-20 md:right-0 md:top-2 md:w-32 md:h-32" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <AnimatedText as="h2"
             text="WORK EXPERIENCE"

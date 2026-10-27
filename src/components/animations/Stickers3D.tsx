@@ -246,6 +246,12 @@ const SETS = {
     pad: { x: 0.6, y: 0.6 },
     stickers: [{ parts: ENVELOPE, size: 1, at: [0, 0, 0], tilt: [0.2, -0.35, 0.12], drift: [0.15, 0.3], turns: 0.5, delay: 0.3 }],
   },
+  // Splash: a star over the monogram that spins once while the yellow wipe bursts out of it
+  splash: {
+    pad: { x: 0.5, y: 0.5 },
+    rest: 0,
+    stickers: [{ parts: STAR, size: 1, at: [0, 0, 0], tilt: [0.2, 0, 0.15], drift: [0, 0], turns: 1, delay: 0 }],
+  },
   // A paper plane crossing the contact section, with a barrel roll on the way
   contact: {
     pad: { x: 0, y: 0 },
@@ -279,7 +285,7 @@ function InkColor({ ink, color }: { ink: Ink; color: string }) {
   return null;
 }
 
-type MeshProps = Omit<Props, "set" | "surface"> & { s: Sticker; pad: SetDef["pad"]; rest: number; ink: Ink };
+type MeshProps = Omit<Props, "set" | "surface" | "onReady"> & { s: Sticker; pad: SetDef["pad"]; rest: number; ink: Ink };
 
 function StickerMesh({ s, pad, rest, ink, progress, active, still, bounce }: MeshProps) {
   const root = useRef<THREE.Group>(null!);
@@ -355,9 +361,10 @@ type Props = {
   still: boolean; // prefers-reduced-motion
   bounce?: boolean; // toggle to make the stickers jump
   surface?: "light" | "dark"; // for sections whose colour ignores the theme
+  onReady?: () => void; // WebGL is up and the stickers start popping in (or unavailable: nothing will show)
 };
 
-export default function Stickers3D({ set, surface, ...shared }: Props) {
+export default function Stickers3D({ set, surface, onReady, ...shared }: Props) {
   const { resolvedTheme } = useTheme();
   // Decorative only: no WebGL2 → render nothing instead of crashing the page
   const [supported] = useState(hasWebGL2);
@@ -377,6 +384,10 @@ export default function Stickers3D({ set, surface, ...shared }: Props) {
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
+  useEffect(() => {
+    if (!supported) onReady?.();
+  }, [supported, onReady]);
+
   if (!supported) return null;
 
   const { pad, rest = 0.6, stickers }: SetDef = SETS[set];
@@ -394,6 +405,7 @@ export default function Stickers3D({ set, surface, ...shared }: Props) {
         dpr={[1, 1.75]}
         frameloop={shared.active && !shared.still ? "always" : "demand"}
         camera={{ position: [0, 0, 12], fov: 30 }}
+        onCreated={onReady}
       >
         <ambientLight intensity={1.3} />
         <directionalLight position={[-4, 5, 6]} intensity={1.85} />
