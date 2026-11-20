@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { NodeViewWrapper, type ReactNodeViewProps } from "@tiptap/react";
 import { ChevronLeft, ChevronRight, Loader2, Plus, X } from "lucide-react";
-import { uploadFile } from "@/app/actions/admin";
+import { uploadFile } from "@/lib/uploadFile";
 import { CONTENT_UPLOAD_FOLDER, type GalleryImage } from "@/lib/projectContent";
 
 export async function uploadContentImage(file: File): Promise<{ url?: string; error?: string }> {
@@ -13,8 +13,8 @@ export async function uploadContentImage(file: File): Promise<{ url?: string; er
   try {
     return await uploadFile(fd);
   } catch {
-    // The server action rejects outright when the body exceeds its 15 MB limit.
-    return { error: `Upload gagal: ${file.name} — file terlalu besar? (maks 15 MB)` };
+    // The server action rejects outright when the body exceeds Vercel's 4.5 MB body limit.
+    return { error: `Upload gagal: ${file.name} — file terlalu besar? (maks ~4 MB)` };
   }
 }
 

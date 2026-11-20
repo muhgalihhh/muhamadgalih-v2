@@ -6,8 +6,8 @@ import {
   createGalleryItem,
   updateGalleryItem,
   deleteGalleryItem,
-  uploadFile,
 } from "@/app/actions/admin";
+import { uploadFile } from "@/lib/uploadFile";
 import type { GalleryItem } from "@/types/portfolio";
 import {
   Plus, Pencil, Trash2, X, Upload, Loader2, Images, ChevronDown, Check,

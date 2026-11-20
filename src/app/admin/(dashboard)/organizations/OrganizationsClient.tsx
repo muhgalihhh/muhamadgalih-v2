@@ -2,7 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { createOrganization, updateOrganization, deleteOrganization, uploadFile } from "@/app/actions/admin";
+import { createOrganization, updateOrganization, deleteOrganization } from "@/app/actions/admin";
+import { uploadFile } from "@/lib/uploadFile";
 import ColorPicker from "@/components/admin/ColorPicker";
 import IconPicker from "@/components/admin/IconPicker";
 import SkillIcon from "@/components/ui/SkillIcon";

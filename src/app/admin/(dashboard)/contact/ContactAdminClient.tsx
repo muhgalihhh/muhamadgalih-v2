@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { updateProfile, uploadFile } from "@/app/actions/admin";
+import { updateProfile } from "@/app/actions/admin";
+import { uploadFile } from "@/lib/uploadFile";
 import { Upload, Loader2, CheckCircle, Music, ExternalLink, Image, X, FileText } from "lucide-react";
 import type { Profile } from "@/types/portfolio";
 

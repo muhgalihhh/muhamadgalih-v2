@@ -3,7 +3,8 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Award, Upload, Loader2, Plus, Pencil, Trash2, X, ExternalLink } from "lucide-react";
-import { createCertificate, updateCertificate, deleteCertificate, uploadFile } from "@/app/actions/admin";
+import { createCertificate, updateCertificate, deleteCertificate } from "@/app/actions/admin";
+import { uploadFile } from "@/lib/uploadFile";
 import type { Certificate } from "@/types/portfolio";
 import PdfThumbnail from "@/components/ui/PdfThumbnail";
 import { renderPdfFirstPage } from "@/lib/pdfRender";
