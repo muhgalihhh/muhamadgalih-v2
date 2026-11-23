@@ -109,9 +109,11 @@ interface Props {
   testimonials?: Testimonial[];
   ownTestimonial?: Testimonial | null;
   dbCategories?: ProjectCategoryRow[];
+  name?: string;
+  alias?: string;
 }
 
-export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbCertificates, dbOrganizations, testimonials = [], ownTestimonial = null, dbCategories }: Props) {
+export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbCertificates, dbOrganizations, testimonials = [], ownTestimonial = null, dbCategories, name = "Muhamad Galih", alias = "" }: Props) {
   const experience: Experience[] = dbExperiences?.length ? dbExperiences : staticExperience;
   const education: Education[] = dbEducation?.length ? dbEducation : staticEducation;
   const skills: Skill[] = dbSkills?.length ? dbSkills : staticSkills;
@@ -146,8 +148,8 @@ export default function AboutContent({ dbExperiences, dbEducation, dbSkills, dbC
           <ScrollReveal variant="fade-up" delay={0.2}>
             <div className="w-20 h-1.5 bg-coral rounded-full mb-8" />
             <p className="font-body text-lg md:text-xl text-cream/75 max-w-2xl leading-relaxed">
-              I&apos;m <strong className="text-cream font-bold">Muhamad Galih</strong>, also known as{" "}
-              <strong className="text-coral font-bold">MIZARIE</strong>. Full-Stack Engineer,
+              I&apos;m <strong className="text-cream font-bold">{name}</strong>
+              {alias && <>, also known as <strong className="text-coral font-bold">{alias}</strong></>}. Full-Stack Engineer,
               UI/UX Designer, Illustrator, and Data Scientist based in Indonesia. I bridge the gap
               between technical precision, data-driven thinking, and artistic creativity.
             </p>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import AnimatedText from "@/components/animations/AnimatedText";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
-export const metadata: Metadata = { title: "Page not found · MIZARIE" };
+export const metadata: Metadata = { title: "Page not found" };
 
 export default function NotFound() {
   return (

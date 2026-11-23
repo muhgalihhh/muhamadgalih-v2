@@ -76,7 +76,7 @@ export default function AdminLogin() {
         </form>
 
         <p className="text-center text-slate-600 text-xs mt-6">
-          Muhamad Galih · MIZARIE Portfolio CMS
+          Muhamad Galih · Portfolio CMS
         </p>
       </div>
     </div>

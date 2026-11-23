@@ -13,7 +13,7 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ alias }: { alias: string }) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
@@ -44,9 +44,11 @@ export default function Navbar() {
         <span className="font-display font-extrabold text-2xl text-coral group-hover:scale-105 transition-transform inline-block">
           MG
         </span>
-        <span className="font-display font-semibold text-base text-muted">
-          / MIZARIE
-        </span>
+        {alias && (
+          <span className="font-display font-semibold text-base text-muted">
+            / {alias}
+          </span>
+        )}
       </Link>
 
       {/* Links */}

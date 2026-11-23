@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { getPublicExperiences, getPublicSkills, getPublicCertificates, getPublicOrganizations, getPublicEducation, getPublicCategories } from "@/lib/data/portfolio";
+import { getPublicExperiences, getPublicSkills, getPublicCertificates, getPublicOrganizations, getPublicEducation, getPublicCategories, getProfile } from "@/lib/data/portfolio";
 import { getApprovedTestimonials, getOwnTestimonial } from "@/app/actions/testimonials";
 import AboutContent from "./AboutContent";
 import type { Testimonial } from "@/types/portfolio";
 
 export const metadata: Metadata = {
-  title: "About · Muhamad Galih · MIZARIE",
+  title: "About",
   description: "Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist based in Indonesia.",
 };
 
 export default async function AboutPage() {
-  const [experiences, skills, certificates, organizations, education, testimonials, ownTestimonial, categories] = await Promise.all([
+  const [experiences, skills, certificates, organizations, education, testimonials, ownTestimonial, categories, profile] = await Promise.all([
     getPublicExperiences(),
     getPublicSkills(),
     getPublicCertificates(),
@@ -19,6 +19,7 @@ export default async function AboutPage() {
     getApprovedTestimonials(),
     getOwnTestimonial(),
     getPublicCategories(),
+    getProfile(),
   ]);
   return (
     <AboutContent
@@ -30,6 +31,8 @@ export default async function AboutPage() {
       testimonials={testimonials as Testimonial[]}
       ownTestimonial={ownTestimonial}
       dbCategories={categories}
+      name={profile?.name || undefined}
+      alias={profile?.alias ?? ""}
     />
   );
 }

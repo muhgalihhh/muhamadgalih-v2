@@ -20,19 +20,24 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: "Muhamad Galih · MIZARIE",
-  description:
-    "Portfolio of Muhamad Galih (MIZARIE): Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist based in Indonesia.",
-  openGraph: { type: "website", siteName: "Muhamad Galih · MIZARIE" },
-  twitter: { card: "summary_large_image" },
-  icons: {
-    icon: "/icon",
-    shortcut: "/icon",
-    apple: "/icon",
-  },
-};
+// Name and alias come from the profile row, so renaming in the CMS updates every title.
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await getProfile();
+  const name = profile?.name || "Muhamad Galih";
+  const site = [name, profile?.alias].filter(Boolean).join(" · ");
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: site, template: `%s · ${site}` },
+    description: `Portfolio of ${name}: Full-Stack Engineer, UI/UX Designer, Illustrator, and Data Scientist based in Indonesia.`,
+    openGraph: { type: "website", siteName: site },
+    twitter: { card: "summary_large_image" },
+    icons: {
+      icon: "/icon",
+      shortcut: "/icon",
+      apple: "/icon",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -51,7 +56,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>
-          <PublicLayout musicUrl={profile?.music_url} songTitle={profile?.name ?? undefined} profile={profile}>
+          <PublicLayout musicUrl={profile?.music_url} songTitle={profile?.name ?? undefined} profile={profile} alias={profile?.alias ?? ""}>
             {children}
           </PublicLayout>
         </ThemeProvider>

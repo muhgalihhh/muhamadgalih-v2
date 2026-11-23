@@ -159,7 +159,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
               <input name="name" required defaultValue={profile.name} className={inputCls} />
             </Field>
             <Field label="Alias / Artist Name">
-              <input name="alias" defaultValue={profile.alias ?? ""} placeholder="MIZARIE" className={inputCls} />
+              <input name="alias" defaultValue={profile.alias ?? ""} placeholder="your handle" className={inputCls} />
             </Field>
             <Field label="Email">
               <input name="email" type="email" defaultValue={profile.email ?? ""} className={inputCls} />
@@ -178,7 +178,7 @@ export default function ContactAdminClient({ profile }: { profile: Profile | nul
               </select>
             </Field>
             <Field label="Hero Tagline">
-              <input name="tagline" defaultValue={profile.tagline ?? ""} placeholder="aka ✦ MIZARIE ✦" className={inputCls} />
+              <input name="tagline" defaultValue={profile.tagline ?? ""} placeholder="Designed, built, and measured." className={inputCls} />
             </Field>
             <Field label="Bio" wide>
               <textarea name="bio" rows={3} defaultValue={profile.bio ?? ""} className={`${inputCls} resize-none`} />

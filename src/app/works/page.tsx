@@ -3,8 +3,8 @@ import { getPublicProjects, getPublicGalleryItems, getPublicCategories, getPubli
 import WorksContent from "./WorksContent";
 
 export const metadata: Metadata = {
-  title: "Works · Muhamad Galih · MIZARIE",
-  description: "Portfolio of software, data science, UI/UX, and illustration projects by Muhamad Galih (MIZARIE).",
+  title: "Works",
+  description: "Portfolio of software, data science, UI/UX, and illustration projects by Muhamad Galih.",
 };
 
 export default async function WorksPage() {

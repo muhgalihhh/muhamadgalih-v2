@@ -76,10 +76,10 @@ export default function Contact({ profile }: { profile?: Profile | null }) {
         <ScrollReveal variant="fade-up" delay={0.5}>
           <div className="pt-8 border-t-2 border-ink/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <p className="font-body text-sm text-ink/50">
-              © {new Date().getFullYear()} Muhamad Galih · MIZARIE · All rights reserved
+              © {new Date().getFullYear()} {[profile?.name || "Muhamad Galih", profile?.alias, "All rights reserved"].filter(Boolean).join(" · ")}
             </p>
             <p className="font-display font-extrabold text-ink/30 text-2xl">
-              MG / MIZARIE
+              MG{profile?.alias && <> / {profile.alias}</>}
             </p>
           </div>
         </ScrollReveal>

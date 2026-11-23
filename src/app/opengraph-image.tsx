@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getProfile } from "@/lib/data/portfolio";
 
 // Default link preview for every page; /works/<slug> overrides it with its own screenshot.
-export const alt = "Muhamad Galih · MIZARIE portfolio";
+export const alt = "Muhamad Galih portfolio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,7 +22,8 @@ export default async function OpengraphImage() {
   const profile = await getProfile();
   const name = (profile?.name ?? "Muhamad Galih").toUpperCase();
   const roles = profile?.hero_roles?.length ? profile.hero_roles.slice(0, 3).join("  ·  ") : "Full-Stack · UI/UX · Illustration";
-  const font = await syne(`MG/MIZARIE${name}${roles}`);
+  const alias = profile?.alias ?? "";
+  const font = await syne(`MG/${alias}${name}${roles}`);
   const display = font ? "Syne" : "sans-serif";
 
   return new ImageResponse(
@@ -30,7 +31,7 @@ export default async function OpengraphImage() {
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 72, background: "#FFFEF0", color: "#0D0B1E", fontFamily: "sans-serif" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, fontWeight: 800, fontFamily: display }}>
           <span style={{ color: "#FF5757" }}>MG</span>
-          <span style={{ color: "#3D3B52", fontWeight: 600 }}>/ MIZARIE</span>
+          {alias && <span style={{ color: "#3D3B52", fontWeight: 600 }}>/ {alias}</span>}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div style={{ display: "flex", fontSize: 92, fontWeight: 800, letterSpacing: -2, lineHeight: 1, fontFamily: display }}>{name}</div>

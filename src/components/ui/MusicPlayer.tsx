@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 interface MusicPlayerProps {
   musicUrl?: string | null;
   songTitle?: string | null;
+  alias?: string;
 }
 
 function audioMimeType(url: string): string | undefined {
@@ -20,7 +21,7 @@ function audioMimeType(url: string): string | undefined {
   return undefined;
 }
 
-export default function MusicPlayer({ musicUrl, songTitle }: MusicPlayerProps) {
+export default function MusicPlayer({ musicUrl, songTitle, alias }: MusicPlayerProps) {
   const audioUrl   = musicUrl  ?? "";
   const displayTitle = songTitle ?? "vibes";
 
@@ -110,7 +111,7 @@ export default function MusicPlayer({ musicUrl, songTitle }: MusicPlayerProps) {
               </motion.div>
               <div className="min-w-0 flex-1">
                 <p className="font-display font-bold text-xs truncate">{displayTitle}</p>
-                <p className="font-body text-[10px] text-cream/50">MIZARIE · vibes</p>
+                <p className="font-body text-[10px] text-cream/50">{[alias, "vibes"].filter(Boolean).join(" · ")}</p>
               </div>
               <button
                 onClick={() => setExpanded(false)}

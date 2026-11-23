@@ -39,7 +39,7 @@ export default function Footer({ profile }: { profile: Profile | null }) {
         <div className="grid grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-8 gap-y-10">
           <ScrollReveal variant="fade-up" once className="col-span-2 md:col-span-1">
             <p className="font-display font-extrabold text-2xl md:text-3xl leading-none whitespace-nowrap">
-              <span className="text-coral">MG</span> / MIZARIE
+              <span className="text-coral">MG</span>{profile?.alias && <> / {profile.alias}</>}
             </p>
             <p className="font-body text-cream/60 mt-4 max-w-xs leading-relaxed">
               {profile?.tagline || "Engineer by day, illustrator by night."}
@@ -86,7 +86,7 @@ export default function Footer({ profile }: { profile: Profile | null }) {
 
         <div className="mt-14 pt-6 border-t-2 border-cream/10 flex flex-col-reverse md:flex-row gap-4 justify-between items-start md:items-center">
           <p className="font-body text-sm text-cream/50">
-            © {new Date().getFullYear()} Muhamad Galih · MIZARIE
+            © {new Date().getFullYear()} {[profile?.name || "Muhamad Galih", profile?.alias].filter(Boolean).join(" · ")}
           </p>
           <button
             type="button"

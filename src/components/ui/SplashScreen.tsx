@@ -13,7 +13,7 @@ const SEEN_KEY = "splash-seen";
 
 const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
-export default function SplashScreen() {
+export default function SplashScreen({ alias }: { alias: string }) {
   const [phase, setPhase] = useState<Phase>("loading");
   const [origin, setOrigin] = useState("50% 50%");
   const starRef = useRef<HTMLDivElement>(null);
@@ -109,7 +109,7 @@ export default function SplashScreen() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            MIZARIE
+            {alias}
           </motion.p>
         </motion.div>
       </div>

@@ -11,10 +11,10 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = await getPublicProjectBySlug(slug);
-  if (!project) return { title: "Project not found · MIZARIE" };
+  if (!project) return { title: "Project not found" };
   const description = project.description.length > 160 ? `${project.description.slice(0, 157)}…` : project.description;
   return {
-    title: `${project.title} · Works · Muhamad Galih · MIZARIE`,
+    title: `${project.title} · Works`,
     description,
     openGraph: {
       title: project.title,

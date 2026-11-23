@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getProfile } from "@/lib/data/portfolio";
 import { Wrench, Briefcase, FolderOpen, Award, Plus, ExternalLink, LayoutDashboard } from "lucide-react";
 
 export default async function AdminDashboard() {
@@ -9,11 +10,13 @@ export default async function AdminDashboard() {
     { count: expCount },
     { count: projectsCount },
     { count: certCount },
+    profile,
   ] = await Promise.all([
     supabase.from("skills").select("*", { count: "exact", head: true }),
     supabase.from("experiences").select("*", { count: "exact", head: true }),
     supabase.from("projects").select("*", { count: "exact", head: true }),
     supabase.from("certificates").select("*", { count: "exact", head: true }),
+    getProfile(),
   ]);
 
   const statCards = [
@@ -63,7 +66,7 @@ export default async function AdminDashboard() {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="font-display text-3xl font-semibold text-slate-900">Hey, Mizarie 👋</h1>
+        <h1 className="font-display text-3xl font-semibold text-slate-900">Hey, {profile?.alias || profile?.name || "there"} 👋</h1>
         <svg
           className="admin-squiggle mt-1 -mb-1"
           width="120"

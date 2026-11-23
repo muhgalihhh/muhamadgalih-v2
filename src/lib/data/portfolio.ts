@@ -196,7 +196,8 @@ export async function getPublicCategories(): Promise<ProjectCategoryRow[]> {
   }
 }
 
-export async function getProfile(): Promise<Profile | null> {
+// cache(): the root layout's generateMetadata, the layout itself and pages all read it per request.
+export const getProfile = cache(async (): Promise<Profile | null> => {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -208,4 +209,4 @@ export async function getProfile(): Promise<Profile | null> {
   } catch {
     return null;
   }
-}
+});

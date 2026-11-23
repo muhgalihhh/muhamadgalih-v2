@@ -25,7 +25,7 @@ const itemAnim = {
 
 export default function Hero({ profile }: { profile?: Profile | null }) {
   const name             = profile?.name             ?? "MUHAMAD GALIH";
-  const alias            = profile?.alias            ?? "MIZARIE";
+  const alias            = profile?.alias            ?? "";
   const isAvailable      = profile?.availability     ?? true;
   const avatarUrl        = profile?.avatar_url       ?? null;
   const illustrationUrl  = profile?.illustration_url ?? null;
@@ -88,9 +88,11 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
         >
           {/* Eyebrow: alias + availability */}
           <motion.div variants={itemAnim} className="flex flex-wrap items-center gap-4">
-            <span className="font-body text-sm md:text-base text-muted">
-              a.k.a. <span className="font-display font-bold text-coral">{alias}</span>
-            </span>
+            {alias && (
+              <span className="font-body text-sm md:text-base text-muted">
+                a.k.a. <span className="font-display font-bold text-coral">{alias}</span>
+              </span>
+            )}
             {isAvailable && (
               <span className="inline-flex items-center cartoon-border-sm bg-mint px-3 py-1.5 rounded-lg -rotate-2">
                 <span className="font-body font-semibold text-xs text-ink">

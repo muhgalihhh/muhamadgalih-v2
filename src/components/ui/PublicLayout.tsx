@@ -16,24 +16,25 @@ interface PublicLayoutProps {
   musicUrl?: string | null;
   songTitle?: string | null;
   profile?: Profile | null;
+  alias?: string;
 }
 
-export default function PublicLayout({ children, musicUrl, songTitle, profile = null }: PublicLayoutProps) {
+export default function PublicLayout({ children, musicUrl, songTitle, profile = null, alias = "" }: PublicLayoutProps) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
   return (
     // Honour the OS "reduce motion" setting for every Framer Motion animation.
     <MotionConfig reducedMotion="user">
-      {!isAdmin && <SplashScreen />}
+      {!isAdmin && <SplashScreen alias={alias} />}
       {!isAdmin && <CustomCursor />}
-      {!isAdmin && <Navbar />}
+      {!isAdmin && <Navbar alias={alias} />}
       {!isAdmin && <PageviewTracker />}
       {children}
       {/* Home closes with its own Contact section; every other page gets the footer */}
       {!isAdmin && pathname !== "/" && <Footer profile={profile} />}
       {!isAdmin && <MobileNav />}
-      {!isAdmin && <MusicPlayer musicUrl={musicUrl} songTitle={songTitle} />}
+      {!isAdmin && <MusicPlayer musicUrl={musicUrl} songTitle={songTitle} alias={alias} />}
     </MotionConfig>
   );
 }
